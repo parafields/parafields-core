@@ -1,29 +1,106 @@
-cmake_minimum_required(VERSION 2.8.12)
-project(dune-randomfield CXX)
+cmake_minimum_required(VERSION 3.11)
 
-if(NOT (dune-common_DIR OR dune-common_ROOT OR
-      "${CMAKE_PREFIX_PATH}" MATCHES ".*dune-common.*"))
-    string(REPLACE  ${CMAKE_PROJECT_NAME} dune-common dune-common_DIR
-      ${PROJECT_BINARY_DIR})
+# Set a name and version number for the project
+project(
+  parafields
+  VERSION 0.1
+  LANGUAGES C CXX)
+
+# Set CMake policies
+
+# We allow <Package>_ROOT (env) variables for locating dependencies
+cmake_policy(SET CMP0074 NEW)
+
+# Initialize some default paths
+include(GNUInstallDirs)
+
+# Define the minimum C++ standard that is required
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Compilation options
+option(BUILD_PYTHON "Enable buildings of Python bindings" ON)
+option(BUILD_DOCS "Enable building of documentation" ON)
+option(BUILD_PARALLEL "Whether to build an MPI-parallel version" OFF)
+option(BUNDLE_DUNE "Whether to bundle Dune module dependencies" ON)
+
+# Add an interface target for our header-only library
+add_library(parafields INTERFACE)
+
+# Add the parafields includes
+target_include_directories(
+  parafields INTERFACE $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>
+                       $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+
+# Find MPI
+find_package(MPI REQUIRED)
+target_link_libraries(parafields INTERFACE MPI::MPI_C MPI::MPI_CXX)
+
+# Find dune-common
+find_package(dune-common REQUIRED)
+target_link_libraries(parafields INTERFACE dunecommon)
+target_include_directories(parafields INTERFACE ${dune-common_INCLUDE_DIRS})
+
+# Find FFTW3 dependency using an improved find module. Maybe bundle this if we
+# stick with it. We are limiting ourselves to double precision for now.
+file(DOWNLOAD
+     https://raw.githubusercontent.com/egpbos/findFFTW/master/FindFFTW.cmake
+     ${CMAKE_BINARY_DIR}/FindFFTW.cmake)
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${CMAKE_BINARY_DIR}")
+find_package(FFTW REQUIRED COMPONENTS DOUBLE_LIB)
+target_link_libraries(parafields INTERFACE FFTW::DoubleMPI FFTW::Double)
+target_compile_definitions(parafields INTERFACE HAVE_FFTW3_DOUBLE)
+target_include_directories(parafields INTERFACE ${FFTW_INCLUDE_DIRS})
+
+# Find HDF5 using the built-in FindHDF5 module
+find_package(HDF5)
+if(HDF5_FOUND AND HDF5_IS_PARALLEL)
+  target_compile_definitions(parafields INTERFACE HAVE_HDF5=1)
+  target_link_libraries(parafields INTERFACE HDF5::HDF5)
+else()
+  if(HDF5_FOUND)
+    message(WARNING "HDF5 found, but has not been compiled with MPI support.")
+  endif()
 endif()
 
-#find dune-common and set the module path
-find_package(dune-common REQUIRED)
-list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/modules"
-  ${dune-common_MODULE_PATH})
+# Find libpng using the built-in FindPNG module
+find_package(PNG)
+if(PNG_FOUND)
+  target_compile_definitions(parafields INTERFACE HAVE_PNG)
+  target_link_libraries(parafields INTERFACE PNG::PNG)
+endif()
 
-#include the dune macros
-include(DuneMacros)
+# Find GSL using the built-in FindGSL module
+find_package(GSL)
+if(GSL_FOUND)
+  target_compile_definitions(parafields INTERFACE HAVE_GSL)
+  target_link_libraries(parafields INTERFACE GSL::gsl)
+endif()
 
-# start a dune project with information from dune.module
-dune_project()
-dune_enable_all_packages()
+# Add the fieldgenerator executable
+add_executable(fieldgenerator app/fieldgenerator.cc)
+target_link_libraries(fieldgenerator PUBLIC parafields)
 
-add_subdirectory(dune)
-add_subdirectory(cmake/modules)
-add_subdirectory(doc)
-add_subdirectory(test)
-add_subdirectory(src)
+# Add an alias target for use if this project is included as a subproject in
+# another project
+add_library(parafields::parafields ALIAS parafields)
 
-# finalize the dune project, e.g. generating config.h etc.
-finalize_dune_project(GENERATE_CONFIG_H_CMAKE)
+# Install targets and configuration
+install(
+  TARGETS parafields
+  EXPORT parafields-config
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+install(
+  EXPORT parafields-config
+  NAMESPACE parafields::
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
+
+install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+# This prints a summary of found dependencies
+include(FeatureSummary)
+feature_summary(WHAT ALL)

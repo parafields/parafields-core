@@ -6,14 +6,15 @@ Ole Klein and contributors.
 | Year         | Name                        |
 |--------------|-----------------------------|
 | 2010 -- 2022 | Ole Klein                   |
-| 2019         | Dominic Kempf               |
+| 2019 -- 2022 | Dominic Kempf               |
 | 2010         | Adrian Ngo                  |
 | 2019         | Santiago Ospina De Los Rios |
 | 2017         | Lukas Riedel                |
 | 2010         | Ronnie Schwede              |
 | 2020         | Arne Strehlow               |
 
-The module dune-randomfield is free software and documentation.
+The library parafields-core and its predecessor module
+dune-randomfield are free software and documentation.
 
 You can use, modify and/or redistribute the contained software under the terms
 of the BSD 3-clause license, which you can find in the file BSD.

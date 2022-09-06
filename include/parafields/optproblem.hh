@@ -4,7 +4,7 @@
 
 #include <dune/nonlinopt/nonlinopt.hh>
 
-#include <dune/randomfield/legacyvtk.hh>
+#include <parafields/legacyvtk.hh>
 
 namespace Dune {
 namespace RandomField {

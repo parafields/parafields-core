@@ -7,7 +7,7 @@
 
 #include <dune/common/fmatrix.hh>
 #include <dune/common/fvector.hh>
-#include <dune/randomfield/randomfield.hh>
+#include <parafields/randomfield.hh>
 
 /**
  * @brief Types for coordinates and range values

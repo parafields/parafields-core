@@ -7,7 +7,7 @@
 #include <dune/pdelab/gridfunctionspace/gridfunctionspaceutilities.hh>
 #endif // HAVE_DUNE_PDELAB
 
-#include <dune/randomfield/fieldtraits.hh>
+#include <parafields/fieldtraits.hh>
 
 namespace Dune {
 namespace RandomField {

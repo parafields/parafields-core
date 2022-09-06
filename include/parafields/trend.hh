@@ -16,7 +16,7 @@
 #include <dune/pdelab/gridfunctionspace/localfunctionspace.hh>
 #endif // HAVE_DUNE_PDELAB
 
-#include <dune/randomfield/pngreader.hh>
+#include <parafields/pngreader.hh>
 
 namespace Dune {
 namespace RandomField {

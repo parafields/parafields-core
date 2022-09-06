@@ -7,27 +7,27 @@
 #include <fftw3-mpi.h>
 #include <fftw3.h>
 
-#include "dune/randomfield/covariance.hh"
+#include "parafields/covariance.hh"
 
-#include "dune/randomfield/backends/fftwwrapper.hh"
+#include "parafields/backends/fftwwrapper.hh"
 
-#include "dune/randomfield/backends/dctmatrixbackend.hh"
-#include "dune/randomfield/backends/dftmatrixbackend.hh"
-#include "dune/randomfield/backends/r2cmatrixbackend.hh"
+#include "parafields/backends/dctmatrixbackend.hh"
+#include "parafields/backends/dftmatrixbackend.hh"
+#include "parafields/backends/r2cmatrixbackend.hh"
 
-#include "dune/randomfield/backends/dctdstfieldbackend.hh"
-#include "dune/randomfield/backends/dftfieldbackend.hh"
-#include "dune/randomfield/backends/r2cfieldbackend.hh"
+#include "parafields/backends/dctdstfieldbackend.hh"
+#include "parafields/backends/dftfieldbackend.hh"
+#include "parafields/backends/r2cfieldbackend.hh"
 
-#include "dune/randomfield/backends/cpprngbackend.hh"
-#include "dune/randomfield/backends/gslrngbackend.hh"
+#include "parafields/backends/cpprngbackend.hh"
+#include "parafields/backends/gslrngbackend.hh"
 
 #if HAVE_GSL
 #include <gsl/gsl_integration.h>
 #endif // HAVE_GSL
 
 #if HAVE_DUNE_NONLINOPT
-#include "dune/randomfield/optproblem.hh"
+#include "parafields/optproblem.hh"
 #endif // HAVE_DUNE_NONLINOPT
 
 namespace Dune {

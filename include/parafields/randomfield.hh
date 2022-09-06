@@ -9,13 +9,13 @@
 #include <dune/grid/yaspgrid.hh>
 #endif // HAVE_DUNE_FUNCTIONS
 
-#include <dune/randomfield/fieldtraits.hh>
-#include <dune/randomfield/io.hh>
-#include <dune/randomfield/legacyvtk.hh>
-#include <dune/randomfield/matrix.hh>
-#include <dune/randomfield/mutators.hh>
-#include <dune/randomfield/stochastic.hh>
-#include <dune/randomfield/trend.hh>
+#include <parafields/fieldtraits.hh>
+#include <parafields/io.hh>
+#include <parafields/legacyvtk.hh>
+#include <parafields/matrix.hh>
+#include <parafields/mutators.hh>
+#include <parafields/stochastic.hh>
+#include <parafields/trend.hh>
 
 namespace Dune {
 namespace RandomField {

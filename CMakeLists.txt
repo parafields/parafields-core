@@ -42,7 +42,7 @@ target_link_libraries(parafields INTERFACE dunecommon)
 target_include_directories(parafields INTERFACE ${dune-common_INCLUDE_DIRS})
 
 # Find FFTW3 dependency using an improved find module.
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake ${CMAKE_MODULE_PATH})
 find_package(FFTW REQUIRED COMPONENTS DOUBLE_MPI_LIB DOUBLE_LIB)
 target_link_libraries(parafields INTERFACE FFTW::DoubleMPI FFTW::Double)
 target_compile_definitions(parafields INTERFACE HAVE_FFTW3_DOUBLE)

@@ -58,7 +58,7 @@ public:
     maxCells = config.get<std::vector<unsigned int>>("grid.cells");
 
     if (maxExt.size() != maxCells.size())
-      throw Dune::Exception{ "cell and extension vectors differ in size" };
+      throw std::runtime_error{ "cell and extension vectors differ in size" };
 
     minCells = maxCells;
     for (int i = 0; i < levels - 1; i++)
@@ -598,7 +598,7 @@ main(int argc, char** argv)
     }
 
     return 0;
-  } catch (const Dune::Exception& e) {
-    std::cerr << "Dune reported error: " << e << std::endl;
+  } catch (const std::runtime_error& e) {
+    std::cerr << "Parafields reported error: " << e << std::endl;
   }
 }

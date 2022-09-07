@@ -29,7 +29,7 @@ add_library(parafields INTERFACE)
 
 # Add the parafields includes
 target_include_directories(
-  parafields INTERFACE $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>
+  parafields INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include/>
                        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 # Find MPI

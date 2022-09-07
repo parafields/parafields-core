@@ -16,6 +16,10 @@ Ole Klein and contributors.
 The library parafields-core and its predecessor module
 dune-randomfield are free software and documentation.
 
+The file `cmake/FindFFTW.cmake` is copyrighted by Wenzel Jakob and
+Patrick Bos and distributed under the BSD 3-clause license.
+The original can be found here: https://github.com/egpbos/findFFTW
+
 You can use, modify and/or redistribute the contained software under the terms
 of the BSD 3-clause license, which you can find in the file BSD.
 

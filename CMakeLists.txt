@@ -41,13 +41,9 @@ find_package(dune-common REQUIRED)
 target_link_libraries(parafields INTERFACE dunecommon)
 target_include_directories(parafields INTERFACE ${dune-common_INCLUDE_DIRS})
 
-# Find FFTW3 dependency using an improved find module. Maybe bundle this if we
-# stick with it. We are limiting ourselves to double precision for now.
-file(DOWNLOAD
-     https://raw.githubusercontent.com/egpbos/findFFTW/master/FindFFTW.cmake
-     ${CMAKE_BINARY_DIR}/FindFFTW.cmake)
-set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${CMAKE_BINARY_DIR}")
-find_package(FFTW REQUIRED COMPONENTS DOUBLE_LIB)
+# Find FFTW3 dependency using an improved find module.
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+find_package(FFTW REQUIRED COMPONENTS DOUBLE_MPI_LIB DOUBLE_LIB)
 target_link_libraries(parafields INTERFACE FFTW::DoubleMPI FFTW::Double)
 target_compile_definitions(parafields INTERFACE HAVE_FFTW3_DOUBLE)
 target_include_directories(parafields INTERFACE ${FFTW_INCLUDE_DIRS})
@@ -88,15 +84,31 @@ add_library(parafields::parafields ALIAS parafields)
 # Install targets and configuration
 install(
   TARGETS parafields
-  EXPORT parafields-config
+  EXPORT parafields-targets
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(
-  EXPORT parafields-config
+  EXPORT parafields-targets
+  FILE parafieldsTargets.cmake
   NAMESPACE parafields::
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
+
+include(CMakePackageConfigHelpers)
+configure_package_config_file(
+  ${CMAKE_CURRENT_LIST_DIR}/cmake/parafieldsConfig.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/parafieldsConfig.cmake
+  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/parafieldsConfig.cmake
+              ${CMAKE_CURRENT_LIST_DIR}/cmake/FindFFTW.cmake
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
+
+export(
+  EXPORT parafields-targets
+  FILE ${CMAKE_CURRENT_BINARY_DIR}/parafieldsTargets.cmake
+  NAMESPACE parafields::)
 
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

@@ -601,6 +601,40 @@ public:
   }
 
   /**
+   * @brief Evaluate the random field at all cells on this processor
+   *
+   * This function evaluates the random field on the entire grid that it
+   * is defined on. The result is stored in a linear container. The values
+   * are ordered such that the axes are in order x, y, z etc. Additionally,
+   * the function exports the sizes of the output.
+   *
+   * @param[out] output The output container of field values
+   * @param[out] sizes  The (local) sizes of the field
+   */
+  void bulkEvaluate(std::vector<typename Traits::RangeType>& output,
+                    typename Traits::Indices& sizes) const
+  {
+    // Export the local sizes from the traits class
+    sizes = traits->localCells;
+
+    // Correctly resize the output container
+    std::size_t size = 1;
+    for (auto lc : traits->localCells)
+      size *= lc;
+    output.resize(size);
+
+    // Do the evaluation. The detour to calculating coordinates is unnecessary,
+    // but allows us a minimally invasive approach.
+    for (std::size_t i = 0; i < size; ++i) {
+      typename Traits::Indices indices;
+      traits->indexToIndices(i, indices, traits->localCells);
+      typename Traits::DomainType location;
+      traits->indicesToCoords(indices, traits->localOffset, location);
+      evaluate(location, output[i]);
+    }
+  }
+
+  /**
    * @brief Export random field to files on disk
    *
    * This function writes the random field, its trend components, and its

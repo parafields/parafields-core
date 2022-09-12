@@ -604,8 +604,11 @@ public:
    * @brief Evaluate the random field at all cells on this processor
    *
    */
-  void bulkEvaluate(std::vector<typename Traits::RangeType>& output) const
+  void bulkEvaluate(std::vector<typename Traits::RangeType>& output,
+                    typename Traits::Indices& sizes) const
   {
+    sizes = traits->localCells;
+
     std::size_t size = 1;
     for (auto lc : traits->localCells)
       size *= lc;

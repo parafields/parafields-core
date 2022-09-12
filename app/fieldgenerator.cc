@@ -565,40 +565,36 @@ printListExample()
 int
 main(int argc, char** argv)
 {
-  try {
-    const Dune::MPIHelper& helper = Dune::MPIHelper::instance(argc, argv);
+  const Dune::MPIHelper& helper = Dune::MPIHelper::instance(argc, argv);
 
-    if (argc != 1) {
-      std::string arg(argv[1]);
+  if (argc != 1) {
+    std::string arg(argv[1]);
 
-      if (arg == "minimal") {
-        printMinimalExample();
-      } else if (arg == "full") {
-        printFullExample();
-      } else if (arg == "list") {
-        printListExample();
-      } else if (arg == "-h" || arg == "--help" || arg == "help") {
-        printHelpMessage();
-      }
-      // argument is option
-      else if (arg[0] == '-') {
-        generateFields(helper, "", argc, argv);
-      }
-      // argument is filename
-      else {
-        generateFields(helper, arg, argc, argv);
-      }
-    } else {
-      // no arguments
-      // print help message if randomfield.ini is missing
-      if (!Dune::RandomField::fileExists("randomfield.ini"))
-        printHelpMessage();
-      else
-        generateFields(helper, "randomfield.ini", argc, argv);
+    if (arg == "minimal") {
+      printMinimalExample();
+    } else if (arg == "full") {
+      printFullExample();
+    } else if (arg == "list") {
+      printListExample();
+    } else if (arg == "-h" || arg == "--help" || arg == "help") {
+      printHelpMessage();
     }
-
-    return 0;
-  } catch (const std::runtime_error& e) {
-    std::cerr << "Parafields reported error: " << e << std::endl;
+    // argument is option
+    else if (arg[0] == '-') {
+      generateFields(helper, "", argc, argv);
+    }
+    // argument is filename
+    else {
+      generateFields(helper, arg, argc, argv);
+    }
+  } else {
+    // no arguments
+    // print help message if randomfield.ini is missing
+    if (!Dune::RandomField::fileExists("randomfield.ini"))
+      printHelpMessage();
+    else
+      generateFields(helper, "randomfield.ini", argc, argv);
   }
+
+  return 0;
 }

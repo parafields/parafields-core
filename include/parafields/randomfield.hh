@@ -601,6 +601,27 @@ public:
   }
 
   /**
+   * @brief Evaluate the random field at all cells on this processor
+   *
+   */
+  void bulkEvaluate(std::vector<typename Traits::RangeType>& output) const
+  {
+    std::size_t size = 1;
+    for (auto lc : traits->localCells)
+      size *= lc;
+
+    output.resize(size);
+
+    for (std::size_t i = 0; i < size; ++i) {
+      typename Traits::Indices indices;
+      traits->indexToIndices(i, indices, traits->localCells);
+      typename Traits::DomainType location;
+      traits->indicesToCoords(indices, traits->localOffset, location);
+      evaluate(location, output[i]);
+    }
+  }
+
+  /**
    * @brief Export random field to files on disk
    *
    * This function writes the random field, its trend components, and its

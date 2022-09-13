@@ -34,7 +34,7 @@ target_include_directories(
 
 # Find MPI
 find_package(MPI REQUIRED)
-target_link_libraries(parafields INTERFACE MPI::MPI_C MPI::MPI_CXX)
+target_link_libraries(parafields INTERFACE MPI::MPI_C)
 
 # Find dune-common
 find_package(dune-common REQUIRED)

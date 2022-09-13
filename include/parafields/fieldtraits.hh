@@ -35,7 +35,7 @@ class R2CFieldBackend;
 
 // constants for MPI communications
 template<typename>
-const MPI_Datatype mpiType = nullptr;
+const MPI_Datatype mpiType = MPI_Datatype{};
 template<>
 const MPI_Datatype mpiType<float> = MPI_FLOAT;
 template<>

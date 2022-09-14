@@ -19,10 +19,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Compilation options
-option(BUILD_PYTHON "Enable buildings of Python bindings" ON)
-option(BUILD_DOCS "Enable building of documentation" ON)
-option(BUILD_PARALLEL "Whether to build an MPI-parallel version" OFF)
-option(BUNDLE_DUNE "Whether to bundle Dune module dependencies" ON)
+option(BUILD_APP "Enable building of stand-alone application" ON)
 
 # Add an interface target for our header-only library
 add_library(parafields INTERFACE)
@@ -34,7 +31,7 @@ target_include_directories(
 
 # Find MPI
 find_package(MPI REQUIRED)
-target_link_libraries(parafields INTERFACE MPI::MPI_C MPI::MPI_CXX)
+target_link_libraries(parafields INTERFACE MPI::MPI_C)
 
 # Find dune-common
 find_package(dune-common REQUIRED)
@@ -74,8 +71,10 @@ if(GSL_FOUND)
 endif()
 
 # Add the fieldgenerator executable
-add_executable(fieldgenerator app/fieldgenerator.cc)
-target_link_libraries(fieldgenerator PUBLIC parafields)
+if(BUILD_APP)
+  add_executable(fieldgenerator app/fieldgenerator.cc)
+  target_link_libraries(fieldgenerator PUBLIC parafields)
+endif()
 
 # Add an alias target for use if this project is included as a subproject in
 # another project

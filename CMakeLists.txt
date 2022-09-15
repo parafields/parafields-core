@@ -40,10 +40,21 @@ target_include_directories(parafields INTERFACE ${dune-common_INCLUDE_DIRS})
 
 # Find FFTW3 dependency using an improved find module.
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake ${CMAKE_MODULE_PATH})
-find_package(FFTW REQUIRED COMPONENTS DOUBLE_MPI_LIB DOUBLE_LIB)
-target_link_libraries(parafields INTERFACE FFTW::DoubleMPI FFTW::Double)
-target_compile_definitions(parafields INTERFACE HAVE_FFTW3_DOUBLE)
+find_package(FFTW COMPONENTS DOUBLE_LIB DOUBLE_MPI_LIB FLOAT_LIB FLOAT_MPI_LIB)
+if(NOT (FFTW_FLOAT_MPI_LIB_FOUND OR FFTW_DOUBLE_MPI_LIB_FOUND))
+  message(
+    FATAL_ERROR "No FFTW library found. parafields requires either the"
+                "single or double precision version of the FFTW-MPI library.")
+endif()
 target_include_directories(parafields INTERFACE ${FFTW_INCLUDE_DIRS})
+if(FFTW_FLOAT_LIB_FOUND AND FFTW_FLOAT_MPI_LIB_FOUND)
+  target_link_libraries(parafields INTERFACE FFTW::FloatMPI FFTW::Float)
+  target_compile_definitions(parafields INTERFACE HAVE_FFTW3_FLOAT)
+endif()
+if(FFTW_DOUBLE_LIB_FOUND AND FFTW_DOUBLE_MPI_LIB_FOUND)
+  target_link_libraries(parafields INTERFACE FFTW::DoubleMPI FFTW::Double)
+  target_compile_definitions(parafields INTERFACE HAVE_FFTW3_DOUBLE)
+endif()
 
 # Find HDF5 using the built-in FindHDF5 module
 find_package(HDF5)

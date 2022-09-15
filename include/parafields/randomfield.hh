@@ -641,8 +641,6 @@ public:
 
       // Perform the evaluation
       evaluate(location, output[i]);
-      std::cout << location[0] << " " << location[1] << ": " << output[i][0]
-                << std::endl;
     }
   }
 

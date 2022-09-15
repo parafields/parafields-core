@@ -614,23 +614,35 @@ public:
   void bulkEvaluate(std::vector<typename Traits::RangeType>& output,
                     typename Traits::Indices& sizes) const
   {
-    // Export the local sizes from the traits class
-    sizes = traits->localCells;
-
-    // Correctly resize the output container
+    // Correctly resize the output container and calculate sizes + strides
     std::size_t size = 1;
-    for (auto lc : traits->localCells)
-      size *= lc;
+    typename Traits::Indices strides;
+    std::fill(strides.begin(), strides.end(), 1);
+    for (std::size_t i = 0; i < Traits::dim; ++i) {
+      size *= traits->localCells[i];
+      sizes[i] = traits->localCells[i];
+      for (std::size_t j = i + 1; j < Traits::dim; ++j)
+        strides[j] *= sizes[i];
+    }
     output.resize(size);
 
     // Do the evaluation. The detour to calculating coordinates is unnecessary,
     // but allows us a minimally invasive approach.
     for (std::size_t i = 0; i < size; ++i) {
-      typename Traits::Indices indices;
-      traits->indexToIndices(i, indices, traits->localCells);
+      // Calculate the location applying above strides
+      std::size_t index = i;
       typename Traits::DomainType location;
-      traits->indicesToCoords(indices, traits->localOffset, location);
+      for (int j = Traits::dim - 1; j >= 0; --j) {
+        double meshsize = traits->extensions[j] / static_cast<double>(sizes[j]);
+        location[j] =
+          (static_cast<double>(index / strides[j]) + 0.5) * meshsize;
+        index = index % strides[j];
+      }
+
+      // Perform the evaluation
       evaluate(location, output[i]);
+      std::cout << location[0] << " " << location[1] << ": " << output[i][0]
+                << std::endl;
     }
   }
 

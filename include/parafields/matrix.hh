@@ -506,7 +506,7 @@ private:
       computeCovarianceMatrixEntries<Covariance, GeneralMatrix<RF, dim>>();
     else
       throw std::runtime_error{ "stochastic.anisotropy must be \"none\", "
-                                "\"axiparallel\" or "\"geometric\"" };
+                                "\"axiparallel\" or \"geometric\"" };
   }
 
   /**

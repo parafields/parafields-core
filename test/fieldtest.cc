@@ -1,7 +1,6 @@
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
-#include <dune/common/exceptions.hh>         // We use exceptions
 #include <dune/common/parallel/mpihelper.hh> // An initializer of MPI
 #include <iostream>
 

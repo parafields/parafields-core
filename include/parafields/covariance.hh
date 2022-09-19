@@ -123,7 +123,7 @@ public:
     } else if (dim == 1) {
       matrixValues[0] = 1. / matrixValues[0];
     } else
-      DUNE_THROW(Dune::NotImplemented, "dimension > 3 not implemented");
+      throw std::runtime_error{ "dimension > 3 not implemented" };
   }
 
   void transform(const std::array<RF, dim>& x, std::array<RF, dim>& xTrans)
@@ -339,8 +339,9 @@ public:
       else
         return variance * (1. - h_eff);
     } else
-      DUNE_THROW(Dune::NotImplemented,
-                 "spherical covariance only defined for 1D, 2D and 3D");
+      throw std::runtime_error{
+        "spherical covariance only defined for 1D, 2D and 3D"
+      };
   }
 };
 
@@ -407,7 +408,7 @@ public:
     : gamma(config.template get<double>("stochastic.expGamma"))
   {
     if (gamma < 0. || gamma > 2.)
-      DUNE_THROW(Dune::Exception, "exponent gamma has to be between 0 and 2");
+      throw std::runtime_error{ "exponent gamma has to be between 0 and 2" };
   }
 
   /**
@@ -544,7 +545,7 @@ public:
     , gammaNu(std::tgamma(nu))
   {
     if (nu < 0.)
-      DUNE_THROW(Dune::Exception, "matern nu has to be positive");
+      throw std::runtime_error{ "matern nu has to be positive" };
   }
 
   /**
@@ -574,8 +575,9 @@ public:
              std::pow(sqrtTwoNu * h_eff, nu) *
              gsl_sf_bessel_Knu(nu, sqrtTwoNu * h_eff);
 #else
-    DUNE_THROW(Dune::Exception,
-               "general matern requires the GNU Scientific Library (gsl)");
+    throw std::runtime_error{
+      "general matern requires the GNU Scientific Library (gsl)"
+    };
 #endif // HAVE_GSL
   }
 };
@@ -765,10 +767,11 @@ public:
     , beta(config.template get<double>("stochastic.cauchyBeta"))
   {
     if (alpha <= 0. || alpha > 2.)
-      DUNE_THROW(Dune::Exception,
-                 "generalized Cauchy alpha has to be in range (0,2]");
+      throw std::runtime_error{
+        "generalized Cauchy alpha has to be in range (0,2]"
+      };
     if (beta <= 0.)
-      DUNE_THROW(Dune::Exception, "generalized Cauchy beta has to be positive");
+      throw std::runtime_error{ "generalized Cauchy beta has to be positive" };
   }
 
   /**
@@ -838,8 +841,9 @@ public:
                (1. - 7. * std::pow(h_eff, 2) + 8.75 * std::pow(h_eff, 3) -
                 3.5 * std::pow(h_eff, 5) + 0.75 * std::pow(h_eff, 7));
     } else
-      DUNE_THROW(Dune::NotImplemented,
-                 "cubic covariance only applicable in 1D or 2D");
+      throw std::runtime_error{
+        "cubic covariance only applicable in 1D or 2D"
+      };
   }
 };
 

@@ -41,9 +41,6 @@ class DefaultFieldBackend;
 template<long unsigned int>
 class DefaultRNGBackend;
 
-struct EmbeddingFailed : public Dune::Exception
-{};
-
 /**
  * @brief Covariance matrix for stationary Gaussian random fields
  *
@@ -238,9 +235,9 @@ public:
   {
     if constexpr (std::is_same<Covariance, void>::value) {
       if (covariance == "custom-iso" || covariance == "custom-aniso")
-        DUNE_THROW(Dune::Exception,
-                   "you need to call fillMatrix with your covariance class as "
-                   "parameter");
+        throw std::runtime_error{
+          "you need to call fillMatrix with your covariance class as parameter"
+        };
 
       if (covariance == "exponential")
         fillCovarianceMatrix<ExponentialCovariance>();
@@ -269,13 +266,14 @@ public:
       else if (covariance == "whiteNoise")
         fillCovarianceMatrix<WhiteNoiseCovariance>();
       else
-        DUNE_THROW(Dune::Exception,
-                   "covariance structure " + covariance + " not known");
+        throw std::runtime_error{ "covariance structure " + covariance +
+                                  " not known" };
     } else {
       if (covariance != "custom-iso" && covariance != "custom-aniso")
-        DUNE_THROW(Dune::Exception,
-                   "you can't fill the matrix explicitly if a default "
-                   "covariance was chosen");
+        throw std::runtime_error{
+          "you can't fill the matrix explicitly if a default "
+          "covariance was chosen"
+        };
 
       computeCovarianceMatrixEntries<Covariance,
                                      ScaledIdentityMatrix<RF, dim>>();
@@ -327,7 +325,7 @@ public:
         std::cerr << "negative eigenvalues in covariance matrix, "
                   << "consider increasing embeddingFactor, or alternatively "
                   << "allow generation of approximate samples" << std::endl;
-      DUNE_THROW(EmbeddingFailed, "negative eigenvalues in covariance matrix");
+      throw std::runtime_error{ "negative eigenvalues in covariance matrix" };
     }
 
     matrixBackend.finalize();
@@ -507,9 +505,8 @@ private:
     else if (anisotropy == "geometric")
       computeCovarianceMatrixEntries<Covariance, GeneralMatrix<RF, dim>>();
     else
-      DUNE_THROW(Dune::Exception,
-                 "stochastic.anisotropy must be \"none\", \"axiparallel\" or "
-                 "\"geometric\"");
+      throw std::runtime_error{ "stochastic.anisotropy must be \"none\", "
+                                "\"axiparallel\" or "\"geometric\"" };
   }
 
   /**
@@ -555,8 +552,9 @@ private:
                                       GeometryMatrix,
                                       SmoothstepSigmoid>();
       else
-        DUNE_THROW(Dune::Exception,
-                   "embedding.sigmoid must be \"smooth\" or \"smoothstep\"");
+        throw std::runtime_error{
+          "embedding.sigmoid must be \"smooth\" or \"smoothstep\""
+        };
     } else if (periodization == "fold") {
       if ((*traits).verbose && rank == 0)
         std::cout << "fold periodization" << std::endl;
@@ -570,8 +568,9 @@ private:
                                      GeometryMatrix,
                                      SmoothstepSigmoid>();
       else
-        DUNE_THROW(Dune::Exception,
-                   "embedding.sigmoid must be \"smooth\" or \"smoothstep\"");
+        throw std::runtime_error{
+          "embedding.sigmoid must be \"smooth\" or \"smoothstep\""
+        };
     } else if (periodization == "cofold") {
       if ((*traits).verbose && rank == 0)
         std::cout << "cofold periodization" << std::endl;
@@ -583,12 +582,14 @@ private:
       else if (sigmoid == "smoothstep")
         modifyMatrixEntriesWithCofold<SmoothstepSigmoid>();
       else
-        DUNE_THROW(Dune::Exception,
-                   "embedding.sigmoid must be \"smooth\" or \"smoothstep\"");
+        throw std::runtime_error{
+          "embedding.sigmoid must be \"smooth\" or \"smoothstep\""
+        };
     } else
-      DUNE_THROW(Dune::Exception,
-                 "stochastic.periodization must be \"classical\", \"merge\", "
-                 "\"fold\", or \"cofold\"");
+      throw std::runtime_error{
+        "stochastic.periodization must be \"classical\", \"merge\", \"fold\", "
+        "or \"cofold\""
+      };
 
     const std::string& optim =
       (*traits).config.template get<std::string>("embedding.optim", "none");
@@ -601,11 +602,12 @@ private:
     else if (optim == "dualopt")
       optimizeMatrixEntriesWithDualOptimization<Covariance, GeometryMatrix>();
     else
-      DUNE_THROW(Dune::Exception,
-                 "stochastic.optim must be \"coneopt\" or \"dualopt\"");
+      throw std::runtime_error{
+        "stochastic.optim must be \"coneopt\" or \"dualopt\""
+      };
 #else  // HAVE_DUNE_NONLINOPT
     else
-      DUNE_THROW(Dune::Exception, "optimization requires dune-nonlinopt");
+      throw std::runtime_error{ "optimization requires dune-nonlinopt" };
 #endif // HAVE_DUNE_NONLINOPT
   }
 
@@ -674,8 +676,9 @@ private:
     else if (type == "tensor")
       radial = false;
     else
-      DUNE_THROW(Dune::Exception,
-                 "sigmoidCombine must be tensor, radial or radialPlus");
+      throw std::runtime_error{
+        "sigmoidCombine must be tensor, radial or radialPlus"
+      };
 
     std::array<RF, dim> trueCoord;
     std::array<RF, dim> mirrorCoord;
@@ -711,9 +714,9 @@ private:
       else if ((*traits).covariance == "cauchy")
         recursions = 3;
       else
-        DUNE_THROW(
-          Dune::Exception,
-          "magic recursions value 99 not implemented for choice of covariance");
+        throw std::runtime_error{
+          "magic recursions value 99 not implemented for choice of covariance"
+        };
     }
 
     RF constValue = 0.;
@@ -837,9 +840,9 @@ private:
       else if ((*traits).covariance == "cauchy")
         recursions = 3;
       else
-        DUNE_THROW(
-          Dune::Exception,
-          "magic recursions value 99 not implemented for choice of covariance");
+        throw std::runtime_error{
+          "magic recursions value 99 not implemented for choice of covariance"
+        };
     }
 
     RF params[3];
@@ -897,7 +900,7 @@ private:
 
     gsl_set_error_handler(handler);
 #else  // HAVE_GSL
-    DUNE_THROW(Dune::Exception, "Fold embedding requires GSL library");
+    throw std::runtime_error{ "Fold embedding requires GSL library" };
 #endif // HAVE_GSL
   }
 
@@ -1020,7 +1023,7 @@ private:
 
     gsl_set_error_handler(handler);
 #else  // HAVE_GSL
-    DUNE_THROW(Dune::Exception, "Cofold embedding requires GSL library");
+    throw std::runtime_error{ "Cofold embedding requires GSL library" };
 #endif // HAVE_GSL
   }
 
@@ -1044,11 +1047,13 @@ private:
     if ((!std::is_same<MatrixBackend<Traits>,
                        DFTMatrixBackend<Traits>>::value) ||
         (*traits).transposed)
-      DUNE_THROW(Dune::Exception,
-                 "optimization requires untransposed DFTMatrixBackend");
+      throw std::runtime_error{
+        "optimization requires untransposed DFTMatrixBackend"
+      };
     if ((*traits).commSize != 1)
-      DUNE_THROW(Dune::Exception,
-                 "optimization is only implemented for sequential runs");
+      throw std::runtime_error{
+        "optimization is only implemented for sequential runs"
+      };
 
     bool radial;
     const std::string& type =
@@ -1188,11 +1193,13 @@ private:
     if ((!std::is_same<MatrixBackend<Traits>,
                        DFTMatrixBackend<Traits>>::value) ||
         (*traits).transposed)
-      DUNE_THROW(Dune::Exception,
-                 "optimization requires untransposed DFTMatrixBackend");
+      throw std::runtime_error{
+        "optimization requires untransposed DFTMatrixBackend"
+      };
     if ((*traits).commSize != 1)
-      DUNE_THROW(Dune::Exception,
-                 "optimization is only implemented for sequential runs");
+      throw std::runtime_error{
+        "optimization is only implemented for sequential runs"
+      };
 
     Covariance covariance((*traits).config);
     GeometryMatrix matrix((*traits).config);

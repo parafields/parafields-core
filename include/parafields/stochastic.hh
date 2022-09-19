@@ -87,8 +87,8 @@ public:
     if (fileName != "") {
 #if HAVE_HDF5
       if (!fileExists(fileName + ".stoch.h5"))
-        DUNE_THROW(Dune::Exception,
-                   "File is missing: " + fileName + ".stoch.h5");
+        throw std::runtime_error{ "File is missing: " + fileName +
+                                  ".stoch.h5" };
 
       if ((*traits).verbose && rank == 0)
         std::cout << "loading random field from file " << fileName << std::endl;
@@ -101,9 +101,9 @@ public:
 
       evalValid = false;
 #else  // HAVE_HDF5
-      DUNE_THROW(
-        Dune::NotImplemented,
-        "Writing and reading field files requires parallel HDF5 support");
+      throw std::runtime_error{
+        "Writing and reading field files requires parallel HDF5 support"
+      };
 #endif // HAVE_HDF5
     } else {
       if ((*traits).verbose && rank == 0)
@@ -239,8 +239,9 @@ public:
 
     for (unsigned int i = 0; i < dim; i++) {
       if (cells[i] % procPerDim[i] != 0)
-        DUNE_THROW(Dune::Exception,
-                   "cells in dimension not divisable by numProcs");
+        throw std::runtime_error{
+          "cells in dimension not divisable by numProcs"
+        };
       localEvalCells[i] = cells[i] / procPerDim[i];
     }
     if (dim == 3) {
@@ -287,9 +288,9 @@ public:
     if (rank == 0)
       writeToXDMF<RF, dim>((*traits).cells, (*traits).extensions, fileName);
 #else  // HAVE_HDF5
-    DUNE_THROW(
-      Dune::NotImplemented,
-      "Writing and reading field files requires parallel HDF5 support");
+    throw std::runtime_error{
+      "Writing and reading field files requires parallel HDF5 support"
+    };
 #endif // HAVE_HDF5
   }
 
@@ -557,8 +558,9 @@ public:
     } else {
       for (unsigned int i = 0; i < dim; i++)
         if (countIndices[i] != 2 * dim)
-          DUNE_THROW(Dune::Exception,
-                     "overlap only available for dimensions 1, 2 and 3");
+          throw std::runtime_error{
+            "overlap only available for dimensions 1, 2 and 3"
+          };
 
       for (unsigned int i = 0; i < dim; i++) {
         if (evalIndices[i] > localEvalCells[i])
@@ -658,9 +660,9 @@ public:
               dataVector[newIndex + localCells[0] + 1] = oldValue;
             }
         } else if (dim == 1) {
-          DUNE_THROW(Dune::Exception, "not implemented");
+          throw std::runtime_error{ "not implemented" };
         } else
-          DUNE_THROW(Dune::Exception, "dimension of field has to be 1, 2 or 3");
+          throw std::runtime_error{ "dimension of field has to be 1, 2 or 3" };
       }
 
       evalValid = false;
@@ -744,9 +746,9 @@ public:
               dataVector[newIndex] = newValue / 4;
             }
         } else if (dim == 1) {
-          DUNE_THROW(Dune::Exception, "not implemented");
+          throw std::runtime_error{ "not implemented" };
         } else
-          DUNE_THROW(Dune::Exception, "dimension of field has to be 1, 2 or 3");
+          throw std::runtime_error{ "dimension of field has to be 1, 2 or 3" };
       }
 
       evalValid = false;
@@ -887,7 +889,7 @@ private:
           resorted[iNew * sliceSize + j] = dataVector[i * sliceSize + j];
       }
     } else
-      DUNE_THROW(Dune::Exception, "dimension of field has to be 1, 2 or 3");
+      throw std::runtime_error{ "dimension of field has to be 1, 2 or 3" };
 
     unsigned int numComms;
     if (dim == 3)
@@ -895,7 +897,7 @@ private:
     else if (dim == 2)
       numComms = procPerDim[0];
     else
-      DUNE_THROW(Dune::Exception, "dimension of field has to be 1, 2 or 3");
+      throw std::runtime_error{ "dimension of field has to be 1, 2 or 3" };
     std::vector<MPI_Request> request(numComms);
 
     for (unsigned int i = 0; i < numComms; i++)
@@ -948,7 +950,7 @@ private:
     else if (dim == 2)
       numComms = procPerDim[0];
     else
-      DUNE_THROW(Dune::Exception, "dimension of field has to be 1, 2 or 3");
+      throw std::runtime_error{ "dimension of field has to be 1, 2 or 3" };
     std::vector<MPI_Request> request(numComms);
 
     for (unsigned int i = 0; i < numComms; i++)
@@ -999,7 +1001,7 @@ private:
           dataVector[i * sliceSize + j] = resorted[iNew * sliceSize + j];
       }
     } else
-      DUNE_THROW(Dune::Exception, "dimension of field has to be 1, 2 or 3");
+      throw std::runtime_error{ "dimension of field has to be 1, 2 or 3" };
 
     MPI_Waitall(request.size(), &(request[0]), MPI_STATUSES_IGNORE);
   }
@@ -1086,7 +1088,7 @@ private:
       neighbor[0] = (rank + (commSize - 1)) % commSize;
       neighbor[1] = (rank + 1) % commSize;
     } else
-      DUNE_THROW(Dune::Exception, "dimension of field has to be 1, 2 or 3");
+      throw std::runtime_error{ "dimension of field has to be 1, 2 or 3" };
 
     std::vector<MPI_Request> request(2 * dim);
 

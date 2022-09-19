@@ -43,8 +43,9 @@ public:
     int commSize;
     MPI_Comm_size(comm, &commSize);
     if (commSize > 1)
-      DUNE_THROW(Dune::Exception,
-                 "Legacy VTK writer doesn't work for parallel runs");
+      throw std::runtime_error{
+        "Legacy VTK writer doesn't work for parallel runs"
+      };
 
     // VTK is always 3D
     if (extensions.size() < 2)

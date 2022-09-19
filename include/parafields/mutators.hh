@@ -152,7 +152,7 @@ public:
       mutator =
         std::shared_ptr<BoxCoxMutator<RF>>(new BoxCoxMutator<RF>(config));
     else
-      DUNE_THROW(Dune::Exception, "transform type not known");
+      throw std::runtime_error{ "transform type not known" };
   }
 
   /**

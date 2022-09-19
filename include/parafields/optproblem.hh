@@ -6,9 +6,7 @@
 
 #include <parafields/legacyvtk.hh>
 
-namespace Dune {
-namespace RandomField {
-
+namespace parafields {
 /**
  * @brief Wrapper class with vector arithmetics for optimization
  *
@@ -894,7 +892,6 @@ public:
   }
 };
 
-}
-}
+} // namespace parafields
 
 #endif // HAVE_DUNE_NONLINOPT

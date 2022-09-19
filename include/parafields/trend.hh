@@ -18,8 +18,7 @@
 
 #include <parafields/pngreader.hh>
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Predefined types of trend component
@@ -1529,5 +1528,4 @@ public:
   }
 };
 
-}
-}
+} // namespace parafields

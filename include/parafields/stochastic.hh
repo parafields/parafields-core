@@ -9,8 +9,7 @@
 
 #include <parafields/fieldtraits.hh>
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /*
  * @brief Part of random field that consists of cell values
@@ -1128,5 +1127,4 @@ private:
   }
 };
 
-}
-}
+} // namespace parafields

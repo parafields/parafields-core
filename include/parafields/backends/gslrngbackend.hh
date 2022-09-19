@@ -5,8 +5,7 @@
 #include <gsl/gsl_rng.h>
 #endif // HAVE_GSL
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Standard normal distribtion based on choice of GSL RNGs
@@ -138,5 +137,4 @@ public:
 #endif // HAVE_GSL
 };
 
-}
-}
+} // namespace parafields

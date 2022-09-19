@@ -1,7 +1,6 @@
 #pragma once
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Field backend that uses real-input discrete Fourier transform (R2C)
@@ -537,5 +536,4 @@ private:
   }
 };
 
-}
-}
+} // namespace parafields

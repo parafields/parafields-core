@@ -124,7 +124,7 @@ generate(const Dune::ParameterTree& config)
       "(or both)\nexample: -output.dune field -output.vtk fieldVis"
     };
 
-  Dune::RandomField::RandomField<GridTraits> field(config);
+  parafields::RandomField<GridTraits> field(config);
   if (seed == 0)
     field.generate();
   else
@@ -199,7 +199,7 @@ generateList(const Dune::ParameterTree& config)
       "(or both)\nexample: -output.dune field -output.vtk fieldVis"
     };
 
-  Dune::RandomField::RandomFieldList<GridTraits> field(config);
+  parafields::RandomFieldList<GridTraits> field(config);
   if (seed == 0)
     field.generate();
   else
@@ -590,7 +590,7 @@ main(int argc, char** argv)
   } else {
     // no arguments
     // print help message if randomfield.ini is missing
-    if (!Dune::RandomField::fileExists("randomfield.ini"))
+    if (!parafields::fileExists("randomfield.ini"))
       printHelpMessage();
     else
       generateFields(helper, "randomfield.ini", argc, argv);

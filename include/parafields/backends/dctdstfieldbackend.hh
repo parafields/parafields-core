@@ -1,7 +1,6 @@
 #pragma once
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Extended field backend that uses discrete cosine / sine transform
@@ -1172,5 +1171,4 @@ private:
   }
 };
 
-}
-}
+} // namespace parafields

@@ -137,7 +137,7 @@ void
 runTests(Dune::ParameterTree config, std::string covariance)
 {
   config["stochastic.covariance"] = covariance;
-  Dune::RandomField::RandomField<GridTraits> randomField(config);
+  parafields::RandomField<GridTraits> randomField(config);
   randomField.generate();
 
   diffRootInvRoot(randomField);

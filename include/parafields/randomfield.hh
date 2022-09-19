@@ -17,9 +17,7 @@
 #include <parafields/stochastic.hh>
 #include <parafields/trend.hh>
 
-namespace Dune {
-namespace RandomField {
-
+namespace parafields {
 /**
  * @brief Gaussian random field in arbitrary dimensions
  *
@@ -1369,7 +1367,7 @@ template<typename GridTraits,
          template<typename> class AnisoMatrix =
            DefaultAnisoMatrix<GridTraits::dim>::template Type,
          template<typename, template<typename> class, template<typename> class>
-         class RandomField = Dune::RandomField::RandomField>
+         class RandomField = parafields::RandomField>
 class RandomFieldList
 {
 public:
@@ -2268,5 +2266,5 @@ public:
       list.find(type)->second->localize(center, radius);
   }
 };
-}
-}
+
+} // namespace parafields

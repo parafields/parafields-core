@@ -8,8 +8,7 @@
 #include "gsl/gsl_sf_bessel.h"
 #endif // HAVE_GSL
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Geometry transformation that is only scaling
@@ -890,5 +889,4 @@ public:
   }
 };
 
-}
-}
+} // namespace parafields

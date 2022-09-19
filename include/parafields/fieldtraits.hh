@@ -8,8 +8,7 @@
 
 #include <dune/common/parametertreeparser.hh>
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 // forward declarations
 template<typename Traits>
@@ -562,5 +561,4 @@ private:
   }
 };
 
-}
-}
+} // namespace parafields

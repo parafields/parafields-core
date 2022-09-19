@@ -1,7 +1,6 @@
 #pragma once
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Fallback class for error message when requested FFTW3 library wasn't
@@ -618,5 +617,4 @@ public:
 };
 #endif // HAVE_FFTW3_LONGDOUBLE
 
-}
-}
+} // namespace parafields

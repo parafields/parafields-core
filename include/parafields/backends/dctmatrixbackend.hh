@@ -1,7 +1,6 @@
 #pragma once
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Matrix backend that uses discrete cosine transform (DCT)
@@ -808,5 +807,4 @@ private:
   }
 };
 
-}
-}
+} // namespace parafields

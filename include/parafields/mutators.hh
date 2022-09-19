@@ -1,7 +1,6 @@
 #pragma once
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Abstract base class for value transformations
@@ -163,5 +162,4 @@ public:
   void apply(RF& value) const { (*mutator).apply(value); }
 };
 
-}
-}
+} // namespace parafields

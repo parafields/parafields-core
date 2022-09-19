@@ -1,7 +1,6 @@
 #pragma once
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Extended field backend that uses discrete Fourier transform (DFT)
@@ -477,5 +476,4 @@ private:
   }
 };
 
-}
-}
+} // namespace parafields

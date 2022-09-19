@@ -10,8 +10,7 @@
 //#define HDF5_DATA_TYPE H5T_IEEE_F32LE //define for 32 bit machine
 #endif // HAVE_HDF5
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Check if file exists
@@ -402,5 +401,4 @@ writeToXDMF(const std::array<unsigned int, dim>& cells,
   return true;
 }
 
-}
-}
+} // namespace parafields

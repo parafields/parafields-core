@@ -2,8 +2,7 @@
 
 #include <random>
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief Standard normal distribution based on C++11 random facilities
@@ -59,5 +58,4 @@ public:
   RF sample() { return normalDist(generator); }
 };
 
-}
-}
+} // namespace parafields

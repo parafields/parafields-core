@@ -30,8 +30,7 @@
 #include "parafields/optproblem.hh"
 #endif // HAVE_DUNE_NONLINOPT
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 // forward declarations
 template<long unsigned int>
@@ -1766,5 +1765,5 @@ public:
   template<typename T>
   using Type = Matrix<T, DFTMatrixBackend>;
 };
-}
-}
+
+} // namespace parafields

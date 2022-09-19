@@ -4,8 +4,7 @@
 #include "png.h"
 #endif // HAVE_PNG
 
-namespace Dune {
-namespace RandomField {
+namespace parafields {
 
 /**
  * @brief A class to read in PNG files as trend components
@@ -110,5 +109,5 @@ public:
 #endif // HAVE_PNG
   }
 };
-}
-}
+
+} // namespace parafields

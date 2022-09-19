@@ -126,9 +126,9 @@ public:
     transposed = (*traits).transposed;
 
     if (dim == 2 && transposed)
-      DUNE_THROW(
-        Dune::Exception,
-        "R2CMatrixBackend supports transposed output only for dim > 2");
+      throw std::runtime_error{
+        "R2CMatrixBackend supports transposed output only for dim > 2"
+      };
 
     getR2CData();
 
@@ -272,7 +272,7 @@ public:
       dim, n, (RF*)matrixData, matrixData, (*traits).comm, flags);
 
     if (plan_forward == nullptr)
-      DUNE_THROW(Dune::Exception, "failed to create forward plan");
+      throw std::runtime_error{ "parafields failed to create forward plan" };
 
     FFTW<RF>::execute(plan_forward);
     FFTW<RF>::destroy_plan(plan_forward);
@@ -315,7 +315,7 @@ public:
       dim, n, matrixData, (RF*)matrixData, (*traits).comm, flags);
 
     if (plan_backward == nullptr)
-      DUNE_THROW(Dune::Exception, "failed to create backward plan");
+      throw std::runtime_error{ "parafields failed to create backward plan" };
 
     FFTW<RF>::execute(plan_backward);
     FFTW<RF>::destroy_plan(plan_backward);
@@ -474,9 +474,8 @@ private:
   void checkFinalized() const
   {
     if (finalized)
-      DUNE_THROW(Dune::Exception,
-                 "matrix is finalized, use DFTMatrixBackend if you need to "
-                 "modify the matrix");
+      throw std::runtime_error{ "matrix is finalized, use DFTMatrixBackend if "
+                                "you need to modify the matrix" };
   }
 };
 

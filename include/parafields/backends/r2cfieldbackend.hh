@@ -124,8 +124,9 @@ public:
     transposed = (*traits).transposed;
 
     if (dim == 2 && transposed)
-      DUNE_THROW(Dune::Exception,
-                 "R2CFieldBackend supports transposed output only for dim > 2");
+      throw std::runtime_error{
+        "R2CFieldBackend supports transposed output only for dim > 2"
+      };
 
     getR2CData();
 
@@ -225,7 +226,7 @@ public:
       dim, n, (RF*)fieldData, fieldData, (*traits).comm, flags);
 
     if (plan_forward == nullptr)
-      DUNE_THROW(Dune::Exception, "failed to create forward plan");
+      throw std::runtime_error{ "parafields failed to create forward plan" };
 
     FFTW<RF>::execute(plan_forward);
     FFTW<RF>::destroy_plan(plan_forward);
@@ -267,7 +268,7 @@ public:
       dim, n, fieldData, (RF*)fieldData, (*traits).comm, flags);
 
     if (plan_backward == nullptr)
-      DUNE_THROW(Dune::Exception, "failed to create backward plan");
+      throw std::runtime_error{ "parafields failed to create backward plan" };
 
     FFTW<RF>::execute(plan_backward);
     FFTW<RF>::destroy_plan(plan_backward);
@@ -426,8 +427,9 @@ public:
     field.resize(localDomainSize);
 
     if (component != 0)
-      DUNE_THROW(Dune::Exception,
-                 "tried to extract more than one field from R2CFieldBackend");
+      throw std::runtime_error{
+        "tried to extract more than one field from R2CFieldBackend"
+      };
 
     if (commSize == 1) {
       Indices indices;

@@ -303,7 +303,7 @@ public:
                    indices[0] - 0.5) %
              extendedDomainSize][0];
     else
-      DUNE_THROW(Dune::Exception, "not implemented");
+      throw std::runtime_error{ "not implemented" };
   }
 
   /**
@@ -322,7 +322,7 @@ public:
         FFTW<Real>::mpi_plan_dft(dim, n, data, data, comm, FFTW_FORWARD, flags);
 
       if (plan_forward == nullptr)
-        DUNE_THROW(Dune::Exception, "failed to create forward plan");
+        throw std::runtime_error{ "parafields failed to create forward plan" };
 
       FFTW<Real>::execute(plan_forward);
       FFTW<Real>::destroy_plan(plan_forward);
@@ -350,7 +350,7 @@ public:
         dim, n, data, data, comm, FFTW_BACKWARD, flags);
 
       if (plan_backward == nullptr)
-        DUNE_THROW(Dune::Exception, "failed to create backward plan");
+        throw std::runtime_error{ "parafields failed to create backward plan" };
 
       FFTW<Real>::execute(plan_backward);
       FFTW<Real>::destroy_plan(plan_backward);
@@ -400,7 +400,7 @@ public:
   void removeUnconstrained(const std::vector<bool>& constrained)
   {
     if (constrained.size() != data_size)
-      DUNE_THROW(Dune::Exception, "size mismatch");
+      throw std::runtime_error{ "size mismatch" };
 
     for (Index i = 0; i < data_size; ++i)
       if (!constrained[i])
@@ -415,7 +415,7 @@ public:
   void removeConstrained(const std::vector<bool>& constrained)
   {
     if (constrained.size() != data_size)
-      DUNE_THROW(Dune::Exception, "size mismatch");
+      throw std::runtime_error{ "size mismatch" };
 
     for (Index i = 0; i < data_size; ++i)
       if (constrained[i])
@@ -442,7 +442,7 @@ public:
       return 0.;
 
     if (data_size != other.data_size)
-      DUNE_THROW(Dune::Exception, "size mismatch");
+      throw std::runtime_error{ "size mismatch" };
 
     Real output = 0.;
     for (Index i = 0; i < data_size; ++i)
@@ -593,7 +593,7 @@ public:
     , current(zero())
   {
     if (constrained.size() != localExtendedDomainSize)
-      DUNE_THROW(Dune::Exception, "size mismatch");
+      throw std::runtime_error{ "size mismatch" };
   }
 
   Real value(const Point& x, bool subsequent = false) const
@@ -818,7 +818,7 @@ public:
     , projectedPoint(zero())
   {
     if (constrained.size() != localExtendedDomainSize)
-      DUNE_THROW(Dune::Exception, "size mismatch");
+      throw std::runtime_error{ "size mismatch" };
   }
 
   Real value(const Point& x, bool subsequent = false) const

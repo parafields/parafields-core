@@ -216,12 +216,13 @@ public:
   {
     // ensures that FFTW can divide data equally between processes
     if (cells[dim - 1] % commSize != 0)
-      DUNE_THROW(
-        Dune::Exception,
-        "number of cells in last dimension has to be multiple of numProc");
+      throw std::runtime_error{
+        "number of cells in last dimension has to be multiple of numProc"
+      };
     if (dim == 1 && cells[0] % (commSize * commSize) != 0)
-      DUNE_THROW(Dune::Exception,
-                 "in 1D, number of cells has to be multiple of numProc^2");
+      throw std::runtime_error{
+        "in 1D, number of cells has to be multiple of numProc^2"
+      };
 
     transposed = config.template get<bool>("fftw.transposed", dim > 1);
     if (transposed) {
@@ -335,7 +336,7 @@ public:
   {
     for (unsigned int i = 0; i < dim; ++i) {
       if (cells[i] % 2 != 0)
-        DUNE_THROW(Dune::Exception, "cannot coarsen odd number of cells");
+        throw std::runtime_error{ "cannot coarsen odd number of cells" };
       cells[i] /= 2;
     }
 
@@ -374,7 +375,7 @@ public:
                                           &localN02,
                                           &local0Start2);
       if (localN0 != localN02 || local0Start != local0Start2)
-        DUNE_THROW(Dune::Exception, "1d size / offset results don't match");
+        throw std::runtime_error{ "1d size / offset results don't match" };
     } else
       allocLocal = fftw_mpi_local_size(dim, n, comm, &localN0, &local0Start);
   }

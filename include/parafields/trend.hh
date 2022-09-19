@@ -125,28 +125,26 @@ public:
   {
     if (trendVector.size() != meanVector.size() ||
         trendVector.size() != varianceVector.size())
-      DUNE_THROW(Dune::Exception, "trend component size does not match");
+      throw std::runtime_error{ "trend component size does not match" };
 
     if (TrendComponentType::isMean(componentType) && trendVector.size() != 1)
-      DUNE_THROW(Dune::Exception,
-                 "Trend mean component must only contain one parameter");
+      throw std::runtime_error{
+        "Trend mean component must only contain one parameter"
+      };
 
     if (TrendComponentType::isSlope(componentType) && trendVector.size() != dim)
-      DUNE_THROW(Dune::Exception,
-                 "Trend slope component must contain dim parameters: slope in "
-                 "each dimension");
+      throw std::runtime_error{ "Trend slope component must contain dim "
+                                "parameters: slope in each dimension" };
 
     if (TrendComponentType::isDisk(componentType) &&
         trendVector.size() != dim + 2)
-      DUNE_THROW(Dune::Exception,
-                 "Trend disk component must contain dim+2 parameters: "
-                 "position, radius, value");
+      throw std::runtime_error{ "Trend disk component must contain dim+2 "
+                                "parameters: position, radius, value" };
 
     if (TrendComponentType::isBlock(componentType) &&
         trendVector.size() != (2 * dim) + 1)
-      DUNE_THROW(Dune::Exception,
-                 "Trend block component must contain (2*dim)+1 parameters: "
-                 "center, extent, value");
+      throw std::runtime_error{ "Trend block component must contain (2*dim)+1 "
+                                "parameters: center, extent, value" };
 
     for (unsigned int i = 0; i < shiftVector.size(); i++)
       shiftVector[i] -= meanVector[i];
@@ -295,7 +293,7 @@ public:
     else if (TrendComponentType::isBlock(componentType))
       return std::string("block") + std::to_string(componentCount);
     else
-      DUNE_THROW(Dune::Exception, "Trend component type not found!");
+      throw std::runtime_error{ "Trend component type not found!" };
   }
 
   /**
@@ -314,7 +312,7 @@ public:
     else if (TrendComponentType::isBlock(componentType))
       return 2 * dim + 1;
     else
-      DUNE_THROW(Dune::Exception, "Trend component type not found!");
+      throw std::runtime_error{ "Trend component type not found!" };
   }
 
   /**
@@ -634,7 +632,7 @@ public:
 
       output[0] = meanVector[2 * dim] + shiftVector[2 * dim];
     } else
-      DUNE_THROW(Dune::Exception, "Trend component type not found!");
+      throw std::runtime_error{ "Trend component type not found!" };
   }
 
   /**
@@ -684,7 +682,7 @@ public:
       else if (TrendComponentType::isBlock(componentType))
         file << "block" << componentCount << " =";
       else
-        DUNE_THROW(Dune::Exception, "Trend component type not found!");
+        throw std::runtime_error{ "Trend component type not found!" };
 
       for (unsigned int i = 0; i < shiftVector.size(); i++)
         file << " " << meanVector[i] + shiftVector[i];
@@ -742,14 +740,15 @@ public:
   {
     if (trendVector.size() != meanVector.size() ||
         trendVector.size() != varianceVector.size())
-      DUNE_THROW(Dune::Exception, "trend component size does not match");
+      throw std::runtime_error{ "trend component size does not match" };
 
     if (trendVector.size() != 1)
-      DUNE_THROW(Dune::Exception,
-                 "Image component must only contain one parameter");
+      throw std::runtime_error{
+        "Image component must only contain one parameter"
+      };
 
     if (dim != 2)
-      DUNE_THROW(Dune::Exception, "image trend components require dim == 2");
+      throw std::runtime_error{ "image trend components require dim == 2" };
   }
 
 #if HAVE_DUNE_PDELAB

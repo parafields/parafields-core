@@ -60,9 +60,10 @@ public:
     else if (rng == "gfsr4")
       generator = gsl_rng_alloc(gsl_rng_gfsr4);
     else
-      DUNE_THROW(Dune::Exception,
-                 "GSLRNGBackend accepts \"twister\", \"ranlux\", "
-                 "\"tausworthe\" and \"gfsr4\"as RNGs");
+      throw std::runtime_error{
+        "GSLRNGBackend accepts \"twister\", \"ranlux\", "
+        "\"tausworthe\" and \"gfsr4\"as RNGs"
+      };
 
     const std::string& dist = (*traits).config.template get<std::string>(
       "random.distribution", "ziggurat");
@@ -74,9 +75,11 @@ public:
     else if (dist == "ziggurat")
       type = Ziggurat;
     else
-      DUNE_THROW(Dune::Exception,
-                 "GSLRNGBackend accepts \"boxMuller\", \"ratioMethod\""
-                 " and \"ziggurat\" as distributions");
+
+      throw std::runtime_error{
+        "GSLRNGBackend accepts \"boxMuller\", \"ratioMethod\""
+        " and \"ziggurat\" as distributions"
+      };
   }
 
   /**
@@ -125,7 +128,7 @@ public:
         return gsl_ran_gaussian_ziggurat(generator, 1.);
 
       default:
-        DUNE_THROW(Dune::Exception, "unknown distribution type");
+        throw std::runtime_error{ "unknown distribution type" };
     }
   }
 

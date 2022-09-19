@@ -39,22 +39,22 @@ public:
     // open file
     FILE* file = fopen(filename.c_str(), "rb");
     if (!file)
-      DUNE_THROW(Dune::Exception, "opening PNG file failed");
+      throw std::runtime_error{ "opening PNG file failed" };
 
     // check header
     png_byte header[8];
     size_t status = fread(header, 1, 8, file);
     if (status != 8 || png_sig_cmp(header, 0, 8))
-      DUNE_THROW(Dune::Exception, "file not recognized as PNG");
+      throw std::runtime_error{ "file not recognized as PNG" };
 
     // create struct and info objects
     pngStruct = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
     if (!pngStruct)
-      DUNE_THROW(Dune::Exception, "couldn't create PNG struct object");
+      throw std::runtime_error{ "couldn't create PNG struct object" };
 
     pngInfo = png_create_info_struct(pngStruct);
     if (!pngInfo)
-      DUNE_THROW(Dune::Exception, "couldn't create PNG info object");
+      throw std::runtime_error{ "couldn't create PNG info object" };
 
     // prepare for reading
     png_init_io(pngStruct, file);
@@ -69,8 +69,9 @@ public:
     channels = png_get_channels(pngStruct, pngInfo);
 
     if (offset >= channels)
-      DUNE_THROW(Dune::Exception,
-                 "chosen channel offset exceeds number of channels in PNG");
+      throw std::runtime_error{
+        "chosen channel offset exceeds number of channels in PNG"
+      };
 
     numPass = png_set_interlace_handling(pngStruct);
     png_read_update_info(pngStruct, pngInfo);
@@ -83,7 +84,7 @@ public:
 
     png_read_image(pngStruct, data);
 #else  // HAVE_PNG
-    DUNE_THROW(Dune::Exception, "missing support for reading PNG files");
+    throw std::runtime_error{ "missing support for reading PNG files" };
 #endif // HAVE_PNG
   }
 
@@ -105,7 +106,7 @@ public:
 
     return 1. - data[row][col * channels + offset] / 255.;
 #else  // HAVE_PNG
-    DUNE_THROW(Dune::NotImplemented, "missing support for reading PNG files");
+    throw std::runtime_error{ "missing support for reading PNG files" };
 #endif // HAVE_PNG
   }
 };

@@ -491,9 +491,10 @@ public:
   void generate(unsigned int seed, bool allowNonWorldComm = false)
   {
     if (((*traits).comm != MPI_COMM_WORLD) && !allowNonWorldComm)
-      DUNE_THROW(Dune::Exception,
-                 "generation of inconsistent fields prevented, set "
-                 "allowNonWorldComm = true if you really want this");
+      throw std::runtime_error{
+        "generation of inconsistent fields prevented, set "
+        "allowNonWorldComm = true if you really want this"
+      };
 
     if ((*traits).verbose && (*traits).rank == 0)
       std::cout << "generate with seed: " << seed << std::endl;
@@ -540,9 +541,10 @@ public:
   void generateUncorrelated(unsigned int seed, bool allowNonWorldComm = false)
   {
     if (((*traits).comm != MPI_COMM_WORLD) && !allowNonWorldComm)
-      DUNE_THROW(Dune::Exception,
-                 "generation of inconsistent fields prevented, set "
-                 "allowNonWorldComm = true if you really want this");
+      throw std::runtime_error{
+        "generation of inconsistent fields prevented, set "
+        "allowNonWorldComm = true if you really want this"
+      };
 
     if (useAnisoMatrix)
       (*anisoMatrix).generateUncorrelatedField(seed, stochasticPart);
@@ -689,8 +691,9 @@ public:
       f, VTK::FieldInfo(fileName, VTK::FieldInfo::Type::scalar, 1));
     vtkWriter.pwrite(fileName, "", "", Dune::VTK::appendedraw);
 #else  // HAVE_DUNE_FUNCTIONS
-    DUNE_THROW(Dune::NotImplemented,
-               "Unstructured VTK output requires dune-grid and dune-functions");
+    throw std::runtime_error{
+      "Unstructured VTK output requires dune-grid and dune-functions"
+    };
 #endif // HAVE_DUNE_FUNCTIONS
   }
 
@@ -735,8 +738,9 @@ public:
     }
     vtkWriter.pwrite(fileName, "", "", Dune::VTK::appendedraw);
 #else  // HAVE_DUNE_FUNCTIONS
-    DUNE_THROW(Dune::NotImplemented,
-               "Unstructured VTK output requires dune-grid and dune-functions");
+    throw std::runtime_error{
+      "Unstructured VTK output requires dune-grid and dune-functions"
+    };
 #endif // HAVE_DUNE_FUNCTIONS
   }
 
@@ -754,8 +758,9 @@ public:
   void writeToLegacyVTK(const std::string& fileName) const
   {
     if ((*traits).commSize > 1)
-      DUNE_THROW(Dune::NotImplemented,
-                 "legacy VTK output doesn't work for parallel runs");
+      throw std::runtime_error{
+        "legacy VTK output doesn't work for parallel runs"
+      };
 
     LegacyVTKWriter<Traits> legacyWriter(config, fileName);
     legacyWriter.writeScalarData("field", *this);
@@ -776,8 +781,9 @@ public:
   void writeToLegacyVTKSeparate(const std::string& fileName) const
   {
     if ((*traits).commSize > 1)
-      DUNE_THROW(Dune::NotImplemented,
-                 "legacy VTK output doesn't work for parallel runs");
+      throw std::runtime_error{
+        "legacy VTK output doesn't work for parallel runs"
+      };
 
     LegacyVTKWriter<Traits> legacyWriter(config, fileName);
     legacyWriter.writeScalarData("stochastic", stochasticPart);
@@ -1480,7 +1486,7 @@ public:
     }
 
     if (fieldNames.empty())
-      DUNE_THROW(Dune::Exception, "List of randomField types is empty");
+      throw std::runtime_error{ "List of randomField types is empty" };
 
     activateFields(config.get<int>("randomField.active", fieldNames.size()));
   }
@@ -1522,7 +1528,7 @@ public:
     }
 
     if (fieldNames.empty())
-      DUNE_THROW(Dune::Exception, "List of randomField types is empty");
+      throw std::runtime_error{ "List of randomField types is empty" };
 
     activateFields(config.get<int>("randomField.active", fieldNames.size()));
   }
@@ -1579,8 +1585,8 @@ public:
   {
     for (const std::string& type : activeTypes) {
       if (fieldList.find(type) == fieldList.end())
-        DUNE_THROW(Dune::Exception,
-                   "Field name " + type + " not found in grid function list");
+        throw std::runtime_error{ "Field name " + type +
+                                  " not found in grid function list" };
 
       std::shared_ptr<SubRandomField> otherField =
         other.list.find(type)->second;
@@ -1616,8 +1622,8 @@ public:
   {
     for (const std::string& type : activeTypes) {
       if (dgfList.find(type) == dgfList.end())
-        DUNE_THROW(Dune::Exception,
-                   "Field name " + type + " not found in grid function list");
+        throw std::runtime_error{ "Field name " + type +
+                                  " not found in grid function list" };
 
       std::shared_ptr<SubRandomField> otherField =
         other.list.find(type)->second;
@@ -1714,7 +1720,7 @@ public:
   void activateFields(const unsigned int number)
   {
     if (number > fieldNames.size())
-      DUNE_THROW(Dune::Exception, "Too many randomFields activated");
+      throw std::runtime_error{ "Too many randomFields activated" };
 
     activeTypes.clear();
     for (unsigned int i = 0; i < number; i++)
@@ -1843,8 +1849,9 @@ public:
     for (const std::string& type : fieldNames)
       list.find(type)->second->writeToVTK(fileName + "." + type, gv);
 #else  // HAVE_DUNE_FUNCTIONS
-    DUNE_THROW(Dune::NotImplemented,
-               "Unstructured VTK output requires dune-grid and dune-functions");
+    throw std::runtime_error{
+      "Unstructured VTK output requires dune-grid and dune-functions"
+    };
 #endif // HAVE_DUNE_FUNCTIONS
   }
 
@@ -1866,8 +1873,9 @@ public:
     for (const std::string& type : fieldNames)
       list.find(type)->second->writeToVTKSeparate(fileName + "." + type, gv);
 #else  // HAVE_DUNE_FUNCTIONS
-    DUNE_THROW(Dune::NotImplemented,
-               "Unstructured VTK output requires dune-grid and dune-functions");
+    throw std::runtime_error{
+      "Unstructured VTK output requires dune-grid and dune-functions"
+    };
 #endif // HAVE_DUNE_FUNCTIONS
   }
 
@@ -1988,8 +1996,9 @@ public:
   {
     for (const std::string& type : activeTypes) {
       if (other.list.find(type) == other.list.end())
-        DUNE_THROW(Dune::Exception,
-                   "RandomFieldLists don't match in operator+=");
+        throw std::runtime_error{
+          "RandomFieldLists don't match in operator+="
+        };
 
       list.find(type)->second->operator+=(*(other.list.find(type)->second));
     }
@@ -2008,8 +2017,9 @@ public:
   {
     for (const std::string& type : activeTypes) {
       if (other.list.find(type) == other.list.end())
-        DUNE_THROW(Dune::Exception,
-                   "RandomFieldLists don't match in operator+=");
+        throw std::runtime_error{
+          "RandomFieldLists don't match in operator+="
+        };
 
       list.find(type)->second->operator-=(*(other.list.find(type)->second));
     }
@@ -2046,7 +2056,7 @@ public:
   {
     for (const std::string& type : activeTypes) {
       if (other.list.find(type) == other.list.end())
-        DUNE_THROW(Dune::Exception, "RandomFieldLists don't match in axpy");
+        throw std::runtime_error{ "RandomFieldLists don't match in axpy" };
 
       list.find(type)->second->axpy(*(other.list.find(type)->second), alpha);
     }
@@ -2084,8 +2094,7 @@ public:
 
     for (const std::string& type : activeTypes) {
       if (other.list.find(type) == other.list.end())
-        DUNE_THROW(Dune::Exception,
-                   "RandomFieldLists don't match in operator*");
+        throw std::runtime_error{ "RandomFieldLists don't match in operator*" };
 
       output +=
         list.find(type)->second->operator*(*(other.list.find(type)->second));
@@ -2215,8 +2224,9 @@ public:
     bool same = true;
     for (const std::string& type : fieldNames) {
       if (other.list.find(type) == other.list.end())
-        DUNE_THROW(Dune::Exception,
-                   "RandomFieldLists don't match in operator==");
+        throw std::runtime_error{
+          "RandomFieldLists don't match in operator=="
+        };
 
       if (!(list.find(type)->second->operator==(
             *(other.list.find(type)->second)))) {

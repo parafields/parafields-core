@@ -202,7 +202,7 @@ public:
       dim, n, fieldData, fieldData, (*traits).comm, FFTW_FORWARD, flags);
 
     if (plan_forward == nullptr)
-      DUNE_THROW(Dune::Exception, "failed to create forward plan");
+      throw std::runtime_error{ "parafields failed to create forward plan" };
 
     FFTW<RF>::execute(plan_forward);
     FFTW<RF>::destroy_plan(plan_forward);
@@ -241,7 +241,7 @@ public:
       dim, n, fieldData, fieldData, (*traits).comm, FFTW_BACKWARD, flags);
 
     if (plan_backward == nullptr)
-      DUNE_THROW(Dune::Exception, "failed to create backward plan");
+      throw std::runtime_error{ "parafields failed to create backward plan" };
 
     FFTW<RF>::execute(plan_backward);
     FFTW<RF>::destroy_plan(plan_backward);
@@ -470,7 +470,7 @@ private:
                                                &localN02,
                                                &local0Start2);
       if (localN0 != localN02 || local0Start != local0Start2)
-        DUNE_THROW(Dune::Exception, "1d size / offset results don't match");
+        throw std::runtime_error{ "1d size / offset results don't match" };
     } else
       allocLocal = FFTW<RF>::mpi_local_size(
         dim, n, (*traits).comm, &localN0, &local0Start);

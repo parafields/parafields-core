@@ -293,7 +293,7 @@ public:
                                   flags);
 
     if (plan_forward == nullptr)
-      DUNE_THROW(Dune::Exception, "failed to create forward plan");
+      throw std::runtime_error{ "parafields failed to create forward plan" };
 
     FFTW<RF>::execute(plan_forward);
     FFTW<RF>::destroy_plan(plan_forward);
@@ -385,7 +385,7 @@ public:
                                   flags);
 
     if (plan_backward == nullptr)
-      DUNE_THROW(Dune::Exception, "failed to create backward plan");
+      throw std::runtime_error{ "parafields failed to create backward plan" };
 
     FFTW<RF>::execute(plan_backward);
     FFTW<RF>::destroy_plan(plan_backward);
@@ -634,9 +634,9 @@ public:
                             bool additive = false) const
   {
     if (component != 0)
-      DUNE_THROW(
-        Dune::Exception,
-        "tried to extract more than one field from DCTDSTFieldBackend");
+      throw std::runtime_error{
+        "tried to extract more than one field from DCTDSTFieldBackend"
+      };
 
     field.resize(localDomainSize);
 

@@ -558,11 +558,11 @@ private:
       if ((*traits).verbose && rank == 0)
         std::cout << "fold periodization" << std::endl;
 
-      if (sigmoid == "fold_smooth")
+      if (sigmoid == "smooth")
         computeMatrixEntriesWithFold<Covariance,
                                      GeometryMatrix,
                                      SmoothSigmoid>();
-      else if (sigmoid == "fold_smoothstep")
+      else if (sigmoid == "smoothstep")
         computeMatrixEntriesWithFold<Covariance,
                                      GeometryMatrix,
                                      SmoothstepSigmoid>();

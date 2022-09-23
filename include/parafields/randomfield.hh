@@ -720,7 +720,9 @@ public:
         },
         gv);
       vtkWriter.addCellData(
-        f, Dune::VTK::FieldInfo("stochastic", Dune::VTK::FieldInfo::Type::scalar, 1));
+        f,
+        Dune::VTK::FieldInfo(
+          "stochastic", Dune::VTK::FieldInfo::Type::scalar, 1));
     }
     for (unsigned int i = 0; i < trendPart.size(); i++) {
       const TrendComponent<Traits>& component = trendPart.getComponent(i);
@@ -732,7 +734,9 @@ public:
         },
         gv);
       vtkWriter.addCellData(
-        f, Dune::VTK::FieldInfo(component.name(), Dune::VTK::FieldInfo::Type::scalar, 1));
+        f,
+        Dune::VTK::FieldInfo(
+          component.name(), Dune::VTK::FieldInfo::Type::scalar, 1));
     }
     vtkWriter.pwrite(fileName, "", "", Dune::VTK::appendedraw);
 #else  // HAVE_DUNE_FUNCTIONS

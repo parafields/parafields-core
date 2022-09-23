@@ -38,6 +38,14 @@ find_package(dune-common REQUIRED)
 target_link_libraries(parafields INTERFACE dunecommon)
 target_include_directories(parafields INTERFACE ${dune-common_INCLUDE_DIRS})
 
+# We need to look for Threads::Threads as it is required to versions of
+# dune-common that did not properly export this dependency (e.g. Debian
+# packages)
+find_package(Threads)
+if(THREADS_FOUND)
+  target_link_libraries(parafields INTERFACE Threads::Threads)
+endif()
+
 # Find FFTW3 dependency using an improved find module.
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake ${CMAKE_MODULE_PATH})
 find_package(FFTW COMPONENTS DOUBLE_LIB DOUBLE_MPI_LIB FLOAT_LIB FLOAT_MPI_LIB)

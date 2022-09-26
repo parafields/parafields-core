@@ -62,6 +62,7 @@ if(FFTW_DOUBLE_LIB_FOUND AND FFTW_DOUBLE_MPI_LIB_FOUND)
 endif()
 
 # Find HDF5 using the built-in FindHDF5 module
+set(HDF5_PREFER_PARALLEL ON)
 find_package(HDF5)
 if(HDF5_FOUND AND HDF5_IS_PARALLEL)
   target_compile_definitions(parafields INTERFACE HAVE_HDF5=1)

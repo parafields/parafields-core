@@ -1,7 +1,5 @@
-dune_symlink_to_source_files(FILES randomfield1d.ini randomfield2d.ini
-                             randomfield3d.ini randomfield4d.ini)
+add_executable(tests tests.cc fieldtest.cc)
+target_link_libraries(tests PUBLIC parafields Catch2::Catch2 MPI::MPI_CXX)
 
-foreach(dim 1 2 3 4)
-  dune_add_test(SOURCES fieldtest.cc NAME fieldtest${dim} COMPILE_DEFINITIONS
-                DIMENSION=${dim})
-endforeach()
+# allow user to run tests with `make test` or `ctest`
+catch_discover_tests(tests)

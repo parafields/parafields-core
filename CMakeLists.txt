@@ -91,6 +91,10 @@ endif()
 # another project
 add_library(parafields::parafields ALIAS parafields)
 
+# Copy FindFFTW.cmake to the build directory for our package configuration to be
+# able to locate it alongside the config file
+file(COPY cmake/FindFFTW.cmake DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 # Install targets and configuration
 install(
   TARGETS parafields

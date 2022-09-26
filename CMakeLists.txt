@@ -18,9 +18,6 @@ include(GNUInstallDirs)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Compilation options
-option(BUILD_APP "Enable building of stand-alone application" ON)
-
 # Add an interface target for our header-only library
 add_library(parafields INTERFACE)
 
@@ -65,6 +62,7 @@ if(FFTW_DOUBLE_LIB_FOUND AND FFTW_DOUBLE_MPI_LIB_FOUND)
 endif()
 
 # Find HDF5 using the built-in FindHDF5 module
+set(HDF5_PREFER_PARALLEL ON)
 find_package(HDF5)
 if(HDF5_FOUND AND HDF5_IS_PARALLEL)
   target_compile_definitions(parafields INTERFACE HAVE_HDF5=1)
@@ -87,12 +85,6 @@ find_package(GSL)
 if(GSL_FOUND)
   target_compile_definitions(parafields INTERFACE HAVE_GSL)
   target_link_libraries(parafields INTERFACE GSL::gsl)
-endif()
-
-# Add the fieldgenerator executable
-if(BUILD_APP)
-  add_executable(fieldgenerator app/fieldgenerator.cc)
-  target_link_libraries(fieldgenerator PUBLIC parafields)
 endif()
 
 # Add an alias target for use if this project is included as a subproject in

@@ -87,6 +87,18 @@ if(GSL_FOUND)
   target_link_libraries(parafields INTERFACE GSL::gsl)
 endif()
 
+# Add test suite
+include(CTest)
+if(BUILD_TESTING)
+  if(NOT EXISTS ${PROJECT_SOURCE_DIR}/ext/Catch2/CMakeLists.txt)
+    message(FATAL_ERROR "To build the test suite, you need to clone"
+                        " parafields-core with --recursive")
+  endif()
+  add_subdirectory(ext/Catch2)
+  include(./ext/Catch2/contrib/Catch.cmake)
+  add_subdirectory(test)
+endif()
+
 # Add an alias target for use if this project is included as a subproject in
 # another project
 add_library(parafields::parafields ALIAS parafields)

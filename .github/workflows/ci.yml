@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  # We run CI on pushes to the main branch
+  push:
+    branches:
+      - main
+  # and on all pull requests to the main branch
+  pull_request:
+    branches:
+      - main
+  # as well as upon manual triggers through the 'Actions' tab of the Github UI
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Testing
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checking out the repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Installing system dependencies
+        run: |
+          sudo apt update
+          sudo apt install libopenmpi-dev libdune-common-dev libfftw3-dev libfftw3-mpi-dev
+
+      - name: make build directory
+        run: |
+          cmake -E make_directory ${{ runner.workspace }}/build
+
+      - name: Configure using cmake
+        working-directory: ${{ runner.workspace  }}/build
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Debug
+
+      - name: Build project
+        working-directory: ${{ runner.workspace }}/build
+        run: cmake --build .
+
+      - name: Run tests
+        working-directory: ${{ runner.workspace }}/build
+        run: ctest

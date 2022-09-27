@@ -72,10 +72,10 @@ $(function() {
 <div class="contents">
 <a href="a00008.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00063.html">parafields</a> {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00066.html">parafields</a> {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Traits&gt;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a00887.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00887.html">DCTMatrixBackend</a></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="a00890.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00890.html">DCTMatrixBackend</a></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keyword">using</span> RF = <span class="keyword">typename</span> Traits::RF;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  <span class="keyword">using</span> Index = <span class="keyword">typename</span> Traits::Index;</div>
@@ -120,7 +120,7 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  };</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="a00887.html#ad6759944da6fc8a4366e0a4e126c1994">   75</a></span>&#160;  <a class="code" href="a00887.html#ad6759944da6fc8a4366e0a4e126c1994">DCTMatrixBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits_)</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="a00890.html#ad6759944da6fc8a4366e0a4e126c1994">   75</a></span>&#160;  <a class="code" href="a00890.html#ad6759944da6fc8a4366e0a4e126c1994">DCTMatrixBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits_)</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    : traits(traits_)</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    , matrixData(nullptr)</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    , finalized(false)</div>
@@ -130,23 +130,23 @@ $(function() {
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="a00899.html">FFTW&lt;RF&gt;::import_wisdom_from_filename</a>(<span class="stringliteral">&quot;wisdom-DCTMatrix.ini&quot;</span>);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="a00902.html">FFTW&lt;RF&gt;::import_wisdom_from_filename</a>(<span class="stringliteral">&quot;wisdom-DCTMatrix.ini&quot;</span>);</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <a class="code" href="a00899.html">FFTW&lt;RF&gt;::mpi_broadcast_wisdom</a>((*traits).comm);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_broadcast_wisdom</a>((*traits).comm);</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  }</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="a00887.html#a2336cf92ab892ca68c2d23b5f51a2c02">   97</a></span>&#160;  <a class="code" href="a00887.html#a2336cf92ab892ca68c2d23b5f51a2c02">~DCTMatrixBackend</a>()</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="a00890.html#a2336cf92ab892ca68c2d23b5f51a2c02">   97</a></span>&#160;  <a class="code" href="a00890.html#a2336cf92ab892ca68c2d23b5f51a2c02">~DCTMatrixBackend</a>()</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  {</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <a class="code" href="a00899.html">FFTW&lt;RF&gt;::mpi_gather_wisdom</a>((*traits).comm);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_gather_wisdom</a>((*traits).comm);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <a class="code" href="a00899.html">FFTW&lt;RF&gt;::export_wisdom_to_filename</a>(<span class="stringliteral">&quot;wisdom-DCTMatrix.ini&quot;</span>);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <a class="code" href="a00902.html">FFTW&lt;RF&gt;::export_wisdom_to_filename</a>(<span class="stringliteral">&quot;wisdom-DCTMatrix.ini&quot;</span>);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span> (matrixData != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <a class="code" href="a00899.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;      matrixData = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  }</div>
@@ -158,7 +158,7 @@ $(function() {
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">   * the random field object or its refinement. It updates</span></div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">   * parameters like the number of cells per dimension.</span></div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="a00887.html#ad1a13e01feb1cf336d137298ad2937ce">  119</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00887.html#ad1a13e01feb1cf336d137298ad2937ce">update</a>()</div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="a00890.html#ad1a13e01feb1cf336d137298ad2937ce">  119</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00890.html#ad1a13e01feb1cf336d137298ad2937ce">update</a>()</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  {</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    checkFinalized();</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
@@ -176,28 +176,28 @@ $(function() {
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    getDCTCells(localN0, local0Start);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keywordflow">if</span> (matrixData != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      <a class="code" href="a00899.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;      matrixData = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  }</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="a00887.html#a93355fefb3fd605694197f0cb9fc0178">  147</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00887.html#a93355fefb3fd605694197f0cb9fc0178">valid</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (matrixData != <span class="keyword">nullptr</span>); }</div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="a00890.html#a93355fefb3fd605694197f0cb9fc0178">  147</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00890.html#a93355fefb3fd605694197f0cb9fc0178">valid</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (matrixData != <span class="keyword">nullptr</span>); }</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="a00887.html#ad21c2c473a56c87cac0e73434a7eda05">  159</a></span>&#160;  Index <a class="code" href="a00887.html#ad21c2c473a56c87cac0e73434a7eda05">localMatrixSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTDomainSize; }</div>
+<div class="line"><a name="l00159"></a><span class="lineno"><a class="line" href="a00890.html#ad21c2c473a56c87cac0e73434a7eda05">  159</a></span>&#160;  Index <a class="code" href="a00890.html#ad21c2c473a56c87cac0e73434a7eda05">localMatrixSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTDomainSize; }</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="a00887.html#aee1e8dcdf56f96949f1e29964ca596bc">  171</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00887.html#aee1e8dcdf56f96949f1e29964ca596bc">localMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTCells; }</div>
+<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="a00890.html#aee1e8dcdf56f96949f1e29964ca596bc">  171</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00890.html#aee1e8dcdf56f96949f1e29964ca596bc">localMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTCells; }</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="a00887.html#a5cee0611402eb93413adcc736d7ca5fa">  182</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00887.html#a5cee0611402eb93413adcc736d7ca5fa">localMatrixOffset</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTOffset; }</div>
+<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="a00890.html#a5cee0611402eb93413adcc736d7ca5fa">  182</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00890.html#a5cee0611402eb93413adcc736d7ca5fa">localMatrixOffset</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTOffset; }</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="a00887.html#ab43870d9a2b1048b4a5e192fd6f5f2f9">  193</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00887.html#ab43870d9a2b1048b4a5e192fd6f5f2f9">localEvalMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localEvalCells; }</div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="a00890.html#ab43870d9a2b1048b4a5e192fd6f5f2f9">  193</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00890.html#ab43870d9a2b1048b4a5e192fd6f5f2f9">localEvalMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localEvalCells; }</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="a00887.html#a6e1c94fdbbbfbf93ef655bf213c517c1">  202</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00887.html#a6e1c94fdbbbfbf93ef655bf213c517c1">allocate</a>()</div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="a00890.html#a6e1c94fdbbbfbf93ef655bf213c517c1">  202</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00890.html#a6e1c94fdbbbfbf93ef655bf213c517c1">allocate</a>()</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  {</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">if</span> (matrixData == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      matrixData = <a class="code" href="a00899.html">FFTW&lt;RF&gt;::alloc_real</a>(allocLocal);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;      matrixData = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::alloc_real</a>(allocLocal);</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  }</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
-<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="a00887.html#a45f0974ba5dfd6e02318b2ff1b2cd657">  221</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00887.html#a45f0974ba5dfd6e02318b2ff1b2cd657">transposeIfNeeded</a>(ptrdiff_t&amp; localN0, ptrdiff_t&amp; local0Start)</div>
+<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="a00890.html#a45f0974ba5dfd6e02318b2ff1b2cd657">  221</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00890.html#a45f0974ba5dfd6e02318b2ff1b2cd657">transposeIfNeeded</a>(ptrdiff_t&amp; localN0, ptrdiff_t&amp; local0Start)</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;  {</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordflow">if</span> (transposed) {</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;      std::swap(extendedCells[dim - 1], extendedCells[dim - 2]);</div>
@@ -209,7 +209,7 @@ $(function() {
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    }</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  }</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
-<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="a00887.html#a456d9fda9a63b9ea9db32740b92f2838">  240</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00887.html#a456d9fda9a63b9ea9db32740b92f2838">forwardTransform</a>()</div>
+<div class="line"><a name="l00240"></a><span class="lineno"><a class="line" href="a00890.html#a456d9fda9a63b9ea9db32740b92f2838">  240</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00890.html#a456d9fda9a63b9ea9db32740b92f2838">forwardTransform</a>()</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  {</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    checkFinalized();</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
@@ -222,31 +222,31 @@ $(function() {
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;      flags |= FFTW_MPI_TRANSPOSED_OUT;</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    ptrdiff_t n[dim];</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00899.html">FFTW&lt;RF&gt;::r2r_kind</a> k[dim];</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::r2r_kind</a> k[dim];</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++) {</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;      n[i] = extendedCells[dim - 1 - i] / 2 + 1;</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;      k[i] = FFTW_REDFT00;</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    }</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00899.html">FFTW&lt;RF&gt;::plan</a> plan_forward = <a class="code" href="a00899.html">FFTW&lt;RF&gt;::mpi_plan_r2r</a>(</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::plan</a> plan_forward = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_plan_r2r</a>(</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;      dim, n, matrixData, matrixData, (*traits).comm, k, flags);</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordflow">if</span> (plan_forward == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create forward plan&quot;</span> };</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <a class="code" href="a00899.html">FFTW&lt;RF&gt;::execute</a>(plan_forward);</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <a class="code" href="a00899.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_forward);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::execute</a>(plan_forward);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_forward);</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">for</span> (Index i = 0; i &lt; allocLocal; i++)</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;      matrixData[i] /= extendedDomainSize;</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <a class="code" href="a00887.html#a45f0974ba5dfd6e02318b2ff1b2cd657">transposeIfNeeded</a>(localN0Trans, local0StartTrans);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <a class="code" href="a00890.html#a45f0974ba5dfd6e02318b2ff1b2cd657">transposeIfNeeded</a>(localN0Trans, local0StartTrans);</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;  }</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00281"></a><span class="lineno"><a class="line" href="a00887.html#a828ef3d54d1225da3cd7a387302b1559">  281</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00887.html#a828ef3d54d1225da3cd7a387302b1559">backwardTransform</a>()</div>
+<div class="line"><a name="l00281"></a><span class="lineno"><a class="line" href="a00890.html#a828ef3d54d1225da3cd7a387302b1559">  281</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00890.html#a828ef3d54d1225da3cd7a387302b1559">backwardTransform</a>()</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  {</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    checkFinalized();</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <a class="code" href="a00887.html#a45f0974ba5dfd6e02318b2ff1b2cd657">transposeIfNeeded</a>(localN0, local0Start);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <a class="code" href="a00890.html#a45f0974ba5dfd6e02318b2ff1b2cd657">transposeIfNeeded</a>(localN0, local0Start);</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> flags;</div>
 <div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.measure&quot;</span>, <span class="keyword">false</span>))</div>
@@ -257,29 +257,29 @@ $(function() {
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      flags |= FFTW_MPI_TRANSPOSED_IN;</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160; </div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    ptrdiff_t n[dim];</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00899.html">FFTW&lt;RF&gt;::r2r_kind</a> k[dim];</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::r2r_kind</a> k[dim];</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++) {</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;      n[i] = extendedCells[dim - 1 - i] / 2 + 1;</div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;      k[i] = FFTW_REDFT00;</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    }</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00899.html">FFTW&lt;RF&gt;::plan</a> plan_backward = <a class="code" href="a00899.html">FFTW&lt;RF&gt;::mpi_plan_r2r</a>(</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::plan</a> plan_backward = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_plan_r2r</a>(</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;      dim, n, matrixData, matrixData, (*traits).comm, k, flags);</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <span class="keywordflow">if</span> (plan_backward == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create backward plan&quot;</span> };</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160; </div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <a class="code" href="a00899.html">FFTW&lt;RF&gt;::execute</a>(plan_backward);</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <a class="code" href="a00899.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_backward);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::execute</a>(plan_backward);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_backward);</div>
 <div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;  }</div>
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="a00887.html#a3fe1a40e845d69bacd64047ffe2fee23">  325</a></span>&#160;  RF <a class="code" href="a00887.html#a3fe1a40e845d69bacd64047ffe2fee23">eval</a>(Index index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="a00890.html#a3fe1a40e845d69bacd64047ffe2fee23">  325</a></span>&#160;  RF <a class="code" href="a00890.html#a3fe1a40e845d69bacd64047ffe2fee23">eval</a>(Index index)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;<span class="keyword">  </span>{</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    Traits::indexToIndices(index, indices, localExtendedCells);</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00887.html#a3fe1a40e845d69bacd64047ffe2fee23">eval</a>(indices);</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00890.html#a3fe1a40e845d69bacd64047ffe2fee23">eval</a>(indices);</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;  }</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
-<div class="line"><a name="l00346"></a><span class="lineno"><a class="line" href="a00887.html#aa65794721a6cca2afe7b4634507cc77e">  346</a></span>&#160;  RF <a class="code" href="a00887.html#aa65794721a6cca2afe7b4634507cc77e">eval</a>(Indices indices)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno"><a class="line" href="a00890.html#aa65794721a6cca2afe7b4634507cc77e">  346</a></span>&#160;  RF <a class="code" href="a00890.html#aa65794721a6cca2afe7b4634507cc77e">eval</a>(Indices indices)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;<span class="keyword">  </span>{</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
 <div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;      <span class="keywordflow">if</span> (indices[i] + localEvalOffset[i] &gt;= evalCells[i])</div>
@@ -290,19 +290,19 @@ $(function() {
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">return</span> matrixData[smallIndex];</div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;  }</div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
-<div class="line"><a name="l00371"></a><span class="lineno"><a class="line" href="a00887.html#a125ddaa43c0315848a9eb413ae53b80a">  371</a></span>&#160;  RF <a class="code" href="a00887.html#a125ddaa43c0315848a9eb413ae53b80a">get</a>(Index index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno"><a class="line" href="a00890.html#a125ddaa43c0315848a9eb413ae53b80a">  371</a></span>&#160;  RF <a class="code" href="a00890.html#a125ddaa43c0315848a9eb413ae53b80a">get</a>(Index index)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="keyword">  </span>{</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    checkFinalized();</div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keywordflow">return</span> matrixData[index];</div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;  }</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160; </div>
-<div class="line"><a name="l00389"></a><span class="lineno"><a class="line" href="a00887.html#a010d59c49c5d24d4c4e8bff01a59b0a6">  389</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00887.html#a010d59c49c5d24d4c4e8bff01a59b0a6">set</a>(Index index, RF value)</div>
+<div class="line"><a name="l00389"></a><span class="lineno"><a class="line" href="a00890.html#a010d59c49c5d24d4c4e8bff01a59b0a6">  389</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00890.html#a010d59c49c5d24d4c4e8bff01a59b0a6">set</a>(Index index, RF value)</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;  {</div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    checkFinalized();</div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    matrixData[index] = value;</div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;  }</div>
 <div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160; </div>
-<div class="line"><a name="l00408"></a><span class="lineno"><a class="line" href="a00887.html#aadec9c5c3b16499d10a44ac0c94bc8b4">  408</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00887.html#aadec9c5c3b16499d10a44ac0c94bc8b4">finalize</a>()</div>
+<div class="line"><a name="l00408"></a><span class="lineno"><a class="line" href="a00890.html#aadec9c5c3b16499d10a44ac0c94bc8b4">  408</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00890.html#aadec9c5c3b16499d10a44ac0c94bc8b4">finalize</a>()</div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;  {</div>
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <span class="comment">// nothing to do in sequential case</span></div>
 <div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keywordflow">if</span> (commSize == 1)</div>
@@ -314,7 +314,7 @@ $(function() {
 <div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> mirrorAllocLocal = localExtendedCells[dim - 1];</div>
 <div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim - 1; i++)</div>
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;      mirrorAllocLocal *= localDCTCells[i];</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    matrixData = <a class="code" href="a00899.html">FFTW&lt;RF&gt;::alloc_real</a>(mirrorAllocLocal);</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    matrixData = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::alloc_real</a>(mirrorAllocLocal);</div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; </div>
 <div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    Index strideWidth = localExtendedCells[dim - 1];</div>
 <div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    Index sliceSize = 1;</div>
@@ -630,7 +630,7 @@ $(function() {
 <div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    localEvalCells[dim - 1] = localExtendedCells[dim - 1];</div>
 <div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    localEvalOffset[dim - 1] = localExtendedOffset[dim - 1];</div>
 <div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160; </div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;    <a class="code" href="a00899.html">FFTW&lt;RF&gt;::free</a>(unmirrored);</div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::free</a>(unmirrored);</div>
 <div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;    unmirrored = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160; </div>
 <div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;    finalized = <span class="keyword">true</span>;</div>
@@ -643,7 +643,7 @@ $(function() {
 <div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
 <div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;      n[i] = extendedCells[dim - 1 - i] / 2 + 1;</div>
 <div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160; </div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    allocLocal = <a class="code" href="a00899.html">FFTW&lt;RF&gt;::mpi_local_size_transposed</a>(dim,</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    allocLocal = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_local_size_transposed</a>(dim,</div>
 <div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;                                                     n,</div>
 <div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;                                                     (*traits).comm,</div>
 <div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;                                                     &amp;localN0,</div>
@@ -684,26 +684,26 @@ $(function() {
 <div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160; </div>
 <div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;} <span class="comment">// namespace parafields</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aa00899_html"><div class="ttname"><a href="a00899.html">parafields::FFTW</a></div><div class="ttdoc">Fallback class for error message when requested FFTW3 library wasn't found.</div><div class="ttdef"><b>Definition:</b> fftwwrapper.hh:17</div></div>
-<div class="ttc" id="aa00887_html_ad1a13e01feb1cf336d137298ad2937ce"><div class="ttname"><a href="a00887.html#ad1a13e01feb1cf336d137298ad2937ce">parafields::DCTMatrixBackend::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:119</div></div>
-<div class="ttc" id="aa00887_html_a3fe1a40e845d69bacd64047ffe2fee23"><div class="ttname"><a href="a00887.html#a3fe1a40e845d69bacd64047ffe2fee23">parafields::DCTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Index index) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:325</div></div>
-<div class="ttc" id="aa00887_html_a010d59c49c5d24d4c4e8bff01a59b0a6"><div class="ttname"><a href="a00887.html#a010d59c49c5d24d4c4e8bff01a59b0a6">parafields::DCTMatrixBackend::set</a></div><div class="ttdeci">void set(Index index, RF value)</div><div class="ttdoc">Set matrix entry (using the actual index)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:389</div></div>
-<div class="ttc" id="aa00887_html"><div class="ttname"><a href="a00887.html">parafields::DCTMatrixBackend</a></div><div class="ttdoc">Matrix backend that uses discrete cosine transform (DCT)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:23</div></div>
-<div class="ttc" id="aa00887_html_aee1e8dcdf56f96949f1e29964ca596bc"><div class="ttname"><a href="a00887.html#aee1e8dcdf56f96949f1e29964ca596bc">parafields::DCTMatrixBackend::localMatrixCells</a></div><div class="ttdeci">const Indices &amp; localMatrixCells() const</div><div class="ttdoc">Number of entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:171</div></div>
-<div class="ttc" id="aa00887_html_a125ddaa43c0315848a9eb413ae53b80a"><div class="ttname"><a href="a00887.html#a125ddaa43c0315848a9eb413ae53b80a">parafields::DCTMatrixBackend::get</a></div><div class="ttdeci">RF get(Index index) const</div><div class="ttdoc">Get matrix entry (using the actual index)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:371</div></div>
-<div class="ttc" id="aa00887_html_a6e1c94fdbbbfbf93ef655bf213c517c1"><div class="ttname"><a href="a00887.html#a6e1c94fdbbbfbf93ef655bf213c517c1">parafields::DCTMatrixBackend::allocate</a></div><div class="ttdeci">void allocate()</div><div class="ttdoc">Reserve memory before storing any matrix entries.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:202</div></div>
-<div class="ttc" id="aa00887_html_aadec9c5c3b16499d10a44ac0c94bc8b4"><div class="ttname"><a href="a00887.html#aadec9c5c3b16499d10a44ac0c94bc8b4">parafields::DCTMatrixBackend::finalize</a></div><div class="ttdeci">void finalize()</div><div class="ttdoc">Mirror matrix on domain boundary in parallel case.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:408</div></div>
-<div class="ttc" id="aa00887_html_a2336cf92ab892ca68c2d23b5f51a2c02"><div class="ttname"><a href="a00887.html#a2336cf92ab892ca68c2d23b5f51a2c02">parafields::DCTMatrixBackend::~DCTMatrixBackend</a></div><div class="ttdeci">~DCTMatrixBackend()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:97</div></div>
-<div class="ttc" id="aa00063_html"><div class="ttname"><a href="a00063.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
-<div class="ttc" id="aa00887_html_ad21c2c473a56c87cac0e73434a7eda05"><div class="ttname"><a href="a00887.html#ad21c2c473a56c87cac0e73434a7eda05">parafields::DCTMatrixBackend::localMatrixSize</a></div><div class="ttdeci">Index localMatrixSize() const</div><div class="ttdoc">Number of matrix entries stored on this processor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:159</div></div>
-<div class="ttc" id="aa00887_html_a5cee0611402eb93413adcc736d7ca5fa"><div class="ttname"><a href="a00887.html#a5cee0611402eb93413adcc736d7ca5fa">parafields::DCTMatrixBackend::localMatrixOffset</a></div><div class="ttdeci">const Indices &amp; localMatrixOffset() const</div><div class="ttdoc">Offset between local indices and global indices per dim.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:182</div></div>
-<div class="ttc" id="aa00887_html_a93355fefb3fd605694197f0cb9fc0178"><div class="ttname"><a href="a00887.html#a93355fefb3fd605694197f0cb9fc0178">parafields::DCTMatrixBackend::valid</a></div><div class="ttdeci">bool valid() const</div><div class="ttdoc">Check whether matrix has already been created.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:147</div></div>
-<div class="ttc" id="aa00887_html_ab43870d9a2b1048b4a5e192fd6f5f2f9"><div class="ttname"><a href="a00887.html#ab43870d9a2b1048b4a5e192fd6f5f2f9">parafields::DCTMatrixBackend::localEvalMatrixCells</a></div><div class="ttdeci">const Indices &amp; localEvalMatrixCells() const</div><div class="ttdoc">Number of logical entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:193</div></div>
-<div class="ttc" id="aa00887_html_a45f0974ba5dfd6e02318b2ff1b2cd657"><div class="ttname"><a href="a00887.html#a45f0974ba5dfd6e02318b2ff1b2cd657">parafields::DCTMatrixBackend::transposeIfNeeded</a></div><div class="ttdeci">void transposeIfNeeded(ptrdiff_t &amp;localN0, ptrdiff_t &amp;local0Start)</div><div class="ttdoc">Switch last two dimensions (for transposed transforms)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:221</div></div>
-<div class="ttc" id="aa00887_html_ad6759944da6fc8a4366e0a4e126c1994"><div class="ttname"><a href="a00887.html#ad6759944da6fc8a4366e0a4e126c1994">parafields::DCTMatrixBackend::DCTMatrixBackend</a></div><div class="ttdeci">DCTMatrixBackend(const std::shared_ptr&lt; Traits &gt; &amp;traits_)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:75</div></div>
-<div class="ttc" id="aa00887_html_a828ef3d54d1225da3cd7a387302b1559"><div class="ttname"><a href="a00887.html#a828ef3d54d1225da3cd7a387302b1559">parafields::DCTMatrixBackend::backwardTransform</a></div><div class="ttdeci">void backwardTransform()</div><div class="ttdoc">Transform from Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:281</div></div>
-<div class="ttc" id="aa00887_html_aa65794721a6cca2afe7b4634507cc77e"><div class="ttname"><a href="a00887.html#aa65794721a6cca2afe7b4634507cc77e">parafields::DCTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Indices indices) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:346</div></div>
-<div class="ttc" id="aa00887_html_a456d9fda9a63b9ea9db32740b92f2838"><div class="ttname"><a href="a00887.html#a456d9fda9a63b9ea9db32740b92f2838">parafields::DCTMatrixBackend::forwardTransform</a></div><div class="ttdeci">void forwardTransform()</div><div class="ttdoc">Transform into Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:240</div></div>
+<div class="ttc" id="aa00066_html"><div class="ttname"><a href="a00066.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
+<div class="ttc" id="aa00890_html_ad1a13e01feb1cf336d137298ad2937ce"><div class="ttname"><a href="a00890.html#ad1a13e01feb1cf336d137298ad2937ce">parafields::DCTMatrixBackend::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:119</div></div>
+<div class="ttc" id="aa00890_html_a6e1c94fdbbbfbf93ef655bf213c517c1"><div class="ttname"><a href="a00890.html#a6e1c94fdbbbfbf93ef655bf213c517c1">parafields::DCTMatrixBackend::allocate</a></div><div class="ttdeci">void allocate()</div><div class="ttdoc">Reserve memory before storing any matrix entries.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:202</div></div>
+<div class="ttc" id="aa00902_html"><div class="ttname"><a href="a00902.html">parafields::FFTW</a></div><div class="ttdoc">Fallback class for error message when requested FFTW3 library wasn't found.</div><div class="ttdef"><b>Definition:</b> fftwwrapper.hh:17</div></div>
+<div class="ttc" id="aa00890_html_a3fe1a40e845d69bacd64047ffe2fee23"><div class="ttname"><a href="a00890.html#a3fe1a40e845d69bacd64047ffe2fee23">parafields::DCTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Index index) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:325</div></div>
+<div class="ttc" id="aa00890_html_aadec9c5c3b16499d10a44ac0c94bc8b4"><div class="ttname"><a href="a00890.html#aadec9c5c3b16499d10a44ac0c94bc8b4">parafields::DCTMatrixBackend::finalize</a></div><div class="ttdeci">void finalize()</div><div class="ttdoc">Mirror matrix on domain boundary in parallel case.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:408</div></div>
+<div class="ttc" id="aa00890_html_aa65794721a6cca2afe7b4634507cc77e"><div class="ttname"><a href="a00890.html#aa65794721a6cca2afe7b4634507cc77e">parafields::DCTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Indices indices) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:346</div></div>
+<div class="ttc" id="aa00890_html"><div class="ttname"><a href="a00890.html">parafields::DCTMatrixBackend</a></div><div class="ttdoc">Matrix backend that uses discrete cosine transform (DCT)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:23</div></div>
+<div class="ttc" id="aa00890_html_a45f0974ba5dfd6e02318b2ff1b2cd657"><div class="ttname"><a href="a00890.html#a45f0974ba5dfd6e02318b2ff1b2cd657">parafields::DCTMatrixBackend::transposeIfNeeded</a></div><div class="ttdeci">void transposeIfNeeded(ptrdiff_t &amp;localN0, ptrdiff_t &amp;local0Start)</div><div class="ttdoc">Switch last two dimensions (for transposed transforms)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:221</div></div>
+<div class="ttc" id="aa00890_html_ad6759944da6fc8a4366e0a4e126c1994"><div class="ttname"><a href="a00890.html#ad6759944da6fc8a4366e0a4e126c1994">parafields::DCTMatrixBackend::DCTMatrixBackend</a></div><div class="ttdeci">DCTMatrixBackend(const std::shared_ptr&lt; Traits &gt; &amp;traits_)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:75</div></div>
+<div class="ttc" id="aa00890_html_a93355fefb3fd605694197f0cb9fc0178"><div class="ttname"><a href="a00890.html#a93355fefb3fd605694197f0cb9fc0178">parafields::DCTMatrixBackend::valid</a></div><div class="ttdeci">bool valid() const</div><div class="ttdoc">Check whether matrix has already been created.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:147</div></div>
+<div class="ttc" id="aa00890_html_a2336cf92ab892ca68c2d23b5f51a2c02"><div class="ttname"><a href="a00890.html#a2336cf92ab892ca68c2d23b5f51a2c02">parafields::DCTMatrixBackend::~DCTMatrixBackend</a></div><div class="ttdeci">~DCTMatrixBackend()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:97</div></div>
+<div class="ttc" id="aa00890_html_a010d59c49c5d24d4c4e8bff01a59b0a6"><div class="ttname"><a href="a00890.html#a010d59c49c5d24d4c4e8bff01a59b0a6">parafields::DCTMatrixBackend::set</a></div><div class="ttdeci">void set(Index index, RF value)</div><div class="ttdoc">Set matrix entry (using the actual index)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:389</div></div>
+<div class="ttc" id="aa00890_html_aee1e8dcdf56f96949f1e29964ca596bc"><div class="ttname"><a href="a00890.html#aee1e8dcdf56f96949f1e29964ca596bc">parafields::DCTMatrixBackend::localMatrixCells</a></div><div class="ttdeci">const Indices &amp; localMatrixCells() const</div><div class="ttdoc">Number of entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:171</div></div>
+<div class="ttc" id="aa00890_html_a125ddaa43c0315848a9eb413ae53b80a"><div class="ttname"><a href="a00890.html#a125ddaa43c0315848a9eb413ae53b80a">parafields::DCTMatrixBackend::get</a></div><div class="ttdeci">RF get(Index index) const</div><div class="ttdoc">Get matrix entry (using the actual index)</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:371</div></div>
+<div class="ttc" id="aa00890_html_ab43870d9a2b1048b4a5e192fd6f5f2f9"><div class="ttname"><a href="a00890.html#ab43870d9a2b1048b4a5e192fd6f5f2f9">parafields::DCTMatrixBackend::localEvalMatrixCells</a></div><div class="ttdeci">const Indices &amp; localEvalMatrixCells() const</div><div class="ttdoc">Number of logical entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:193</div></div>
+<div class="ttc" id="aa00890_html_ad21c2c473a56c87cac0e73434a7eda05"><div class="ttname"><a href="a00890.html#ad21c2c473a56c87cac0e73434a7eda05">parafields::DCTMatrixBackend::localMatrixSize</a></div><div class="ttdeci">Index localMatrixSize() const</div><div class="ttdoc">Number of matrix entries stored on this processor.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:159</div></div>
+<div class="ttc" id="aa00890_html_a456d9fda9a63b9ea9db32740b92f2838"><div class="ttname"><a href="a00890.html#a456d9fda9a63b9ea9db32740b92f2838">parafields::DCTMatrixBackend::forwardTransform</a></div><div class="ttdeci">void forwardTransform()</div><div class="ttdoc">Transform into Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:240</div></div>
+<div class="ttc" id="aa00890_html_a5cee0611402eb93413adcc736d7ca5fa"><div class="ttname"><a href="a00890.html#a5cee0611402eb93413adcc736d7ca5fa">parafields::DCTMatrixBackend::localMatrixOffset</a></div><div class="ttdeci">const Indices &amp; localMatrixOffset() const</div><div class="ttdoc">Offset between local indices and global indices per dim.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:182</div></div>
+<div class="ttc" id="aa00890_html_a828ef3d54d1225da3cd7a387302b1559"><div class="ttname"><a href="a00890.html#a828ef3d54d1225da3cd7a387302b1559">parafields::DCTMatrixBackend::backwardTransform</a></div><div class="ttdeci">void backwardTransform()</div><div class="ttdoc">Transform from Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dctmatrixbackend.hh:281</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cauchycovariance_223',['CauchyCovariance',['../a00951.html',1,'parafields']]],
-  ['clampingsigmoid_224',['ClampingSigmoid',['../a00931.html',1,'parafields']]],
-  ['cpprngbackend_225',['CppRNGBackend',['../a00879.html',1,'parafields']]]
+  ['cauchycovariance_224',['CauchyCovariance',['../a00954.html',1,'parafields']]],
+  ['clampingsigmoid_225',['ClampingSigmoid',['../a00934.html',1,'parafields']]],
+  ['cpprngbackend_226',['CppRNGBackend',['../a00882.html',1,'parafields']]]
 ];

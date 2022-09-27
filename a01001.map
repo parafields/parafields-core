@@ -1,0 +1,4 @@
+<map id="parafields::DefaultRNGBackend&lt; dim &gt;" name="parafields::DefaultRNGBackend&lt; dim &gt;">
+<area shape="rect" id="node1" title="Default RNG backend: GSL when available, std::random as fallback." alt="" coords="5,5,232,47"/>
+<area shape="rect" id="node2" href="$a01002.html" title=" " alt="" coords="5,109,232,151"/>
+</map>

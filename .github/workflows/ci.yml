@@ -34,7 +34,7 @@ jobs:
 
       - name: Configure using cmake
         working-directory: ${{ runner.workspace  }}/build
-        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DISABLE_FIND_PACKAGE_GSL=ON
+        run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Debug
 
       - name: Build project
         working-directory: ${{ runner.workspace }}/build

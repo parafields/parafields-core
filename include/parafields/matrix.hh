@@ -8,6 +8,7 @@
 #include <fftw3.h>
 
 #include "parafields/covariance.hh"
+#include "parafields/gslfallback.hh"
 
 #include "parafields/backends/fftwwrapper.hh"
 
@@ -850,7 +851,7 @@ private:
       maxFactor * 0.5 * (*traits).embeddingFactor / std::sqrt(RF(dim));
     params[2] = recursions;
 
-    auto func = [](RF x, void* params) {
+    auto func = [](double x, void* params) {
       const double alpha = ((double*)params)[0];
       const double beta = ((double*)params)[1];
       const double gamma = ((double*)params)[2];
@@ -967,7 +968,7 @@ private:
     params[1] = std::min(maxFactor * maxBorder, minConstrained);
     params[2] = recursion;
 
-    auto func = [](RF x, void* params) {
+    auto func = [](double x, void* params) {
       const double alpha = ((double*)params)[0];
       const double beta = ((double*)params)[1];
       const double gamma = ((double*)params)[2];

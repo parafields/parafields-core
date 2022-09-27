@@ -60,7 +60,7 @@ git clone https://github.com/parafields/parafields-core.git
 cd parafield-core
 mkdir build
 cd build
-cmake -DHDF5_PREFER_PARALLEL=ON ..
+cmake ..
 make
 ```
 

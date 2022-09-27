@@ -223,5 +223,5 @@ PREDEFINED             = DOXYGEN \
 
 
 # marker - here to allow the last line continuation
-INPUT += /home/dominic/dune/dune-randomfield/dune
+INPUT += ../parafields
 EXTRA_PACKAGES = amsmath, amssymb

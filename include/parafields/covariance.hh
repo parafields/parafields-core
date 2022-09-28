@@ -4,6 +4,8 @@
 #include <random>
 #include <vector>
 
+#include <dune/common/math.hh>
+
 #if HAVE_GSL
 #include "gsl/gsl_sf_bessel.h"
 #endif // HAVE_GSL
@@ -329,9 +331,10 @@ public:
       if (h_eff > 1.)
         return 0.;
       else
-        return variance * (1. - 2. / M_PI *
-                                  (h_eff * std::sqrt(1. - std::pow(h_eff, 2)) +
-                                   std::asin(h_eff)));
+        return variance *
+               (1. - 2. / Dune::StandardMathematicalConstants<RF>::pi() *
+                       (h_eff * std::sqrt(1. - std::pow(h_eff, 2)) +
+                        std::asin(h_eff)));
     } else if (dim == 1) {
       if (h_eff > 1.)
         return 0.;

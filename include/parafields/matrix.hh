@@ -230,53 +230,47 @@ public:
    *
    * @tparam Covariance type of custom covariance class, if desired
    */
-  template<typename Covariance = void>
-  void fillTransformedMatrix() const
+  template<typename Covariance>
+  void fillTransformedMatrix(Covariance&& covariance) const
   {
-    if constexpr (std::is_same<Covariance, void>::value) {
+    if constexpr (std::is_same<std::decay_t<Covariance>, std::string>::value) {
       if (covariance == "custom-iso" || covariance == "custom-aniso")
         throw std::runtime_error{
           "you need to call fillMatrix with your covariance class as parameter"
         };
 
       if (covariance == "exponential")
-        fillCovarianceMatrix<ExponentialCovariance>();
+        fillCovarianceMatrix(ExponentialCovariance());
       else if (covariance == "gaussian")
-        fillCovarianceMatrix<GaussianCovariance>();
+        fillCovarianceMatrix(GaussianCovariance());
       else if (covariance == "spherical")
-        fillCovarianceMatrix<SphericalCovariance>();
+        fillCovarianceMatrix(SphericalCovariance());
       else if (covariance == "separableExponential")
-        fillCovarianceMatrix<SeparableExponentialCovariance>();
+        fillCovarianceMatrix(SeparableExponentialCovariance());
       else if (covariance == "matern")
-        fillCovarianceMatrix<MaternCovariance>();
+        fillCovarianceMatrix(MaternCovariance(traits->config));
       else if (covariance == "matern32")
-        fillCovarianceMatrix<Matern32Covariance>();
+        fillCovarianceMatrix(Matern32Covariance());
       else if (covariance == "matern52")
-        fillCovarianceMatrix<Matern52Covariance>();
+        fillCovarianceMatrix(Matern52Covariance());
       else if (covariance == "dampedOscillation")
-        fillCovarianceMatrix<DampedOscillationCovariance>();
+        fillCovarianceMatrix(DampedOscillationCovariance());
       else if (covariance == "gammaExponential")
-        fillCovarianceMatrix<GammaExponentialCovariance>();
+        fillCovarianceMatrix(GammaExponentialCovariance(traits->config));
       else if (covariance == "cauchy")
-        fillCovarianceMatrix<CauchyCovariance>();
+        fillCovarianceMatrix(CauchyCovariance());
       else if (covariance == "generalizedCauchy")
-        fillCovarianceMatrix<GeneralizedCauchyCovariance>();
+        fillCovarianceMatrix(GeneralizedCauchyCovariance(traits->config));
       else if (covariance == "cubic")
-        fillCovarianceMatrix<CubicCovariance>();
+        fillCovarianceMatrix(CubicCovariance());
       else if (covariance == "whiteNoise")
-        fillCovarianceMatrix<WhiteNoiseCovariance>();
+        fillCovarianceMatrix(WhiteNoiseCovariance());
       else
         throw std::runtime_error{ "covariance structure " + covariance +
                                   " not known" };
     } else {
-      if (covariance != "custom-iso" && covariance != "custom-aniso")
-        throw std::runtime_error{
-          "you can't fill the matrix explicitly if a default "
-          "covariance was chosen"
-        };
-
-      computeCovarianceMatrixEntries<Covariance,
-                                     ScaledIdentityMatrix<RF, dim>>();
+      computeCovarianceMatrixEntries<Covariance, ScaledIdentityMatrix<RF, dim>>(
+        std::forward<Covariance>(covariance));
     }
 
     matrixBackend.forwardTransform();
@@ -345,7 +339,7 @@ public:
                      StochasticPartType& stochasticPart) const
   {
     if (!matrixBackend.valid())
-      fillTransformedMatrix();
+      fillTransformedMatrix(covariance);
 
     if (!spareField) {
       fieldBackend.allocate();
@@ -492,18 +486,20 @@ private:
    * @tparam Covariance prescribed covariance function
    */
   template<typename Covariance>
-  void fillCovarianceMatrix() const
+  void fillCovarianceMatrix(Covariance&& covariance) const
   {
     const std::string& anisotropy = (*traits).config.template get<std::string>(
       "stochastic.anisotropy", "none");
 
     if (anisotropy == "none")
-      computeCovarianceMatrixEntries<Covariance,
-                                     ScaledIdentityMatrix<RF, dim>>();
+      computeCovarianceMatrixEntries<Covariance, ScaledIdentityMatrix<RF, dim>>(
+        std::forward<Covariance>(covariance));
     else if (anisotropy == "axiparallel")
-      computeCovarianceMatrixEntries<Covariance, DiagonalMatrix<RF, dim>>();
+      computeCovarianceMatrixEntries<Covariance, DiagonalMatrix<RF, dim>>(
+        std::forward<Covariance>(covariance));
     else if (anisotropy == "geometric")
-      computeCovarianceMatrixEntries<Covariance, GeneralMatrix<RF, dim>>();
+      computeCovarianceMatrixEntries<Covariance, GeneralMatrix<RF, dim>>(
+        std::forward<Covariance>(covariance));
     else
       throw std::runtime_error{ "stochastic.anisotropy must be \"none\", "
                                 "\"axiparallel\" or \"geometric\"" };
@@ -524,7 +520,7 @@ private:
    * @tparam GeometryMatrix transformation matrix (based on correlation lengths)
    */
   template<typename Covariance, typename GeometryMatrix>
-  void computeCovarianceMatrixEntries() const
+  void computeCovarianceMatrixEntries(Covariance&& covariance) const
   {
     matrixBackend.allocate();
 
@@ -538,7 +534,8 @@ private:
       if ((*traits).verbose && rank == 0)
         std::cout << "classical circulant embedding" << std::endl;
 
-      computeMatrixEntriesWithMirroring<Covariance, GeometryMatrix>();
+      computeMatrixEntriesWithMirroring<Covariance, GeometryMatrix>(
+        std::forward<Covariance>(covariance));
     } else if (periodization == "merge") {
       if ((*traits).verbose && rank == 0)
         std::cout << "merge periodization" << std::endl;
@@ -546,11 +543,13 @@ private:
       if (sigmoid == "smooth")
         computeMatrixEntriesWithMerge<Covariance,
                                       GeometryMatrix,
-                                      SmoothSigmoid>();
+                                      SmoothSigmoid>(
+          std::forward<Covariance>(covariance));
       else if (sigmoid == "smoothstep")
         computeMatrixEntriesWithMerge<Covariance,
                                       GeometryMatrix,
-                                      SmoothstepSigmoid>();
+                                      SmoothstepSigmoid>(
+          std::forward<Covariance>(covariance));
       else
         throw std::runtime_error{
           "embedding.sigmoid must be \"smooth\" or \"smoothstep\""
@@ -560,13 +559,13 @@ private:
         std::cout << "fold periodization" << std::endl;
 
       if (sigmoid == "smooth")
-        computeMatrixEntriesWithFold<Covariance,
-                                     GeometryMatrix,
-                                     SmoothSigmoid>();
+        computeMatrixEntriesWithFold<Covariance, GeometryMatrix, SmoothSigmoid>(
+          std::forward<Covariance>(covariance));
       else if (sigmoid == "smoothstep")
         computeMatrixEntriesWithFold<Covariance,
                                      GeometryMatrix,
-                                     SmoothstepSigmoid>();
+                                     SmoothstepSigmoid>(
+          std::forward<Covariance>(covariance));
       else
         throw std::runtime_error{
           "embedding.sigmoid must be \"smooth\" or \"smoothstep\""
@@ -575,7 +574,8 @@ private:
       if ((*traits).verbose && rank == 0)
         std::cout << "cofold periodization" << std::endl;
 
-      computeMatrixEntriesWithMirroring<Covariance, GeometryMatrix>();
+      computeMatrixEntriesWithMirroring<Covariance, GeometryMatrix>(
+        std::forward<Covariance>(covariance));
 
       if (sigmoid == "smooth")
         modifyMatrixEntriesWithCofold<SmoothSigmoid>();
@@ -598,9 +598,11 @@ private:
       return;
 #if HAVE_DUNE_NONLINOPT
     else if (optim == "coneopt")
-      optimizeMatrixEntriesWithConeOptimization<Covariance, GeometryMatrix>();
+      optimizeMatrixEntriesWithConeOptimization<Covariance, GeometryMatrix>(
+        std::forward<Covariance>(covariance));
     else if (optim == "dualopt")
-      optimizeMatrixEntriesWithDualOptimization<Covariance, GeometryMatrix>();
+      optimizeMatrixEntriesWithDualOptimization<Covariance, GeometryMatrix>(
+        std::forward<Covariance>(covariance));
     else
       throw std::runtime_error{
         "stochastic.optim must be \"coneopt\" or \"dualopt\""
@@ -623,11 +625,10 @@ private:
    * @tparam GeometryMatrix transformation matrix (based on correlation lengths)
    */
   template<typename Covariance, typename GeometryMatrix>
-  void computeMatrixEntriesWithMirroring() const
+  void computeMatrixEntriesWithMirroring(Covariance&& covariance) const
   {
     GeometryMatrix matrix((*traits).config);
 
-    const Covariance covariance((*traits).config);
     std::array<RF, dim> coord;
     std::array<RF, dim> transCoord;
     Indices indices;
@@ -661,11 +662,9 @@ private:
    * @tparam Sigmoid        sigmoid function used for merging
    */
   template<typename Covariance, typename GeometryMatrix, typename Sigmoid>
-  void computeMatrixEntriesWithMerge() const
+  void computeMatrixEntriesWithMerge(Covariance&& covariance) const
   {
     GeometryMatrix matrix((*traits).config);
-
-    const Covariance covariance((*traits).config);
     Sigmoid sigmoid;
 
     bool radial;
@@ -802,11 +801,9 @@ private:
    * @tparam Sigmoid        sigmoid function used for smooth max function
    */
   template<typename Covariance, typename GeometryMatrix, typename Sigmoid>
-  void computeMatrixEntriesWithFold() const
+  void computeMatrixEntriesWithFold(Covariance&& covariance) const
   {
     GeometryMatrix matrix((*traits).config);
-
-    const Covariance covariance((*traits).config);
 
 #if HAVE_GSL
     std::array<RF, dim> coord;
@@ -1042,7 +1039,7 @@ private:
    * @tparam GeometryMatrix transformation matrix (based on correlation lengths)
    */
   template<typename Covariance, typename GeometryMatrix>
-  void optimizeMatrixEntriesWithConeOptimization() const
+  void optimizeMatrixEntriesWithConeOptimization(Covariance&& covariance) const
   {
     if ((!std::is_same<MatrixBackend<Traits>,
                        DFTMatrixBackend<Traits>>::value) ||
@@ -1065,7 +1062,6 @@ private:
 
     GeometryMatrix matrix((*traits).config);
 
-    const Covariance covariance((*traits).config);
     std::array<RF, dim> coord;
     std::array<RF, dim> transCoord;
     std::array<unsigned int, dim> indices;
@@ -1188,7 +1184,7 @@ private:
    * @tparam GeometryMatrix transformation matrix (based on correlation lengths)
    */
   template<typename Covariance, typename GeometryMatrix>
-  void optimizeMatrixEntriesWithDualOptimization() const
+  void optimizeMatrixEntriesWithDualOptimization(Covariance&& covariance) const
   {
     if ((!std::is_same<MatrixBackend<Traits>,
                        DFTMatrixBackend<Traits>>::value) ||
@@ -1201,7 +1197,6 @@ private:
         "optimization is only implemented for sequential runs"
       };
 
-    Covariance covariance((*traits).config);
     GeometryMatrix matrix((*traits).config);
 
     bool radial;
@@ -1460,7 +1455,7 @@ private:
   void multiplyExtended(std::vector<RF>& input, std::vector<RF>& output) const
   {
     if (!matrixBackend.valid())
-      fillTransformedMatrix();
+      fillTransformedMatrix(covariance);
 
     fieldBackend.fieldToExtendedField(input);
 
@@ -1532,7 +1527,7 @@ private:
                             std::vector<RF>& output) const
   {
     if (!matrixBackend.valid())
-      fillTransformedMatrix();
+      fillTransformedMatrix(covariance);
 
     fieldBackend.fieldToExtendedField(input);
 
@@ -1605,7 +1600,7 @@ private:
                                std::vector<RF>& output) const
   {
     if (!matrixBackend.valid())
-      fillTransformedMatrix();
+      fillTransformedMatrix(covariance);
 
     fieldBackend.fieldToExtendedField(input);
 

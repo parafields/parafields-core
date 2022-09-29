@@ -9,6 +9,8 @@
 #include <dune/grid/yaspgrid.hh>
 #endif // HAVE_DUNE_FUNCTIONS
 
+#include <parafields/backends/cpprngbackend.hh>
+#include <parafields/backends/gslrngbackend.hh>
 #include <parafields/fieldtraits.hh>
 #include <parafields/io.hh>
 #include <parafields/legacyvtk.hh>
@@ -488,19 +490,51 @@ public:
    */
   void generate(unsigned int seed, bool allowNonWorldComm = false)
   {
+    if ((*traits).verbose && (*traits).rank == 0)
+      std::cout << "generate with seed: " << seed << std::endl;
+
+      // Instantiate the RNG
+#if HAVE_GSL
+    GSLRNGBackend<Traits> rngBackend(this->traits);
+#else
+    CppRNGBackend<Traits> rngBackend(this->traits);
+#endif
+
+    // initialize pseudo-random generator
+    seed += this->traits->rank; // different seed for each processor
+    rngBackend.seed(seed);
+
+    generateWithRNG(rngBackend, seed, allowNonWorldComm);
+  }
+
+  /**
+   * @brief Generate a field with desired correlation structure using
+   * instantiate RNG
+   *
+   * Generate a random field sample, using a pre-instantiated RNG for field
+   * generation.
+   *
+   * @param rngBackend        The RNG providing a sample() method
+   * @param seed              seed value for random number generation (still
+   * used in trend)
+   * @param allowNonWorldComm prevent inconsistent field generation by default
+   */
+  template<typename RNG>
+  void generateWithRNG(RNG&& rngBackend,
+                       unsigned int seed,
+                       bool allowNonWorldComm = false)
+  {
     if (((*traits).comm != MPI_COMM_WORLD) && !allowNonWorldComm)
       throw std::runtime_error{
         "generation of inconsistent fields prevented, set "
         "allowNonWorldComm = true if you really want this"
       };
 
-    if ((*traits).verbose && (*traits).rank == 0)
-      std::cout << "generate with seed: " << seed << std::endl;
-
     if (useAnisoMatrix)
-      (*anisoMatrix).generateField(seed, stochasticPart);
+      (*anisoMatrix)
+        .generateField(std::forward<RNG>(rngBackend), stochasticPart);
     else
-      (*isoMatrix).generateField(seed, stochasticPart);
+      (*isoMatrix).generateField(std::forward<RNG>(rngBackend), stochasticPart);
     trendPart.generate(seed);
 
     invMatvecValid = false;

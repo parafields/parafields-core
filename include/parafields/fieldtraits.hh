@@ -103,10 +103,13 @@ private:
   friend AnisoMatrix<ThisType>;
   friend typename IsoMatrix<ThisType>::MatrixBackendType;
   friend typename IsoMatrix<ThisType>::FieldBackendType;
-  friend typename IsoMatrix<ThisType>::RNGBackendType;
   friend typename AnisoMatrix<ThisType>::MatrixBackendType;
   friend typename AnisoMatrix<ThisType>::FieldBackendType;
-  friend typename AnisoMatrix<ThisType>::RNGBackendType;
+
+  friend CppRNGBackend<ThisType>;
+#if HAVE_GSL
+  friend GSLRNGBackend<ThisType>;
+#endif
 
   friend RandomField<GridTraits, IsoMatrix, AnisoMatrix>;
 

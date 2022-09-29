@@ -20,9 +20,6 @@
 #include "parafields/backends/dftfieldbackend.hh"
 #include "parafields/backends/r2cfieldbackend.hh"
 
-#include "parafields/backends/cpprngbackend.hh"
-#include "parafields/backends/gslrngbackend.hh"
-
 #if HAVE_GSL
 #include <gsl/gsl_integration.h>
 #endif // HAVE_GSL
@@ -38,8 +35,6 @@ template<long unsigned int>
 class DefaultMatrixBackend;
 template<long unsigned int>
 class DefaultFieldBackend;
-template<long unsigned int>
-class DefaultRNGBackend;
 
 /**
  * @brief Covariance matrix for stationary Gaussian random fields
@@ -49,27 +44,22 @@ class DefaultRNGBackend;
  * the matrix is stored as the Fourier transform of the covariance matrix
  * belonging to an extended domain, which is a diagonal matrix that can
  * be stored as a vector. Different backends are available for the way
- * the matrix is stored, the way extended fields are represented, and the
- * way random numbers are generated. Custom backends can be used by
- * providing new template template parameters.
+ * the matrix is stored and the way extended fields are represented.
+ * Custom backends can be used by providing new template template parameters.
  *
  * @tparam MatrixBackend representation of extended covariance matrix
  * @tparam FieldBackend  representation of extended random field
- * @tparam RNGBackend    class that produces normally distributed random numbers
  */
 template<typename Traits,
          template<typename> class MatrixBackend =
            DefaultMatrixBackend<Traits::dim>::template Type,
          template<typename> class FieldBackend =
-           DefaultFieldBackend<Traits::dim>::template Type,
-         template<typename> class RNGBackend =
-           DefaultRNGBackend<Traits::dim>::template Type>
+           DefaultFieldBackend<Traits::dim>::template Type>
 class Matrix
 {
 public:
   using MatrixBackendType = MatrixBackend<Traits>;
   using FieldBackendType = FieldBackend<Traits>;
-  using RNGBackendType = RNGBackend<Traits>;
 
   using StochasticPartType = StochasticPart<Traits>;
 
@@ -94,7 +84,6 @@ private:
 
   mutable MatrixBackend<Traits> matrixBackend;
   mutable FieldBackend<Traits> fieldBackend;
-  mutable RNGBackend<Traits> rngBackend;
 
   mutable std::vector<RF>* spareField;
 
@@ -108,7 +97,6 @@ public:
     : traits(traits_)
     , matrixBackend(traits)
     , fieldBackend(traits)
-    , rngBackend(traits)
     , spareField(nullptr)
   {
     update();
@@ -341,18 +329,14 @@ public:
    * @param      seed           seed value for random number generation
    * @param[out] stochasticPart resulting random field
    */
-  void generateField(unsigned int seed,
-                     StochasticPartType& stochasticPart) const
+  template<typename RNG>
+  void generateField(RNG&& rngBackend, StochasticPartType& stochasticPart) const
   {
     if (!matrixBackend.valid())
       fillTransformedMatrix();
 
     if (!spareField) {
       fieldBackend.allocate();
-
-      // initialize pseudo-random generator
-      seed += rank; // different seed for each processor
-      rngBackend.seed(seed);
 
       RF lambda = 0.;
 
@@ -1705,22 +1689,6 @@ class DefaultFieldBackend<1>
 public:
   template<typename T>
   using Type = DFTFieldBackend<T>;
-};
-
-/**
- * @brief Default RNG backend: GSL when available, std::random as fallback
- */
-template<long unsigned int dim>
-class DefaultRNGBackend
-{
-public:
-#if HAVE_GSL
-  template<typename T>
-  using Type = GSLRNGBackend<T>;
-#else  // HAVE_GSL
-  template<typename T>
-  using Type = CppRNGBackend<T>;
-#endif // HAVE_GSL
 };
 
 /**

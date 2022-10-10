@@ -451,6 +451,30 @@ public:
       (*isoMatrix).template fillTransformedMatrix<Covariance>();
   }
 
+  /** @brief Dynamically add trend components
+   *
+   * This adds trend components to an already instantiated random field.
+   *
+   * @param config The configuration expecting the same input as
+   *               the class constructor.
+   */
+  void add_trend_components(const Dune::ParameterTree& config)
+  {
+    this->trendPart.add_components(config);
+  }
+
+  /** @brief Dynamically remove a number of trend components
+   *
+   * This removes a number of trend components. We remove those
+   * that were added last.
+   *
+   * @param count The number of components to remove
+   */
+  void remove_trend_components(std::size_t count)
+  {
+    this->trendPart.remove_components(count);
+  }
+
   /**
    * @brief Generate a field with the desired correlation structure
    *

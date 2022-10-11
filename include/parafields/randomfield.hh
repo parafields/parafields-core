@@ -504,7 +504,7 @@ public:
     seed += this->traits->rank; // different seed for each processor
     rngBackend.seed(seed);
 
-    generateWithRNG(rngBackend, seed, allowNonWorldComm);
+    generateWithRNG(rngBackend, allowNonWorldComm);
   }
 
   /**
@@ -515,14 +515,10 @@ public:
    * generation.
    *
    * @param rngBackend        The RNG providing a sample() method
-   * @param seed              seed value for random number generation (still
-   * used in trend)
    * @param allowNonWorldComm prevent inconsistent field generation by default
    */
   template<typename RNG>
-  void generateWithRNG(RNG&& rngBackend,
-                       unsigned int seed,
-                       bool allowNonWorldComm = false)
+  void generateWithRNG(RNG& rngBackend, bool allowNonWorldComm = false)
   {
     if (((*traits).comm != MPI_COMM_WORLD) && !allowNonWorldComm)
       throw std::runtime_error{
@@ -531,11 +527,10 @@ public:
       };
 
     if (useAnisoMatrix)
-      (*anisoMatrix)
-        .generateField(std::forward<RNG>(rngBackend), stochasticPart);
+      (*anisoMatrix).generateField(rngBackend, stochasticPart);
     else
-      (*isoMatrix).generateField(std::forward<RNG>(rngBackend), stochasticPart);
-    trendPart.generate(seed);
+      (*isoMatrix).generateField(rngBackend, stochasticPart);
+    trendPart.generate(rngBackend);
 
     invMatvecValid = false;
     invRootMatvecValid = false;

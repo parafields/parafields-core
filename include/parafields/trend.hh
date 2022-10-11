@@ -321,30 +321,17 @@ public:
    * mean and variance. Each component uses its own number generator,
    * and therefore requires a distict seed value.
    *
-   * @param seed seed value for the random number generator
+   * @param rng The random number generator
    */
-  void generate(unsigned int seed)
+  template<typename RNG>
+  void generate(RNG& rng)
   {
     std::vector<RF> newShiftVector(shiftVector.size(), 0.),
       myNewShiftVector(shiftVector.size(), 0.);
 
     if ((*traits).rank == 0) {
-#if HAVE_GSL
-      gsl_rng* gslRng = gsl_rng_alloc(gsl_rng_mt19937);
-      gsl_rng_set(gslRng, seed);
-#else
-      std::default_random_engine generator(seed);
-      std::normal_distribution<RF> normalDist(0., 1.);
-#endif // HAVE_GSL
-
       for (unsigned int i = 0; i < shiftVector.size(); i++) {
-#if HAVE_GSL
-        myNewShiftVector[i] =
-          gsl_ran_gaussian_ziggurat(gslRng, 1.) * std::sqrt(varianceVector[i]);
-#else
-        myNewShiftVector[i] =
-          normalDist(generator) * std::sqrt(varianceVector[i]);
-#endif // HAVE_GSL
+        myNewShiftVector[i] = rng.sample() * std::sqrt(varianceVector[i]);
       }
     }
 
@@ -1138,19 +1125,16 @@ public:
    * mean and variance. Each component uses its own number generator,
    * and therefore requires a distict seed value.
    *
-   * @param seed seed value for the random number generator
+   * @param rng The Random Number generator
    */
-  void generate(unsigned int seed)
+  template<typename RNG>
+  void generate(RNG& rng)
   {
-    // different seed than stochastic part
-    seed += (*traits).commSize;
-    for (unsigned int i = 0; i < componentVector.size(); i++) {
-      // different seed for each component
-      componentVector[i].generate(seed + i);
-    }
+    for (unsigned int i = 0; i < componentVector.size(); i++)
+      componentVector[i].generate(rng);
 
     if (imageComponent)
-      imageComponent->generate(seed + componentVector.size());
+      imageComponent->generate(rng);
   }
 
   /**

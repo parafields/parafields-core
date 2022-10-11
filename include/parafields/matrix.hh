@@ -330,7 +330,7 @@ public:
    * @param[out] stochasticPart resulting random field
    */
   template<typename RNG>
-  void generateField(RNG&& rngBackend, StochasticPartType& stochasticPart) const
+  void generateField(RNG& rngBackend, StochasticPartType& stochasticPart) const
   {
     if (!matrixBackend.valid())
       fillTransformedMatrix();

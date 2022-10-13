@@ -297,13 +297,6 @@ class SphericalCovariance
 {
 public:
   /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  SphericalCovariance(const Dune::ParameterTree& config) {}
-
-  /**
    * @brief Evaluate the covariance function
    *
    * @tparam RF      type of values and coordinates
@@ -358,13 +351,6 @@ public:
 class ExponentialCovariance
 {
 public:
-  /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  ExponentialCovariance(const Dune::ParameterTree& config) {}
-
   /**
    * @brief Evaluate the covariance function
    *
@@ -448,13 +434,6 @@ class GaussianCovariance
 {
 public:
   /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  GaussianCovariance(const Dune::ParameterTree& config) {}
-
-  /**
    * @brief Evaluate the covariance function
    *
    * @tparam RF      type of values and coordinates
@@ -486,13 +465,6 @@ public:
 class SeparableExponentialCovariance
 {
 public:
-  /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  SeparableExponentialCovariance(const Dune::ParameterTree& config) {}
-
   /**
    * @brief Evaluate the covariance function
    *
@@ -595,13 +567,6 @@ class Matern32Covariance
 {
 public:
   /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  Matern32Covariance(const Dune::ParameterTree& config) {}
-
-  /**
    * @brief Evaluate the covariance function
    *
    * @tparam RF      type of values and coordinates
@@ -636,13 +601,6 @@ class Matern52Covariance
 {
 public:
   /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  Matern52Covariance(const Dune::ParameterTree& config) {}
-
-  /**
    * @brief Evaluate the covariance function
    *
    * @tparam RF      type of values and coordinates
@@ -675,13 +633,6 @@ public:
 class DampedOscillationCovariance
 {
 public:
-  /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  DampedOscillationCovariance(const Dune::ParameterTree& config) {}
-
   /**
    * @brief Evaluate the covariance function
    *
@@ -716,13 +667,6 @@ public:
 class CauchyCovariance
 {
 public:
-  /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  CauchyCovariance(const Dune::ParameterTree& config) {}
-
   /**
    * @brief Evaluate the covariance function
    *
@@ -810,13 +754,6 @@ class CubicCovariance
 {
 public:
   /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  CubicCovariance(const Dune::ParameterTree& config) {}
-
-  /**
    * @brief Evaluate the covariance function
    *
    * @tparam RF      type of values and coordinates
@@ -862,13 +799,6 @@ public:
 class WhiteNoiseCovariance
 {
 public:
-  /**
-   * @brief Constructor
-   *
-   * @param config unused dummy argument
-   */
-  WhiteNoiseCovariance(const Dune::ParameterTree& config) {}
-
   /**
    * @brief Evaluate the covariance function
    *

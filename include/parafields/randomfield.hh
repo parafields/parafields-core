@@ -436,21 +436,48 @@ public:
    * @brief Explicit matrix setup for custom covariance classes
    *
    * This function can be called if a custom user-supplied covariance
-   * function should be used. The function is passed as a template
-   * parameter, and has to fulfill the interface of the built-in
-   * covariance functions. In the configuration, "custom-iso" or
+   * function should be used. The function is passed as a callable (e.g.
+   * a (std::)function, a functor etc). In the configuration, "custom-iso" or
    * "custom-aniso" has to be chosen as the desired covariance type.
    * The former assumes that the covariance function is symmetric in
    * each dimension, leading to significant memory savings, and will
    * not work if that is not the case.
    */
   template<typename Covariance>
-  void fillMatrix()
+  void fillMatrix(Covariance&& covariance)
   {
     if (useAnisoMatrix)
-      (*anisoMatrix).template fillTransformedMatrix<Covariance>();
+      (*anisoMatrix)
+        .template fillTransformedMatrix<Covariance>(
+          std::forward<Covariance>(covariance));
     else
-      (*isoMatrix).template fillTransformedMatrix<Covariance>();
+      (*isoMatrix)
+        .template fillTransformedMatrix<Covariance>(
+          std::forward<Covariance>(covariance));
+  }
+
+  /** @brief Dynamically add trend components
+   *
+   * This adds trend components to an already instantiated random field.
+   *
+   * @param config The configuration expecting the same input as
+   *               the class constructor.
+   */
+  void add_trend_components(const Dune::ParameterTree& config)
+  {
+    this->trendPart.add_components(config);
+  }
+
+  /** @brief Dynamically remove a number of trend components
+   *
+   * This removes a number of trend components. We remove those
+   * that were added last.
+   *
+   * @param count The number of components to remove
+   */
+  void remove_trend_components(std::size_t count)
+  {
+    this->trendPart.remove_components(count);
   }
 
   /**

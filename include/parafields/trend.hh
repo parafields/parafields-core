@@ -904,6 +904,24 @@ public:
             const std::string& fileName = "")
     : traits(traits_)
   {
+    add_components(config, fileName);
+  }
+
+  /**
+   * @brief Construct trend components from configuration
+   *
+   * This method reads the coefficients of the trend components from
+   * a file in ParameterTree format, which has been written using the
+   * writeToFile method. If the file name argument is empty, a homogeneous
+   * field is created instead, by setting each coefficient to its
+   * expected value.
+   *
+   * @param config   ParameterTree object containing configuration
+   * @param fileName name of file containing coefficients, or empty string
+   */
+  void add_components(const Dune::ParameterTree& config,
+                      const std::string& fileName = "")
+  {
     std::vector<RF> emptyVector, trendVector, meanVector, varianceVector;
 
     meanVector = config.get<std::vector<RF>>("mean.mean", emptyVector);
@@ -1040,6 +1058,20 @@ public:
       imageComponent = std::make_shared<ImageComponent<Traits>>(
         traits, trendVector, meanVector, varianceVector, imageFile);
     }
+  }
+
+  /** @brief Dynamically remove a number of trend components
+   *
+   * This removes a number of trend components. We remove those
+   * that were added last.
+   *
+   * @param count The number of components to remove
+   */
+  void remove_components(std::size_t count)
+  {
+    count = std::min(count, componentVector.size());
+    for (std::size_t i = 0; i < count; ++i)
+      componentVector.pop_back();
   }
 
 #if HAVE_DUNE_PDELAB

@@ -13,7 +13,7 @@ var searchData=
   ['slope_181',['Slope',['../a01078.html#af920d0b0a036b7fb50af46d938bc03fcaab55a1278f78783341a158803056af1d',1,'parafields::TrendComponentType']]],
   ['smoothsigmoid_182',['SmoothSigmoid',['../a00930.html',1,'parafields']]],
   ['smoothstepsigmoid_183',['SmoothstepSigmoid',['../a00938.html',1,'parafields']]],
-  ['sphericalcovariance_184',['SphericalCovariance',['../a00942.html',1,'parafields::SphericalCovariance'],['../a00942.html#adc7e938336997cc1474de1a4e751eeff',1,'parafields::SphericalCovariance::SphericalCovariance()']]],
+  ['sphericalcovariance_184',['SphericalCovariance',['../a00942.html',1,'parafields']]],
   ['stochastic_2ehh_185',['stochastic.hh',['../a00059.html',1,'']]],
   ['stochasticpart_186',['StochasticPart',['../a00974.html',1,'parafields::StochasticPart&lt; Traits &gt;'],['../a00978.html#a96ce6b169608071982bd7ba3cc40fc3f',1,'parafields::RandomField::stochasticPart()'],['../a00974.html#ae7b155efbf9f8e45447726954abbc4bb',1,'parafields::StochasticPart::StochasticPart()']]],
   ['stochasticparttype_187',['StochasticPartType',['../a01006.html#a528f50754e209baf260addf383a4753b',1,'parafields::Matrix::StochasticPartType()'],['../a00978.html#a9517746032a6c08ef718295d2f11f8d0',1,'parafields::RandomField::StochasticPartType()']]],

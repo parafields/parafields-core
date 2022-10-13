@@ -110,10 +110,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac9b187b9a67581e5e83f3e8af617707a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01006.html#a528f50754e209baf260addf383a4753b">StochasticPartType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#ac9b187b9a67581e5e83f3e8af617707a">multiplyInverse</a> (const <a class="el" href="a01006.html#a528f50754e209baf260addf383a4753b">StochasticPartType</a> &amp;input) const</td></tr>
 <tr class="memdesc:ac9b187b9a67581e5e83f3e8af617707a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiply random field with inverse of covariance matrix.  <a href="a01006.html#ac9b187b9a67581e5e83f3e8af617707a">More...</a><br /></td></tr>
 <tr class="separator:ac9b187b9a67581e5e83f3e8af617707a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adaca756900895ba4844d024241013f69"><td class="memTemplParams" colspan="2">template&lt;typename Covariance  = void&gt; </td></tr>
-<tr class="memitem:adaca756900895ba4844d024241013f69"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01006.html#adaca756900895ba4844d024241013f69">fillTransformedMatrix</a> () const</td></tr>
-<tr class="memdesc:adaca756900895ba4844d024241013f69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute entries of Fourier-transformed covariance matrix.  <a href="a01006.html#adaca756900895ba4844d024241013f69">More...</a><br /></td></tr>
-<tr class="separator:adaca756900895ba4844d024241013f69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3899ec6f2448a35c80e735f6b7fe0d8"><td class="memTemplParams" colspan="2">template&lt;typename Covariance &gt; </td></tr>
+<tr class="memitem:ad3899ec6f2448a35c80e735f6b7fe0d8"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a01006.html#ad3899ec6f2448a35c80e735f6b7fe0d8">fillTransformedMatrix</a> (Covariance &amp;&amp;covariance) const</td></tr>
+<tr class="memdesc:ad3899ec6f2448a35c80e735f6b7fe0d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute entries of Fourier-transformed covariance matrix.  <a href="a01006.html#ad3899ec6f2448a35c80e735f6b7fe0d8">More...</a><br /></td></tr>
+<tr class="separator:ad3899ec6f2448a35c80e735f6b7fe0d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a937b17f51f8a3ec9b4d0a36ab545c3f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a937b17f51f8a3ec9b4d0a36ab545c3f1">generateField</a> (unsigned int seed, <a class="el" href="a01006.html#a528f50754e209baf260addf383a4753b">StochasticPartType</a> &amp;stochasticPart) const</td></tr>
 <tr class="memdesc:a937b17f51f8a3ec9b4d0a36ab545c3f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate random field based on covariance matrix.  <a href="a01006.html#a937b17f51f8a3ec9b4d0a36ab545c3f1">More...</a><br /></td></tr>
 <tr class="separator:a937b17f51f8a3ec9b4d0a36ab545c3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -270,15 +270,15 @@ template&lt;typename Traits , template&lt; typename &gt; class MatrixBackend = D
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="adaca756900895ba4844d024241013f69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adaca756900895ba4844d024241013f69">&#9670;&nbsp;</a></span>fillTransformedMatrix()</h2>
+<a id="ad3899ec6f2448a35c80e735f6b7fe0d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3899ec6f2448a35c80e735f6b7fe0d8">&#9670;&nbsp;</a></span>fillTransformedMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Traits , template&lt; typename &gt; class MatrixBackend = DefaultMatrixBackend&lt;Traits::dim&gt;::template Type, template&lt; typename &gt; class FieldBackend = DefaultFieldBackend&lt;Traits::dim&gt;::template Type, template&lt; typename &gt; class RNGBackend = DefaultRNGBackend&lt;Traits::dim&gt;::template Type&gt; </div>
 <div class="memtemplate">
-template&lt;typename Covariance  = void&gt; </div>
+template&lt;typename Covariance &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -286,7 +286,8 @@ template&lt;typename Covariance  = void&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="a01006.html">parafields::Matrix</a>&lt; Traits, MatrixBackend, FieldBackend, RNGBackend &gt;::fillTransformedMatrix </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">Covariance &amp;&amp;&#160;</td>
+          <td class="paramname"><em>covariance</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>

@@ -119,10 +119,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adcbe8a51ea400b1a354a42d06ef6797f"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00978.html#adcbe8a51ea400b1a354a42d06ef6797f">dofs</a> () const</td></tr>
 <tr class="memdesc:adcbe8a51ea400b1a354a42d06ef6797f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of degrees of freedom.  <a href="a00978.html#adcbe8a51ea400b1a354a42d06ef6797f">More...</a><br /></td></tr>
 <tr class="separator:adcbe8a51ea400b1a354a42d06ef6797f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65fdb3a7758d01da6f1aea276f5dd64f"><td class="memTemplParams" colspan="2">template&lt;typename Covariance &gt; </td></tr>
-<tr class="memitem:a65fdb3a7758d01da6f1aea276f5dd64f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00978.html#a65fdb3a7758d01da6f1aea276f5dd64f">fillMatrix</a> ()</td></tr>
-<tr class="memdesc:a65fdb3a7758d01da6f1aea276f5dd64f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit matrix setup for custom covariance classes.  <a href="a00978.html#a65fdb3a7758d01da6f1aea276f5dd64f">More...</a><br /></td></tr>
-<tr class="separator:a65fdb3a7758d01da6f1aea276f5dd64f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9368238afb78bf7292007054ee89bae"><td class="memTemplParams" colspan="2">template&lt;typename Covariance &gt; </td></tr>
+<tr class="memitem:ab9368238afb78bf7292007054ee89bae"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00978.html#ab9368238afb78bf7292007054ee89bae">fillMatrix</a> (Covariance &amp;&amp;covariance)</td></tr>
+<tr class="memdesc:ab9368238afb78bf7292007054ee89bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit matrix setup for custom covariance classes.  <a href="a00978.html#ab9368238afb78bf7292007054ee89bae">More...</a><br /></td></tr>
+<tr class="separator:ab9368238afb78bf7292007054ee89bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06ea63a8f1baae4662baa090d81b3e29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00978.html#a06ea63a8f1baae4662baa090d81b3e29">add_trend_components</a> (const Dune::ParameterTree &amp;<a class="el" href="a00978.html#ad65014826513fd13d3f3a82a89b25aef">config</a>)</td></tr>
 <tr class="memdesc:a06ea63a8f1baae4662baa090d81b3e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamically add trend components.  <a href="a00978.html#a06ea63a8f1baae4662baa090d81b3e29">More...</a><br /></td></tr>
 <tr class="separator:a06ea63a8f1baae4662baa090d81b3e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -976,8 +976,8 @@ template&lt;typename GridTraits , template&lt; typename &gt; class IsoMatrix = D
 
 </div>
 </div>
-<a id="a65fdb3a7758d01da6f1aea276f5dd64f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65fdb3a7758d01da6f1aea276f5dd64f">&#9670;&nbsp;</a></span>fillMatrix()</h2>
+<a id="ab9368238afb78bf7292007054ee89bae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9368238afb78bf7292007054ee89bae">&#9670;&nbsp;</a></span>fillMatrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -992,7 +992,8 @@ template&lt;typename Covariance &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="a00978.html">parafields::RandomField</a>&lt; GridTraits, IsoMatrix, AnisoMatrix &gt;::fillMatrix </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">Covariance &amp;&amp;&#160;</td>
+          <td class="paramname"><em>covariance</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1004,7 +1005,7 @@ template&lt;typename Covariance &gt; </div>
 </div><div class="memdoc">
 
 <p>Explicit matrix setup for custom covariance classes. </p>
-<p>This function can be called if a custom user-supplied covariance function should be used. The function is passed as a template parameter, and has to fulfill the interface of the built-in covariance functions. In the configuration, "custom-iso" or "custom-aniso" has to be chosen as the desired covariance type. The former assumes that the covariance function is symmetric in each dimension, leading to significant memory savings, and will not work if that is not the case. </p>
+<p>This function can be called if a custom user-supplied covariance function should be used. The function is passed as a callable (e.g. a (std::)function, a functor etc). In the configuration, "custom-iso" or "custom-aniso" has to be chosen as the desired covariance type. The former assumes that the covariance function is symmetric in each dimension, leading to significant memory savings, and will not work if that is not the case. </p>
 
 </div>
 </div>

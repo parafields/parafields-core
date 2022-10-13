@@ -80,15 +80,7 @@ var menudata={children:[
 {text:"z",url:"functions_func_z.html#index_z"},
 {text:"~",url:"functions_func_~.html#index__7E"}]},
 {text:"Variables",url:"functions_vars.html"},
-{text:"Typedefs",url:"functions_type.html",children:[
-{text:"a",url:"functions_type.html#index_a"},
-{text:"d",url:"functions_type.html#index_d"},
-{text:"f",url:"functions_type.html#index_f"},
-{text:"i",url:"functions_type.html#index_i"},
-{text:"m",url:"functions_type.html#index_m"},
-{text:"r",url:"functions_type.html#index_r"},
-{text:"s",url:"functions_type.html#index_s"},
-{text:"t",url:"functions_type.html#index_t"}]},
+{text:"Typedefs",url:"functions_type.html"},
 {text:"Enumerations",url:"functions_enum.html"},
 {text:"Enumerator",url:"functions_eval.html"}]}]},
 {text:"Files",url:"files.html",children:[

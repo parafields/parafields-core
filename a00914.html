@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="a01006.html" title="Covariance matrix for stationary Gaussian random fields.">Matrix</a> backend that uses real-input discrete Fourier transform (R2C)  
+<p><a class="el" href="a01002.html" title="Covariance matrix for stationary Gaussian random fields.">Matrix</a> backend that uses real-input discrete Fourier transform (R2C)  
  <a href="a00914.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="a00026_source.html">r2cmatrixbackend.hh</a>&gt;</code></p>
@@ -136,7 +136,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><h3>template&lt;typename Traits&gt;<br />
 class parafields::R2CMatrixBackend&lt; Traits &gt;</h3>
 
-<p><a class="el" href="a01006.html" title="Covariance matrix for stationary Gaussian random fields.">Matrix</a> backend that uses real-input discrete Fourier transform (R2C) </p>
+<p><a class="el" href="a01002.html" title="Covariance matrix for stationary Gaussian random fields.">Matrix</a> backend that uses real-input discrete Fourier transform (R2C) </p>
 <p>This matrix backend is an implementation of the circulant embedding method that makes use of data redundancy to save a significant amount of memory and time. By construction, the covariance function is an even real function, which means that its Fourier transform is also even and real. As a consequence, both the required memory and the number of instructions needed for the transform can be reduced by roughly a factor of four. However, <a class="el" href="a00902.html" title="Fallback class for error message when requested FFTW3 library wasn&#39;t found.">FFTW</a> doesn't offer general real even transforms for higher dimensions, only tensor products of onedimensional transforms. Therefore, a real-to-complex DFT is employed to create an Hermitian complex transformed covariance matrix, and then the zero imaginary part is eliminated. This needs more time than a true real-to-real transform would, but the additional memory use can be masked, since the storage for the field backend hasn't been allocated at this point in time.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

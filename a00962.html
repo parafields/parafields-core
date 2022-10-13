@@ -102,9 +102,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a437be37f2b645f464ec1ae0355e65866"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#a437be37f2b645f464ec1ae0355e65866">dofs</a> () const</td></tr>
 <tr class="memdesc:a437be37f2b645f464ec1ae0355e65866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of degrees of freedom.  <a href="a00962.html#a437be37f2b645f464ec1ae0355e65866">More...</a><br /></td></tr>
 <tr class="separator:a437be37f2b645f464ec1ae0355e65866"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a463354821f0873f4f711321306c0e7a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#a463354821f0873f4f711321306c0e7a8">generate</a> (unsigned int seed)</td></tr>
-<tr class="memdesc:a463354821f0873f4f711321306c0e7a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a trend part with desired covariance structure.  <a href="a00962.html#a463354821f0873f4f711321306c0e7a8">More...</a><br /></td></tr>
-<tr class="separator:a463354821f0873f4f711321306c0e7a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7564ad8786f21684231ea60cafd7ead"><td class="memTemplParams" colspan="2">template&lt;typename RNG &gt; </td></tr>
+<tr class="memitem:af7564ad8786f21684231ea60cafd7ead"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00962.html#af7564ad8786f21684231ea60cafd7ead">generate</a> (RNG &amp;rng)</td></tr>
+<tr class="memdesc:af7564ad8786f21684231ea60cafd7ead"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a trend part with desired covariance structure.  <a href="a00962.html#af7564ad8786f21684231ea60cafd7ead">More...</a><br /></td></tr>
+<tr class="separator:af7564ad8786f21684231ea60cafd7ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a771c248428e241b9abb04ca2726ab4ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#a771c248428e241b9abb04ca2726ab4ff">generateUncorrelated</a> (unsigned int seed)</td></tr>
 <tr class="memdesc:a771c248428e241b9abb04ca2726ab4ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a trend part without correlation (i.e. noise)  <a href="a00962.html#a771c248428e241b9abb04ca2726ab4ff">More...</a><br /></td></tr>
 <tr class="separator:a771c248428e241b9abb04ca2726ab4ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -411,13 +412,15 @@ template&lt;typename Traits &gt; </div>
 
 </div>
 </div>
-<a id="a463354821f0873f4f711321306c0e7a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a463354821f0873f4f711321306c0e7a8">&#9670;&nbsp;</a></span>generate()</h2>
+<a id="af7564ad8786f21684231ea60cafd7ead"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7564ad8786f21684231ea60cafd7ead">&#9670;&nbsp;</a></span>generate()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Traits &gt; </div>
+<div class="memtemplate">
+template&lt;typename RNG &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -425,8 +428,8 @@ template&lt;typename Traits &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="a00962.html">parafields::TrendPart</a>&lt; Traits &gt;::generate </td>
           <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>seed</em></td><td>)</td>
+          <td class="paramtype">RNG &amp;&#160;</td>
+          <td class="paramname"><em>rng</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -441,7 +444,7 @@ template&lt;typename Traits &gt; </div>
 <p>This function creates random coefficients with the assigned mean and variance. Each component uses its own number generator, and therefore requires a distict seed value.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">seed</td><td>seed value for the random number generator </td></tr>
+    <tr><td class="paramname">rng</td><td>The Random Number generator </td></tr>
   </table>
   </dd>
 </dl>
@@ -482,7 +485,7 @@ template&lt;typename Traits &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00962.html#a463354821f0873f4f711321306c0e7a8" title="Generate a trend part with desired covariance structure.">generate</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00962.html#af7564ad8786f21684231ea60cafd7ead" title="Generate a trend part with desired covariance structure.">generate</a> </dd></dl>
 
 </div>
 </div>

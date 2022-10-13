@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>parafields-core: parafields::FoldedNormalMutator&lt; RF &gt; Class Template Reference</title>
+<title>parafields-core: parafields::SignMutator&lt; RF &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00066.html">parafields</a></li><li class="navelem"><a class="el" href="a01046.html">FoldedNormalMutator</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00066.html">parafields</a></li><li class="navelem"><a class="el" href="a01046.html">SignMutator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -70,36 +70,36 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="a01043.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">parafields::FoldedNormalMutator&lt; RF &gt; Class Template Reference</div>  </div>
+<div class="title">parafields::SignMutator&lt; RF &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Absolute value function mutator for folded normal fields.  
+<p>Replaces value with its sign (-1 for negative, +1 for nonnegative)  
  <a href="a01046.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="a00047_source.html">mutators.hh</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for parafields::FoldedNormalMutator&lt; RF &gt;:</div>
+Inheritance diagram for parafields::SignMutator&lt; RF &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="a01045.png" border="0" usemap="#parafields_1_1_folded_normal_mutator_3_01_r_f_01_4_inherit__map" alt="Inheritance graph"/></div>
-<map name="parafields_1_1_folded_normal_mutator_3_01_r_f_01_4_inherit__map" id="parafields_1_1_folded_normal_mutator_3_01_r_f_01_4_inherit__map">
-<area shape="rect" title="Absolute value function mutator for folded normal fields." alt="" coords="5,95,191,136"/>
-<area shape="rect" href="a01034.html" title="Abstract base class for value transformations." alt="" coords="9,5,187,47"/>
+<div class="center"><img src="a01045.png" border="0" usemap="#parafields_1_1_sign_mutator_3_01_r_f_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="parafields_1_1_sign_mutator_3_01_r_f_01_4_inherit__map" id="parafields_1_1_sign_mutator_3_01_r_f_01_4_inherit__map">
+<area shape="rect" title="Replaces value with its sign (&#45;1 for negative, +1 for nonnegative)" alt="" coords="7,95,181,136"/>
+<area shape="rect" href="a01030.html" title="Abstract base class for value transformations." alt="" coords="5,5,183,47"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4372a724a3bc356f3d250b3a4a8ae42d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01046.html#a4372a724a3bc356f3d250b3a4a8ae42d">apply</a> (RF &amp;value) const</td></tr>
-<tr class="memdesc:a4372a724a3bc356f3d250b3a4a8ae42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply transformation to given value.  <a href="a01046.html#a4372a724a3bc356f3d250b3a4a8ae42d">More...</a><br /></td></tr>
-<tr class="separator:a4372a724a3bc356f3d250b3a4a8ae42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ed9a89a9c0b59cfd03ecfe1cbb0ad0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01046.html#a8ed9a89a9c0b59cfd03ecfe1cbb0ad0a">apply</a> (RF &amp;value) const</td></tr>
+<tr class="memdesc:a8ed9a89a9c0b59cfd03ecfe1cbb0ad0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply transformation to given value.  <a href="a01046.html#a8ed9a89a9c0b59cfd03ecfe1cbb0ad0a">More...</a><br /></td></tr>
+<tr class="separator:a8ed9a89a9c0b59cfd03ecfe1cbb0ad0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename RF&gt;<br />
-class parafields::FoldedNormalMutator&lt; RF &gt;</h3>
+class parafields::SignMutator&lt; RF &gt;</h3>
 
-<p>Absolute value function mutator for folded normal fields. </p>
-<p>This mutator returns the absolute value of the random field.</p>
+<p>Replaces value with its sign (-1 for negative, +1 for nonnegative) </p>
+<p>This mutator returns the sign of the values. This can be used to generate random subdomains (by using the two assigned values to define an indicator function).</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">RF</td><td>data type of field values </td></tr>
@@ -107,8 +107,8 @@ class parafields::FoldedNormalMutator&lt; RF &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4372a724a3bc356f3d250b3a4a8ae42d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4372a724a3bc356f3d250b3a4a8ae42d">&#9670;&nbsp;</a></span>apply()</h2>
+<a id="a8ed9a89a9c0b59cfd03ecfe1cbb0ad0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ed9a89a9c0b59cfd03ecfe1cbb0ad0a">&#9670;&nbsp;</a></span>apply()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -119,7 +119,7 @@ template&lt;typename RF &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="a01046.html">parafields::FoldedNormalMutator</a>&lt; RF &gt;::apply </td>
+          <td class="memname">void <a class="el" href="a01046.html">parafields::SignMutator</a>&lt; RF &gt;::apply </td>
           <td>(</td>
           <td class="paramtype">RF &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -141,7 +141,7 @@ template&lt;typename RF &gt; </div>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="a01034.html#a48e5ade6ea53d6876645b0d9d158fed4">parafields::MutatorBase&lt; RF &gt;</a>.</p>
+<p>Implements <a class="el" href="a01030.html#a48e5ade6ea53d6876645b0d9d158fed4">parafields::MutatorBase&lt; RF &gt;</a>.</p>
 
 </div>
 </div>

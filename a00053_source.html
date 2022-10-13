@@ -78,7 +78,7 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00066.html">parafields</a> {</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="a01062.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="a01062.html">PNGReader</a></div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="a01058.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="a01058.html">PNGReader</a></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> offset;</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#if HAVE_PNG</span></div>
@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#endif // HAVE_PNG</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a01062.html#a3b9baf739e0a50a55090a00d6f74bd59">   34</a></span>&#160;  <a class="code" href="a01062.html#a3b9baf739e0a50a55090a00d6f74bd59">PNGReader</a>(<span class="keyword">const</span> std::string&amp; filename, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> channelOffset = 0)</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a01058.html#a3b9baf739e0a50a55090a00d6f74bd59">   34</a></span>&#160;  <a class="code" href="a01058.html#a3b9baf739e0a50a55090a00d6f74bd59">PNGReader</a>(<span class="keyword">const</span> std::string&amp; filename, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> channelOffset = 0)</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    : offset(channelOffset)</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  {</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#if HAVE_PNG</span></div>
@@ -151,7 +151,7 @@ $(function() {
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;  }</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Coord1, <span class="keyword">typename</span> Coord2&gt;</div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="a01062.html#a67510e82bde22c4b45e4acb3c04e2e3c">   99</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="a01062.html#a67510e82bde22c4b45e4acb3c04e2e3c">evaluate</a>(<span class="keyword">const</span> Coord1&amp; coord, <span class="keyword">const</span> Coord2&amp; extent)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="a01058.html#a67510e82bde22c4b45e4acb3c04e2e3c">   99</a></span>&#160;  <span class="keywordtype">double</span> <a class="code" href="a01058.html#a67510e82bde22c4b45e4acb3c04e2e3c">evaluate</a>(<span class="keyword">const</span> Coord1&amp; coord, <span class="keyword">const</span> Coord2&amp; extent)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">  </span>{</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#if HAVE_PNG</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> row =</div>
@@ -168,9 +168,9 @@ $(function() {
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;} <span class="comment">// namespace parafields</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aa00066_html"><div class="ttname"><a href="a00066.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
-<div class="ttc" id="aa01062_html_a3b9baf739e0a50a55090a00d6f74bd59"><div class="ttname"><a href="a01062.html#a3b9baf739e0a50a55090a00d6f74bd59">parafields::PNGReader::PNGReader</a></div><div class="ttdeci">PNGReader(const std::string &amp;filename, unsigned int channelOffset=0)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> pngreader.hh:34</div></div>
-<div class="ttc" id="aa01062_html_a67510e82bde22c4b45e4acb3c04e2e3c"><div class="ttname"><a href="a01062.html#a67510e82bde22c4b45e4acb3c04e2e3c">parafields::PNGReader::evaluate</a></div><div class="ttdeci">double evaluate(const Coord1 &amp;coord, const Coord2 &amp;extent) const</div><div class="ttdoc">Extract first pixel byte (gray or red) as value at coordinate.</div><div class="ttdef"><b>Definition:</b> pngreader.hh:99</div></div>
-<div class="ttc" id="aa01062_html"><div class="ttname"><a href="a01062.html">parafields::PNGReader</a></div><div class="ttdoc">A class to read in PNG files as trend components.</div><div class="ttdef"><b>Definition:</b> pngreader.hh:12</div></div>
+<div class="ttc" id="aa01058_html"><div class="ttname"><a href="a01058.html">parafields::PNGReader</a></div><div class="ttdoc">A class to read in PNG files as trend components.</div><div class="ttdef"><b>Definition:</b> pngreader.hh:12</div></div>
+<div class="ttc" id="aa01058_html_a3b9baf739e0a50a55090a00d6f74bd59"><div class="ttname"><a href="a01058.html#a3b9baf739e0a50a55090a00d6f74bd59">parafields::PNGReader::PNGReader</a></div><div class="ttdeci">PNGReader(const std::string &amp;filename, unsigned int channelOffset=0)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> pngreader.hh:34</div></div>
+<div class="ttc" id="aa01058_html_a67510e82bde22c4b45e4acb3c04e2e3c"><div class="ttname"><a href="a01058.html#a67510e82bde22c4b45e4acb3c04e2e3c">parafields::PNGReader::evaluate</a></div><div class="ttdeci">double evaluate(const Coord1 &amp;coord, const Coord2 &amp;extent) const</div><div class="ttdoc">Extract first pixel byte (gray or red) as value at coordinate.</div><div class="ttdef"><b>Definition:</b> pngreader.hh:99</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

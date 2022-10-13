@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>parafields-core: parafields::IdentityMutator&lt; RF &gt; Class Template Reference</title>
+<title>parafields-core: parafields::LogNormalMutator&lt; RF &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00066.html">parafields</a></li><li class="navelem"><a class="el" href="a01038.html">IdentityMutator</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00066.html">parafields</a></li><li class="navelem"><a class="el" href="a01038.html">LogNormalMutator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -70,36 +70,36 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="a01035.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">parafields::IdentityMutator&lt; RF &gt; Class Template Reference</div>  </div>
+<div class="title">parafields::LogNormalMutator&lt; RF &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Default Identity mutator that leaves its argument unchanged.  
+<p>Exponential function mutator for log-normal fields.  
  <a href="a01038.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="a00047_source.html">mutators.hh</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for parafields::IdentityMutator&lt; RF &gt;:</div>
+Inheritance diagram for parafields::LogNormalMutator&lt; RF &gt;:</div>
 <div class="dyncontent">
-<div class="center"><img src="a01037.png" border="0" usemap="#parafields_1_1_identity_mutator_3_01_r_f_01_4_inherit__map" alt="Inheritance graph"/></div>
-<map name="parafields_1_1_identity_mutator_3_01_r_f_01_4_inherit__map" id="parafields_1_1_identity_mutator_3_01_r_f_01_4_inherit__map">
-<area shape="rect" title="Default Identity mutator that leaves its argument unchanged." alt="" coords="5,95,200,136"/>
-<area shape="rect" href="a01034.html" title="Abstract base class for value transformations." alt="" coords="14,5,191,47"/>
+<div class="center"><img src="a01037.png" border="0" usemap="#parafields_1_1_log_normal_mutator_3_01_r_f_01_4_inherit__map" alt="Inheritance graph"/></div>
+<map name="parafields_1_1_log_normal_mutator_3_01_r_f_01_4_inherit__map" id="parafields_1_1_log_normal_mutator_3_01_r_f_01_4_inherit__map">
+<area shape="rect" title="Exponential function mutator for log&#45;normal fields." alt="" coords="5,95,221,136"/>
+<area shape="rect" href="a01030.html" title="Abstract base class for value transformations." alt="" coords="25,5,202,47"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3624d172e1b7388fe6df3a2aeff522c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01038.html#a3624d172e1b7388fe6df3a2aeff522c9">apply</a> (RF &amp;value) const</td></tr>
-<tr class="memdesc:a3624d172e1b7388fe6df3a2aeff522c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply transformation to given value.  <a href="a01038.html#a3624d172e1b7388fe6df3a2aeff522c9">More...</a><br /></td></tr>
-<tr class="separator:a3624d172e1b7388fe6df3a2aeff522c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af78a4a3e26e5c17b5bbf8c8f1350e6f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01038.html#af78a4a3e26e5c17b5bbf8c8f1350e6f4">apply</a> (RF &amp;value) const</td></tr>
+<tr class="memdesc:af78a4a3e26e5c17b5bbf8c8f1350e6f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply transformation to given value.  <a href="a01038.html#af78a4a3e26e5c17b5bbf8c8f1350e6f4">More...</a><br /></td></tr>
+<tr class="separator:af78a4a3e26e5c17b5bbf8c8f1350e6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename RF&gt;<br />
-class parafields::IdentityMutator&lt; RF &gt;</h3>
+class parafields::LogNormalMutator&lt; RF &gt;</h3>
 
-<p>Default Identity mutator that leaves its argument unchanged. </p>
-<p>This is the default mutator, it does nothing to its arguments, i.e., the generated field is a Gaussian random field.</p>
+<p>Exponential function mutator for log-normal fields. </p>
+<p>This mutator replaces each value with its exponential, thereby producing a log-normal random field.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">RF</td><td>data type of field values </td></tr>
@@ -107,8 +107,8 @@ class parafields::IdentityMutator&lt; RF &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3624d172e1b7388fe6df3a2aeff522c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3624d172e1b7388fe6df3a2aeff522c9">&#9670;&nbsp;</a></span>apply()</h2>
+<a id="af78a4a3e26e5c17b5bbf8c8f1350e6f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af78a4a3e26e5c17b5bbf8c8f1350e6f4">&#9670;&nbsp;</a></span>apply()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -119,7 +119,7 @@ template&lt;typename RF &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="a01038.html">parafields::IdentityMutator</a>&lt; RF &gt;::apply </td>
+          <td class="memname">void <a class="el" href="a01038.html">parafields::LogNormalMutator</a>&lt; RF &gt;::apply </td>
           <td>(</td>
           <td class="paramtype">RF &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -141,7 +141,7 @@ template&lt;typename RF &gt; </div>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="a01034.html#a48e5ade6ea53d6876645b0d9d158fed4">parafields::MutatorBase&lt; RF &gt;</a>.</p>
+<p>Implements <a class="el" href="a01030.html#a48e5ade6ea53d6876645b0d9d158fed4">parafields::MutatorBase&lt; RF &gt;</a>.</p>
 
 </div>
 </div>

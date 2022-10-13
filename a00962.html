@@ -93,6 +93,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aeec3acc4b6cad0479fc8db4732c33269"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#aeec3acc4b6cad0479fc8db4732c33269">TrendPart</a> (const Dune::ParameterTree &amp;config, const std::shared_ptr&lt; Traits &gt; &amp;traits_, const std::string &amp;fileName=&quot;&quot;)</td></tr>
 <tr class="memdesc:aeec3acc4b6cad0479fc8db4732c33269"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor reading from file or creating homogeneous field.  <a href="a00962.html#aeec3acc4b6cad0479fc8db4732c33269">More...</a><br /></td></tr>
 <tr class="separator:aeec3acc4b6cad0479fc8db4732c33269"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0360a2fe4f6796ca15257eada549deae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#a0360a2fe4f6796ca15257eada549deae">add_components</a> (const Dune::ParameterTree &amp;config, const std::string &amp;fileName=&quot;&quot;)</td></tr>
+<tr class="memdesc:a0360a2fe4f6796ca15257eada549deae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct trend components from configuration.  <a href="a00962.html#a0360a2fe4f6796ca15257eada549deae">More...</a><br /></td></tr>
+<tr class="separator:a0360a2fe4f6796ca15257eada549deae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a912fc13c5ca8f6d7eb63fd7464bce6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#a0a912fc13c5ca8f6d7eb63fd7464bce6">remove_components</a> (std::size_t count)</td></tr>
+<tr class="memdesc:a0a912fc13c5ca8f6d7eb63fd7464bce6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamically remove a number of trend components.  <a href="a00962.html#a0a912fc13c5ca8f6d7eb63fd7464bce6">More...</a><br /></td></tr>
+<tr class="separator:a0a912fc13c5ca8f6d7eb63fd7464bce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a437be37f2b645f464ec1ae0355e65866"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#a437be37f2b645f464ec1ae0355e65866">dofs</a> () const</td></tr>
 <tr class="memdesc:a437be37f2b645f464ec1ae0355e65866"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of degrees of freedom.  <a href="a00962.html#a437be37f2b645f464ec1ae0355e65866">More...</a><br /></td></tr>
 <tr class="separator:a437be37f2b645f464ec1ae0355e65866"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,6 +235,54 @@ template&lt;typename Traits &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0360a2fe4f6796ca15257eada549deae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0360a2fe4f6796ca15257eada549deae">&#9670;&nbsp;</a></span>add_components()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Traits &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00962.html">parafields::TrendPart</a>&lt; Traits &gt;::add_components </td>
+          <td>(</td>
+          <td class="paramtype">const Dune::ParameterTree &amp;&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fileName</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct trend components from configuration. </p>
+<p>This method reads the coefficients of the trend components from a file in ParameterTree format, which has been written using the writeToFile method. If the file name argument is empty, a homogeneous field is created instead, by setting each coefficient to its expected value.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>ParameterTree object containing configuration </td></tr>
+    <tr><td class="paramname">fileName</td><td>name of file containing coefficients, or empty string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ab50e8805b7444d433c4ad09ec91f256b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab50e8805b7444d433c4ad09ec91f256b">&#9670;&nbsp;</a></span>axpy()</h2>
 
@@ -784,6 +838,43 @@ template&lt;typename Traits &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if all components are the same, else false </dd></dl>
+
+</div>
+</div>
+<a id="a0a912fc13c5ca8f6d7eb63fd7464bce6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a912fc13c5ca8f6d7eb63fd7464bce6">&#9670;&nbsp;</a></span>remove_components()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Traits &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00962.html">parafields::TrendPart</a>&lt; Traits &gt;::remove_components </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dynamically remove a number of trend components. </p>
+<p>This removes a number of trend components. We remove those that were added last.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>The number of components to remove </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

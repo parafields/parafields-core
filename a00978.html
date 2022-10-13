@@ -123,6 +123,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a65fdb3a7758d01da6f1aea276f5dd64f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00978.html#a65fdb3a7758d01da6f1aea276f5dd64f">fillMatrix</a> ()</td></tr>
 <tr class="memdesc:a65fdb3a7758d01da6f1aea276f5dd64f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit matrix setup for custom covariance classes.  <a href="a00978.html#a65fdb3a7758d01da6f1aea276f5dd64f">More...</a><br /></td></tr>
 <tr class="separator:a65fdb3a7758d01da6f1aea276f5dd64f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06ea63a8f1baae4662baa090d81b3e29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00978.html#a06ea63a8f1baae4662baa090d81b3e29">add_trend_components</a> (const Dune::ParameterTree &amp;<a class="el" href="a00978.html#ad65014826513fd13d3f3a82a89b25aef">config</a>)</td></tr>
+<tr class="memdesc:a06ea63a8f1baae4662baa090d81b3e29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamically add trend components.  <a href="a00978.html#a06ea63a8f1baae4662baa090d81b3e29">More...</a><br /></td></tr>
+<tr class="separator:a06ea63a8f1baae4662baa090d81b3e29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc300906c9a778530dda47cbd9fe0165"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00978.html#afc300906c9a778530dda47cbd9fe0165">remove_trend_components</a> (std::size_t count)</td></tr>
+<tr class="memdesc:afc300906c9a778530dda47cbd9fe0165"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamically remove a number of trend components.  <a href="a00978.html#afc300906c9a778530dda47cbd9fe0165">More...</a><br /></td></tr>
+<tr class="separator:afc300906c9a778530dda47cbd9fe0165"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae81946963b8d1625f5733818bed4a3d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00978.html#ae81946963b8d1625f5733818bed4a3d6">generate</a> (bool allowNonWorldComm=false)</td></tr>
 <tr class="memdesc:ae81946963b8d1625f5733818bed4a3d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a field with the desired correlation structure.  <a href="a00978.html#ae81946963b8d1625f5733818bed4a3d6">More...</a><br /></td></tr>
 <tr class="separator:ae81946963b8d1625f5733818bed4a3d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -616,6 +622,43 @@ template&lt;typename GridTraits , template&lt; typename &gt; class IsoMatrix = D
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a06ea63a8f1baae4662baa090d81b3e29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06ea63a8f1baae4662baa090d81b3e29">&#9670;&nbsp;</a></span>add_trend_components()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GridTraits , template&lt; typename &gt; class IsoMatrix = DefaultIsoMatrix&lt;GridTraits::dim&gt;::template Type, template&lt; typename &gt; class AnisoMatrix = DefaultAnisoMatrix&lt;GridTraits::dim&gt;::template Type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00978.html">parafields::RandomField</a>&lt; GridTraits, IsoMatrix, AnisoMatrix &gt;::add_trend_components </td>
+          <td>(</td>
+          <td class="paramtype">const Dune::ParameterTree &amp;&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dynamically add trend components. </p>
+<p>This adds trend components to an already instantiated random field.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>The configuration expecting the same input as the class constructor. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="abcfa5a414831a49f7e83dc75f985d63b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abcfa5a414831a49f7e83dc75f985d63b">&#9670;&nbsp;</a></span>axpy() <span class="overload">[1/2]</span></h2>
 
@@ -1563,6 +1606,43 @@ template&lt;typename GridTraits , template&lt; typename &gt; class IsoMatrix = D
 
 <p>Double spatial resolution of covariance matrix. </p>
 <p>This function instructs the covariance matrix to subdivide each cell in each dimension and recompute itself. It is not a part of the refine method for design reasons, since several random fields can share a covariance matrix, i.e., this method should only be called once, and then refine should be called on all fields sharing the matrix instance. </p>
+
+</div>
+</div>
+<a id="afc300906c9a778530dda47cbd9fe0165"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc300906c9a778530dda47cbd9fe0165">&#9670;&nbsp;</a></span>remove_trend_components()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GridTraits , template&lt; typename &gt; class IsoMatrix = DefaultIsoMatrix&lt;GridTraits::dim&gt;::template Type, template&lt; typename &gt; class AnisoMatrix = DefaultAnisoMatrix&lt;GridTraits::dim&gt;::template Type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00978.html">parafields::RandomField</a>&lt; GridTraits, IsoMatrix, AnisoMatrix &gt;::remove_trend_components </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>count</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Dynamically remove a number of trend components. </p>
+<p>This removes a number of trend components. We remove those that were added last.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>The number of components to remove </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

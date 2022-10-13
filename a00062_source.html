@@ -642,431 +642,445 @@ $(function() {
 <div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160;            <span class="keyword">const</span> std::string&amp; fileName = <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;    : traits(traits_)</div>
 <div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;  {</div>
-<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;    std::vector&lt;RF&gt; emptyVector, trendVector, meanVector, varianceVector;</div>
-<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160; </div>
-<div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160;    meanVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;mean.mean&quot;</span>, emptyVector);</div>
-<div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160; </div>
-<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;    <span class="keywordflow">if</span> (!meanVector.empty()) {</div>
-<div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;      varianceVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;mean.variance&quot;</span>);</div>
-<div class="line"><a name="l00913"></a><span class="lineno">  913</span>&#160; </div>
-<div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160;      <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;        trendVector = meanVector;</div>
-<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;        Dune::ParameterTree trendConfig;</div>
-<div class="line"><a name="l00918"></a><span class="lineno">  918</span>&#160;        Dune::ParameterTreeParser parser;</div>
-<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;        parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
-<div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;        trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;mean&quot;</span>);</div>
-<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;      }</div>
-<div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160; </div>
-<div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;      componentVector.emplace_back(traits,</div>
-<div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;                                   trendVector,</div>
-<div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;                                   meanVector,</div>
-<div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;                                   varianceVector,</div>
-<div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;                                   <a class="code" href="a01078.html#af920d0b0a036b7fb50af46d938bc03fcaca9d0a41040794aa495b374a9f4f4ed5">TrendComponentType::Mean</a>);</div>
-<div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160;    }</div>
-<div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160; </div>
-<div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;    meanVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;slope.mean&quot;</span>, emptyVector);</div>
+<div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;    <a class="code" href="a00962.html#a0360a2fe4f6796ca15257eada549deae">add_components</a>(config, fileName);</div>
+<div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;  }</div>
+<div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160; </div>
+<div class="line"><a name="l00922"></a><span class="lineno"><a class="line" href="a00962.html#a0360a2fe4f6796ca15257eada549deae">  922</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a0360a2fe4f6796ca15257eada549deae">add_components</a>(<span class="keyword">const</span> Dune::ParameterTree&amp; config,</div>
+<div class="line"><a name="l00923"></a><span class="lineno">  923</span>&#160;                      <span class="keyword">const</span> std::string&amp; fileName = <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160;  {</div>
+<div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;    std::vector&lt;RF&gt; emptyVector, trendVector, meanVector, varianceVector;</div>
+<div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160; </div>
+<div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;    meanVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;mean.mean&quot;</span>, emptyVector);</div>
+<div class="line"><a name="l00928"></a><span class="lineno">  928</span>&#160; </div>
+<div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160;    <span class="keywordflow">if</span> (!meanVector.empty()) {</div>
+<div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;      varianceVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;mean.variance&quot;</span>);</div>
 <div class="line"><a name="l00931"></a><span class="lineno">  931</span>&#160; </div>
-<div class="line"><a name="l00932"></a><span class="lineno">  932</span>&#160;    <span class="keywordflow">if</span> (!meanVector.empty()) {</div>
-<div class="line"><a name="l00933"></a><span class="lineno">  933</span>&#160;      varianceVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;slope.variance&quot;</span>);</div>
-<div class="line"><a name="l00934"></a><span class="lineno">  934</span>&#160; </div>
-<div class="line"><a name="l00935"></a><span class="lineno">  935</span>&#160;      <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;        trendVector = meanVector;</div>
-<div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;        Dune::ParameterTree trendConfig;</div>
-<div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;        Dune::ParameterTreeParser parser;</div>
-<div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;        parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
-<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;        trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;slope&quot;</span>);</div>
-<div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;      }</div>
-<div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160; </div>
-<div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;      componentVector.emplace_back(traits,</div>
-<div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;                                   trendVector,</div>
-<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;                                   meanVector,</div>
-<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;                                   varianceVector,</div>
-<div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;                                   <a class="code" href="a01078.html#af920d0b0a036b7fb50af46d938bc03fcaab55a1278f78783341a158803056af1d">TrendComponentType::Slope</a>);</div>
-<div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160;    }</div>
-<div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160; </div>
-<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;    <span class="keywordtype">int</span> count = 0;</div>
-<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;    std::stringstream s;</div>
-<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;    <span class="keywordtype">bool</span> endReached = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160; </div>
-<div class="line"><a name="l00955"></a><span class="lineno">  955</span>&#160;    <span class="keywordflow">while</span> (!endReached) {</div>
-<div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;      s.clear();</div>
-<div class="line"><a name="l00957"></a><span class="lineno">  957</span>&#160;      s.str(std::string());</div>
-<div class="line"><a name="l00958"></a><span class="lineno">  958</span>&#160;      s &lt;&lt; count;</div>
-<div class="line"><a name="l00959"></a><span class="lineno">  959</span>&#160;      meanVector =</div>
-<div class="line"><a name="l00960"></a><span class="lineno">  960</span>&#160;        config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;disk&quot;</span> + s.str() + <span class="stringliteral">&quot;.mean&quot;</span>, emptyVector);</div>
+<div class="line"><a name="l00932"></a><span class="lineno">  932</span>&#160;      <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a name="l00933"></a><span class="lineno">  933</span>&#160;        trendVector = meanVector;</div>
+<div class="line"><a name="l00934"></a><span class="lineno">  934</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00935"></a><span class="lineno">  935</span>&#160;        Dune::ParameterTree trendConfig;</div>
+<div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;        Dune::ParameterTreeParser parser;</div>
+<div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;        parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
+<div class="line"><a name="l00938"></a><span class="lineno">  938</span>&#160;        trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;mean&quot;</span>);</div>
+<div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160;      }</div>
+<div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160; </div>
+<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;      componentVector.emplace_back(traits,</div>
+<div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;                                   trendVector,</div>
+<div class="line"><a name="l00943"></a><span class="lineno">  943</span>&#160;                                   meanVector,</div>
+<div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160;                                   varianceVector,</div>
+<div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;                                   <a class="code" href="a01078.html#af920d0b0a036b7fb50af46d938bc03fcaca9d0a41040794aa495b374a9f4f4ed5">TrendComponentType::Mean</a>);</div>
+<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;    }</div>
+<div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160; </div>
+<div class="line"><a name="l00948"></a><span class="lineno">  948</span>&#160;    meanVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;slope.mean&quot;</span>, emptyVector);</div>
+<div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160; </div>
+<div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;    <span class="keywordflow">if</span> (!meanVector.empty()) {</div>
+<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;      varianceVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;slope.variance&quot;</span>);</div>
+<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160; </div>
+<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;      <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160;        trendVector = meanVector;</div>
+<div class="line"><a name="l00955"></a><span class="lineno">  955</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;        Dune::ParameterTree trendConfig;</div>
+<div class="line"><a name="l00957"></a><span class="lineno">  957</span>&#160;        Dune::ParameterTreeParser parser;</div>
+<div class="line"><a name="l00958"></a><span class="lineno">  958</span>&#160;        parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
+<div class="line"><a name="l00959"></a><span class="lineno">  959</span>&#160;        trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;slope&quot;</span>);</div>
+<div class="line"><a name="l00960"></a><span class="lineno">  960</span>&#160;      }</div>
 <div class="line"><a name="l00961"></a><span class="lineno">  961</span>&#160; </div>
-<div class="line"><a name="l00962"></a><span class="lineno">  962</span>&#160;      <span class="keywordflow">if</span> (meanVector.empty()) {</div>
-<div class="line"><a name="l00963"></a><span class="lineno">  963</span>&#160;        endReached = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160;        varianceVector =</div>
-<div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160;          config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;disk&quot;</span> + s.str() + <span class="stringliteral">&quot;.variance&quot;</span>);</div>
-<div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160; </div>
-<div class="line"><a name="l00968"></a><span class="lineno">  968</span>&#160;        <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160;          trendVector = meanVector;</div>
-<div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160;          Dune::ParameterTree trendConfig;</div>
-<div class="line"><a name="l00972"></a><span class="lineno">  972</span>&#160;          Dune::ParameterTreeParser parser;</div>
-<div class="line"><a name="l00973"></a><span class="lineno">  973</span>&#160;          parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
-<div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160;          trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;disk&quot;</span> + s.str());</div>
-<div class="line"><a name="l00975"></a><span class="lineno">  975</span>&#160;        }</div>
-<div class="line"><a name="l00976"></a><span class="lineno">  976</span>&#160; </div>
-<div class="line"><a name="l00977"></a><span class="lineno">  977</span>&#160;        componentVector.emplace_back(traits,</div>
-<div class="line"><a name="l00978"></a><span class="lineno">  978</span>&#160;                                     trendVector,</div>
-<div class="line"><a name="l00979"></a><span class="lineno">  979</span>&#160;                                     meanVector,</div>
-<div class="line"><a name="l00980"></a><span class="lineno">  980</span>&#160;                                     varianceVector,</div>
-<div class="line"><a name="l00981"></a><span class="lineno">  981</span>&#160;                                     <a class="code" href="a01078.html#af920d0b0a036b7fb50af46d938bc03fca9a37da2a3663fe61d1794eafa18140c1">TrendComponentType::Disk</a>,</div>
-<div class="line"><a name="l00982"></a><span class="lineno">  982</span>&#160;                                     count);</div>
-<div class="line"><a name="l00983"></a><span class="lineno">  983</span>&#160; </div>
-<div class="line"><a name="l00984"></a><span class="lineno">  984</span>&#160;        count++;</div>
-<div class="line"><a name="l00985"></a><span class="lineno">  985</span>&#160;      }</div>
-<div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;    }</div>
-<div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160; </div>
-<div class="line"><a name="l00988"></a><span class="lineno">  988</span>&#160;    count = 0;</div>
-<div class="line"><a name="l00989"></a><span class="lineno">  989</span>&#160;    s.clear();</div>
-<div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;    endReached = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160; </div>
-<div class="line"><a name="l00992"></a><span class="lineno">  992</span>&#160;    <span class="keywordflow">while</span> (!endReached) {</div>
-<div class="line"><a name="l00993"></a><span class="lineno">  993</span>&#160;      s.clear();</div>
-<div class="line"><a name="l00994"></a><span class="lineno">  994</span>&#160;      s.str(std::string());</div>
-<div class="line"><a name="l00995"></a><span class="lineno">  995</span>&#160;      s &lt;&lt; count;</div>
-<div class="line"><a name="l00996"></a><span class="lineno">  996</span>&#160;      meanVector =</div>
-<div class="line"><a name="l00997"></a><span class="lineno">  997</span>&#160;        config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;block&quot;</span> + s.str() + <span class="stringliteral">&quot;.mean&quot;</span>, emptyVector);</div>
-<div class="line"><a name="l00998"></a><span class="lineno">  998</span>&#160; </div>
-<div class="line"><a name="l00999"></a><span class="lineno">  999</span>&#160;      <span class="keywordflow">if</span> (meanVector.empty()) {</div>
-<div class="line"><a name="l01000"></a><span class="lineno"> 1000</span>&#160;        endReached = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l01001"></a><span class="lineno"> 1001</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l01002"></a><span class="lineno"> 1002</span>&#160;        varianceVector =</div>
-<div class="line"><a name="l01003"></a><span class="lineno"> 1003</span>&#160;          config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;block&quot;</span> + s.str() + <span class="stringliteral">&quot;.variance&quot;</span>);</div>
-<div class="line"><a name="l01004"></a><span class="lineno"> 1004</span>&#160; </div>
-<div class="line"><a name="l01005"></a><span class="lineno"> 1005</span>&#160;        <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a name="l01006"></a><span class="lineno"> 1006</span>&#160;          trendVector = meanVector;</div>
-<div class="line"><a name="l01007"></a><span class="lineno"> 1007</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l01008"></a><span class="lineno"> 1008</span>&#160;          Dune::ParameterTree trendConfig;</div>
-<div class="line"><a name="l01009"></a><span class="lineno"> 1009</span>&#160;          Dune::ParameterTreeParser parser;</div>
-<div class="line"><a name="l01010"></a><span class="lineno"> 1010</span>&#160;          parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
-<div class="line"><a name="l01011"></a><span class="lineno"> 1011</span>&#160;          trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;block&quot;</span> + s.str());</div>
-<div class="line"><a name="l01012"></a><span class="lineno"> 1012</span>&#160;        }</div>
-<div class="line"><a name="l01013"></a><span class="lineno"> 1013</span>&#160; </div>
-<div class="line"><a name="l01014"></a><span class="lineno"> 1014</span>&#160;        componentVector.emplace_back(traits,</div>
-<div class="line"><a name="l01015"></a><span class="lineno"> 1015</span>&#160;                                     trendVector,</div>
-<div class="line"><a name="l01016"></a><span class="lineno"> 1016</span>&#160;                                     meanVector,</div>
-<div class="line"><a name="l01017"></a><span class="lineno"> 1017</span>&#160;                                     varianceVector,</div>
-<div class="line"><a name="l01018"></a><span class="lineno"> 1018</span>&#160;                                     <a class="code" href="a01078.html#af920d0b0a036b7fb50af46d938bc03fcaba6b328cb33ebee11ed2b326acaae2de">TrendComponentType::Block</a>,</div>
-<div class="line"><a name="l01019"></a><span class="lineno"> 1019</span>&#160;                                     count);</div>
-<div class="line"><a name="l01020"></a><span class="lineno"> 1020</span>&#160; </div>
-<div class="line"><a name="l01021"></a><span class="lineno"> 1021</span>&#160;        count++;</div>
-<div class="line"><a name="l01022"></a><span class="lineno"> 1022</span>&#160;      }</div>
-<div class="line"><a name="l01023"></a><span class="lineno"> 1023</span>&#160;    }</div>
-<div class="line"><a name="l01024"></a><span class="lineno"> 1024</span>&#160; </div>
-<div class="line"><a name="l01025"></a><span class="lineno"> 1025</span>&#160;    meanVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;image.mean&quot;</span>, emptyVector);</div>
-<div class="line"><a name="l01026"></a><span class="lineno"> 1026</span>&#160; </div>
-<div class="line"><a name="l01027"></a><span class="lineno"> 1027</span>&#160;    <span class="keywordflow">if</span> (!meanVector.empty()) {</div>
-<div class="line"><a name="l01028"></a><span class="lineno"> 1028</span>&#160;      varianceVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;image.variance&quot;</span>);</div>
-<div class="line"><a name="l01029"></a><span class="lineno"> 1029</span>&#160; </div>
-<div class="line"><a name="l01030"></a><span class="lineno"> 1030</span>&#160;      <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
-<div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160;        trendVector = meanVector;</div>
-<div class="line"><a name="l01032"></a><span class="lineno"> 1032</span>&#160;      } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l01033"></a><span class="lineno"> 1033</span>&#160;        Dune::ParameterTree trendConfig;</div>
-<div class="line"><a name="l01034"></a><span class="lineno"> 1034</span>&#160;        Dune::ParameterTreeParser parser;</div>
-<div class="line"><a name="l01035"></a><span class="lineno"> 1035</span>&#160;        parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
-<div class="line"><a name="l01036"></a><span class="lineno"> 1036</span>&#160;        trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;image&quot;</span>);</div>
-<div class="line"><a name="l01037"></a><span class="lineno"> 1037</span>&#160;      }</div>
+<div class="line"><a name="l00962"></a><span class="lineno">  962</span>&#160;      componentVector.emplace_back(traits,</div>
+<div class="line"><a name="l00963"></a><span class="lineno">  963</span>&#160;                                   trendVector,</div>
+<div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160;                                   meanVector,</div>
+<div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160;                                   varianceVector,</div>
+<div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160;                                   <a class="code" href="a01078.html#af920d0b0a036b7fb50af46d938bc03fcaab55a1278f78783341a158803056af1d">TrendComponentType::Slope</a>);</div>
+<div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160;    }</div>
+<div class="line"><a name="l00968"></a><span class="lineno">  968</span>&#160; </div>
+<div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160;    <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160;    std::stringstream s;</div>
+<div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160;    <span class="keywordtype">bool</span> endReached = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00972"></a><span class="lineno">  972</span>&#160; </div>
+<div class="line"><a name="l00973"></a><span class="lineno">  973</span>&#160;    <span class="keywordflow">while</span> (!endReached) {</div>
+<div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160;      s.clear();</div>
+<div class="line"><a name="l00975"></a><span class="lineno">  975</span>&#160;      s.str(std::string());</div>
+<div class="line"><a name="l00976"></a><span class="lineno">  976</span>&#160;      s &lt;&lt; count;</div>
+<div class="line"><a name="l00977"></a><span class="lineno">  977</span>&#160;      meanVector =</div>
+<div class="line"><a name="l00978"></a><span class="lineno">  978</span>&#160;        config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;disk&quot;</span> + s.str() + <span class="stringliteral">&quot;.mean&quot;</span>, emptyVector);</div>
+<div class="line"><a name="l00979"></a><span class="lineno">  979</span>&#160; </div>
+<div class="line"><a name="l00980"></a><span class="lineno">  980</span>&#160;      <span class="keywordflow">if</span> (meanVector.empty()) {</div>
+<div class="line"><a name="l00981"></a><span class="lineno">  981</span>&#160;        endReached = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00982"></a><span class="lineno">  982</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00983"></a><span class="lineno">  983</span>&#160;        varianceVector =</div>
+<div class="line"><a name="l00984"></a><span class="lineno">  984</span>&#160;          config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;disk&quot;</span> + s.str() + <span class="stringliteral">&quot;.variance&quot;</span>);</div>
+<div class="line"><a name="l00985"></a><span class="lineno">  985</span>&#160; </div>
+<div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;        <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160;          trendVector = meanVector;</div>
+<div class="line"><a name="l00988"></a><span class="lineno">  988</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00989"></a><span class="lineno">  989</span>&#160;          Dune::ParameterTree trendConfig;</div>
+<div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;          Dune::ParameterTreeParser parser;</div>
+<div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160;          parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
+<div class="line"><a name="l00992"></a><span class="lineno">  992</span>&#160;          trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;disk&quot;</span> + s.str());</div>
+<div class="line"><a name="l00993"></a><span class="lineno">  993</span>&#160;        }</div>
+<div class="line"><a name="l00994"></a><span class="lineno">  994</span>&#160; </div>
+<div class="line"><a name="l00995"></a><span class="lineno">  995</span>&#160;        componentVector.emplace_back(traits,</div>
+<div class="line"><a name="l00996"></a><span class="lineno">  996</span>&#160;                                     trendVector,</div>
+<div class="line"><a name="l00997"></a><span class="lineno">  997</span>&#160;                                     meanVector,</div>
+<div class="line"><a name="l00998"></a><span class="lineno">  998</span>&#160;                                     varianceVector,</div>
+<div class="line"><a name="l00999"></a><span class="lineno">  999</span>&#160;                                     <a class="code" href="a01078.html#af920d0b0a036b7fb50af46d938bc03fca9a37da2a3663fe61d1794eafa18140c1">TrendComponentType::Disk</a>,</div>
+<div class="line"><a name="l01000"></a><span class="lineno"> 1000</span>&#160;                                     count);</div>
+<div class="line"><a name="l01001"></a><span class="lineno"> 1001</span>&#160; </div>
+<div class="line"><a name="l01002"></a><span class="lineno"> 1002</span>&#160;        count++;</div>
+<div class="line"><a name="l01003"></a><span class="lineno"> 1003</span>&#160;      }</div>
+<div class="line"><a name="l01004"></a><span class="lineno"> 1004</span>&#160;    }</div>
+<div class="line"><a name="l01005"></a><span class="lineno"> 1005</span>&#160; </div>
+<div class="line"><a name="l01006"></a><span class="lineno"> 1006</span>&#160;    count = 0;</div>
+<div class="line"><a name="l01007"></a><span class="lineno"> 1007</span>&#160;    s.clear();</div>
+<div class="line"><a name="l01008"></a><span class="lineno"> 1008</span>&#160;    endReached = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l01009"></a><span class="lineno"> 1009</span>&#160; </div>
+<div class="line"><a name="l01010"></a><span class="lineno"> 1010</span>&#160;    <span class="keywordflow">while</span> (!endReached) {</div>
+<div class="line"><a name="l01011"></a><span class="lineno"> 1011</span>&#160;      s.clear();</div>
+<div class="line"><a name="l01012"></a><span class="lineno"> 1012</span>&#160;      s.str(std::string());</div>
+<div class="line"><a name="l01013"></a><span class="lineno"> 1013</span>&#160;      s &lt;&lt; count;</div>
+<div class="line"><a name="l01014"></a><span class="lineno"> 1014</span>&#160;      meanVector =</div>
+<div class="line"><a name="l01015"></a><span class="lineno"> 1015</span>&#160;        config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;block&quot;</span> + s.str() + <span class="stringliteral">&quot;.mean&quot;</span>, emptyVector);</div>
+<div class="line"><a name="l01016"></a><span class="lineno"> 1016</span>&#160; </div>
+<div class="line"><a name="l01017"></a><span class="lineno"> 1017</span>&#160;      <span class="keywordflow">if</span> (meanVector.empty()) {</div>
+<div class="line"><a name="l01018"></a><span class="lineno"> 1018</span>&#160;        endReached = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l01019"></a><span class="lineno"> 1019</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l01020"></a><span class="lineno"> 1020</span>&#160;        varianceVector =</div>
+<div class="line"><a name="l01021"></a><span class="lineno"> 1021</span>&#160;          config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;block&quot;</span> + s.str() + <span class="stringliteral">&quot;.variance&quot;</span>);</div>
+<div class="line"><a name="l01022"></a><span class="lineno"> 1022</span>&#160; </div>
+<div class="line"><a name="l01023"></a><span class="lineno"> 1023</span>&#160;        <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a name="l01024"></a><span class="lineno"> 1024</span>&#160;          trendVector = meanVector;</div>
+<div class="line"><a name="l01025"></a><span class="lineno"> 1025</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l01026"></a><span class="lineno"> 1026</span>&#160;          Dune::ParameterTree trendConfig;</div>
+<div class="line"><a name="l01027"></a><span class="lineno"> 1027</span>&#160;          Dune::ParameterTreeParser parser;</div>
+<div class="line"><a name="l01028"></a><span class="lineno"> 1028</span>&#160;          parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
+<div class="line"><a name="l01029"></a><span class="lineno"> 1029</span>&#160;          trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;block&quot;</span> + s.str());</div>
+<div class="line"><a name="l01030"></a><span class="lineno"> 1030</span>&#160;        }</div>
+<div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160; </div>
+<div class="line"><a name="l01032"></a><span class="lineno"> 1032</span>&#160;        componentVector.emplace_back(traits,</div>
+<div class="line"><a name="l01033"></a><span class="lineno"> 1033</span>&#160;                                     trendVector,</div>
+<div class="line"><a name="l01034"></a><span class="lineno"> 1034</span>&#160;                                     meanVector,</div>
+<div class="line"><a name="l01035"></a><span class="lineno"> 1035</span>&#160;                                     varianceVector,</div>
+<div class="line"><a name="l01036"></a><span class="lineno"> 1036</span>&#160;                                     <a class="code" href="a01078.html#af920d0b0a036b7fb50af46d938bc03fcaba6b328cb33ebee11ed2b326acaae2de">TrendComponentType::Block</a>,</div>
+<div class="line"><a name="l01037"></a><span class="lineno"> 1037</span>&#160;                                     count);</div>
 <div class="line"><a name="l01038"></a><span class="lineno"> 1038</span>&#160; </div>
-<div class="line"><a name="l01039"></a><span class="lineno"> 1039</span>&#160;      <span class="keyword">const</span> std::string imageFile = config.get&lt;std::string&gt;(<span class="stringliteral">&quot;image.filename&quot;</span>);</div>
-<div class="line"><a name="l01040"></a><span class="lineno"> 1040</span>&#160;      imageComponent = std::make_shared&lt;ImageComponent&lt;Traits&gt;&gt;(</div>
-<div class="line"><a name="l01041"></a><span class="lineno"> 1041</span>&#160;        traits, trendVector, meanVector, varianceVector, imageFile);</div>
-<div class="line"><a name="l01042"></a><span class="lineno"> 1042</span>&#160;    }</div>
-<div class="line"><a name="l01043"></a><span class="lineno"> 1043</span>&#160;  }</div>
+<div class="line"><a name="l01039"></a><span class="lineno"> 1039</span>&#160;        count++;</div>
+<div class="line"><a name="l01040"></a><span class="lineno"> 1040</span>&#160;      }</div>
+<div class="line"><a name="l01041"></a><span class="lineno"> 1041</span>&#160;    }</div>
+<div class="line"><a name="l01042"></a><span class="lineno"> 1042</span>&#160; </div>
+<div class="line"><a name="l01043"></a><span class="lineno"> 1043</span>&#160;    meanVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;image.mean&quot;</span>, emptyVector);</div>
 <div class="line"><a name="l01044"></a><span class="lineno"> 1044</span>&#160; </div>
-<div class="line"><a name="l01045"></a><span class="lineno"> 1045</span>&#160;<span class="preprocessor">#if HAVE_DUNE_PDELAB</span></div>
-<div class="line"><a name="l01046"></a><span class="lineno"> 1046</span>&#160; </div>
-<div class="line"><a name="l01066"></a><span class="lineno"> 1066</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> GFS, <span class="keyword">typename</span> Field&gt;</div>
-<div class="line"><a name="l01067"></a><span class="lineno"> 1067</span>&#160;  <a class="code" href="a00962.html#aeec3acc4b6cad0479fc8db4732c33269">TrendPart</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other, <span class="keyword">const</span> GFS&amp; gfs, <span class="keyword">const</span> Field&amp; field)</div>
-<div class="line"><a name="l01068"></a><span class="lineno"> 1068</span>&#160;    : traits(other.traits)</div>
-<div class="line"><a name="l01069"></a><span class="lineno"> 1069</span>&#160;    , componentVector(other.componentVector)</div>
-<div class="line"><a name="l01070"></a><span class="lineno"> 1070</span>&#160;  {</div>
-<div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160;      componentVector[i].construct(gfs, field);</div>
-<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160; </div>
-<div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160;    <span class="keywordflow">if</span> (other.imageComponent) {</div>
-<div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160;      imageComponent =</div>
-<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;        std::make_shared&lt;ImageComponent&lt;Traits&gt;&gt;(*(other.imageComponent));</div>
-<div class="line"><a name="l01077"></a><span class="lineno"> 1077</span>&#160;      imageComponent-&gt;construct(gfs, field);</div>
-<div class="line"><a name="l01078"></a><span class="lineno"> 1078</span>&#160;    }</div>
-<div class="line"><a name="l01079"></a><span class="lineno"> 1079</span>&#160;  }</div>
-<div class="line"><a name="l01080"></a><span class="lineno"> 1080</span>&#160; </div>
-<div class="line"><a name="l01098"></a><span class="lineno"> 1098</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> DGF&gt;</div>
-<div class="line"><a name="l01099"></a><span class="lineno"> 1099</span>&#160;  <a class="code" href="a00962.html#aeec3acc4b6cad0479fc8db4732c33269">TrendPart</a>(<span class="keyword">const</span> TrendPart&lt;Traits&gt;&amp; other, <span class="keyword">const</span> DGF&amp; dgf)</div>
+<div class="line"><a name="l01045"></a><span class="lineno"> 1045</span>&#160;    <span class="keywordflow">if</span> (!meanVector.empty()) {</div>
+<div class="line"><a name="l01046"></a><span class="lineno"> 1046</span>&#160;      varianceVector = config.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;image.variance&quot;</span>);</div>
+<div class="line"><a name="l01047"></a><span class="lineno"> 1047</span>&#160; </div>
+<div class="line"><a name="l01048"></a><span class="lineno"> 1048</span>&#160;      <span class="keywordflow">if</span> (fileName == <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a name="l01049"></a><span class="lineno"> 1049</span>&#160;        trendVector = meanVector;</div>
+<div class="line"><a name="l01050"></a><span class="lineno"> 1050</span>&#160;      } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l01051"></a><span class="lineno"> 1051</span>&#160;        Dune::ParameterTree trendConfig;</div>
+<div class="line"><a name="l01052"></a><span class="lineno"> 1052</span>&#160;        Dune::ParameterTreeParser parser;</div>
+<div class="line"><a name="l01053"></a><span class="lineno"> 1053</span>&#160;        parser.readINITree(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, trendConfig);</div>
+<div class="line"><a name="l01054"></a><span class="lineno"> 1054</span>&#160;        trendVector = trendConfig.get&lt;std::vector&lt;RF&gt;&gt;(<span class="stringliteral">&quot;image&quot;</span>);</div>
+<div class="line"><a name="l01055"></a><span class="lineno"> 1055</span>&#160;      }</div>
+<div class="line"><a name="l01056"></a><span class="lineno"> 1056</span>&#160; </div>
+<div class="line"><a name="l01057"></a><span class="lineno"> 1057</span>&#160;      <span class="keyword">const</span> std::string imageFile = config.get&lt;std::string&gt;(<span class="stringliteral">&quot;image.filename&quot;</span>);</div>
+<div class="line"><a name="l01058"></a><span class="lineno"> 1058</span>&#160;      imageComponent = std::make_shared&lt;ImageComponent&lt;Traits&gt;&gt;(</div>
+<div class="line"><a name="l01059"></a><span class="lineno"> 1059</span>&#160;        traits, trendVector, meanVector, varianceVector, imageFile);</div>
+<div class="line"><a name="l01060"></a><span class="lineno"> 1060</span>&#160;    }</div>
+<div class="line"><a name="l01061"></a><span class="lineno"> 1061</span>&#160;  }</div>
+<div class="line"><a name="l01062"></a><span class="lineno"> 1062</span>&#160; </div>
+<div class="line"><a name="l01070"></a><span class="lineno"><a class="line" href="a00962.html#a0a912fc13c5ca8f6d7eb63fd7464bce6"> 1070</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a0a912fc13c5ca8f6d7eb63fd7464bce6">remove_components</a>(std::size_t count)</div>
+<div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;  {</div>
+<div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160;    count = std::min(count, componentVector.size());</div>
+<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160;    <span class="keywordflow">for</span> (std::size_t i = 0; i &lt; count; ++i)</div>
+<div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160;      componentVector.pop_back();</div>
+<div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160;  }</div>
+<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160; </div>
+<div class="line"><a name="l01077"></a><span class="lineno"> 1077</span>&#160;<span class="preprocessor">#if HAVE_DUNE_PDELAB</span></div>
+<div class="line"><a name="l01078"></a><span class="lineno"> 1078</span>&#160; </div>
+<div class="line"><a name="l01098"></a><span class="lineno"> 1098</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> GFS, <span class="keyword">typename</span> Field&gt;</div>
+<div class="line"><a name="l01099"></a><span class="lineno"> 1099</span>&#160;  <a class="code" href="a00962.html#aeec3acc4b6cad0479fc8db4732c33269">TrendPart</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other, <span class="keyword">const</span> GFS&amp; gfs, <span class="keyword">const</span> Field&amp; field)</div>
 <div class="line"><a name="l01100"></a><span class="lineno"> 1100</span>&#160;    : traits(other.traits)</div>
 <div class="line"><a name="l01101"></a><span class="lineno"> 1101</span>&#160;    , componentVector(other.componentVector)</div>
 <div class="line"><a name="l01102"></a><span class="lineno"> 1102</span>&#160;  {</div>
 <div class="line"><a name="l01103"></a><span class="lineno"> 1103</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01104"></a><span class="lineno"> 1104</span>&#160;      componentVector[i].construct(dgf);</div>
+<div class="line"><a name="l01104"></a><span class="lineno"> 1104</span>&#160;      componentVector[i].construct(gfs, field);</div>
 <div class="line"><a name="l01105"></a><span class="lineno"> 1105</span>&#160; </div>
 <div class="line"><a name="l01106"></a><span class="lineno"> 1106</span>&#160;    <span class="keywordflow">if</span> (other.imageComponent) {</div>
 <div class="line"><a name="l01107"></a><span class="lineno"> 1107</span>&#160;      imageComponent =</div>
 <div class="line"><a name="l01108"></a><span class="lineno"> 1108</span>&#160;        std::make_shared&lt;ImageComponent&lt;Traits&gt;&gt;(*(other.imageComponent));</div>
-<div class="line"><a name="l01109"></a><span class="lineno"> 1109</span>&#160;      imageComponent-&gt;construct(dgf);</div>
+<div class="line"><a name="l01109"></a><span class="lineno"> 1109</span>&#160;      imageComponent-&gt;construct(gfs, field);</div>
 <div class="line"><a name="l01110"></a><span class="lineno"> 1110</span>&#160;    }</div>
 <div class="line"><a name="l01111"></a><span class="lineno"> 1111</span>&#160;  }</div>
-<div class="line"><a name="l01112"></a><span class="lineno"> 1112</span>&#160;<span class="preprocessor">#endif // HAVE_DUNE_PDELAB</span></div>
-<div class="line"><a name="l01113"></a><span class="lineno"> 1113</span>&#160; </div>
-<div class="line"><a name="l01121"></a><span class="lineno"><a class="line" href="a00962.html#a437be37f2b645f464ec1ae0355e65866"> 1121</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="a00962.html#a437be37f2b645f464ec1ae0355e65866">dofs</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l01122"></a><span class="lineno"> 1122</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01123"></a><span class="lineno"> 1123</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> output = 0;</div>
-<div class="line"><a name="l01124"></a><span class="lineno"> 1124</span>&#160; </div>
-<div class="line"><a name="l01125"></a><span class="lineno"> 1125</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01126"></a><span class="lineno"> 1126</span>&#160;      output += componentVector[i].<a class="code" href="a00962.html#a437be37f2b645f464ec1ae0355e65866">dofs</a>();</div>
-<div class="line"><a name="l01127"></a><span class="lineno"> 1127</span>&#160; </div>
-<div class="line"><a name="l01128"></a><span class="lineno"> 1128</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01129"></a><span class="lineno"> 1129</span>&#160;      output += (*imageComponent).dofs();</div>
-<div class="line"><a name="l01130"></a><span class="lineno"> 1130</span>&#160; </div>
-<div class="line"><a name="l01131"></a><span class="lineno"> 1131</span>&#160;    <span class="keywordflow">return</span> output;</div>
-<div class="line"><a name="l01132"></a><span class="lineno"> 1132</span>&#160;  }</div>
-<div class="line"><a name="l01133"></a><span class="lineno"> 1133</span>&#160; </div>
-<div class="line"><a name="l01143"></a><span class="lineno"><a class="line" href="a00962.html#a463354821f0873f4f711321306c0e7a8"> 1143</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a463354821f0873f4f711321306c0e7a8">generate</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seed)</div>
-<div class="line"><a name="l01144"></a><span class="lineno"> 1144</span>&#160;  {</div>
-<div class="line"><a name="l01145"></a><span class="lineno"> 1145</span>&#160;    <span class="comment">// different seed than stochastic part</span></div>
-<div class="line"><a name="l01146"></a><span class="lineno"> 1146</span>&#160;    seed += (*traits).commSize;</div>
-<div class="line"><a name="l01147"></a><span class="lineno"> 1147</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++) {</div>
-<div class="line"><a name="l01148"></a><span class="lineno"> 1148</span>&#160;      <span class="comment">// different seed for each component</span></div>
-<div class="line"><a name="l01149"></a><span class="lineno"> 1149</span>&#160;      componentVector[i].generate(seed + i);</div>
-<div class="line"><a name="l01150"></a><span class="lineno"> 1150</span>&#160;    }</div>
-<div class="line"><a name="l01151"></a><span class="lineno"> 1151</span>&#160; </div>
-<div class="line"><a name="l01152"></a><span class="lineno"> 1152</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01153"></a><span class="lineno"> 1153</span>&#160;      imageComponent-&gt;generate(seed + componentVector.size());</div>
-<div class="line"><a name="l01154"></a><span class="lineno"> 1154</span>&#160;  }</div>
-<div class="line"><a name="l01155"></a><span class="lineno"> 1155</span>&#160; </div>
-<div class="line"><a name="l01167"></a><span class="lineno"><a class="line" href="a00962.html#a771c248428e241b9abb04ca2726ab4ff"> 1167</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a771c248428e241b9abb04ca2726ab4ff">generateUncorrelated</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seed)</div>
-<div class="line"><a name="l01168"></a><span class="lineno"> 1168</span>&#160;  {</div>
-<div class="line"><a name="l01169"></a><span class="lineno"> 1169</span>&#160;    <span class="comment">// different seed than stochastic part</span></div>
-<div class="line"><a name="l01170"></a><span class="lineno"> 1170</span>&#160;    seed += (*traits).commSize;</div>
-<div class="line"><a name="l01171"></a><span class="lineno"> 1171</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++) {</div>
-<div class="line"><a name="l01172"></a><span class="lineno"> 1172</span>&#160;      <span class="comment">// different seed for each component</span></div>
-<div class="line"><a name="l01173"></a><span class="lineno"> 1173</span>&#160;      componentVector[i].generateUncorrelated(seed + i);</div>
-<div class="line"><a name="l01174"></a><span class="lineno"> 1174</span>&#160;    }</div>
-<div class="line"><a name="l01175"></a><span class="lineno"> 1175</span>&#160; </div>
-<div class="line"><a name="l01176"></a><span class="lineno"> 1176</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01177"></a><span class="lineno"> 1177</span>&#160;      imageComponent-&gt;generateUncorrelated(seed + componentVector.size());</div>
-<div class="line"><a name="l01178"></a><span class="lineno"> 1178</span>&#160;  }</div>
-<div class="line"><a name="l01179"></a><span class="lineno"> 1179</span>&#160; </div>
-<div class="line"><a name="l01189"></a><span class="lineno"><a class="line" href="a00962.html#ab37c69f552cfbad711a5b9630923e41c"> 1189</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="a00962.html#ab37c69f552cfbad711a5b9630923e41c">size</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l01190"></a><span class="lineno"> 1190</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01191"></a><span class="lineno"> 1191</span>&#160;    <span class="keywordflow">return</span> componentVector.size();</div>
-<div class="line"><a name="l01192"></a><span class="lineno"> 1192</span>&#160;  }</div>
-<div class="line"><a name="l01193"></a><span class="lineno"> 1193</span>&#160; </div>
-<div class="line"><a name="l01203"></a><span class="lineno"><a class="line" href="a00962.html#a8b0b806efa604b418cdbeaa453a8d305"> 1203</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="a00966.html">TrendComponent&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#a8b0b806efa604b418cdbeaa453a8d305">getComponent</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i)<span class="keyword"> const</span></div>
-<div class="line"><a name="l01204"></a><span class="lineno"> 1204</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01205"></a><span class="lineno"> 1205</span>&#160;    <span class="keywordflow">return</span> componentVector[i];</div>
-<div class="line"><a name="l01206"></a><span class="lineno"> 1206</span>&#160;  }</div>
+<div class="line"><a name="l01112"></a><span class="lineno"> 1112</span>&#160; </div>
+<div class="line"><a name="l01130"></a><span class="lineno"> 1130</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> DGF&gt;</div>
+<div class="line"><a name="l01131"></a><span class="lineno"> 1131</span>&#160;  <a class="code" href="a00962.html#aeec3acc4b6cad0479fc8db4732c33269">TrendPart</a>(<span class="keyword">const</span> TrendPart&lt;Traits&gt;&amp; other, <span class="keyword">const</span> DGF&amp; dgf)</div>
+<div class="line"><a name="l01132"></a><span class="lineno"> 1132</span>&#160;    : traits(other.traits)</div>
+<div class="line"><a name="l01133"></a><span class="lineno"> 1133</span>&#160;    , componentVector(other.componentVector)</div>
+<div class="line"><a name="l01134"></a><span class="lineno"> 1134</span>&#160;  {</div>
+<div class="line"><a name="l01135"></a><span class="lineno"> 1135</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01136"></a><span class="lineno"> 1136</span>&#160;      componentVector[i].construct(dgf);</div>
+<div class="line"><a name="l01137"></a><span class="lineno"> 1137</span>&#160; </div>
+<div class="line"><a name="l01138"></a><span class="lineno"> 1138</span>&#160;    <span class="keywordflow">if</span> (other.imageComponent) {</div>
+<div class="line"><a name="l01139"></a><span class="lineno"> 1139</span>&#160;      imageComponent =</div>
+<div class="line"><a name="l01140"></a><span class="lineno"> 1140</span>&#160;        std::make_shared&lt;ImageComponent&lt;Traits&gt;&gt;(*(other.imageComponent));</div>
+<div class="line"><a name="l01141"></a><span class="lineno"> 1141</span>&#160;      imageComponent-&gt;construct(dgf);</div>
+<div class="line"><a name="l01142"></a><span class="lineno"> 1142</span>&#160;    }</div>
+<div class="line"><a name="l01143"></a><span class="lineno"> 1143</span>&#160;  }</div>
+<div class="line"><a name="l01144"></a><span class="lineno"> 1144</span>&#160;<span class="preprocessor">#endif // HAVE_DUNE_PDELAB</span></div>
+<div class="line"><a name="l01145"></a><span class="lineno"> 1145</span>&#160; </div>
+<div class="line"><a name="l01153"></a><span class="lineno"><a class="line" href="a00962.html#a437be37f2b645f464ec1ae0355e65866"> 1153</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="a00962.html#a437be37f2b645f464ec1ae0355e65866">dofs</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01154"></a><span class="lineno"> 1154</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01155"></a><span class="lineno"> 1155</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> output = 0;</div>
+<div class="line"><a name="l01156"></a><span class="lineno"> 1156</span>&#160; </div>
+<div class="line"><a name="l01157"></a><span class="lineno"> 1157</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01158"></a><span class="lineno"> 1158</span>&#160;      output += componentVector[i].<a class="code" href="a00962.html#a437be37f2b645f464ec1ae0355e65866">dofs</a>();</div>
+<div class="line"><a name="l01159"></a><span class="lineno"> 1159</span>&#160; </div>
+<div class="line"><a name="l01160"></a><span class="lineno"> 1160</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01161"></a><span class="lineno"> 1161</span>&#160;      output += (*imageComponent).dofs();</div>
+<div class="line"><a name="l01162"></a><span class="lineno"> 1162</span>&#160; </div>
+<div class="line"><a name="l01163"></a><span class="lineno"> 1163</span>&#160;    <span class="keywordflow">return</span> output;</div>
+<div class="line"><a name="l01164"></a><span class="lineno"> 1164</span>&#160;  }</div>
+<div class="line"><a name="l01165"></a><span class="lineno"> 1165</span>&#160; </div>
+<div class="line"><a name="l01175"></a><span class="lineno"><a class="line" href="a00962.html#a463354821f0873f4f711321306c0e7a8"> 1175</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a463354821f0873f4f711321306c0e7a8">generate</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seed)</div>
+<div class="line"><a name="l01176"></a><span class="lineno"> 1176</span>&#160;  {</div>
+<div class="line"><a name="l01177"></a><span class="lineno"> 1177</span>&#160;    <span class="comment">// different seed than stochastic part</span></div>
+<div class="line"><a name="l01178"></a><span class="lineno"> 1178</span>&#160;    seed += (*traits).commSize;</div>
+<div class="line"><a name="l01179"></a><span class="lineno"> 1179</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++) {</div>
+<div class="line"><a name="l01180"></a><span class="lineno"> 1180</span>&#160;      <span class="comment">// different seed for each component</span></div>
+<div class="line"><a name="l01181"></a><span class="lineno"> 1181</span>&#160;      componentVector[i].generate(seed + i);</div>
+<div class="line"><a name="l01182"></a><span class="lineno"> 1182</span>&#160;    }</div>
+<div class="line"><a name="l01183"></a><span class="lineno"> 1183</span>&#160; </div>
+<div class="line"><a name="l01184"></a><span class="lineno"> 1184</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01185"></a><span class="lineno"> 1185</span>&#160;      imageComponent-&gt;generate(seed + componentVector.size());</div>
+<div class="line"><a name="l01186"></a><span class="lineno"> 1186</span>&#160;  }</div>
+<div class="line"><a name="l01187"></a><span class="lineno"> 1187</span>&#160; </div>
+<div class="line"><a name="l01199"></a><span class="lineno"><a class="line" href="a00962.html#a771c248428e241b9abb04ca2726ab4ff"> 1199</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a771c248428e241b9abb04ca2726ab4ff">generateUncorrelated</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> seed)</div>
+<div class="line"><a name="l01200"></a><span class="lineno"> 1200</span>&#160;  {</div>
+<div class="line"><a name="l01201"></a><span class="lineno"> 1201</span>&#160;    <span class="comment">// different seed than stochastic part</span></div>
+<div class="line"><a name="l01202"></a><span class="lineno"> 1202</span>&#160;    seed += (*traits).commSize;</div>
+<div class="line"><a name="l01203"></a><span class="lineno"> 1203</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++) {</div>
+<div class="line"><a name="l01204"></a><span class="lineno"> 1204</span>&#160;      <span class="comment">// different seed for each component</span></div>
+<div class="line"><a name="l01205"></a><span class="lineno"> 1205</span>&#160;      componentVector[i].generateUncorrelated(seed + i);</div>
+<div class="line"><a name="l01206"></a><span class="lineno"> 1206</span>&#160;    }</div>
 <div class="line"><a name="l01207"></a><span class="lineno"> 1207</span>&#160; </div>
-<div class="line"><a name="l01215"></a><span class="lineno"><a class="line" href="a00962.html#a245207cac0d81475b0772e39d5794c49"> 1215</a></span>&#160;  <span class="keyword">const</span> std::shared_ptr&lt;const ImageComponent&lt;Traits&gt;&gt;&amp; <a class="code" href="a00962.html#a245207cac0d81475b0772e39d5794c49">getImageComponent</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l01216"></a><span class="lineno"> 1216</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01217"></a><span class="lineno"> 1217</span>&#160;    <span class="keywordflow">return</span> imageComponent;</div>
-<div class="line"><a name="l01218"></a><span class="lineno"> 1218</span>&#160;  }</div>
-<div class="line"><a name="l01219"></a><span class="lineno"> 1219</span>&#160; </div>
-<div class="line"><a name="l01227"></a><span class="lineno"><a class="line" href="a00962.html#a690d55129c57451bf2a46a4dd2753554"> 1227</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a690d55129c57451bf2a46a4dd2753554">timesMatrix</a>()</div>
-<div class="line"><a name="l01228"></a><span class="lineno"> 1228</span>&#160;  {</div>
-<div class="line"><a name="l01229"></a><span class="lineno"> 1229</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01230"></a><span class="lineno"> 1230</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a690d55129c57451bf2a46a4dd2753554">timesMatrix</a>();</div>
-<div class="line"><a name="l01231"></a><span class="lineno"> 1231</span>&#160; </div>
-<div class="line"><a name="l01232"></a><span class="lineno"> 1232</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01233"></a><span class="lineno"> 1233</span>&#160;      imageComponent-&gt;timesMatrix();</div>
-<div class="line"><a name="l01234"></a><span class="lineno"> 1234</span>&#160;  }</div>
-<div class="line"><a name="l01235"></a><span class="lineno"> 1235</span>&#160; </div>
-<div class="line"><a name="l01244"></a><span class="lineno"><a class="line" href="a00962.html#a76617df08142ff6f8e70ee2f54af459b"> 1244</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a76617df08142ff6f8e70ee2f54af459b">timesInverseMatrix</a>()</div>
-<div class="line"><a name="l01245"></a><span class="lineno"> 1245</span>&#160;  {</div>
-<div class="line"><a name="l01246"></a><span class="lineno"> 1246</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01247"></a><span class="lineno"> 1247</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a76617df08142ff6f8e70ee2f54af459b">timesInverseMatrix</a>();</div>
-<div class="line"><a name="l01248"></a><span class="lineno"> 1248</span>&#160; </div>
-<div class="line"><a name="l01249"></a><span class="lineno"> 1249</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01250"></a><span class="lineno"> 1250</span>&#160;      imageComponent-&gt;timesInverseMatrix();</div>
-<div class="line"><a name="l01251"></a><span class="lineno"> 1251</span>&#160;  }</div>
-<div class="line"><a name="l01252"></a><span class="lineno"> 1252</span>&#160; </div>
-<div class="line"><a name="l01262"></a><span class="lineno"><a class="line" href="a00962.html#a191b51e07535fcc1df4da9acb3e43cb8"> 1262</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a191b51e07535fcc1df4da9acb3e43cb8">timesMatrixRoot</a>()</div>
-<div class="line"><a name="l01263"></a><span class="lineno"> 1263</span>&#160;  {</div>
-<div class="line"><a name="l01264"></a><span class="lineno"> 1264</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01265"></a><span class="lineno"> 1265</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a191b51e07535fcc1df4da9acb3e43cb8">timesMatrixRoot</a>();</div>
-<div class="line"><a name="l01266"></a><span class="lineno"> 1266</span>&#160; </div>
-<div class="line"><a name="l01267"></a><span class="lineno"> 1267</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01268"></a><span class="lineno"> 1268</span>&#160;      imageComponent-&gt;timesMatrixRoot();</div>
-<div class="line"><a name="l01269"></a><span class="lineno"> 1269</span>&#160;  }</div>
-<div class="line"><a name="l01270"></a><span class="lineno"> 1270</span>&#160; </div>
-<div class="line"><a name="l01280"></a><span class="lineno"><a class="line" href="a00962.html#a35afb0022db004d3b5f5700897a7eb1d"> 1280</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a35afb0022db004d3b5f5700897a7eb1d">timesInvMatRoot</a>()</div>
-<div class="line"><a name="l01281"></a><span class="lineno"> 1281</span>&#160;  {</div>
-<div class="line"><a name="l01282"></a><span class="lineno"> 1282</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01283"></a><span class="lineno"> 1283</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a35afb0022db004d3b5f5700897a7eb1d">timesInvMatRoot</a>();</div>
+<div class="line"><a name="l01208"></a><span class="lineno"> 1208</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01209"></a><span class="lineno"> 1209</span>&#160;      imageComponent-&gt;generateUncorrelated(seed + componentVector.size());</div>
+<div class="line"><a name="l01210"></a><span class="lineno"> 1210</span>&#160;  }</div>
+<div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160; </div>
+<div class="line"><a name="l01221"></a><span class="lineno"><a class="line" href="a00962.html#ab37c69f552cfbad711a5b9630923e41c"> 1221</a></span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="a00962.html#ab37c69f552cfbad711a5b9630923e41c">size</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01222"></a><span class="lineno"> 1222</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01223"></a><span class="lineno"> 1223</span>&#160;    <span class="keywordflow">return</span> componentVector.size();</div>
+<div class="line"><a name="l01224"></a><span class="lineno"> 1224</span>&#160;  }</div>
+<div class="line"><a name="l01225"></a><span class="lineno"> 1225</span>&#160; </div>
+<div class="line"><a name="l01235"></a><span class="lineno"><a class="line" href="a00962.html#a8b0b806efa604b418cdbeaa453a8d305"> 1235</a></span>&#160;  <span class="keyword">const</span> <a class="code" href="a00966.html">TrendComponent&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#a8b0b806efa604b418cdbeaa453a8d305">getComponent</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i)<span class="keyword"> const</span></div>
+<div class="line"><a name="l01236"></a><span class="lineno"> 1236</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01237"></a><span class="lineno"> 1237</span>&#160;    <span class="keywordflow">return</span> componentVector[i];</div>
+<div class="line"><a name="l01238"></a><span class="lineno"> 1238</span>&#160;  }</div>
+<div class="line"><a name="l01239"></a><span class="lineno"> 1239</span>&#160; </div>
+<div class="line"><a name="l01247"></a><span class="lineno"><a class="line" href="a00962.html#a245207cac0d81475b0772e39d5794c49"> 1247</a></span>&#160;  <span class="keyword">const</span> std::shared_ptr&lt;const ImageComponent&lt;Traits&gt;&gt;&amp; <a class="code" href="a00962.html#a245207cac0d81475b0772e39d5794c49">getImageComponent</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01248"></a><span class="lineno"> 1248</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01249"></a><span class="lineno"> 1249</span>&#160;    <span class="keywordflow">return</span> imageComponent;</div>
+<div class="line"><a name="l01250"></a><span class="lineno"> 1250</span>&#160;  }</div>
+<div class="line"><a name="l01251"></a><span class="lineno"> 1251</span>&#160; </div>
+<div class="line"><a name="l01259"></a><span class="lineno"><a class="line" href="a00962.html#a690d55129c57451bf2a46a4dd2753554"> 1259</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a690d55129c57451bf2a46a4dd2753554">timesMatrix</a>()</div>
+<div class="line"><a name="l01260"></a><span class="lineno"> 1260</span>&#160;  {</div>
+<div class="line"><a name="l01261"></a><span class="lineno"> 1261</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01262"></a><span class="lineno"> 1262</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a690d55129c57451bf2a46a4dd2753554">timesMatrix</a>();</div>
+<div class="line"><a name="l01263"></a><span class="lineno"> 1263</span>&#160; </div>
+<div class="line"><a name="l01264"></a><span class="lineno"> 1264</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01265"></a><span class="lineno"> 1265</span>&#160;      imageComponent-&gt;timesMatrix();</div>
+<div class="line"><a name="l01266"></a><span class="lineno"> 1266</span>&#160;  }</div>
+<div class="line"><a name="l01267"></a><span class="lineno"> 1267</span>&#160; </div>
+<div class="line"><a name="l01276"></a><span class="lineno"><a class="line" href="a00962.html#a76617df08142ff6f8e70ee2f54af459b"> 1276</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a76617df08142ff6f8e70ee2f54af459b">timesInverseMatrix</a>()</div>
+<div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160;  {</div>
+<div class="line"><a name="l01278"></a><span class="lineno"> 1278</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01279"></a><span class="lineno"> 1279</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a76617df08142ff6f8e70ee2f54af459b">timesInverseMatrix</a>();</div>
+<div class="line"><a name="l01280"></a><span class="lineno"> 1280</span>&#160; </div>
+<div class="line"><a name="l01281"></a><span class="lineno"> 1281</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01282"></a><span class="lineno"> 1282</span>&#160;      imageComponent-&gt;timesInverseMatrix();</div>
+<div class="line"><a name="l01283"></a><span class="lineno"> 1283</span>&#160;  }</div>
 <div class="line"><a name="l01284"></a><span class="lineno"> 1284</span>&#160; </div>
-<div class="line"><a name="l01285"></a><span class="lineno"> 1285</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01286"></a><span class="lineno"> 1286</span>&#160;      imageComponent-&gt;timesInvMatRoot();</div>
-<div class="line"><a name="l01287"></a><span class="lineno"> 1287</span>&#160;  }</div>
-<div class="line"><a name="l01288"></a><span class="lineno"> 1288</span>&#160; </div>
-<div class="line"><a name="l01296"></a><span class="lineno"><a class="line" href="a00962.html#a0ddda26f9dd2a241aed264cee5dcfde9"> 1296</a></span>&#160;  <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#a0ddda26f9dd2a241aed264cee5dcfde9">operator+=</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)</div>
-<div class="line"><a name="l01297"></a><span class="lineno"> 1297</span>&#160;  {</div>
-<div class="line"><a name="l01298"></a><span class="lineno"> 1298</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01299"></a><span class="lineno"> 1299</span>&#160;      componentVector[i] += other.componentVector[i];</div>
-<div class="line"><a name="l01300"></a><span class="lineno"> 1300</span>&#160; </div>
-<div class="line"><a name="l01301"></a><span class="lineno"> 1301</span>&#160;    if (imageComponent)</div>
-<div class="line"><a name="l01302"></a><span class="lineno"> 1302</span>&#160;      *imageComponent += *(other.imageComponent);</div>
-<div class="line"><a name="l01303"></a><span class="lineno"> 1303</span>&#160; </div>
-<div class="line"><a name="l01304"></a><span class="lineno"> 1304</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l01305"></a><span class="lineno"> 1305</span>&#160;  }</div>
-<div class="line"><a name="l01306"></a><span class="lineno"> 1306</span>&#160; </div>
-<div class="line"><a name="l01314"></a><span class="lineno"><a class="line" href="a00962.html#a44ed96a04610622497a8e06d08fb7da8"> 1314</a></span>&#160;  <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#a44ed96a04610622497a8e06d08fb7da8">operator-=</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)</div>
-<div class="line"><a name="l01315"></a><span class="lineno"> 1315</span>&#160;  {</div>
-<div class="line"><a name="l01316"></a><span class="lineno"> 1316</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01317"></a><span class="lineno"> 1317</span>&#160;      componentVector[i] -= other.componentVector[i];</div>
-<div class="line"><a name="l01318"></a><span class="lineno"> 1318</span>&#160; </div>
-<div class="line"><a name="l01319"></a><span class="lineno"> 1319</span>&#160;    if (imageComponent)</div>
-<div class="line"><a name="l01320"></a><span class="lineno"> 1320</span>&#160;      *imageComponent -= *(other.imageComponent);</div>
-<div class="line"><a name="l01321"></a><span class="lineno"> 1321</span>&#160; </div>
-<div class="line"><a name="l01322"></a><span class="lineno"> 1322</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l01323"></a><span class="lineno"> 1323</span>&#160;  }</div>
-<div class="line"><a name="l01324"></a><span class="lineno"> 1324</span>&#160; </div>
-<div class="line"><a name="l01332"></a><span class="lineno"><a class="line" href="a00962.html#a1c43afed4568c3788fcbfcdb62a330e2"> 1332</a></span>&#160;  <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#a1c43afed4568c3788fcbfcdb62a330e2">operator*=</a>(<span class="keyword">const</span> RF alpha)</div>
-<div class="line"><a name="l01333"></a><span class="lineno"> 1333</span>&#160;  {</div>
-<div class="line"><a name="l01334"></a><span class="lineno"> 1334</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01335"></a><span class="lineno"> 1335</span>&#160;      componentVector[i] *= alpha;</div>
-<div class="line"><a name="l01336"></a><span class="lineno"> 1336</span>&#160; </div>
-<div class="line"><a name="l01337"></a><span class="lineno"> 1337</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01338"></a><span class="lineno"> 1338</span>&#160;      *imageComponent *= alpha;</div>
-<div class="line"><a name="l01339"></a><span class="lineno"> 1339</span>&#160; </div>
-<div class="line"><a name="l01340"></a><span class="lineno"> 1340</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l01341"></a><span class="lineno"> 1341</span>&#160;  }</div>
-<div class="line"><a name="l01342"></a><span class="lineno"> 1342</span>&#160; </div>
-<div class="line"><a name="l01353"></a><span class="lineno"><a class="line" href="a00962.html#ab50e8805b7444d433c4ad09ec91f256b"> 1353</a></span>&#160;  <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#ab50e8805b7444d433c4ad09ec91f256b">axpy</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other, <span class="keyword">const</span> RF alpha)</div>
-<div class="line"><a name="l01354"></a><span class="lineno"> 1354</span>&#160;  {</div>
-<div class="line"><a name="l01355"></a><span class="lineno"> 1355</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01356"></a><span class="lineno"> 1356</span>&#160;      componentVector[i].<a class="code" href="a00962.html#ab50e8805b7444d433c4ad09ec91f256b">axpy</a>(other.componentVector[i], alpha);</div>
-<div class="line"><a name="l01357"></a><span class="lineno"> 1357</span>&#160; </div>
-<div class="line"><a name="l01358"></a><span class="lineno"> 1358</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01359"></a><span class="lineno"> 1359</span>&#160;      imageComponent-&gt;axpy(*(other.imageComponent), alpha);</div>
-<div class="line"><a name="l01360"></a><span class="lineno"> 1360</span>&#160; </div>
-<div class="line"><a name="l01361"></a><span class="lineno"> 1361</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l01362"></a><span class="lineno"> 1362</span>&#160;  }</div>
-<div class="line"><a name="l01363"></a><span class="lineno"> 1363</span>&#160; </div>
-<div class="line"><a name="l01373"></a><span class="lineno"><a class="line" href="a00962.html#a31c665cf70c0dfdbc7b63bbfc7e66ebe"> 1373</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a31c665cf70c0dfdbc7b63bbfc7e66ebe">zero</a>()</div>
-<div class="line"><a name="l01374"></a><span class="lineno"> 1374</span>&#160;  {</div>
-<div class="line"><a name="l01375"></a><span class="lineno"> 1375</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01376"></a><span class="lineno"> 1376</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a31c665cf70c0dfdbc7b63bbfc7e66ebe">zero</a>();</div>
-<div class="line"><a name="l01377"></a><span class="lineno"> 1377</span>&#160; </div>
-<div class="line"><a name="l01378"></a><span class="lineno"> 1378</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01379"></a><span class="lineno"> 1379</span>&#160;      imageComponent-&gt;zero();</div>
-<div class="line"><a name="l01380"></a><span class="lineno"> 1380</span>&#160;  }</div>
-<div class="line"><a name="l01381"></a><span class="lineno"> 1381</span>&#160; </div>
-<div class="line"><a name="l01391"></a><span class="lineno"><a class="line" href="a00962.html#a063b4f456006a650c963ab29a07800df"> 1391</a></span>&#160;  RF <a class="code" href="a00962.html#a063b4f456006a650c963ab29a07800df">operator*</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)<span class="keyword"> const</span></div>
-<div class="line"><a name="l01392"></a><span class="lineno"> 1392</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01393"></a><span class="lineno"> 1393</span>&#160;    RF output = 0.;</div>
-<div class="line"><a name="l01394"></a><span class="lineno"> 1394</span>&#160; </div>
-<div class="line"><a name="l01395"></a><span class="lineno"> 1395</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01396"></a><span class="lineno"> 1396</span>&#160;      output += componentVector[i] * other.componentVector[i];</div>
-<div class="line"><a name="l01397"></a><span class="lineno"> 1397</span>&#160; </div>
-<div class="line"><a name="l01398"></a><span class="lineno"> 1398</span>&#160;    if (imageComponent)</div>
-<div class="line"><a name="l01399"></a><span class="lineno"> 1399</span>&#160;      output += *imageComponent * *(other.imageComponent);</div>
-<div class="line"><a name="l01400"></a><span class="lineno"> 1400</span>&#160; </div>
-<div class="line"><a name="l01401"></a><span class="lineno"> 1401</span>&#160;    <span class="keywordflow">return</span> output;</div>
-<div class="line"><a name="l01402"></a><span class="lineno"> 1402</span>&#160;  }</div>
-<div class="line"><a name="l01403"></a><span class="lineno"> 1403</span>&#160; </div>
-<div class="line"><a name="l01411"></a><span class="lineno"><a class="line" href="a00962.html#a69a6d3773d9c7333f01eb4cb60c4e195"> 1411</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00962.html#a69a6d3773d9c7333f01eb4cb60c4e195">operator==</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)<span class="keyword"> const</span></div>
-<div class="line"><a name="l01412"></a><span class="lineno"> 1412</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01413"></a><span class="lineno"> 1413</span>&#160;    <span class="keywordtype">bool</span> same = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l01414"></a><span class="lineno"> 1414</span>&#160; </div>
-<div class="line"><a name="l01415"></a><span class="lineno"> 1415</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01416"></a><span class="lineno"> 1416</span>&#160;      <span class="keywordflow">if</span> (!(componentVector[i] == other.componentVector[i])) {</div>
-<div class="line"><a name="l01417"></a><span class="lineno"> 1417</span>&#160;        same = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l01418"></a><span class="lineno"> 1418</span>&#160;        <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l01419"></a><span class="lineno"> 1419</span>&#160;      }</div>
-<div class="line"><a name="l01420"></a><span class="lineno"> 1420</span>&#160; </div>
-<div class="line"><a name="l01421"></a><span class="lineno"> 1421</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01422"></a><span class="lineno"> 1422</span>&#160;      same = same &amp;&amp; (*imageComponent == *(other.imageComponent));</div>
-<div class="line"><a name="l01423"></a><span class="lineno"> 1423</span>&#160; </div>
-<div class="line"><a name="l01424"></a><span class="lineno"> 1424</span>&#160;    <span class="keywordflow">return</span> same;</div>
-<div class="line"><a name="l01425"></a><span class="lineno"> 1425</span>&#160;  }</div>
+<div class="line"><a name="l01294"></a><span class="lineno"><a class="line" href="a00962.html#a191b51e07535fcc1df4da9acb3e43cb8"> 1294</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a191b51e07535fcc1df4da9acb3e43cb8">timesMatrixRoot</a>()</div>
+<div class="line"><a name="l01295"></a><span class="lineno"> 1295</span>&#160;  {</div>
+<div class="line"><a name="l01296"></a><span class="lineno"> 1296</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01297"></a><span class="lineno"> 1297</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a191b51e07535fcc1df4da9acb3e43cb8">timesMatrixRoot</a>();</div>
+<div class="line"><a name="l01298"></a><span class="lineno"> 1298</span>&#160; </div>
+<div class="line"><a name="l01299"></a><span class="lineno"> 1299</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01300"></a><span class="lineno"> 1300</span>&#160;      imageComponent-&gt;timesMatrixRoot();</div>
+<div class="line"><a name="l01301"></a><span class="lineno"> 1301</span>&#160;  }</div>
+<div class="line"><a name="l01302"></a><span class="lineno"> 1302</span>&#160; </div>
+<div class="line"><a name="l01312"></a><span class="lineno"><a class="line" href="a00962.html#a35afb0022db004d3b5f5700897a7eb1d"> 1312</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a35afb0022db004d3b5f5700897a7eb1d">timesInvMatRoot</a>()</div>
+<div class="line"><a name="l01313"></a><span class="lineno"> 1313</span>&#160;  {</div>
+<div class="line"><a name="l01314"></a><span class="lineno"> 1314</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01315"></a><span class="lineno"> 1315</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a35afb0022db004d3b5f5700897a7eb1d">timesInvMatRoot</a>();</div>
+<div class="line"><a name="l01316"></a><span class="lineno"> 1316</span>&#160; </div>
+<div class="line"><a name="l01317"></a><span class="lineno"> 1317</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01318"></a><span class="lineno"> 1318</span>&#160;      imageComponent-&gt;timesInvMatRoot();</div>
+<div class="line"><a name="l01319"></a><span class="lineno"> 1319</span>&#160;  }</div>
+<div class="line"><a name="l01320"></a><span class="lineno"> 1320</span>&#160; </div>
+<div class="line"><a name="l01328"></a><span class="lineno"><a class="line" href="a00962.html#a0ddda26f9dd2a241aed264cee5dcfde9"> 1328</a></span>&#160;  <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#a0ddda26f9dd2a241aed264cee5dcfde9">operator+=</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)</div>
+<div class="line"><a name="l01329"></a><span class="lineno"> 1329</span>&#160;  {</div>
+<div class="line"><a name="l01330"></a><span class="lineno"> 1330</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01331"></a><span class="lineno"> 1331</span>&#160;      componentVector[i] += other.componentVector[i];</div>
+<div class="line"><a name="l01332"></a><span class="lineno"> 1332</span>&#160; </div>
+<div class="line"><a name="l01333"></a><span class="lineno"> 1333</span>&#160;    if (imageComponent)</div>
+<div class="line"><a name="l01334"></a><span class="lineno"> 1334</span>&#160;      *imageComponent += *(other.imageComponent);</div>
+<div class="line"><a name="l01335"></a><span class="lineno"> 1335</span>&#160; </div>
+<div class="line"><a name="l01336"></a><span class="lineno"> 1336</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l01337"></a><span class="lineno"> 1337</span>&#160;  }</div>
+<div class="line"><a name="l01338"></a><span class="lineno"> 1338</span>&#160; </div>
+<div class="line"><a name="l01346"></a><span class="lineno"><a class="line" href="a00962.html#a44ed96a04610622497a8e06d08fb7da8"> 1346</a></span>&#160;  <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#a44ed96a04610622497a8e06d08fb7da8">operator-=</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)</div>
+<div class="line"><a name="l01347"></a><span class="lineno"> 1347</span>&#160;  {</div>
+<div class="line"><a name="l01348"></a><span class="lineno"> 1348</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01349"></a><span class="lineno"> 1349</span>&#160;      componentVector[i] -= other.componentVector[i];</div>
+<div class="line"><a name="l01350"></a><span class="lineno"> 1350</span>&#160; </div>
+<div class="line"><a name="l01351"></a><span class="lineno"> 1351</span>&#160;    if (imageComponent)</div>
+<div class="line"><a name="l01352"></a><span class="lineno"> 1352</span>&#160;      *imageComponent -= *(other.imageComponent);</div>
+<div class="line"><a name="l01353"></a><span class="lineno"> 1353</span>&#160; </div>
+<div class="line"><a name="l01354"></a><span class="lineno"> 1354</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l01355"></a><span class="lineno"> 1355</span>&#160;  }</div>
+<div class="line"><a name="l01356"></a><span class="lineno"> 1356</span>&#160; </div>
+<div class="line"><a name="l01364"></a><span class="lineno"><a class="line" href="a00962.html#a1c43afed4568c3788fcbfcdb62a330e2"> 1364</a></span>&#160;  <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#a1c43afed4568c3788fcbfcdb62a330e2">operator*=</a>(<span class="keyword">const</span> RF alpha)</div>
+<div class="line"><a name="l01365"></a><span class="lineno"> 1365</span>&#160;  {</div>
+<div class="line"><a name="l01366"></a><span class="lineno"> 1366</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01367"></a><span class="lineno"> 1367</span>&#160;      componentVector[i] *= alpha;</div>
+<div class="line"><a name="l01368"></a><span class="lineno"> 1368</span>&#160; </div>
+<div class="line"><a name="l01369"></a><span class="lineno"> 1369</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01370"></a><span class="lineno"> 1370</span>&#160;      *imageComponent *= alpha;</div>
+<div class="line"><a name="l01371"></a><span class="lineno"> 1371</span>&#160; </div>
+<div class="line"><a name="l01372"></a><span class="lineno"> 1372</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l01373"></a><span class="lineno"> 1373</span>&#160;  }</div>
+<div class="line"><a name="l01374"></a><span class="lineno"> 1374</span>&#160; </div>
+<div class="line"><a name="l01385"></a><span class="lineno"><a class="line" href="a00962.html#ab50e8805b7444d433c4ad09ec91f256b"> 1385</a></span>&#160;  <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; <a class="code" href="a00962.html#ab50e8805b7444d433c4ad09ec91f256b">axpy</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other, <span class="keyword">const</span> RF alpha)</div>
+<div class="line"><a name="l01386"></a><span class="lineno"> 1386</span>&#160;  {</div>
+<div class="line"><a name="l01387"></a><span class="lineno"> 1387</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01388"></a><span class="lineno"> 1388</span>&#160;      componentVector[i].<a class="code" href="a00962.html#ab50e8805b7444d433c4ad09ec91f256b">axpy</a>(other.componentVector[i], alpha);</div>
+<div class="line"><a name="l01389"></a><span class="lineno"> 1389</span>&#160; </div>
+<div class="line"><a name="l01390"></a><span class="lineno"> 1390</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01391"></a><span class="lineno"> 1391</span>&#160;      imageComponent-&gt;axpy(*(other.imageComponent), alpha);</div>
+<div class="line"><a name="l01392"></a><span class="lineno"> 1392</span>&#160; </div>
+<div class="line"><a name="l01393"></a><span class="lineno"> 1393</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l01394"></a><span class="lineno"> 1394</span>&#160;  }</div>
+<div class="line"><a name="l01395"></a><span class="lineno"> 1395</span>&#160; </div>
+<div class="line"><a name="l01405"></a><span class="lineno"><a class="line" href="a00962.html#a31c665cf70c0dfdbc7b63bbfc7e66ebe"> 1405</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a31c665cf70c0dfdbc7b63bbfc7e66ebe">zero</a>()</div>
+<div class="line"><a name="l01406"></a><span class="lineno"> 1406</span>&#160;  {</div>
+<div class="line"><a name="l01407"></a><span class="lineno"> 1407</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01408"></a><span class="lineno"> 1408</span>&#160;      componentVector[i].<a class="code" href="a00962.html#a31c665cf70c0dfdbc7b63bbfc7e66ebe">zero</a>();</div>
+<div class="line"><a name="l01409"></a><span class="lineno"> 1409</span>&#160; </div>
+<div class="line"><a name="l01410"></a><span class="lineno"> 1410</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01411"></a><span class="lineno"> 1411</span>&#160;      imageComponent-&gt;zero();</div>
+<div class="line"><a name="l01412"></a><span class="lineno"> 1412</span>&#160;  }</div>
+<div class="line"><a name="l01413"></a><span class="lineno"> 1413</span>&#160; </div>
+<div class="line"><a name="l01423"></a><span class="lineno"><a class="line" href="a00962.html#a063b4f456006a650c963ab29a07800df"> 1423</a></span>&#160;  RF <a class="code" href="a00962.html#a063b4f456006a650c963ab29a07800df">operator*</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)<span class="keyword"> const</span></div>
+<div class="line"><a name="l01424"></a><span class="lineno"> 1424</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01425"></a><span class="lineno"> 1425</span>&#160;    RF output = 0.;</div>
 <div class="line"><a name="l01426"></a><span class="lineno"> 1426</span>&#160; </div>
-<div class="line"><a name="l01436"></a><span class="lineno"><a class="line" href="a00962.html#ae93a04adea90c5ed8a9480f2f0ed3bd9"> 1436</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00962.html#ae93a04adea90c5ed8a9480f2f0ed3bd9">operator!=</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)<span class="keyword"> const</span></div>
-<div class="line"><a name="l01437"></a><span class="lineno"> 1437</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01438"></a><span class="lineno"> 1438</span>&#160;    <span class="keywordflow">return</span> !<a class="code" href="a00962.html#a69a6d3773d9c7333f01eb4cb60c4e195">operator==</a>(other);</div>
-<div class="line"><a name="l01439"></a><span class="lineno"> 1439</span>&#160;  }</div>
-<div class="line"><a name="l01440"></a><span class="lineno"> 1440</span>&#160; </div>
-<div class="line"><a name="l01448"></a><span class="lineno"><a class="line" href="a00962.html#a8ea461cc6da9b1f4a3ed7baf7771a628"> 1448</a></span>&#160;  RF <a class="code" href="a00962.html#a8ea461cc6da9b1f4a3ed7baf7771a628">oneNorm</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l01449"></a><span class="lineno"> 1449</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01450"></a><span class="lineno"> 1450</span>&#160;    RF output = 0.;</div>
-<div class="line"><a name="l01451"></a><span class="lineno"> 1451</span>&#160; </div>
-<div class="line"><a name="l01452"></a><span class="lineno"> 1452</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01453"></a><span class="lineno"> 1453</span>&#160;      output += componentVector[i].<a class="code" href="a00962.html#a8ea461cc6da9b1f4a3ed7baf7771a628">oneNorm</a>();</div>
-<div class="line"><a name="l01454"></a><span class="lineno"> 1454</span>&#160; </div>
-<div class="line"><a name="l01455"></a><span class="lineno"> 1455</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01456"></a><span class="lineno"> 1456</span>&#160;      output += (*imageComponent).oneNorm();</div>
-<div class="line"><a name="l01457"></a><span class="lineno"> 1457</span>&#160; </div>
-<div class="line"><a name="l01458"></a><span class="lineno"> 1458</span>&#160;    <span class="keywordflow">return</span> output;</div>
-<div class="line"><a name="l01459"></a><span class="lineno"> 1459</span>&#160;  }</div>
-<div class="line"><a name="l01460"></a><span class="lineno"> 1460</span>&#160; </div>
-<div class="line"><a name="l01468"></a><span class="lineno"><a class="line" href="a00962.html#ab26ffac0da6fe50c4c0395cbbc7eeac8"> 1468</a></span>&#160;  RF <a class="code" href="a00962.html#ab26ffac0da6fe50c4c0395cbbc7eeac8">infNorm</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01427"></a><span class="lineno"> 1427</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01428"></a><span class="lineno"> 1428</span>&#160;      output += componentVector[i] * other.componentVector[i];</div>
+<div class="line"><a name="l01429"></a><span class="lineno"> 1429</span>&#160; </div>
+<div class="line"><a name="l01430"></a><span class="lineno"> 1430</span>&#160;    if (imageComponent)</div>
+<div class="line"><a name="l01431"></a><span class="lineno"> 1431</span>&#160;      output += *imageComponent * *(other.imageComponent);</div>
+<div class="line"><a name="l01432"></a><span class="lineno"> 1432</span>&#160; </div>
+<div class="line"><a name="l01433"></a><span class="lineno"> 1433</span>&#160;    <span class="keywordflow">return</span> output;</div>
+<div class="line"><a name="l01434"></a><span class="lineno"> 1434</span>&#160;  }</div>
+<div class="line"><a name="l01435"></a><span class="lineno"> 1435</span>&#160; </div>
+<div class="line"><a name="l01443"></a><span class="lineno"><a class="line" href="a00962.html#a69a6d3773d9c7333f01eb4cb60c4e195"> 1443</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00962.html#a69a6d3773d9c7333f01eb4cb60c4e195">operator==</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)<span class="keyword"> const</span></div>
+<div class="line"><a name="l01444"></a><span class="lineno"> 1444</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01445"></a><span class="lineno"> 1445</span>&#160;    <span class="keywordtype">bool</span> same = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l01446"></a><span class="lineno"> 1446</span>&#160; </div>
+<div class="line"><a name="l01447"></a><span class="lineno"> 1447</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01448"></a><span class="lineno"> 1448</span>&#160;      <span class="keywordflow">if</span> (!(componentVector[i] == other.componentVector[i])) {</div>
+<div class="line"><a name="l01449"></a><span class="lineno"> 1449</span>&#160;        same = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l01450"></a><span class="lineno"> 1450</span>&#160;        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l01451"></a><span class="lineno"> 1451</span>&#160;      }</div>
+<div class="line"><a name="l01452"></a><span class="lineno"> 1452</span>&#160; </div>
+<div class="line"><a name="l01453"></a><span class="lineno"> 1453</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01454"></a><span class="lineno"> 1454</span>&#160;      same = same &amp;&amp; (*imageComponent == *(other.imageComponent));</div>
+<div class="line"><a name="l01455"></a><span class="lineno"> 1455</span>&#160; </div>
+<div class="line"><a name="l01456"></a><span class="lineno"> 1456</span>&#160;    <span class="keywordflow">return</span> same;</div>
+<div class="line"><a name="l01457"></a><span class="lineno"> 1457</span>&#160;  }</div>
+<div class="line"><a name="l01458"></a><span class="lineno"> 1458</span>&#160; </div>
+<div class="line"><a name="l01468"></a><span class="lineno"><a class="line" href="a00962.html#ae93a04adea90c5ed8a9480f2f0ed3bd9"> 1468</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00962.html#ae93a04adea90c5ed8a9480f2f0ed3bd9">operator!=</a>(<span class="keyword">const</span> <a class="code" href="a00962.html">TrendPart&lt;Traits&gt;</a>&amp; other)<span class="keyword"> const</span></div>
 <div class="line"><a name="l01469"></a><span class="lineno"> 1469</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01470"></a><span class="lineno"> 1470</span>&#160;    RF output = 0.;</div>
-<div class="line"><a name="l01471"></a><span class="lineno"> 1471</span>&#160; </div>
-<div class="line"><a name="l01472"></a><span class="lineno"> 1472</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01473"></a><span class="lineno"> 1473</span>&#160;      output = std::max(output, componentVector[i].<a class="code" href="a00962.html#ab26ffac0da6fe50c4c0395cbbc7eeac8">infNorm</a>());</div>
-<div class="line"><a name="l01474"></a><span class="lineno"> 1474</span>&#160; </div>
-<div class="line"><a name="l01475"></a><span class="lineno"> 1475</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01476"></a><span class="lineno"> 1476</span>&#160;      output = std::max(output, (*imageComponent).infNorm());</div>
-<div class="line"><a name="l01477"></a><span class="lineno"> 1477</span>&#160; </div>
-<div class="line"><a name="l01478"></a><span class="lineno"> 1478</span>&#160;    <span class="keywordflow">return</span> output;</div>
-<div class="line"><a name="l01479"></a><span class="lineno"> 1479</span>&#160;  }</div>
-<div class="line"><a name="l01480"></a><span class="lineno"> 1480</span>&#160; </div>
-<div class="line"><a name="l01491"></a><span class="lineno"><a class="line" href="a00962.html#a593ef495e25af72ba9d5a2e7a73ff4ee"> 1491</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a593ef495e25af72ba9d5a2e7a73ff4ee">evaluate</a>(<span class="keyword">const</span> <span class="keyword">typename</span> Traits::DomainType&amp; x,</div>
-<div class="line"><a name="l01492"></a><span class="lineno"> 1492</span>&#160;                <span class="keyword">typename</span> Traits::RangeType&amp; output)<span class="keyword"> const</span></div>
-<div class="line"><a name="l01493"></a><span class="lineno"> 1493</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01494"></a><span class="lineno"> 1494</span>&#160;    output = 0.;</div>
-<div class="line"><a name="l01495"></a><span class="lineno"> 1495</span>&#160;    <span class="keyword">typename</span> Traits::RangeType compOutput = 0.;</div>
-<div class="line"><a name="l01496"></a><span class="lineno"> 1496</span>&#160; </div>
-<div class="line"><a name="l01497"></a><span class="lineno"> 1497</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++) {</div>
-<div class="line"><a name="l01498"></a><span class="lineno"> 1498</span>&#160;      componentVector[i].evaluate(x, compOutput);</div>
-<div class="line"><a name="l01499"></a><span class="lineno"> 1499</span>&#160;      output[0] += compOutput[0];</div>
-<div class="line"><a name="l01500"></a><span class="lineno"> 1500</span>&#160;    }</div>
-<div class="line"><a name="l01501"></a><span class="lineno"> 1501</span>&#160; </div>
-<div class="line"><a name="l01502"></a><span class="lineno"> 1502</span>&#160;    <span class="keywordflow">if</span> (imageComponent) {</div>
-<div class="line"><a name="l01503"></a><span class="lineno"> 1503</span>&#160;      imageComponent-&gt;evaluate(x, compOutput);</div>
-<div class="line"><a name="l01504"></a><span class="lineno"> 1504</span>&#160;      output[0] += compOutput[0];</div>
-<div class="line"><a name="l01505"></a><span class="lineno"> 1505</span>&#160;    }</div>
-<div class="line"><a name="l01506"></a><span class="lineno"> 1506</span>&#160;  }</div>
-<div class="line"><a name="l01507"></a><span class="lineno"> 1507</span>&#160; </div>
-<div class="line"><a name="l01517"></a><span class="lineno"><a class="line" href="a00962.html#a26009e7982a2755dadf3fe56209521a1"> 1517</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a26009e7982a2755dadf3fe56209521a1">writeToFile</a>(<span class="keyword">const</span> std::string&amp; fileName)<span class="keyword"> const</span></div>
-<div class="line"><a name="l01518"></a><span class="lineno"> 1518</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l01519"></a><span class="lineno"> 1519</span>&#160;    <span class="keywordflow">if</span> ((*traits).rank == 0) {</div>
-<div class="line"><a name="l01520"></a><span class="lineno"> 1520</span>&#160;      std::ofstream file(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, std::ofstream::trunc);</div>
-<div class="line"><a name="l01521"></a><span class="lineno"> 1521</span>&#160; </div>
-<div class="line"><a name="l01522"></a><span class="lineno"> 1522</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
-<div class="line"><a name="l01523"></a><span class="lineno"> 1523</span>&#160;        componentVector[i].<a class="code" href="a00962.html#a26009e7982a2755dadf3fe56209521a1">writeToFile</a>(file);</div>
-<div class="line"><a name="l01524"></a><span class="lineno"> 1524</span>&#160; </div>
-<div class="line"><a name="l01525"></a><span class="lineno"> 1525</span>&#160;      <span class="keywordflow">if</span> (imageComponent)</div>
-<div class="line"><a name="l01526"></a><span class="lineno"> 1526</span>&#160;        imageComponent-&gt;writeToFile(file);</div>
-<div class="line"><a name="l01527"></a><span class="lineno"> 1527</span>&#160;    }</div>
-<div class="line"><a name="l01528"></a><span class="lineno"> 1528</span>&#160;  }</div>
-<div class="line"><a name="l01529"></a><span class="lineno"> 1529</span>&#160;};</div>
-<div class="line"><a name="l01530"></a><span class="lineno"> 1530</span>&#160; </div>
-<div class="line"><a name="l01531"></a><span class="lineno"> 1531</span>&#160;} <span class="comment">// namespace parafields</span></div>
+<div class="line"><a name="l01470"></a><span class="lineno"> 1470</span>&#160;    <span class="keywordflow">return</span> !<a class="code" href="a00962.html#a69a6d3773d9c7333f01eb4cb60c4e195">operator==</a>(other);</div>
+<div class="line"><a name="l01471"></a><span class="lineno"> 1471</span>&#160;  }</div>
+<div class="line"><a name="l01472"></a><span class="lineno"> 1472</span>&#160; </div>
+<div class="line"><a name="l01480"></a><span class="lineno"><a class="line" href="a00962.html#a8ea461cc6da9b1f4a3ed7baf7771a628"> 1480</a></span>&#160;  RF <a class="code" href="a00962.html#a8ea461cc6da9b1f4a3ed7baf7771a628">oneNorm</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01481"></a><span class="lineno"> 1481</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01482"></a><span class="lineno"> 1482</span>&#160;    RF output = 0.;</div>
+<div class="line"><a name="l01483"></a><span class="lineno"> 1483</span>&#160; </div>
+<div class="line"><a name="l01484"></a><span class="lineno"> 1484</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01485"></a><span class="lineno"> 1485</span>&#160;      output += componentVector[i].<a class="code" href="a00962.html#a8ea461cc6da9b1f4a3ed7baf7771a628">oneNorm</a>();</div>
+<div class="line"><a name="l01486"></a><span class="lineno"> 1486</span>&#160; </div>
+<div class="line"><a name="l01487"></a><span class="lineno"> 1487</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01488"></a><span class="lineno"> 1488</span>&#160;      output += (*imageComponent).oneNorm();</div>
+<div class="line"><a name="l01489"></a><span class="lineno"> 1489</span>&#160; </div>
+<div class="line"><a name="l01490"></a><span class="lineno"> 1490</span>&#160;    <span class="keywordflow">return</span> output;</div>
+<div class="line"><a name="l01491"></a><span class="lineno"> 1491</span>&#160;  }</div>
+<div class="line"><a name="l01492"></a><span class="lineno"> 1492</span>&#160; </div>
+<div class="line"><a name="l01500"></a><span class="lineno"><a class="line" href="a00962.html#ab26ffac0da6fe50c4c0395cbbc7eeac8"> 1500</a></span>&#160;  RF <a class="code" href="a00962.html#ab26ffac0da6fe50c4c0395cbbc7eeac8">infNorm</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01501"></a><span class="lineno"> 1501</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01502"></a><span class="lineno"> 1502</span>&#160;    RF output = 0.;</div>
+<div class="line"><a name="l01503"></a><span class="lineno"> 1503</span>&#160; </div>
+<div class="line"><a name="l01504"></a><span class="lineno"> 1504</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01505"></a><span class="lineno"> 1505</span>&#160;      output = std::max(output, componentVector[i].<a class="code" href="a00962.html#ab26ffac0da6fe50c4c0395cbbc7eeac8">infNorm</a>());</div>
+<div class="line"><a name="l01506"></a><span class="lineno"> 1506</span>&#160; </div>
+<div class="line"><a name="l01507"></a><span class="lineno"> 1507</span>&#160;    <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01508"></a><span class="lineno"> 1508</span>&#160;      output = std::max(output, (*imageComponent).infNorm());</div>
+<div class="line"><a name="l01509"></a><span class="lineno"> 1509</span>&#160; </div>
+<div class="line"><a name="l01510"></a><span class="lineno"> 1510</span>&#160;    <span class="keywordflow">return</span> output;</div>
+<div class="line"><a name="l01511"></a><span class="lineno"> 1511</span>&#160;  }</div>
+<div class="line"><a name="l01512"></a><span class="lineno"> 1512</span>&#160; </div>
+<div class="line"><a name="l01523"></a><span class="lineno"><a class="line" href="a00962.html#a593ef495e25af72ba9d5a2e7a73ff4ee"> 1523</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a593ef495e25af72ba9d5a2e7a73ff4ee">evaluate</a>(<span class="keyword">const</span> <span class="keyword">typename</span> Traits::DomainType&amp; x,</div>
+<div class="line"><a name="l01524"></a><span class="lineno"> 1524</span>&#160;                <span class="keyword">typename</span> Traits::RangeType&amp; output)<span class="keyword"> const</span></div>
+<div class="line"><a name="l01525"></a><span class="lineno"> 1525</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01526"></a><span class="lineno"> 1526</span>&#160;    output = 0.;</div>
+<div class="line"><a name="l01527"></a><span class="lineno"> 1527</span>&#160;    <span class="keyword">typename</span> Traits::RangeType compOutput = 0.;</div>
+<div class="line"><a name="l01528"></a><span class="lineno"> 1528</span>&#160; </div>
+<div class="line"><a name="l01529"></a><span class="lineno"> 1529</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++) {</div>
+<div class="line"><a name="l01530"></a><span class="lineno"> 1530</span>&#160;      componentVector[i].evaluate(x, compOutput);</div>
+<div class="line"><a name="l01531"></a><span class="lineno"> 1531</span>&#160;      output[0] += compOutput[0];</div>
+<div class="line"><a name="l01532"></a><span class="lineno"> 1532</span>&#160;    }</div>
+<div class="line"><a name="l01533"></a><span class="lineno"> 1533</span>&#160; </div>
+<div class="line"><a name="l01534"></a><span class="lineno"> 1534</span>&#160;    <span class="keywordflow">if</span> (imageComponent) {</div>
+<div class="line"><a name="l01535"></a><span class="lineno"> 1535</span>&#160;      imageComponent-&gt;evaluate(x, compOutput);</div>
+<div class="line"><a name="l01536"></a><span class="lineno"> 1536</span>&#160;      output[0] += compOutput[0];</div>
+<div class="line"><a name="l01537"></a><span class="lineno"> 1537</span>&#160;    }</div>
+<div class="line"><a name="l01538"></a><span class="lineno"> 1538</span>&#160;  }</div>
+<div class="line"><a name="l01539"></a><span class="lineno"> 1539</span>&#160; </div>
+<div class="line"><a name="l01549"></a><span class="lineno"><a class="line" href="a00962.html#a26009e7982a2755dadf3fe56209521a1"> 1549</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00962.html#a26009e7982a2755dadf3fe56209521a1">writeToFile</a>(<span class="keyword">const</span> std::string&amp; fileName)<span class="keyword"> const</span></div>
+<div class="line"><a name="l01550"></a><span class="lineno"> 1550</span>&#160;<span class="keyword">  </span>{</div>
+<div class="line"><a name="l01551"></a><span class="lineno"> 1551</span>&#160;    <span class="keywordflow">if</span> ((*traits).rank == 0) {</div>
+<div class="line"><a name="l01552"></a><span class="lineno"> 1552</span>&#160;      std::ofstream file(fileName + <span class="stringliteral">&quot;.trend&quot;</span>, std::ofstream::trunc);</div>
+<div class="line"><a name="l01553"></a><span class="lineno"> 1553</span>&#160; </div>
+<div class="line"><a name="l01554"></a><span class="lineno"> 1554</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; componentVector.size(); i++)</div>
+<div class="line"><a name="l01555"></a><span class="lineno"> 1555</span>&#160;        componentVector[i].<a class="code" href="a00962.html#a26009e7982a2755dadf3fe56209521a1">writeToFile</a>(file);</div>
+<div class="line"><a name="l01556"></a><span class="lineno"> 1556</span>&#160; </div>
+<div class="line"><a name="l01557"></a><span class="lineno"> 1557</span>&#160;      <span class="keywordflow">if</span> (imageComponent)</div>
+<div class="line"><a name="l01558"></a><span class="lineno"> 1558</span>&#160;        imageComponent-&gt;writeToFile(file);</div>
+<div class="line"><a name="l01559"></a><span class="lineno"> 1559</span>&#160;    }</div>
+<div class="line"><a name="l01560"></a><span class="lineno"> 1560</span>&#160;  }</div>
+<div class="line"><a name="l01561"></a><span class="lineno"> 1561</span>&#160;};</div>
+<div class="line"><a name="l01562"></a><span class="lineno"> 1562</span>&#160; </div>
+<div class="line"><a name="l01563"></a><span class="lineno"> 1563</span>&#160;} <span class="comment">// namespace parafields</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aa00966_html_a0c26ecd5d4bcdbd5e9a284955936c590"><div class="ttname"><a href="a00966.html#a0c26ecd5d4bcdbd5e9a284955936c590">parafields::TrendComponent::timesInvMatRoot</a></div><div class="ttdeci">void timesInvMatRoot()</div><div class="ttdoc">Divide the trend coefficients by their standard deviations.</div><div class="ttdef"><b>Definition:</b> trend.hh:453</div></div>
 <div class="ttc" id="aa00970_html_a58add0a4ca396e6a9f11c6838a77d519"><div class="ttname"><a href="a00970.html#a58add0a4ca396e6a9f11c6838a77d519">parafields::ImageComponent::writeToFile</a></div><div class="ttdeci">void writeToFile(std::ofstream &amp;file) const</div><div class="ttdoc">Write the trend component to hard disk.</div><div class="ttdef"><b>Definition:</b> trend.hh:855</div></div>
 <div class="ttc" id="aa00966_html_a59ff15847b2b8b09d7715bbcccaf6648"><div class="ttname"><a href="a00966.html#a59ff15847b2b8b09d7715bbcccaf6648">parafields::TrendComponent::operator*</a></div><div class="ttdeci">RF operator*(const TrendComponent&lt; Traits &gt; &amp;other) const</div><div class="ttdoc">Scalar product.</div><div class="ttdef"><b>Definition:</b> trend.hh:547</div></div>
 <div class="ttc" id="aa00966_html_aae17d1df523579d1467637d7f27af857"><div class="ttname"><a href="a00966.html#aae17d1df523579d1467637d7f27af857">parafields::TrendComponent::componentType</a></div><div class="ttdeci">TrendComponentType::Type componentType</div><div class="ttdef"><b>Definition:</b> trend.hh:91</div></div>
-<div class="ttc" id="aa00962_html_a191b51e07535fcc1df4da9acb3e43cb8"><div class="ttname"><a href="a00962.html#a191b51e07535fcc1df4da9acb3e43cb8">parafields::TrendPart::timesMatrixRoot</a></div><div class="ttdeci">void timesMatrixRoot()</div><div class="ttdoc">Multiply the trend part with approximate root of its cov. matrix.</div><div class="ttdef"><b>Definition:</b> trend.hh:1262</div></div>
+<div class="ttc" id="aa00962_html_a191b51e07535fcc1df4da9acb3e43cb8"><div class="ttname"><a href="a00962.html#a191b51e07535fcc1df4da9acb3e43cb8">parafields::TrendPart::timesMatrixRoot</a></div><div class="ttdeci">void timesMatrixRoot()</div><div class="ttdoc">Multiply the trend part with approximate root of its cov. matrix.</div><div class="ttdef"><b>Definition:</b> trend.hh:1294</div></div>
 <div class="ttc" id="aa01078_html"><div class="ttname"><a href="a01078.html">parafields::TrendComponentType</a></div><div class="ttdoc">Predefined types of trend component.</div><div class="ttdef"><b>Definition:</b> trend.hh:29</div></div>
 <div class="ttc" id="aa00966_html_a6e7c1263d15516b60e5f77898f163f9a"><div class="ttname"><a href="a00966.html#a6e7c1263d15516b60e5f77898f163f9a">parafields::TrendComponent::dofs</a></div><div class="ttdeci">unsigned int dofs() const</div><div class="ttdoc">Number of degrees of freedom.</div><div class="ttdef"><b>Definition:</b> trend.hh:303</div></div>
+<div class="ttc" id="aa00962_html_a0a912fc13c5ca8f6d7eb63fd7464bce6"><div class="ttname"><a href="a00962.html#a0a912fc13c5ca8f6d7eb63fd7464bce6">parafields::TrendPart::remove_components</a></div><div class="ttdeci">void remove_components(std::size_t count)</div><div class="ttdoc">Dynamically remove a number of trend components.</div><div class="ttdef"><b>Definition:</b> trend.hh:1070</div></div>
 <div class="ttc" id="aa00966_html_a56d4657c703a5f780ff3ad14d616f243"><div class="ttname"><a href="a00966.html#a56d4657c703a5f780ff3ad14d616f243">parafields::TrendComponent&lt; parafields::RandomFieldTraits &gt;::RF</a></div><div class="ttdeci">typename parafields::RandomFieldTraits ::RF RF</div><div class="ttdef"><b>Definition:</b> trend.hh:82</div></div>
-<div class="ttc" id="aa00962_html_a771c248428e241b9abb04ca2726ab4ff"><div class="ttname"><a href="a00962.html#a771c248428e241b9abb04ca2726ab4ff">parafields::TrendPart::generateUncorrelated</a></div><div class="ttdeci">void generateUncorrelated(unsigned int seed)</div><div class="ttdoc">Generate a trend part without correlation (i.e. noise)</div><div class="ttdef"><b>Definition:</b> trend.hh:1167</div></div>
+<div class="ttc" id="aa00962_html_a771c248428e241b9abb04ca2726ab4ff"><div class="ttname"><a href="a00962.html#a771c248428e241b9abb04ca2726ab4ff">parafields::TrendPart::generateUncorrelated</a></div><div class="ttdeci">void generateUncorrelated(unsigned int seed)</div><div class="ttdoc">Generate a trend part without correlation (i.e. noise)</div><div class="ttdef"><b>Definition:</b> trend.hh:1199</div></div>
 <div class="ttc" id="aa00962_html_aeec3acc4b6cad0479fc8db4732c33269"><div class="ttname"><a href="a00962.html#aeec3acc4b6cad0479fc8db4732c33269">parafields::TrendPart::TrendPart</a></div><div class="ttdeci">TrendPart(const Dune::ParameterTree &amp;config, const std::shared_ptr&lt; Traits &gt; &amp;traits_, const std::string &amp;fileName=&quot;&quot;)</div><div class="ttdoc">Constructor reading from file or creating homogeneous field.</div><div class="ttdef"><b>Definition:</b> trend.hh:902</div></div>
 <div class="ttc" id="aa00966_html_aeb7925c908562246755aae8b806318b2"><div class="ttname"><a href="a00966.html#aeb7925c908562246755aae8b806318b2">parafields::TrendComponent::meanVector</a></div><div class="ttdeci">std::vector&lt; RF &gt; meanVector</div><div class="ttdef"><b>Definition:</b> trend.hh:97</div></div>
 <div class="ttc" id="aa00966_html_adec3c0d85736686d8a482ec083dd917d"><div class="ttname"><a href="a00966.html#adec3c0d85736686d8a482ec083dd917d">parafields::TrendComponent::componentCount</a></div><div class="ttdeci">unsigned int componentCount</div><div class="ttdef"><b>Definition:</b> trend.hh:92</div></div>
 <div class="ttc" id="aa00966_html_a217d9998ab270768d709796b9d537004"><div class="ttname"><a href="a00966.html#a217d9998ab270768d709796b9d537004">parafields::TrendComponent::infNorm</a></div><div class="ttdeci">RF infNorm() const</div><div class="ttdoc">Maximum abs. value of component.</div><div class="ttdef"><b>Definition:</b> trend.hh:655</div></div>
-<div class="ttc" id="aa00962_html_a76617df08142ff6f8e70ee2f54af459b"><div class="ttname"><a href="a00962.html#a76617df08142ff6f8e70ee2f54af459b">parafields::TrendPart::timesInverseMatrix</a></div><div class="ttdeci">void timesInverseMatrix()</div><div class="ttdoc">Multiply the trend part with the inverse of its covariance matrix.</div><div class="ttdef"><b>Definition:</b> trend.hh:1244</div></div>
+<div class="ttc" id="aa00962_html_a76617df08142ff6f8e70ee2f54af459b"><div class="ttname"><a href="a00962.html#a76617df08142ff6f8e70ee2f54af459b">parafields::TrendPart::timesInverseMatrix</a></div><div class="ttdeci">void timesInverseMatrix()</div><div class="ttdoc">Multiply the trend part with the inverse of its covariance matrix.</div><div class="ttdef"><b>Definition:</b> trend.hh:1276</div></div>
 <div class="ttc" id="aa01078_html_af920d0b0a036b7fb50af46d938bc03fcaca9d0a41040794aa495b374a9f4f4ed5"><div class="ttname"><a href="a01078.html#af920d0b0a036b7fb50af46d938bc03fcaca9d0a41040794aa495b374a9f4f4ed5">parafields::TrendComponentType::Mean</a></div><div class="ttdeci">@ Mean</div><div class="ttdef"><b>Definition:</b> trend.hh:33</div></div>
 <div class="ttc" id="aa01078_html_a6bee1c493c27a7862240ef41bedab3d9"><div class="ttname"><a href="a01078.html#a6bee1c493c27a7862240ef41bedab3d9">parafields::TrendComponentType::isDisk</a></div><div class="ttdeci">static bool isDisk(Type i)</div><div class="ttdoc">Check whether component is Gaussian component.</div><div class="ttdef"><b>Definition:</b> trend.hh:53</div></div>
 <div class="ttc" id="aa00066_html"><div class="ttname"><a href="a00066.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
-<div class="ttc" id="aa00962_html_a1c43afed4568c3788fcbfcdb62a330e2"><div class="ttname"><a href="a00962.html#a1c43afed4568c3788fcbfcdb62a330e2">parafields::TrendPart::operator*=</a></div><div class="ttdeci">TrendPart&lt; Traits &gt; &amp; operator*=(const RF alpha)</div><div class="ttdoc">Multiplication with scalar.</div><div class="ttdef"><b>Definition:</b> trend.hh:1332</div></div>
+<div class="ttc" id="aa00962_html_a1c43afed4568c3788fcbfcdb62a330e2"><div class="ttname"><a href="a00962.html#a1c43afed4568c3788fcbfcdb62a330e2">parafields::TrendPart::operator*=</a></div><div class="ttdeci">TrendPart&lt; Traits &gt; &amp; operator*=(const RF alpha)</div><div class="ttdoc">Multiplication with scalar.</div><div class="ttdef"><b>Definition:</b> trend.hh:1364</div></div>
 <div class="ttc" id="aa00966_html_aefd82e9ace6823686ba5c7d0ad701f2e"><div class="ttname"><a href="a00966.html#aefd82e9ace6823686ba5c7d0ad701f2e">parafields::TrendComponent::TrendComponent</a></div><div class="ttdeci">TrendComponent(const std::shared_ptr&lt; Traits &gt; &amp;traits_, const std::vector&lt; RF &gt; &amp;trendVector, const std::vector&lt; RF &gt; &amp;meanVector_, const std::vector&lt; RF &gt; &amp;varianceVector_, const TrendComponentType::Type &amp;componentType_, unsigned int componentCount_=0)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> trend.hh:111</div></div>
 <div class="ttc" id="aa00966_html"><div class="ttname"><a href="a00966.html">parafields::TrendComponent</a></div><div class="ttdoc">Component of random field representing deterministic structure.</div><div class="ttdef"><b>Definition:</b> fieldtraits.hh:17</div></div>
 <div class="ttc" id="aa00966_html_a42fe39603f8acd852fef911d63879322"><div class="ttname"><a href="a00966.html#a42fe39603f8acd852fef911d63879322">parafields::TrendComponent::oneNorm</a></div><div class="ttdeci">RF oneNorm() const</div><div class="ttdoc">Sum of abs. values of component.</div><div class="ttdef"><b>Definition:</b> trend.hh:642</div></div>
@@ -1077,55 +1091,56 @@ $(function() {
 <div class="ttc" id="aa00970_html_a76cc95400e3415bde9ce6548d0cb83b6"><div class="ttname"><a href="a00970.html#a76cc95400e3415bde9ce6548d0cb83b6">parafields::ImageComponent::name</a></div><div class="ttdeci">std::string name() const</div><div class="ttdoc">Name of type of this trend component.</div><div class="ttdef"><b>Definition:</b> trend.hh:803</div></div>
 <div class="ttc" id="aa01078_html_af920d0b0a036b7fb50af46d938bc03fca87c1494ef6dd8b292f1f3bfe5c8dc9dc"><div class="ttname"><a href="a01078.html#af920d0b0a036b7fb50af46d938bc03fca87c1494ef6dd8b292f1f3bfe5c8dc9dc">parafields::TrendComponentType::Image</a></div><div class="ttdeci">@ Image</div><div class="ttdef"><b>Definition:</b> trend.hh:37</div></div>
 <div class="ttc" id="aa00970_html_aa23c6968bfd1e67326e5ab5c20a5dfb3"><div class="ttname"><a href="a00970.html#aa23c6968bfd1e67326e5ab5c20a5dfb3">parafields::ImageComponent::evaluate</a></div><div class="ttdeci">void evaluate(const typename Traits::DomainType &amp;location, typename Traits::RangeType &amp;output) const</div><div class="ttdoc">Evaluate the trend component at a given location.</div><div class="ttdef"><b>Definition:</b> trend.hh:823</div></div>
-<div class="ttc" id="aa00962_html_ae93a04adea90c5ed8a9480f2f0ed3bd9"><div class="ttname"><a href="a00962.html#ae93a04adea90c5ed8a9480f2f0ed3bd9">parafields::TrendPart::operator!=</a></div><div class="ttdeci">bool operator!=(const TrendPart&lt; Traits &gt; &amp;other) const</div><div class="ttdoc">Inequality operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:1436</div></div>
+<div class="ttc" id="aa00962_html_ae93a04adea90c5ed8a9480f2f0ed3bd9"><div class="ttname"><a href="a00962.html#ae93a04adea90c5ed8a9480f2f0ed3bd9">parafields::TrendPart::operator!=</a></div><div class="ttdeci">bool operator!=(const TrendPart&lt; Traits &gt; &amp;other) const</div><div class="ttdoc">Inequality operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:1468</div></div>
 <div class="ttc" id="aa00966_html_abfa500c59858309b70f1026a5f34abb6"><div class="ttname"><a href="a00966.html#abfa500c59858309b70f1026a5f34abb6">parafields::TrendComponent::evaluate</a></div><div class="ttdeci">void evaluate(const typename Traits::DomainType &amp;location, typename Traits::RangeType &amp;output) const</div><div class="ttdoc">Evaluate the trend component at a given location.</div><div class="ttdef"><b>Definition:</b> trend.hh:601</div></div>
 <div class="ttc" id="aa01078_html_af920d0b0a036b7fb50af46d938bc03fca9a37da2a3663fe61d1794eafa18140c1"><div class="ttname"><a href="a01078.html#af920d0b0a036b7fb50af46d938bc03fca9a37da2a3663fe61d1794eafa18140c1">parafields::TrendComponentType::Disk</a></div><div class="ttdeci">@ Disk</div><div class="ttdef"><b>Definition:</b> trend.hh:35</div></div>
 <div class="ttc" id="aa01078_html_addf505de00dfdb0070513410d7d2f343"><div class="ttname"><a href="a01078.html#addf505de00dfdb0070513410d7d2f343">parafields::TrendComponentType::isImage</a></div><div class="ttdeci">static bool isImage(Type i)</div><div class="ttdoc">Check whether component is a PNG image component.</div><div class="ttdef"><b>Definition:</b> trend.hh:63</div></div>
 <div class="ttc" id="aa01078_html_a779d6cb4aa556909654a45ec06c0093d"><div class="ttname"><a href="a01078.html#a779d6cb4aa556909654a45ec06c0093d">parafields::TrendComponentType::isMean</a></div><div class="ttdeci">static bool isMean(Type i)</div><div class="ttdoc">Check whether component is mean component.</div><div class="ttdef"><b>Definition:</b> trend.hh:43</div></div>
 <div class="ttc" id="aa00966_html_a981e1baa45537d98a442ac0f9e6b83fd"><div class="ttname"><a href="a00966.html#a981e1baa45537d98a442ac0f9e6b83fd">parafields::TrendComponent::timesMatrixRoot</a></div><div class="ttdeci">void timesMatrixRoot()</div><div class="ttdoc">Multiply the trend coefficients with their standard deviations.</div><div class="ttdef"><b>Definition:</b> trend.hh:439</div></div>
-<div class="ttc" id="aa00962_html_a31c665cf70c0dfdbc7b63bbfc7e66ebe"><div class="ttname"><a href="a00962.html#a31c665cf70c0dfdbc7b63bbfc7e66ebe">parafields::TrendPart::zero</a></div><div class="ttdeci">void zero()</div><div class="ttdoc">Set the trend part to zero.</div><div class="ttdef"><b>Definition:</b> trend.hh:1373</div></div>
+<div class="ttc" id="aa00962_html_a31c665cf70c0dfdbc7b63bbfc7e66ebe"><div class="ttname"><a href="a00962.html#a31c665cf70c0dfdbc7b63bbfc7e66ebe">parafields::TrendPart::zero</a></div><div class="ttdeci">void zero()</div><div class="ttdoc">Set the trend part to zero.</div><div class="ttdef"><b>Definition:</b> trend.hh:1405</div></div>
+<div class="ttc" id="aa00962_html_a0360a2fe4f6796ca15257eada549deae"><div class="ttname"><a href="a00962.html#a0360a2fe4f6796ca15257eada549deae">parafields::TrendPart::add_components</a></div><div class="ttdeci">void add_components(const Dune::ParameterTree &amp;config, const std::string &amp;fileName=&quot;&quot;)</div><div class="ttdoc">Construct trend components from configuration.</div><div class="ttdef"><b>Definition:</b> trend.hh:922</div></div>
 <div class="ttc" id="aa00966_html_a3c2e94d106ec19f078dc5fac6035f3b3"><div class="ttname"><a href="a00966.html#a3c2e94d106ec19f078dc5fac6035f3b3">parafields::TrendComponent::generateUncorrelated</a></div><div class="ttdeci">void generateUncorrelated(unsigned int seed)</div><div class="ttdoc">Generate trend component coefficients that are noise.</div><div class="ttdef"><b>Definition:</b> trend.hh:371</div></div>
-<div class="ttc" id="aa00962_html_ab26ffac0da6fe50c4c0395cbbc7eeac8"><div class="ttname"><a href="a00962.html#ab26ffac0da6fe50c4c0395cbbc7eeac8">parafields::TrendPart::infNorm</a></div><div class="ttdeci">RF infNorm() const</div><div class="ttdoc">Infinity norm.</div><div class="ttdef"><b>Definition:</b> trend.hh:1468</div></div>
+<div class="ttc" id="aa00962_html_ab26ffac0da6fe50c4c0395cbbc7eeac8"><div class="ttname"><a href="a00962.html#ab26ffac0da6fe50c4c0395cbbc7eeac8">parafields::TrendPart::infNorm</a></div><div class="ttdeci">RF infNorm() const</div><div class="ttdoc">Infinity norm.</div><div class="ttdef"><b>Definition:</b> trend.hh:1500</div></div>
 <div class="ttc" id="aa00966_html_afc3f8b39871c6d26b8851d833587701a"><div class="ttname"><a href="a00966.html#afc3f8b39871c6d26b8851d833587701a">parafields::TrendComponent::name</a></div><div class="ttdeci">std::string name() const</div><div class="ttdoc">Name of type of this trend component.</div><div class="ttdef"><b>Definition:</b> trend.hh:284</div></div>
 <div class="ttc" id="aa00966_html_aa0070353dfc0c1a10db2fc32353d71fb"><div class="ttname"><a href="a00966.html#aa0070353dfc0c1a10db2fc32353d71fb">parafields::TrendComponent::operator-=</a></div><div class="ttdeci">TrendComponent&lt; Traits &gt; &amp; operator-=(const TrendComponent&lt; Traits &gt; &amp;other)</div><div class="ttdoc">Subtraction assignment operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:481</div></div>
 <div class="ttc" id="aa01078_html_af920d0b0a036b7fb50af46d938bc03fc"><div class="ttname"><a href="a01078.html#af920d0b0a036b7fb50af46d938bc03fc">parafields::TrendComponentType::Type</a></div><div class="ttdeci">Type</div><div class="ttdef"><b>Definition:</b> trend.hh:31</div></div>
 <div class="ttc" id="aa00966_html_afe5fe3b463ffad88deddb316740eedda"><div class="ttname"><a href="a00966.html#afe5fe3b463ffad88deddb316740eedda">parafields::TrendComponent::type</a></div><div class="ttdeci">TrendComponentType::Type type() const</div><div class="ttdoc">Type of this trend component.</div><div class="ttdef"><b>Definition:</b> trend.hh:270</div></div>
 <div class="ttc" id="aa00966_html_a31df3651669581234993f657e05e804d"><div class="ttname"><a href="a00966.html#a31df3651669581234993f657e05e804d">parafields::TrendComponent::varianceVector</a></div><div class="ttdeci">std::vector&lt; RF &gt; varianceVector</div><div class="ttdef"><b>Definition:</b> trend.hh:98</div></div>
 <div class="ttc" id="aa00966_html_a9393c80846da016941cda399c879dd76"><div class="ttname"><a href="a00966.html#a9393c80846da016941cda399c879dd76">parafields::TrendComponent::extensions</a></div><div class="ttdeci">std::array&lt; RF, dim &gt; extensions</div><div class="ttdef"><b>Definition:</b> trend.hh:94</div></div>
-<div class="ttc" id="aa00962_html_ab37c69f552cfbad711a5b9630923e41c"><div class="ttname"><a href="a00962.html#ab37c69f552cfbad711a5b9630923e41c">parafields::TrendPart::size</a></div><div class="ttdeci">unsigned int size() const</div><div class="ttdoc">Number of stored trend components (excluding image)</div><div class="ttdef"><b>Definition:</b> trend.hh:1189</div></div>
+<div class="ttc" id="aa00962_html_ab37c69f552cfbad711a5b9630923e41c"><div class="ttname"><a href="a00962.html#ab37c69f552cfbad711a5b9630923e41c">parafields::TrendPart::size</a></div><div class="ttdeci">unsigned int size() const</div><div class="ttdoc">Number of stored trend components (excluding image)</div><div class="ttdef"><b>Definition:</b> trend.hh:1221</div></div>
 <div class="ttc" id="aa00966_html_acc665e51f541262202d2fbd0dc14bb0f"><div class="ttname"><a href="a00966.html#acc665e51f541262202d2fbd0dc14bb0f">parafields::TrendComponent::shiftVector</a></div><div class="ttdeci">std::vector&lt; RF &gt; shiftVector</div><div class="ttdef"><b>Definition:</b> trend.hh:96</div></div>
-<div class="ttc" id="aa00962_html_a35afb0022db004d3b5f5700897a7eb1d"><div class="ttname"><a href="a00962.html#a35afb0022db004d3b5f5700897a7eb1d">parafields::TrendPart::timesInvMatRoot</a></div><div class="ttdeci">void timesInvMatRoot()</div><div class="ttdoc">Multiply the trend part with approximate inverse root of its cov. matrix.</div><div class="ttdef"><b>Definition:</b> trend.hh:1280</div></div>
+<div class="ttc" id="aa00962_html_a35afb0022db004d3b5f5700897a7eb1d"><div class="ttname"><a href="a00962.html#a35afb0022db004d3b5f5700897a7eb1d">parafields::TrendPart::timesInvMatRoot</a></div><div class="ttdeci">void timesInvMatRoot()</div><div class="ttdoc">Multiply the trend part with approximate inverse root of its cov. matrix.</div><div class="ttdef"><b>Definition:</b> trend.hh:1312</div></div>
 <div class="ttc" id="aa00966_html_ab9e4d55b50b77423fac23637274a6887"><div class="ttname"><a href="a00966.html#ab9e4d55b50b77423fac23637274a6887">parafields::TrendComponent::traits</a></div><div class="ttdeci">std::shared_ptr&lt; Traits &gt; traits</div><div class="ttdef"><b>Definition:</b> trend.hh:89</div></div>
-<div class="ttc" id="aa00962_html_a0ddda26f9dd2a241aed264cee5dcfde9"><div class="ttname"><a href="a00962.html#a0ddda26f9dd2a241aed264cee5dcfde9">parafields::TrendPart::operator+=</a></div><div class="ttdeci">TrendPart&lt; Traits &gt; &amp; operator+=(const TrendPart&lt; Traits &gt; &amp;other)</div><div class="ttdoc">Addition assignment operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:1296</div></div>
+<div class="ttc" id="aa00962_html_a0ddda26f9dd2a241aed264cee5dcfde9"><div class="ttname"><a href="a00962.html#a0ddda26f9dd2a241aed264cee5dcfde9">parafields::TrendPart::operator+=</a></div><div class="ttdeci">TrendPart&lt; Traits &gt; &amp; operator+=(const TrendPart&lt; Traits &gt; &amp;other)</div><div class="ttdoc">Addition assignment operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:1328</div></div>
 <div class="ttc" id="aa00970_html_a2ae72843b0e06355884444a5232a93e6"><div class="ttname"><a href="a00970.html#a2ae72843b0e06355884444a5232a93e6">parafields::ImageComponent::infNorm</a></div><div class="ttdeci">RF infNorm() const</div><div class="ttdoc">Maximum abs. value of component.</div><div class="ttdef"><b>Definition:</b> trend.hh:845</div></div>
 <div class="ttc" id="aa00966_html_ab24f592d721054a1f2f080fc6081e556"><div class="ttname"><a href="a00966.html#ab24f592d721054a1f2f080fc6081e556">parafields::TrendComponent::axpy</a></div><div class="ttdeci">TrendComponent&lt; Traits &gt; &amp; axpy(const TrendComponent&lt; Traits &gt; &amp;other, const RF alpha)</div><div class="ttdoc">AXPY scaled addition.</div><div class="ttdef"><b>Definition:</b> trend.hh:514</div></div>
 <div class="ttc" id="aa00966_html_acdc93bdff06f8aaf9c48fb47076f86c8"><div class="ttname"><a href="a00966.html#acdc93bdff06f8aaf9c48fb47076f86c8">parafields::TrendComponent::generate</a></div><div class="ttdeci">void generate(unsigned int seed)</div><div class="ttdoc">Generate trend component coefficients with correct variance.</div><div class="ttdef"><b>Definition:</b> trend.hh:326</div></div>
-<div class="ttc" id="aa00962_html_a8b0b806efa604b418cdbeaa453a8d305"><div class="ttname"><a href="a00962.html#a8b0b806efa604b418cdbeaa453a8d305">parafields::TrendPart::getComponent</a></div><div class="ttdeci">const TrendComponent&lt; Traits &gt; &amp; getComponent(unsigned int i) const</div><div class="ttdoc">Access ith trend component (excluding image)</div><div class="ttdef"><b>Definition:</b> trend.hh:1203</div></div>
+<div class="ttc" id="aa00962_html_a8b0b806efa604b418cdbeaa453a8d305"><div class="ttname"><a href="a00962.html#a8b0b806efa604b418cdbeaa453a8d305">parafields::TrendPart::getComponent</a></div><div class="ttdeci">const TrendComponent&lt; Traits &gt; &amp; getComponent(unsigned int i) const</div><div class="ttdoc">Access ith trend component (excluding image)</div><div class="ttdef"><b>Definition:</b> trend.hh:1235</div></div>
 <div class="ttc" id="aa01078_html_a34a211b9301f13cb56e296ddaac5e84b"><div class="ttname"><a href="a01078.html#a34a211b9301f13cb56e296ddaac5e84b">parafields::TrendComponentType::isSlope</a></div><div class="ttdeci">static bool isSlope(Type i)</div><div class="ttdoc">Check whether component is slope component.</div><div class="ttdef"><b>Definition:</b> trend.hh:48</div></div>
 <div class="ttc" id="aa01078_html_af920d0b0a036b7fb50af46d938bc03fcaba6b328cb33ebee11ed2b326acaae2de"><div class="ttname"><a href="a01078.html#af920d0b0a036b7fb50af46d938bc03fcaba6b328cb33ebee11ed2b326acaae2de">parafields::TrendComponentType::Block</a></div><div class="ttdeci">@ Block</div><div class="ttdef"><b>Definition:</b> trend.hh:36</div></div>
 <div class="ttc" id="aa00966_html_af4d0cfe5a4dcf5ab1bce20693f9ddff8"><div class="ttname"><a href="a00966.html#af4d0cfe5a4dcf5ab1bce20693f9ddff8">parafields::TrendComponent::writeToFile</a></div><div class="ttdeci">void writeToFile(std::ofstream &amp;file) const</div><div class="ttdoc">Write the trend component to hard disk.</div><div class="ttdef"><b>Definition:</b> trend.hh:672</div></div>
 <div class="ttc" id="aa00966_html_a52643c1e25f88a6f671f1c9e52d4b98ba09a96d6fc5d61b2ca8f2334bb47a1c89"><div class="ttname"><a href="a00966.html#a52643c1e25f88a6f671f1c9e52d4b98ba09a96d6fc5d61b2ca8f2334bb47a1c89">parafields::TrendComponent::dim</a></div><div class="ttdeci">@ dim</div><div class="ttdef"><b>Definition:</b> trend.hh:86</div></div>
 <div class="ttc" id="aa01078_html_a3630dab38841109263d63a5eb0ed9b42"><div class="ttname"><a href="a01078.html#a3630dab38841109263d63a5eb0ed9b42">parafields::TrendComponentType::isBlock</a></div><div class="ttdeci">static bool isBlock(Type i)</div><div class="ttdoc">Check whether component is rectangle component.</div><div class="ttdef"><b>Definition:</b> trend.hh:58</div></div>
 <div class="ttc" id="aa00970_html"><div class="ttname"><a href="a00970.html">parafields::ImageComponent</a></div><div class="ttdoc">Component of random field based on pixel image.</div><div class="ttdef"><b>Definition:</b> fieldtraits.hh:19</div></div>
-<div class="ttc" id="aa00962_html_a593ef495e25af72ba9d5a2e7a73ff4ee"><div class="ttname"><a href="a00962.html#a593ef495e25af72ba9d5a2e7a73ff4ee">parafields::TrendPart::evaluate</a></div><div class="ttdeci">void evaluate(const typename Traits::DomainType &amp;x, typename Traits::RangeType &amp;output) const</div><div class="ttdoc">Evaluate the trend part at a given location.</div><div class="ttdef"><b>Definition:</b> trend.hh:1491</div></div>
+<div class="ttc" id="aa00962_html_a593ef495e25af72ba9d5a2e7a73ff4ee"><div class="ttname"><a href="a00962.html#a593ef495e25af72ba9d5a2e7a73ff4ee">parafields::TrendPart::evaluate</a></div><div class="ttdeci">void evaluate(const typename Traits::DomainType &amp;x, typename Traits::RangeType &amp;output) const</div><div class="ttdoc">Evaluate the trend part at a given location.</div><div class="ttdef"><b>Definition:</b> trend.hh:1523</div></div>
 <div class="ttc" id="aa00966_html_aafe0b2bdfaca903a4b68d7ac35f64c3a"><div class="ttname"><a href="a00966.html#aafe0b2bdfaca903a4b68d7ac35f64c3a">parafields::TrendComponent::operator+=</a></div><div class="ttdeci">TrendComponent&lt; Traits &gt; &amp; operator+=(const TrendComponent&lt; Traits &gt; &amp;other)</div><div class="ttdoc">Addition assignment operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:466</div></div>
-<div class="ttc" id="aa00962_html_a44ed96a04610622497a8e06d08fb7da8"><div class="ttname"><a href="a00962.html#a44ed96a04610622497a8e06d08fb7da8">parafields::TrendPart::operator-=</a></div><div class="ttdeci">TrendPart&lt; Traits &gt; &amp; operator-=(const TrendPart&lt; Traits &gt; &amp;other)</div><div class="ttdoc">Subtraction assignment operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:1314</div></div>
+<div class="ttc" id="aa00962_html_a44ed96a04610622497a8e06d08fb7da8"><div class="ttname"><a href="a00962.html#a44ed96a04610622497a8e06d08fb7da8">parafields::TrendPart::operator-=</a></div><div class="ttdeci">TrendPart&lt; Traits &gt; &amp; operator-=(const TrendPart&lt; Traits &gt; &amp;other)</div><div class="ttdoc">Subtraction assignment operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:1346</div></div>
 <div class="ttc" id="aa00962_html"><div class="ttname"><a href="a00962.html">parafields::TrendPart</a></div><div class="ttdoc">Part of random field that consists of deterministic components.</div><div class="ttdef"><b>Definition:</b> fieldtraits.hh:15</div></div>
 <div class="ttc" id="aa00966_html_a6b967dfaa5e57a290c21a22ca799b21c"><div class="ttname"><a href="a00966.html#a6b967dfaa5e57a290c21a22ca799b21c">parafields::TrendComponent::operator*=</a></div><div class="ttdeci">TrendComponent&lt; Traits &gt; &amp; operator*=(const RF alpha)</div><div class="ttdoc">Multiplication with scalar.</div><div class="ttdef"><b>Definition:</b> trend.hh:496</div></div>
-<div class="ttc" id="aa00962_html_ab50e8805b7444d433c4ad09ec91f256b"><div class="ttname"><a href="a00962.html#ab50e8805b7444d433c4ad09ec91f256b">parafields::TrendPart::axpy</a></div><div class="ttdeci">TrendPart&lt; Traits &gt; &amp; axpy(const TrendPart&lt; Traits &gt; &amp;other, const RF alpha)</div><div class="ttdoc">AXPY scaled addition.</div><div class="ttdef"><b>Definition:</b> trend.hh:1353</div></div>
-<div class="ttc" id="aa00962_html_a463354821f0873f4f711321306c0e7a8"><div class="ttname"><a href="a00962.html#a463354821f0873f4f711321306c0e7a8">parafields::TrendPart::generate</a></div><div class="ttdeci">void generate(unsigned int seed)</div><div class="ttdoc">Generate a trend part with desired covariance structure.</div><div class="ttdef"><b>Definition:</b> trend.hh:1143</div></div>
+<div class="ttc" id="aa00962_html_ab50e8805b7444d433c4ad09ec91f256b"><div class="ttname"><a href="a00962.html#ab50e8805b7444d433c4ad09ec91f256b">parafields::TrendPart::axpy</a></div><div class="ttdeci">TrendPart&lt; Traits &gt; &amp; axpy(const TrendPart&lt; Traits &gt; &amp;other, const RF alpha)</div><div class="ttdoc">AXPY scaled addition.</div><div class="ttdef"><b>Definition:</b> trend.hh:1385</div></div>
+<div class="ttc" id="aa00962_html_a463354821f0873f4f711321306c0e7a8"><div class="ttname"><a href="a00962.html#a463354821f0873f4f711321306c0e7a8">parafields::TrendPart::generate</a></div><div class="ttdeci">void generate(unsigned int seed)</div><div class="ttdoc">Generate a trend part with desired covariance structure.</div><div class="ttdef"><b>Definition:</b> trend.hh:1175</div></div>
 <div class="ttc" id="aa00970_html_ae214cac7a7a898d84c17633395e9ba10"><div class="ttname"><a href="a00970.html#ae214cac7a7a898d84c17633395e9ba10">parafields::ImageComponent::ImageComponent</a></div><div class="ttdeci">ImageComponent(const std::shared_ptr&lt; Traits &gt; &amp;traits, const std::vector&lt; RF &gt; &amp;trendVector, const std::vector&lt; RF &gt; &amp;meanVector, const std::vector&lt; RF &gt; &amp;varianceVector, const std::string &amp;imageFile_)</div><div class="ttdoc">Constructor reading image file.</div><div class="ttdef"><b>Definition:</b> trend.hh:726</div></div>
 <div class="ttc" id="aa00966_html_af1bfb12730927bd8bd220ade22e03ff8"><div class="ttname"><a href="a00966.html#af1bfb12730927bd8bd220ade22e03ff8">parafields::TrendComponent::operator!=</a></div><div class="ttdeci">bool operator!=(const TrendComponent&lt; Traits &gt; &amp;other) const</div><div class="ttdoc">Inequality operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:586</div></div>
 <div class="ttc" id="aa00970_html_ad4904908d59d4d528900a630a32c0b8b"><div class="ttname"><a href="a00970.html#ad4904908d59d4d528900a630a32c0b8b">parafields::ImageComponent::dofs</a></div><div class="ttdeci">unsigned int dofs() const</div><div class="ttdoc">Number of degrees of freedom.</div><div class="ttdef"><b>Definition:</b> trend.hh:813</div></div>
-<div class="ttc" id="aa00962_html_a063b4f456006a650c963ab29a07800df"><div class="ttname"><a href="a00962.html#a063b4f456006a650c963ab29a07800df">parafields::TrendPart::operator*</a></div><div class="ttdeci">RF operator*(const TrendPart&lt; Traits &gt; &amp;other) const</div><div class="ttdoc">Scalar product.</div><div class="ttdef"><b>Definition:</b> trend.hh:1391</div></div>
+<div class="ttc" id="aa00962_html_a063b4f456006a650c963ab29a07800df"><div class="ttname"><a href="a00962.html#a063b4f456006a650c963ab29a07800df">parafields::TrendPart::operator*</a></div><div class="ttdeci">RF operator*(const TrendPart&lt; Traits &gt; &amp;other) const</div><div class="ttdoc">Scalar product.</div><div class="ttdef"><b>Definition:</b> trend.hh:1423</div></div>
 <div class="ttc" id="aa00966_html_a08a3f004a902d514d827d24a4099f878"><div class="ttname"><a href="a00966.html#a08a3f004a902d514d827d24a4099f878">parafields::TrendComponent::timesInverseMatrix</a></div><div class="ttdeci">void timesInverseMatrix()</div><div class="ttdoc">Divide the trend coefficients by their variances.</div><div class="ttdef"><b>Definition:</b> trend.hh:424</div></div>
-<div class="ttc" id="aa00962_html_a690d55129c57451bf2a46a4dd2753554"><div class="ttname"><a href="a00962.html#a690d55129c57451bf2a46a4dd2753554">parafields::TrendPart::timesMatrix</a></div><div class="ttdeci">void timesMatrix()</div><div class="ttdoc">Multiply the trend part with its covariance matrix.</div><div class="ttdef"><b>Definition:</b> trend.hh:1227</div></div>
+<div class="ttc" id="aa00962_html_a690d55129c57451bf2a46a4dd2753554"><div class="ttname"><a href="a00962.html#a690d55129c57451bf2a46a4dd2753554">parafields::TrendPart::timesMatrix</a></div><div class="ttdeci">void timesMatrix()</div><div class="ttdoc">Multiply the trend part with its covariance matrix.</div><div class="ttdef"><b>Definition:</b> trend.hh:1259</div></div>
 <div class="ttc" id="aa00053_html"><div class="ttname"><a href="a00053.html">pngreader.hh</a></div></div>
-<div class="ttc" id="aa00962_html_a437be37f2b645f464ec1ae0355e65866"><div class="ttname"><a href="a00962.html#a437be37f2b645f464ec1ae0355e65866">parafields::TrendPart::dofs</a></div><div class="ttdeci">unsigned int dofs() const</div><div class="ttdoc">Number of degrees of freedom.</div><div class="ttdef"><b>Definition:</b> trend.hh:1121</div></div>
-<div class="ttc" id="aa00962_html_a245207cac0d81475b0772e39d5794c49"><div class="ttname"><a href="a00962.html#a245207cac0d81475b0772e39d5794c49">parafields::TrendPart::getImageComponent</a></div><div class="ttdeci">const std::shared_ptr&lt; const ImageComponent&lt; Traits &gt; &gt; &amp; getImageComponent() const</div><div class="ttdoc">Access image component if available.</div><div class="ttdef"><b>Definition:</b> trend.hh:1215</div></div>
-<div class="ttc" id="aa00962_html_a26009e7982a2755dadf3fe56209521a1"><div class="ttname"><a href="a00962.html#a26009e7982a2755dadf3fe56209521a1">parafields::TrendPart::writeToFile</a></div><div class="ttdeci">void writeToFile(const std::string &amp;fileName) const</div><div class="ttdoc">Write the trend part to hard disk.</div><div class="ttdef"><b>Definition:</b> trend.hh:1517</div></div>
-<div class="ttc" id="aa00962_html_a8ea461cc6da9b1f4a3ed7baf7771a628"><div class="ttname"><a href="a00962.html#a8ea461cc6da9b1f4a3ed7baf7771a628">parafields::TrendPart::oneNorm</a></div><div class="ttdeci">RF oneNorm() const</div><div class="ttdoc">One norm.</div><div class="ttdef"><b>Definition:</b> trend.hh:1448</div></div>
-<div class="ttc" id="aa00962_html_a69a6d3773d9c7333f01eb4cb60c4e195"><div class="ttname"><a href="a00962.html#a69a6d3773d9c7333f01eb4cb60c4e195">parafields::TrendPart::operator==</a></div><div class="ttdeci">bool operator==(const TrendPart&lt; Traits &gt; &amp;other) const</div><div class="ttdoc">Equality operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:1411</div></div>
+<div class="ttc" id="aa00962_html_a437be37f2b645f464ec1ae0355e65866"><div class="ttname"><a href="a00962.html#a437be37f2b645f464ec1ae0355e65866">parafields::TrendPart::dofs</a></div><div class="ttdeci">unsigned int dofs() const</div><div class="ttdoc">Number of degrees of freedom.</div><div class="ttdef"><b>Definition:</b> trend.hh:1153</div></div>
+<div class="ttc" id="aa00962_html_a245207cac0d81475b0772e39d5794c49"><div class="ttname"><a href="a00962.html#a245207cac0d81475b0772e39d5794c49">parafields::TrendPart::getImageComponent</a></div><div class="ttdeci">const std::shared_ptr&lt; const ImageComponent&lt; Traits &gt; &gt; &amp; getImageComponent() const</div><div class="ttdoc">Access image component if available.</div><div class="ttdef"><b>Definition:</b> trend.hh:1247</div></div>
+<div class="ttc" id="aa00962_html_a26009e7982a2755dadf3fe56209521a1"><div class="ttname"><a href="a00962.html#a26009e7982a2755dadf3fe56209521a1">parafields::TrendPart::writeToFile</a></div><div class="ttdeci">void writeToFile(const std::string &amp;fileName) const</div><div class="ttdoc">Write the trend part to hard disk.</div><div class="ttdef"><b>Definition:</b> trend.hh:1549</div></div>
+<div class="ttc" id="aa00962_html_a8ea461cc6da9b1f4a3ed7baf7771a628"><div class="ttname"><a href="a00962.html#a8ea461cc6da9b1f4a3ed7baf7771a628">parafields::TrendPart::oneNorm</a></div><div class="ttdeci">RF oneNorm() const</div><div class="ttdoc">One norm.</div><div class="ttdef"><b>Definition:</b> trend.hh:1480</div></div>
+<div class="ttc" id="aa00962_html_a69a6d3773d9c7333f01eb4cb60c4e195"><div class="ttname"><a href="a00962.html#a69a6d3773d9c7333f01eb4cb60c4e195">parafields::TrendPart::operator==</a></div><div class="ttdeci">bool operator==(const TrendPart&lt; Traits &gt; &amp;other) const</div><div class="ttdoc">Equality operator.</div><div class="ttdef"><b>Definition:</b> trend.hh:1443</div></div>
 <div class="ttc" id="aa00966_html_acd9bdf11a77d442c0282f875f62a016f"><div class="ttname"><a href="a00966.html#acd9bdf11a77d442c0282f875f62a016f">parafields::TrendComponent::timesMatrix</a></div><div class="ttdeci">void timesMatrix()</div><div class="ttdoc">Multiply the trend coefficients with their variances.</div><div class="ttdef"><b>Definition:</b> trend.hh:410</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

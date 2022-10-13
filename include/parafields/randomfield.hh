@@ -434,21 +434,24 @@ public:
    * @brief Explicit matrix setup for custom covariance classes
    *
    * This function can be called if a custom user-supplied covariance
-   * function should be used. The function is passed as a template
-   * parameter, and has to fulfill the interface of the built-in
-   * covariance functions. In the configuration, "custom-iso" or
+   * function should be used. The function is passed as a callable (e.g.
+   * a (std::)function, a functor etc). In the configuration, "custom-iso" or
    * "custom-aniso" has to be chosen as the desired covariance type.
    * The former assumes that the covariance function is symmetric in
    * each dimension, leading to significant memory savings, and will
    * not work if that is not the case.
    */
   template<typename Covariance>
-  void fillMatrix()
+  void fillMatrix(Covariance&& covariance)
   {
     if (useAnisoMatrix)
-      (*anisoMatrix).template fillTransformedMatrix<Covariance>();
+      (*anisoMatrix)
+        .template fillTransformedMatrix<Covariance>(
+          std::forward<Covariance>(covariance));
     else
-      (*isoMatrix).template fillTransformedMatrix<Covariance>();
+      (*isoMatrix)
+        .template fillTransformedMatrix<Covariance>(
+          std::forward<Covariance>(covariance));
   }
 
   /** @brief Dynamically add trend components

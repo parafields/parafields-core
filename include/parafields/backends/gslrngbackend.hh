@@ -104,10 +104,7 @@ public:
    *
    * @param seed seed value for the random number generator
    */
-  void seed(unsigned int seed)
-  {
-    gsl_rng_set(generator, seed);
-  }
+  void seed(unsigned int seed) { gsl_rng_set(generator, seed); }
 
   /**
    * @brief Produce sample from normally distributed random variable

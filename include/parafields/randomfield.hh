@@ -413,10 +413,7 @@ public:
    *
    * @return volume of one of the grid cells the values are assigned to
    */
-  RF cellVolume() const
-  {
-    return (*traits).cellVolume;
-  }
+  RF cellVolume() const { return (*traits).cellVolume; }
 
   /**
    * @brief Number of degrees of freedom
@@ -427,10 +424,7 @@ public:
    *
    * @return total degrees of freedom
    */
-  unsigned int dofs() const
-  {
-    return stochasticPart.dofs() + trendPart.dofs();
-  }
+  unsigned int dofs() const { return stochasticPart.dofs() + trendPart.dofs(); }
 
   /**
    * @brief Explicit matrix setup for custom covariance classes
@@ -1323,10 +1317,7 @@ public:
    *
    * @return resulting sum
    */
-  RF oneNorm() const
-  {
-    return trendPart.oneNorm() + stochasticPart.oneNorm();
-  }
+  RF oneNorm() const { return trendPart.oneNorm() + stochasticPart.oneNorm(); }
 
   /**
    * @brief Euclidean norm
@@ -1336,10 +1327,7 @@ public:
    *
    * @return resulting value
    */
-  RF twoNorm() const
-  {
-    return std::sqrt(*this * *this);
-  }
+  RF twoNorm() const { return std::sqrt(*this * *this); }
 
   /**
    * @brief Maximum norm
@@ -1376,10 +1364,7 @@ public:
    *
    * @see operator==
    */
-  bool operator!=(const RandomField& other) const
-  {
-    return !operator==(other);
-  }
+  bool operator!=(const RandomField& other) const { return !operator==(other); }
 
   /**
    * @brief Multiply field with Gaussian with given center and radius
@@ -1851,10 +1836,7 @@ public:
    *
    * @see get
    */
-  const std::vector<std::string> types() const
-  {
-    return activeTypes;
-  }
+  const std::vector<std::string> types() const { return activeTypes; }
 
   /**
    * @brief Access to individual random field

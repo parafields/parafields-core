@@ -267,10 +267,7 @@ public:
    *
    * @return TrendComponentType object
    */
-  TrendComponentType::Type type() const
-  {
-    return componentType;
-  }
+  TrendComponentType::Type type() const { return componentType; }
 
   /**
    * @brief Name of type of this trend component
@@ -787,20 +784,14 @@ public:
    *
    * @see TrendComponent
    */
-  std::string name() const
-  {
-    return "image";
-  }
+  std::string name() const { return "image"; }
 
   /**
    * @brief Number of degrees of freedom
    *
    * @see TrendComponent
    */
-  unsigned int dofs() const
-  {
-    return 1;
-  }
+  unsigned int dofs() const { return 1; }
 
   /**
    * @brief Evaluate the trend component at a given location
@@ -819,20 +810,14 @@ public:
    *
    * @see TrendComponent
    */
-  RF oneNorm() const
-  {
-    return std::abs(this->shiftVector[0]);
-  }
+  RF oneNorm() const { return std::abs(this->shiftVector[0]); }
 
   /**
    * @brief Maximum abs. value of component
    *
    * @see TrendComponent
    */
-  RF infNorm() const
-  {
-    return std::abs(this->shiftVector[0]);
-  }
+  RF infNorm() const { return std::abs(this->shiftVector[0]); }
 
   /**
    * @brief Write the trend component to hard disk
@@ -1202,10 +1187,7 @@ public:
    *
    * @return number of components
    */
-  unsigned int size() const
-  {
-    return componentVector.size();
-  }
+  unsigned int size() const { return componentVector.size(); }
 
   /**
    * @brief Access ith trend component (excluding image)

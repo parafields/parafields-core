@@ -7,7 +7,7 @@
 
 /// @todo get rid of this
 #define HDF5_DATA_TYPE H5T_IEEE_F64LE // define for 64 bit machine
-//#define HDF5_DATA_TYPE H5T_IEEE_F32LE //define for 32 bit machine
+// #define HDF5_DATA_TYPE H5T_IEEE_F32LE //define for 32 bit machine
 #endif // HAVE_HDF5
 
 namespace parafields {

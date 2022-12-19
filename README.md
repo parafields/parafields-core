@@ -1,7 +1,7 @@
 # Welcome to parafields-core
 
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/parafields/parafields/ci.yml?branch=main)](https://github.com/parafields/parafields/actions/workflows/ci.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/parafields/parafields-core/ci.yml?branch=main)](https://github.com/parafields/parafields-core/actions/workflows/ci.yml)
 [![Documentation Status](https://img.shields.io/github/deployments/parafields/parafields-core/github-pages?label=documentation)](https://parafields.github.io/parafields-core/)
 
 parafields-core is a C++library for the generation of Gaussian random

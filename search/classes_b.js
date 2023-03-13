@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['r2cfieldbackend_265',['R2CFieldBackend',['../a00913.html',1,'parafields']]],
-  ['r2cmatrixbackend_266',['R2CMatrixBackend',['../a00917.html',1,'parafields']]],
-  ['randomfield_267',['RandomField',['../a00985.html',1,'parafields']]],
-  ['randomfieldlist_268',['RandomFieldList',['../a01073.html',1,'parafields']]],
-  ['randomfieldtraits_269',['RandomFieldTraits',['../a00989.html',1,'parafields']]]
+  ['scaledidentitymatrix_267',['ScaledIdentityMatrix',['../a00918.html',1,'parafields']]],
+  ['signmutator_268',['SignMutator',['../a01046.html',1,'parafields']]],
+  ['smoothsigmoid_269',['SmoothSigmoid',['../a00930.html',1,'parafields']]],
+  ['smoothstepsigmoid_270',['SmoothstepSigmoid',['../a00938.html',1,'parafields']]],
+  ['sphericalcovariance_271',['SphericalCovariance',['../a00942.html',1,'parafields']]],
+  ['stochasticpart_272',['StochasticPart',['../a00974.html',1,'parafields']]]
 ];

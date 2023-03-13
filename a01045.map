@@ -1,0 +1,4 @@
+<map id="parafields::SignMutator&lt; RF &gt;" name="parafields::SignMutator&lt; RF &gt;">
+<area shape="rect" id="node1" title="Replaces value with its sign (&#45;1 for negative, +1 for nonnegative)" alt="" coords="7,95,181,136"/>
+<area shape="rect" id="node2" href="$a01030.html" title="Abstract base class for value transformations." alt="" coords="5,5,183,47"/>
+</map>

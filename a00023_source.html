@@ -72,10 +72,10 @@ $(function() {
 <div class="contents">
 <a href="a00023.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00069.html">parafields</a> {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00066.html">parafields</a> {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Traits&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="a00913.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00913.html">R2CFieldBackend</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="a00910.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00910.html">R2CFieldBackend</a></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">using</span> RF = <span class="keyword">typename</span> Traits::RF;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  <span class="keyword">using</span> Index = <span class="keyword">typename</span> Traits::Index;</div>
@@ -107,7 +107,7 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  Indices localR2CRealCells;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  Index localR2CRealDomainSize;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">mutable</span> <span class="keyword">typename</span> <a class="code" href="a00905.html">FFTW&lt;RF&gt;::complex</a>* fieldData;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">mutable</span> <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::complex</a>* fieldData;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keyword">mutable</span> Indices indices;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordtype">bool</span> transposed;</div>
@@ -119,7 +119,7 @@ $(function() {
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  };</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="a00913.html#a96db9bfe3a466ed92fe8239c85b3b6c1">   68</a></span>&#160;  <a class="code" href="a00913.html#a96db9bfe3a466ed92fe8239c85b3b6c1">R2CFieldBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits_)</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="a00910.html#a96db9bfe3a466ed92fe8239c85b3b6c1">   68</a></span>&#160;  <a class="code" href="a00910.html#a96db9bfe3a466ed92fe8239c85b3b6c1">R2CFieldBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits_)</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    : traits(traits_)</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    , fieldData(nullptr)</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  {</div>
@@ -128,23 +128,23 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="a00905.html">FFTW&lt;RF&gt;::import_wisdom_from_filename</a>(<span class="stringliteral">&quot;wisdom-R2CField.ini&quot;</span>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="a00902.html">FFTW&lt;RF&gt;::import_wisdom_from_filename</a>(<span class="stringliteral">&quot;wisdom-R2CField.ini&quot;</span>);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_broadcast_wisdom</a>((*traits).comm);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_broadcast_wisdom</a>((*traits).comm);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  }</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a00913.html#a2e1a03a2a9419a0c5026cc5d6b01499e">   89</a></span>&#160;  <a class="code" href="a00913.html#a2e1a03a2a9419a0c5026cc5d6b01499e">~R2CFieldBackend</a>()</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a00910.html#a2e1a03a2a9419a0c5026cc5d6b01499e">   89</a></span>&#160;  <a class="code" href="a00910.html#a2e1a03a2a9419a0c5026cc5d6b01499e">~R2CFieldBackend</a>()</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  {</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_gather_wisdom</a>((*traits).comm);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_gather_wisdom</a>((*traits).comm);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <a class="code" href="a00905.html">FFTW&lt;RF&gt;::export_wisdom_to_filename</a>(<span class="stringliteral">&quot;wisdom-R2CField.ini&quot;</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <a class="code" href="a00902.html">FFTW&lt;RF&gt;::export_wisdom_to_filename</a>(<span class="stringliteral">&quot;wisdom-R2CField.ini&quot;</span>);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span> (fieldData != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::free</a>(fieldData);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::free</a>(fieldData);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      fieldData = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
@@ -156,7 +156,7 @@ $(function() {
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">   * the random field object or its refinement. It updates</span></div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">   * parameters like the number of cells per dimension.</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a00913.html#af49279cf6af32ce1e37a151d26dc12db">  111</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00913.html#af49279cf6af32ce1e37a151d26dc12db">update</a>()</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a00910.html#af49279cf6af32ce1e37a151d26dc12db">  111</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00910.html#af49279cf6af32ce1e37a151d26dc12db">update</a>()</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  {</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    rank = (*traits).rank;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    commSize = (*traits).commSize;</div>
@@ -180,22 +180,22 @@ $(function() {
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    getR2CCells();</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">if</span> (fieldData != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::free</a>(fieldData);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::free</a>(fieldData);</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;      fieldData = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    }</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  }</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="a00913.html#abbcee6d23d71392bb5c6292f199fed55">  151</a></span>&#160;  Index <a class="code" href="a00913.html#abbcee6d23d71392bb5c6292f199fed55">localFieldSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localR2CComplexDomainSize; }</div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="a00910.html#abbcee6d23d71392bb5c6292f199fed55">  151</a></span>&#160;  Index <a class="code" href="a00910.html#abbcee6d23d71392bb5c6292f199fed55">localFieldSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localR2CComplexDomainSize; }</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="a00913.html#a79659db49c1e665dc89b5dbbeb5dbb13">  165</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00913.html#a79659db49c1e665dc89b5dbbeb5dbb13">localFieldCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localR2CComplexCells; }</div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="a00910.html#a79659db49c1e665dc89b5dbbeb5dbb13">  165</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00910.html#a79659db49c1e665dc89b5dbbeb5dbb13">localFieldCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localR2CComplexCells; }</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="a00913.html#a8ae16567d7fc43176a0c4adb9b2ecb58">  174</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00913.html#a8ae16567d7fc43176a0c4adb9b2ecb58">allocate</a>()</div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="a00910.html#a8ae16567d7fc43176a0c4adb9b2ecb58">  174</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00910.html#a8ae16567d7fc43176a0c4adb9b2ecb58">allocate</a>()</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  {</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordflow">if</span> (fieldData == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;      fieldData = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::alloc_complex</a>(allocLocal);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;      fieldData = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::alloc_complex</a>(allocLocal);</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  }</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="a00913.html#ae856ab0c4eb244ef1f135b22dd1f88ba">  190</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00913.html#ae856ab0c4eb244ef1f135b22dd1f88ba">transposeIfNeeded</a>()</div>
+<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="a00910.html#ae856ab0c4eb244ef1f135b22dd1f88ba">  190</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00910.html#ae856ab0c4eb244ef1f135b22dd1f88ba">transposeIfNeeded</a>()</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  {</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <span class="keywordflow">if</span> (transposed) {</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;      std::swap(extendedCells[dim - 1], extendedCells[dim - 2]);</div>
@@ -206,7 +206,7 @@ $(function() {
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;  }</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="a00913.html#a5c85e49fdb5568b5fef8a8591390edf5">  210</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00913.html#a5c85e49fdb5568b5fef8a8591390edf5">forwardTransform</a>()</div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="a00910.html#a5c85e49fdb5568b5fef8a8591390edf5">  210</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00910.html#a5c85e49fdb5568b5fef8a8591390edf5">forwardTransform</a>()</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  {</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> flags;</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.measure&quot;</span>, <span class="keyword">false</span>))</div>
@@ -220,26 +220,26 @@ $(function() {
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;      n[i] = extendedCells[dim - 1 - i];</div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00905.html">FFTW&lt;RF&gt;::plan</a> plan_forward = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_plan_dft_r2c</a>(</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::plan</a> plan_forward = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_plan_dft_r2c</a>(</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;      dim, n, (RF*)fieldData, fieldData, (*traits).comm, flags);</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keywordflow">if</span> (plan_forward == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create forward plan&quot;</span> };</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::execute</a>(plan_forward);</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_forward);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::execute</a>(plan_forward);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_forward);</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <span class="keywordflow">for</span> (Index i = 0; i &lt; allocLocal; i++) {</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;      fieldData[i][0] /= extendedDomainSize;</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;      fieldData[i][1] /= extendedDomainSize;</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    }</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <a class="code" href="a00913.html#ae856ab0c4eb244ef1f135b22dd1f88ba">transposeIfNeeded</a>();</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <a class="code" href="a00910.html#ae856ab0c4eb244ef1f135b22dd1f88ba">transposeIfNeeded</a>();</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  }</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
-<div class="line"><a name="l00250"></a><span class="lineno"><a class="line" href="a00913.html#acf6c5167545b5dea97f0595afa76b712">  250</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00913.html#acf6c5167545b5dea97f0595afa76b712">backwardTransform</a>()</div>
+<div class="line"><a name="l00250"></a><span class="lineno"><a class="line" href="a00910.html#acf6c5167545b5dea97f0595afa76b712">  250</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00910.html#acf6c5167545b5dea97f0595afa76b712">backwardTransform</a>()</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;  {</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <a class="code" href="a00913.html#ae856ab0c4eb244ef1f135b22dd1f88ba">transposeIfNeeded</a>();</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <a class="code" href="a00910.html#ae856ab0c4eb244ef1f135b22dd1f88ba">transposeIfNeeded</a>();</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> flags;</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.measure&quot;</span>, <span class="keyword">false</span>))</div>
@@ -253,19 +253,19 @@ $(function() {
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;      n[i] = extendedCells[dim - 1 - i];</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00905.html">FFTW&lt;RF&gt;::plan</a> plan_backward = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_plan_dft_c2r</a>(</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::plan</a> plan_backward = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_plan_dft_c2r</a>(</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;      dim, n, fieldData, (RF*)fieldData, (*traits).comm, flags);</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordflow">if</span> (plan_backward == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create backward plan&quot;</span> };</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::execute</a>(plan_backward);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_backward);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::execute</a>(plan_backward);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_backward);</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  }</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="a00913.html#aa98b670d0723d18f22bb5b75a6c9408c">  283</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00913.html#aa98b670d0723d18f22bb5b75a6c9408c">hasSpareField</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line"><a name="l00283"></a><span class="lineno"><a class="line" href="a00910.html#aa98b670d0723d18f22bb5b75a6c9408c">  283</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00910.html#aa98b670d0723d18f22bb5b75a6c9408c">hasSpareField</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="a00913.html#aff21467ddeb93b1860f6998632928797">  305</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00913.html#aff21467ddeb93b1860f6998632928797">set</a>(Index index, RF lambda, RF rand1, RF rand2)</div>
+<div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="a00910.html#aff21467ddeb93b1860f6998632928797">  305</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00910.html#aff21467ddeb93b1860f6998632928797">set</a>(Index index, RF lambda, RF rand1, RF rand2)</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;  {</div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keyword">static</span> <span class="keyword">const</span> RF sqrtTwo = std::sqrt(2.);</div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
@@ -287,16 +287,16 @@ $(function() {
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    }</div>
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;  }</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
-<div class="line"><a name="l00337"></a><span class="lineno"><a class="line" href="a00913.html#a2726cbbef151a69d8e4e13641d73eb73">  337</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00913.html#a2726cbbef151a69d8e4e13641d73eb73">mult</a>(Index index, RF lambda)</div>
+<div class="line"><a name="l00337"></a><span class="lineno"><a class="line" href="a00910.html#a2726cbbef151a69d8e4e13641d73eb73">  337</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00910.html#a2726cbbef151a69d8e4e13641d73eb73">mult</a>(Index index, RF lambda)</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;  {</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    fieldData[index][0] *= lambda;</div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    fieldData[index][1] *= lambda;</div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;  }</div>
 <div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
-<div class="line"><a name="l00352"></a><span class="lineno"><a class="line" href="a00913.html#a2ed5acf036626d3e84cc7e43f80e6198">  352</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00913.html#a2ed5acf036626d3e84cc7e43f80e6198">fieldToExtendedField</a>(std::vector&lt;RF&gt;&amp; field)</div>
+<div class="line"><a name="l00352"></a><span class="lineno"><a class="line" href="a00910.html#a2ed5acf036626d3e84cc7e43f80e6198">  352</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00910.html#a2ed5acf036626d3e84cc7e43f80e6198">fieldToExtendedField</a>(std::vector&lt;RF&gt;&amp; field)</div>
 <div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  {</div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordflow">if</span> (fieldData == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;      fieldData = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::alloc_complex</a>(allocLocal);</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;      fieldData = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::alloc_complex</a>(allocLocal);</div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="keywordflow">for</span> (Index i = 0; i &lt; localR2CRealDomainSize; i++)</div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;      ((RF*)fieldData)[i] = 0.;</div>
@@ -352,7 +352,7 @@ $(function() {
 <div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    }</div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;  }</div>
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00423"></a><span class="lineno"><a class="line" href="a00913.html#adcd1b0cc2219e8b50495478c902ea8df">  423</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00913.html#adcd1b0cc2219e8b50495478c902ea8df">extendedFieldToField</a>(std::vector&lt;RF&gt;&amp; field,</div>
+<div class="line"><a name="l00423"></a><span class="lineno"><a class="line" href="a00910.html#adcd1b0cc2219e8b50495478c902ea8df">  423</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00910.html#adcd1b0cc2219e8b50495478c902ea8df">extendedFieldToField</a>(std::vector&lt;RF&gt;&amp; field,</div>
 <div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;                            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="keyword">  </span>{</div>
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    field.resize(localDomainSize);</div>
@@ -434,7 +434,7 @@ $(function() {
 <div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;    n[dim - 1] = extendedCells[0] / 2 + 1;</div>
 <div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160; </div>
 <div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;    allocLocal =</div>
-<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_local_size</a>(dim, n, (*traits).comm, &amp;localN0, &amp;local0Start);</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_local_size</a>(dim, n, (*traits).comm, &amp;localN0, &amp;local0Start);</div>
 <div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;  }</div>
 <div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160; </div>
 <div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;  <span class="keywordtype">void</span> getR2CCells()</div>
@@ -453,23 +453,23 @@ $(function() {
 <div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;};</div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160; </div>
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;} <span class="comment">// namespace parafields</span></div>
-<div class="ttc" id="aa00069_html"><div class="ttname"><a href="a00069.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
-<div class="ttc" id="aa00905_html"><div class="ttname"><a href="a00905.html">parafields::FFTW</a></div><div class="ttdoc">Fallback class for error message when requested FFTW3 library wasn't found.</div><div class="ttdef"><b>Definition:</b> fftwwrapper.hh:18</div></div>
-<div class="ttc" id="aa00913_html"><div class="ttname"><a href="a00913.html">parafields::R2CFieldBackend</a></div><div class="ttdoc">Field backend that uses real-input discrete Fourier transform (R2C)</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:18</div></div>
-<div class="ttc" id="aa00913_html_a2726cbbef151a69d8e4e13641d73eb73"><div class="ttname"><a href="a00913.html#a2726cbbef151a69d8e4e13641d73eb73">parafields::R2CFieldBackend::mult</a></div><div class="ttdeci">void mult(Index index, RF lambda)</div><div class="ttdoc">Multiply entry with given number.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:337</div></div>
-<div class="ttc" id="aa00913_html_a2e1a03a2a9419a0c5026cc5d6b01499e"><div class="ttname"><a href="a00913.html#a2e1a03a2a9419a0c5026cc5d6b01499e">parafields::R2CFieldBackend::~R2CFieldBackend</a></div><div class="ttdeci">~R2CFieldBackend()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:89</div></div>
-<div class="ttc" id="aa00913_html_a2ed5acf036626d3e84cc7e43f80e6198"><div class="ttname"><a href="a00913.html#a2ed5acf036626d3e84cc7e43f80e6198">parafields::R2CFieldBackend::fieldToExtendedField</a></div><div class="ttdeci">void fieldToExtendedField(std::vector&lt; RF &gt; &amp;field)</div><div class="ttdoc">Embed a random field in the extended domain.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:352</div></div>
-<div class="ttc" id="aa00913_html_a5c85e49fdb5568b5fef8a8591390edf5"><div class="ttname"><a href="a00913.html#a5c85e49fdb5568b5fef8a8591390edf5">parafields::R2CFieldBackend::forwardTransform</a></div><div class="ttdeci">void forwardTransform()</div><div class="ttdoc">Transform into Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:210</div></div>
-<div class="ttc" id="aa00913_html_a79659db49c1e665dc89b5dbbeb5dbb13"><div class="ttname"><a href="a00913.html#a79659db49c1e665dc89b5dbbeb5dbb13">parafields::R2CFieldBackend::localFieldCells</a></div><div class="ttdeci">const Indices &amp; localFieldCells() const</div><div class="ttdoc">Number of entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:165</div></div>
-<div class="ttc" id="aa00913_html_a8ae16567d7fc43176a0c4adb9b2ecb58"><div class="ttname"><a href="a00913.html#a8ae16567d7fc43176a0c4adb9b2ecb58">parafields::R2CFieldBackend::allocate</a></div><div class="ttdeci">void allocate()</div><div class="ttdoc">Reserve memory before storing any field entries.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:174</div></div>
-<div class="ttc" id="aa00913_html_a96db9bfe3a466ed92fe8239c85b3b6c1"><div class="ttname"><a href="a00913.html#a96db9bfe3a466ed92fe8239c85b3b6c1">parafields::R2CFieldBackend::R2CFieldBackend</a></div><div class="ttdeci">R2CFieldBackend(const std::shared_ptr&lt; Traits &gt; &amp;traits_)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:68</div></div>
-<div class="ttc" id="aa00913_html_aa98b670d0723d18f22bb5b75a6c9408c"><div class="ttname"><a href="a00913.html#aa98b670d0723d18f22bb5b75a6c9408c">parafields::R2CFieldBackend::hasSpareField</a></div><div class="ttdeci">bool hasSpareField() const</div><div class="ttdoc">Whether this kind of backend produces two fields at once.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:283</div></div>
-<div class="ttc" id="aa00913_html_abbcee6d23d71392bb5c6292f199fed55"><div class="ttname"><a href="a00913.html#abbcee6d23d71392bb5c6292f199fed55">parafields::R2CFieldBackend::localFieldSize</a></div><div class="ttdeci">Index localFieldSize() const</div><div class="ttdoc">Number of extended field entries stored on this processor.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:151</div></div>
-<div class="ttc" id="aa00913_html_acf6c5167545b5dea97f0595afa76b712"><div class="ttname"><a href="a00913.html#acf6c5167545b5dea97f0595afa76b712">parafields::R2CFieldBackend::backwardTransform</a></div><div class="ttdeci">void backwardTransform()</div><div class="ttdoc">Transform from Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:250</div></div>
-<div class="ttc" id="aa00913_html_adcd1b0cc2219e8b50495478c902ea8df"><div class="ttname"><a href="a00913.html#adcd1b0cc2219e8b50495478c902ea8df">parafields::R2CFieldBackend::extendedFieldToField</a></div><div class="ttdeci">void extendedFieldToField(std::vector&lt; RF &gt; &amp;field, unsigned int component=0) const</div><div class="ttdoc">Restrict an extended random field to the original domain.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:423</div></div>
-<div class="ttc" id="aa00913_html_ae856ab0c4eb244ef1f135b22dd1f88ba"><div class="ttname"><a href="a00913.html#ae856ab0c4eb244ef1f135b22dd1f88ba">parafields::R2CFieldBackend::transposeIfNeeded</a></div><div class="ttdeci">void transposeIfNeeded()</div><div class="ttdoc">Switch last two dimensions (for transposed transforms)</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:190</div></div>
-<div class="ttc" id="aa00913_html_af49279cf6af32ce1e37a151d26dc12db"><div class="ttname"><a href="a00913.html#af49279cf6af32ce1e37a151d26dc12db">parafields::R2CFieldBackend::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:111</div></div>
-<div class="ttc" id="aa00913_html_aff21467ddeb93b1860f6998632928797"><div class="ttname"><a href="a00913.html#aff21467ddeb93b1860f6998632928797">parafields::R2CFieldBackend::set</a></div><div class="ttdeci">void set(Index index, RF lambda, RF rand1, RF rand2)</div><div class="ttdoc">Set entry based on pair of random numbers.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:305</div></div>
+<div class="ttc" id="aa00066_html"><div class="ttname"><a href="a00066.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
+<div class="ttc" id="aa00902_html"><div class="ttname"><a href="a00902.html">parafields::FFTW</a></div><div class="ttdoc">Fallback class for error message when requested FFTW3 library wasn't found.</div><div class="ttdef"><b>Definition:</b> fftwwrapper.hh:18</div></div>
+<div class="ttc" id="aa00910_html"><div class="ttname"><a href="a00910.html">parafields::R2CFieldBackend</a></div><div class="ttdoc">Field backend that uses real-input discrete Fourier transform (R2C)</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:18</div></div>
+<div class="ttc" id="aa00910_html_a2726cbbef151a69d8e4e13641d73eb73"><div class="ttname"><a href="a00910.html#a2726cbbef151a69d8e4e13641d73eb73">parafields::R2CFieldBackend::mult</a></div><div class="ttdeci">void mult(Index index, RF lambda)</div><div class="ttdoc">Multiply entry with given number.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:337</div></div>
+<div class="ttc" id="aa00910_html_a2e1a03a2a9419a0c5026cc5d6b01499e"><div class="ttname"><a href="a00910.html#a2e1a03a2a9419a0c5026cc5d6b01499e">parafields::R2CFieldBackend::~R2CFieldBackend</a></div><div class="ttdeci">~R2CFieldBackend()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:89</div></div>
+<div class="ttc" id="aa00910_html_a2ed5acf036626d3e84cc7e43f80e6198"><div class="ttname"><a href="a00910.html#a2ed5acf036626d3e84cc7e43f80e6198">parafields::R2CFieldBackend::fieldToExtendedField</a></div><div class="ttdeci">void fieldToExtendedField(std::vector&lt; RF &gt; &amp;field)</div><div class="ttdoc">Embed a random field in the extended domain.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:352</div></div>
+<div class="ttc" id="aa00910_html_a5c85e49fdb5568b5fef8a8591390edf5"><div class="ttname"><a href="a00910.html#a5c85e49fdb5568b5fef8a8591390edf5">parafields::R2CFieldBackend::forwardTransform</a></div><div class="ttdeci">void forwardTransform()</div><div class="ttdoc">Transform into Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:210</div></div>
+<div class="ttc" id="aa00910_html_a79659db49c1e665dc89b5dbbeb5dbb13"><div class="ttname"><a href="a00910.html#a79659db49c1e665dc89b5dbbeb5dbb13">parafields::R2CFieldBackend::localFieldCells</a></div><div class="ttdeci">const Indices &amp; localFieldCells() const</div><div class="ttdoc">Number of entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:165</div></div>
+<div class="ttc" id="aa00910_html_a8ae16567d7fc43176a0c4adb9b2ecb58"><div class="ttname"><a href="a00910.html#a8ae16567d7fc43176a0c4adb9b2ecb58">parafields::R2CFieldBackend::allocate</a></div><div class="ttdeci">void allocate()</div><div class="ttdoc">Reserve memory before storing any field entries.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:174</div></div>
+<div class="ttc" id="aa00910_html_a96db9bfe3a466ed92fe8239c85b3b6c1"><div class="ttname"><a href="a00910.html#a96db9bfe3a466ed92fe8239c85b3b6c1">parafields::R2CFieldBackend::R2CFieldBackend</a></div><div class="ttdeci">R2CFieldBackend(const std::shared_ptr&lt; Traits &gt; &amp;traits_)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:68</div></div>
+<div class="ttc" id="aa00910_html_aa98b670d0723d18f22bb5b75a6c9408c"><div class="ttname"><a href="a00910.html#aa98b670d0723d18f22bb5b75a6c9408c">parafields::R2CFieldBackend::hasSpareField</a></div><div class="ttdeci">bool hasSpareField() const</div><div class="ttdoc">Whether this kind of backend produces two fields at once.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:283</div></div>
+<div class="ttc" id="aa00910_html_abbcee6d23d71392bb5c6292f199fed55"><div class="ttname"><a href="a00910.html#abbcee6d23d71392bb5c6292f199fed55">parafields::R2CFieldBackend::localFieldSize</a></div><div class="ttdeci">Index localFieldSize() const</div><div class="ttdoc">Number of extended field entries stored on this processor.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:151</div></div>
+<div class="ttc" id="aa00910_html_acf6c5167545b5dea97f0595afa76b712"><div class="ttname"><a href="a00910.html#acf6c5167545b5dea97f0595afa76b712">parafields::R2CFieldBackend::backwardTransform</a></div><div class="ttdeci">void backwardTransform()</div><div class="ttdoc">Transform from Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:250</div></div>
+<div class="ttc" id="aa00910_html_adcd1b0cc2219e8b50495478c902ea8df"><div class="ttname"><a href="a00910.html#adcd1b0cc2219e8b50495478c902ea8df">parafields::R2CFieldBackend::extendedFieldToField</a></div><div class="ttdeci">void extendedFieldToField(std::vector&lt; RF &gt; &amp;field, unsigned int component=0) const</div><div class="ttdoc">Restrict an extended random field to the original domain.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:423</div></div>
+<div class="ttc" id="aa00910_html_ae856ab0c4eb244ef1f135b22dd1f88ba"><div class="ttname"><a href="a00910.html#ae856ab0c4eb244ef1f135b22dd1f88ba">parafields::R2CFieldBackend::transposeIfNeeded</a></div><div class="ttdeci">void transposeIfNeeded()</div><div class="ttdoc">Switch last two dimensions (for transposed transforms)</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:190</div></div>
+<div class="ttc" id="aa00910_html_af49279cf6af32ce1e37a151d26dc12db"><div class="ttname"><a href="a00910.html#af49279cf6af32ce1e37a151d26dc12db">parafields::R2CFieldBackend::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:111</div></div>
+<div class="ttc" id="aa00910_html_aff21467ddeb93b1860f6998632928797"><div class="ttname"><a href="a00910.html#aff21467ddeb93b1860f6998632928797">parafields::R2CFieldBackend::set</a></div><div class="ttdeci">void set(Index index, RF lambda, RF rand1, RF rand2)</div><div class="ttdoc">Set entry based on pair of random numbers.</div><div class="ttdef"><b>Definition:</b> r2cfieldbackend.hh:305</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

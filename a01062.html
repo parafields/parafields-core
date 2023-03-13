@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>parafields-core: Member List</title>
+<title>parafields-core: parafields::RandomField&lt; GridTraits, IsoMatrix, AnisoMatrix &gt;::ParamTreeHelper Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,20 +62,111 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00069.html">parafields</a></li><li class="navelem"><a class="el" href="a01065.html">PNGReader</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00066.html">parafields</a></li><li class="navelem"><a class="el" href="a00978.html">RandomField</a></li><li class="navelem"><a class="el" href="a01062.html">ParamTreeHelper</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a01059.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">parafields::PNGReader Member List</div>  </div>
+<div class="title">parafields::RandomField&lt; GridTraits, IsoMatrix, AnisoMatrix &gt;::ParamTreeHelper Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a01065.html">parafields::PNGReader</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a01065.html#a67510e82bde22c4b45e4acb3c04e2e3c">evaluate</a>(const Coord1 &amp;coord, const Coord2 &amp;extent) const</td><td class="entry"><a class="el" href="a01065.html">parafields::PNGReader</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01065.html#a3b9baf739e0a50a55090a00d6f74bd59">PNGReader</a>(const std::string &amp;filename, unsigned int channelOffset=0)</td><td class="entry"><a class="el" href="a01065.html">parafields::PNGReader</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-</table></div><!-- contents -->
+<p>Internal class for ParameterTree value extraction.  
+ <a href="a01062.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00056_source.html">randomfield.hh</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a848ed063f067afe918be77285a5dc1db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01062.html#a848ed063f067afe918be77285a5dc1db">ParamTreeHelper</a> (const std::string &amp;fileName=&quot;&quot;)</td></tr>
+<tr class="memdesc:a848ed063f067afe918be77285a5dc1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a01062.html#a848ed063f067afe918be77285a5dc1db">More...</a><br /></td></tr>
+<tr class="separator:a848ed063f067afe918be77285a5dc1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa09456085badce80985ca256a9c4e908"><td class="memItemLeft" align="right" valign="top">const Dune::ParameterTree &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01062.html#aa09456085badce80985ca256a9c4e908">get</a> () const</td></tr>
+<tr class="memdesc:aa09456085badce80985ca256a9c4e908"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access to the generated config object.  <a href="a01062.html#aa09456085badce80985ca256a9c4e908">More...</a><br /></td></tr>
+<tr class="separator:aa09456085badce80985ca256a9c4e908"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename GridTraits, template&lt; typename &gt; class IsoMatrix = DefaultIsoMatrix&lt;GridTraits::dim&gt;::template Type, template&lt; typename &gt; class AnisoMatrix = DefaultAnisoMatrix&lt;GridTraits::dim&gt;::template Type&gt;<br />
+class parafields::RandomField&lt; GridTraits, IsoMatrix, AnisoMatrix &gt;::ParamTreeHelper</h3>
+
+<p>Internal class for ParameterTree value extraction. </p>
+<p>The field constructor needs to construct the ParameterTree config object by reading in a file, but that is not possible while in the initialization list. This helper class parses the file in its constructor, so that the needed object is available for all subsequent entries in the list. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a848ed063f067afe918be77285a5dc1db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a848ed063f067afe918be77285a5dc1db">&#9670;&nbsp;</a></span>ParamTreeHelper()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GridTraits , template&lt; typename &gt; class IsoMatrix = DefaultIsoMatrix&lt;GridTraits::dim&gt;::template Type, template&lt; typename &gt; class AnisoMatrix = DefaultAnisoMatrix&lt;GridTraits::dim&gt;::template Type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00978.html">parafields::RandomField</a>&lt; GridTraits, IsoMatrix, AnisoMatrix &gt;::ParamTreeHelper::ParamTreeHelper </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>fileName</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Reads config from given file, or creates an empty config if file name was empty.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileName</td><td>name of config file, or empty string </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa09456085badce80985ca256a9c4e908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa09456085badce80985ca256a9c4e908">&#9670;&nbsp;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename GridTraits , template&lt; typename &gt; class IsoMatrix = DefaultIsoMatrix&lt;GridTraits::dim&gt;::template Type, template&lt; typename &gt; class AnisoMatrix = DefaultAnisoMatrix&lt;GridTraits::dim&gt;::template Type&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Dune::ParameterTree&amp; <a class="el" href="a00978.html">parafields::RandomField</a>&lt; GridTraits, IsoMatrix, AnisoMatrix &gt;::ParamTreeHelper::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Access to the generated config object. </p>
+<dl class="section return"><dt>Returns</dt><dd>reference to the config object </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="a00056_source.html">randomfield.hh</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

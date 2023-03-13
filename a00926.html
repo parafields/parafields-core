@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>parafields-core: Member List</title>
+<title>parafields-core: parafields::GeneralMatrix&lt; RF, dim &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,20 +62,117 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00069.html">parafields</a></li><li class="navelem"><a class="el" href="a00929.html">GeneralMatrix</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00066.html">parafields</a></li><li class="navelem"><a class="el" href="a00926.html">GeneralMatrix</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a00923.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">parafields::GeneralMatrix&lt; RF, dim &gt; Member List</div>  </div>
+<div class="title">parafields::GeneralMatrix&lt; RF, dim &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00929.html">parafields::GeneralMatrix&lt; RF, dim &gt;</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00929.html#a70ec8204f1b9d1d6c0ed50fa82718e94">GeneralMatrix</a>(const Dune::ParameterTree &amp;config)</td><td class="entry"><a class="el" href="a00929.html">parafields::GeneralMatrix&lt; RF, dim &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00929.html#aa6d027a292772c0405f9c99868ca1bbb">transform</a>(const std::array&lt; RF, dim &gt; &amp;x, std::array&lt; RF, dim &gt; &amp;xTrans)</td><td class="entry"><a class="el" href="a00929.html">parafields::GeneralMatrix&lt; RF, dim &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-</table></div><!-- contents -->
+<p>General geometry transformation.  
+ <a href="a00926.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00029_source.html">covariance.hh</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a70ec8204f1b9d1d6c0ed50fa82718e94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00926.html#a70ec8204f1b9d1d6c0ed50fa82718e94">GeneralMatrix</a> (const Dune::ParameterTree &amp;config)</td></tr>
+<tr class="memdesc:a70ec8204f1b9d1d6c0ed50fa82718e94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor reading correlation lengths from config.  <a href="a00926.html#a70ec8204f1b9d1d6c0ed50fa82718e94">More...</a><br /></td></tr>
+<tr class="separator:a70ec8204f1b9d1d6c0ed50fa82718e94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6d027a292772c0405f9c99868ca1bbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00926.html#aa6d027a292772c0405f9c99868ca1bbb">transform</a> (const std::array&lt; RF, dim &gt; &amp;x, std::array&lt; RF, dim &gt; &amp;xTrans)</td></tr>
+<tr class="separator:aa6d027a292772c0405f9c99868ca1bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename RF, unsigned int dim&gt;<br />
+class parafields::GeneralMatrix&lt; RF, dim &gt;</h3>
+
+<p>General geometry transformation. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a70ec8204f1b9d1d6c0ed50fa82718e94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70ec8204f1b9d1d6c0ed50fa82718e94">&#9670;&nbsp;</a></span>GeneralMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RF , unsigned int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00926.html">parafields::GeneralMatrix</a>&lt; RF, dim &gt;::<a class="el" href="a00926.html">GeneralMatrix</a> </td>
+          <td>(</td>
+          <td class="paramtype">const Dune::ParameterTree &amp;&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor reading correlation lengths from config. </p>
+<p>This parameter expects a regular <img class="formulaInl" alt="$ d \times d $" src="form_18.png"/> matrix as "correlation length", specified row after row and interpreted as a general space transformation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>parameter tree containing correlation lengths </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa6d027a292772c0405f9c99868ca1bbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6d027a292772c0405f9c99868ca1bbb">&#9670;&nbsp;</a></span>transform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RF , unsigned int dim&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="a00926.html">parafields::GeneralMatrix</a>&lt; RF, dim &gt;::transform </td>
+          <td>(</td>
+          <td class="paramtype">const std::array&lt; RF, dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::array&lt; RF, dim &gt; &amp;&#160;</td>
+          <td class="paramname"><em>xTrans</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="a00029_source.html">covariance.hh</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>parafields-core: Member List</title>
+<title>parafields-core: parafields::SmoothSigmoid Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,19 +62,100 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="a00069.html">parafields</a></li><li class="navelem"><a class="el" href="a00933.html">SmoothSigmoid</a></li>  </ul>
+<li class="navelem"><a class="el" href="a00066.html">parafields</a></li><li class="navelem"><a class="el" href="a00930.html">SmoothSigmoid</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a00927.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">parafields::SmoothSigmoid Member List</div>  </div>
+<div class="title">parafields::SmoothSigmoid Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00933.html">parafields::SmoothSigmoid</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00933.html#a956ea1dcdafb48757228d8460e275980">operator()</a>(RF oneEdge, RF zeroEdge, RF x, unsigned int recursions=0) const</td><td class="entry"><a class="el" href="a00933.html">parafields::SmoothSigmoid</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-</table></div><!-- contents -->
+<p>Smooth (C^\infty) cutoff function.  
+ <a href="a00930.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="a00029_source.html">covariance.hh</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a956ea1dcdafb48757228d8460e275980"><td class="memTemplParams" colspan="2">template&lt;typename RF &gt; </td></tr>
+<tr class="memitem:a956ea1dcdafb48757228d8460e275980"><td class="memTemplItemLeft" align="right" valign="top">RF&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="a00930.html#a956ea1dcdafb48757228d8460e275980">operator()</a> (RF oneEdge, RF zeroEdge, RF x, unsigned int recursions=0) const</td></tr>
+<tr class="memdesc:a956ea1dcdafb48757228d8460e275980"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the sigmoid function.  <a href="a00930.html#a956ea1dcdafb48757228d8460e275980">More...</a><br /></td></tr>
+<tr class="separator:a956ea1dcdafb48757228d8460e275980"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Smooth (C^\infty) cutoff function. </p>
+<p>This functor class provides a <img class="formulaInl" alt="$ (C^\infty) $" src="form_0.png"/> interpolation between a constant value of one on one side of the interval, and a constant value of zero on the other. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a956ea1dcdafb48757228d8460e275980"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a956ea1dcdafb48757228d8460e275980">&#9670;&nbsp;</a></span>operator()()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RF &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RF parafields::SmoothSigmoid::operator() </td>
+          <td>(</td>
+          <td class="paramtype">RF&#160;</td>
+          <td class="paramname"><em>oneEdge</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RF&#160;</td>
+          <td class="paramname"><em>zeroEdge</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">RF&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>recursions</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Evaluate the sigmoid function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oneEdge</td><td>interval boundary with value one </td></tr>
+    <tr><td class="paramname">zeroEdge</td><td>interval boundary with value zero </td></tr>
+    <tr><td class="paramname">x</td><td>evaluation point </td></tr>
+    <tr><td class="paramname">recursions</td><td>unused dummy argument</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>function value at x </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li><a class="el" href="a00029_source.html">covariance.hh</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

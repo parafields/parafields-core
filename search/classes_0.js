@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['boxcoxmutator_227',['BoxCoxMutator',['../a01050.html',1,'parafields']]]
+  ['boxcoxmutator_229',['BoxCoxMutator',['../a01057.html',1,'parafields']]]
 ];

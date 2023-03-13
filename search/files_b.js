@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['trend_2ehh_299',['trend.hh',['../a00062.html',1,'']]]
+  ['stochastic_2ehh_302',['stochastic.hh',['../a00062.html',1,'']]]
 ];

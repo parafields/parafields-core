@@ -77,10 +77,10 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;gsl/gsl_rng.h&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// HAVE_GSL</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00066.html">parafields</a> {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00069.html">parafields</a> {</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Traits&gt;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a00906.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00906.html">GSLRNGBackend</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a00909.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00909.html">GSLRNGBackend</a></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#if HAVE_GSL</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">using</span> RF = <span class="keyword">typename</span> Traits::RF;</div>
@@ -97,7 +97,7 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  Distribution type;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="a00906.html">GSLRNGBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;  <a class="code" href="a00909.html">GSLRNGBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits)</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  {</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> ((*traits).verbose &amp;&amp; (*traits).rank == 0)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      std::cout &lt;&lt; <span class="stringliteral">&quot;using GSLRNGBackend&quot;</span> &lt;&lt; std::endl;</div>
@@ -135,7 +135,7 @@ $(function() {
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      };</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  }</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  ~<a class="code" href="a00906.html">GSLRNGBackend</a>()</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  ~<a class="code" href="a00909.html">GSLRNGBackend</a>()</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  {</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span> (generator != <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      gsl_rng_free(generator);</div>
@@ -165,8 +165,8 @@ $(function() {
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;};</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;} <span class="comment">// namespace parafields</span></div>
-<div class="ttc" id="aa00066_html"><div class="ttname"><a href="a00066.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
-<div class="ttc" id="aa00906_html"><div class="ttname"><a href="a00906.html">parafields::GSLRNGBackend</a></div><div class="ttdoc">Standard normal distribtion based on choice of GSL RNGs.</div><div class="ttdef"><b>Definition:</b> gslrngbackend.hh:21</div></div>
+<div class="ttc" id="aa00069_html"><div class="ttname"><a href="a00069.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
+<div class="ttc" id="aa00909_html"><div class="ttname"><a href="a00909.html">parafields::GSLRNGBackend</a></div><div class="ttdoc">Standard normal distribtion based on choice of GSL RNGs.</div><div class="ttdef"><b>Definition:</b> gslrngbackend.hh:21</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

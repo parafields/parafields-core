@@ -72,10 +72,10 @@ $(function() {
 <div class="contents">
 <a href="a00014.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00066.html">parafields</a> {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00069.html">parafields</a> {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Traits&gt;</div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a00898.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00898.html">DFTMatrixBackend</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="a00901.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00901.html">DFTMatrixBackend</a></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">using</span> RF = <span class="keyword">typename</span> Traits::RF;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">using</span> Index = <span class="keyword">typename</span> Traits::Index;</div>
@@ -98,12 +98,12 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  Indices localExtendedOffset;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;  Index localExtendedDomainSize;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">mutable</span> <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::complex</a>* matrixData;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;  <span class="keyword">mutable</span> <span class="keyword">typename</span> <a class="code" href="a00905.html">FFTW&lt;RF&gt;::complex</a>* matrixData;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;  <span class="keywordtype">bool</span> transposed;</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a00898.html#ae2058da1584ccbf3eddefd878d77b62a">   55</a></span>&#160;  <a class="code" href="a00898.html#ae2058da1584ccbf3eddefd878d77b62a">DFTMatrixBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits_)</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="a00901.html#ae2058da1584ccbf3eddefd878d77b62a">   55</a></span>&#160;  <a class="code" href="a00901.html#ae2058da1584ccbf3eddefd878d77b62a">DFTMatrixBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits_)</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    : traits(traits_)</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    , matrixData(nullptr)</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  {</div>
@@ -112,23 +112,23 @@ $(function() {
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="a00902.html">FFTW&lt;RF&gt;::import_wisdom_from_filename</a>(<span class="stringliteral">&quot;wisdom-DFTMatrix.ini&quot;</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="a00905.html">FFTW&lt;RF&gt;::import_wisdom_from_filename</a>(<span class="stringliteral">&quot;wisdom-DFTMatrix.ini&quot;</span>);</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_broadcast_wisdom</a>((*traits).comm);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_broadcast_wisdom</a>((*traits).comm);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="a00898.html#a554d2e5fa1de5d77331cb39e0f00e783">   76</a></span>&#160;  <a class="code" href="a00898.html#a554d2e5fa1de5d77331cb39e0f00e783">~DFTMatrixBackend</a>()</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="a00901.html#a554d2e5fa1de5d77331cb39e0f00e783">   76</a></span>&#160;  <a class="code" href="a00901.html#a554d2e5fa1de5d77331cb39e0f00e783">~DFTMatrixBackend</a>()</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  {</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_gather_wisdom</a>((*traits).comm);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_gather_wisdom</a>((*traits).comm);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <a class="code" href="a00902.html">FFTW&lt;RF&gt;::export_wisdom_to_filename</a>(<span class="stringliteral">&quot;wisdom-DFTMatrix.ini&quot;</span>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <a class="code" href="a00905.html">FFTW&lt;RF&gt;::export_wisdom_to_filename</a>(<span class="stringliteral">&quot;wisdom-DFTMatrix.ini&quot;</span>);</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span> (matrixData != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      matrixData = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  }</div>
@@ -140,7 +140,7 @@ $(function() {
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">   * the random field object or its refinement. It updates</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">   * parameters like the number of cells per dimension.</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="a00898.html#a8f867215ac7f71c926568e5ac6a64595">   98</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00898.html#a8f867215ac7f71c926568e5ac6a64595">update</a>()</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="a00901.html#a8f867215ac7f71c926568e5ac6a64595">   98</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00901.html#a8f867215ac7f71c926568e5ac6a64595">update</a>()</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  {</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    rank = (*traits).rank;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    commSize = (*traits).commSize;</div>
@@ -155,28 +155,28 @@ $(function() {
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    getDFTData();</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">if</span> (matrixData != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;      matrixData = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    }</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;  }</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="a00898.html#acf9fbdba9b2dd2f206dd83c53834d968">  123</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00898.html#acf9fbdba9b2dd2f206dd83c53834d968">valid</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (matrixData != <span class="keyword">nullptr</span>); }</div>
+<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="a00901.html#acf9fbdba9b2dd2f206dd83c53834d968">  123</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00901.html#acf9fbdba9b2dd2f206dd83c53834d968">valid</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (matrixData != <span class="keyword">nullptr</span>); }</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="a00898.html#aa0320529369704c414123291cd643d66">  133</a></span>&#160;  Index <a class="code" href="a00898.html#aa0320529369704c414123291cd643d66">localMatrixSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedDomainSize; }</div>
+<div class="line"><a name="l00133"></a><span class="lineno"><a class="line" href="a00901.html#aa0320529369704c414123291cd643d66">  133</a></span>&#160;  Index <a class="code" href="a00901.html#aa0320529369704c414123291cd643d66">localMatrixSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedDomainSize; }</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="a00898.html#aa107d13262d2fee4989b211e62b0da9d">  145</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00898.html#aa107d13262d2fee4989b211e62b0da9d">localMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedCells; }</div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="a00901.html#aa107d13262d2fee4989b211e62b0da9d">  145</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00901.html#aa107d13262d2fee4989b211e62b0da9d">localMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedCells; }</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="a00898.html#aa95bb896931308831dbe07332654ed9c">  156</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00898.html#aa95bb896931308831dbe07332654ed9c">localMatrixOffset</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedOffset; }</div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="a00901.html#aa95bb896931308831dbe07332654ed9c">  156</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00901.html#aa95bb896931308831dbe07332654ed9c">localMatrixOffset</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedOffset; }</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="a00898.html#ad875611beaa8c3103ee742338fd157ef">  168</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00898.html#ad875611beaa8c3103ee742338fd157ef">localEvalMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedCells; }</div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="a00901.html#ad875611beaa8c3103ee742338fd157ef">  168</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00901.html#ad875611beaa8c3103ee742338fd157ef">localEvalMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedCells; }</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="a00898.html#a399f833cff18b0113d3797764c48075a">  177</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00898.html#a399f833cff18b0113d3797764c48075a">allocate</a>()</div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="a00901.html#a399f833cff18b0113d3797764c48075a">  177</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00901.html#a399f833cff18b0113d3797764c48075a">allocate</a>()</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;  {</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordflow">if</span> (matrixData == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;      matrixData = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::alloc_complex</a>(allocLocal);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;      matrixData = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::alloc_complex</a>(allocLocal);</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  }</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="a00898.html#a0f438264d43299fc3285e038e31f849a">  193</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00898.html#a0f438264d43299fc3285e038e31f849a">transposeIfNeeded</a>()</div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="a00901.html#a0f438264d43299fc3285e038e31f849a">  193</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00901.html#a0f438264d43299fc3285e038e31f849a">transposeIfNeeded</a>()</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  {</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keywordflow">if</span> (transposed) {</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;      std::swap(extendedCells[dim - 1], extendedCells[dim - 2]);</div>
@@ -186,7 +186,7 @@ $(function() {
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    }</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  }</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="a00898.html#adda1ef1288986468d34aa1d377d5bdcc">  209</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00898.html#adda1ef1288986468d34aa1d377d5bdcc">forwardTransform</a>()</div>
+<div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="a00901.html#adda1ef1288986468d34aa1d377d5bdcc">  209</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00901.html#adda1ef1288986468d34aa1d377d5bdcc">forwardTransform</a>()</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  {</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> flags;</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.measure&quot;</span>, <span class="keyword">false</span>))</div>
@@ -200,26 +200,26 @@ $(function() {
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;      n[i] = extendedCells[dim - 1 - i];</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::plan</a> plan_forward = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_plan_dft</a>(</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00905.html">FFTW&lt;RF&gt;::plan</a> plan_forward = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_plan_dft</a>(</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;      dim, n, matrixData, matrixData, (*traits).comm, FFTW_FORWARD, flags);</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordflow">if</span> (plan_forward == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create forward plan&quot;</span> };</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::execute</a>(plan_forward);</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_forward);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::execute</a>(plan_forward);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_forward);</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordflow">for</span> (Index i = 0; i &lt; allocLocal; i++) {</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;      matrixData[i][0] /= extendedDomainSize;</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;      matrixData[i][1] /= extendedDomainSize;</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    }</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <a class="code" href="a00898.html#a0f438264d43299fc3285e038e31f849a">transposeIfNeeded</a>();</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <a class="code" href="a00901.html#a0f438264d43299fc3285e038e31f849a">transposeIfNeeded</a>();</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  }</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="a00898.html#a610634e940d15cf5ed8ae6ade405710f">  246</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00898.html#a610634e940d15cf5ed8ae6ade405710f">backwardTransform</a>()</div>
+<div class="line"><a name="l00246"></a><span class="lineno"><a class="line" href="a00901.html#a610634e940d15cf5ed8ae6ade405710f">  246</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00901.html#a610634e940d15cf5ed8ae6ade405710f">backwardTransform</a>()</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  {</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="a00898.html#a0f438264d43299fc3285e038e31f849a">transposeIfNeeded</a>();</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <a class="code" href="a00901.html#a0f438264d43299fc3285e038e31f849a">transposeIfNeeded</a>();</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> flags;</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.measure&quot;</span>, <span class="keyword">false</span>))</div>
@@ -233,37 +233,37 @@ $(function() {
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;      n[i] = extendedCells[dim - 1 - i];</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::plan</a> plan_backward = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_plan_dft</a>(</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00905.html">FFTW&lt;RF&gt;::plan</a> plan_backward = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_plan_dft</a>(</div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;      dim, n, matrixData, matrixData, (*traits).comm, FFTW_BACKWARD, flags);</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordflow">if</span> (plan_backward == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create backward plan&quot;</span> };</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::execute</a>(plan_backward);</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_backward);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::execute</a>(plan_backward);</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_backward);</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  }</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="a00898.html#ad892633886001178037f49fcc2e0c42c">  284</a></span>&#160;  RF <a class="code" href="a00898.html#ad892633886001178037f49fcc2e0c42c">eval</a>(Index index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="a00901.html#ad892633886001178037f49fcc2e0c42c">  284</a></span>&#160;  RF <a class="code" href="a00901.html#ad892633886001178037f49fcc2e0c42c">eval</a>(Index index)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="keyword">  </span>{</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="comment">// no translation necessary</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00898.html#a8afb6a012854ec9c28af39c9026aac08">get</a>(index);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">get</a>(index);</div>
 <div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;  }</div>
 <div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="a00898.html#a78206c5a35e316e0fa8ced37ea984b04">  303</a></span>&#160;  RF <a class="code" href="a00898.html#a78206c5a35e316e0fa8ced37ea984b04">eval</a>(Indices indices)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno"><a class="line" href="a00901.html#a78206c5a35e316e0fa8ced37ea984b04">  303</a></span>&#160;  RF <a class="code" href="a00901.html#a78206c5a35e316e0fa8ced37ea984b04">eval</a>(Indices indices)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="keyword">  </span>{</div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keyword">const</span> Index&amp; index = Traits::indicesToIndex(indices, localExtendedCells);</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00898.html#ad892633886001178037f49fcc2e0c42c">eval</a>(index);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="a00901.html#ad892633886001178037f49fcc2e0c42c">eval</a>(index);</div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;  }</div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="a00898.html#a8afb6a012854ec9c28af39c9026aac08">  322</a></span>&#160;  RF <a class="code" href="a00898.html#a8afb6a012854ec9c28af39c9026aac08">get</a>(Index index)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> matrixData[index][0]; }</div>
+<div class="line"><a name="l00322"></a><span class="lineno"><a class="line" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">  322</a></span>&#160;  RF <a class="code" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">get</a>(Index index)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> matrixData[index][0]; }</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="a00898.html#a1cf45d5b19c4e098439d5896eb5e461f">  334</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00898.html#a1cf45d5b19c4e098439d5896eb5e461f">set</a>(Index index, RF value)</div>
+<div class="line"><a name="l00334"></a><span class="lineno"><a class="line" href="a00901.html#a1cf45d5b19c4e098439d5896eb5e461f">  334</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00901.html#a1cf45d5b19c4e098439d5896eb5e461f">set</a>(Index index, RF value)</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;  {</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    matrixData[index][0] = value;</div>
 <div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    matrixData[index][1] = 0.;</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;  }</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160; </div>
-<div class="line"><a name="l00350"></a><span class="lineno"><a class="line" href="a00898.html#ad7ceb9a9b8dc6f0e1633d43d68f61acd">  350</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00898.html#ad7ceb9a9b8dc6f0e1633d43d68f61acd">finalize</a>()</div>
+<div class="line"><a name="l00350"></a><span class="lineno"><a class="line" href="a00901.html#ad7ceb9a9b8dc6f0e1633d43d68f61acd">  350</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00901.html#ad7ceb9a9b8dc6f0e1633d43d68f61acd">finalize</a>()</div>
 <div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;  {</div>
 <div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    <span class="comment">// nothing to do</span></div>
 <div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;  }</div>
@@ -277,7 +277,7 @@ $(function() {
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordflow">if</span> (dim == 1) {</div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;      ptrdiff_t localN02, local0Start2;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;      allocLocal = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_local_size_1d</a>(n[0],</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;      allocLocal = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_local_size_1d</a>(n[0],</div>
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                                               (*traits).comm,</div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                                               FFTW_FORWARD,</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                                               FFTW_ESTIMATE,</div>
@@ -294,26 +294,26 @@ $(function() {
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;};</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160; </div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;} <span class="comment">// namespace parafields</span></div>
-<div class="ttc" id="aa00066_html"><div class="ttname"><a href="a00066.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
-<div class="ttc" id="aa00898_html"><div class="ttname"><a href="a00898.html">parafields::DFTMatrixBackend</a></div><div class="ttdoc">Matrix backend that uses discrete Fourier transform (DFT)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:21</div></div>
-<div class="ttc" id="aa00898_html_a0f438264d43299fc3285e038e31f849a"><div class="ttname"><a href="a00898.html#a0f438264d43299fc3285e038e31f849a">parafields::DFTMatrixBackend::transposeIfNeeded</a></div><div class="ttdeci">void transposeIfNeeded()</div><div class="ttdoc">Switch last two dimensions (for transposed transforms)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:193</div></div>
-<div class="ttc" id="aa00898_html_a1cf45d5b19c4e098439d5896eb5e461f"><div class="ttname"><a href="a00898.html#a1cf45d5b19c4e098439d5896eb5e461f">parafields::DFTMatrixBackend::set</a></div><div class="ttdeci">void set(Index index, RF value)</div><div class="ttdoc">Set matrix entry (using the actual index)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:334</div></div>
-<div class="ttc" id="aa00898_html_a399f833cff18b0113d3797764c48075a"><div class="ttname"><a href="a00898.html#a399f833cff18b0113d3797764c48075a">parafields::DFTMatrixBackend::allocate</a></div><div class="ttdeci">void allocate()</div><div class="ttdoc">Reserve memory before storing any matrix entries.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:177</div></div>
-<div class="ttc" id="aa00898_html_a554d2e5fa1de5d77331cb39e0f00e783"><div class="ttname"><a href="a00898.html#a554d2e5fa1de5d77331cb39e0f00e783">parafields::DFTMatrixBackend::~DFTMatrixBackend</a></div><div class="ttdeci">~DFTMatrixBackend()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:76</div></div>
-<div class="ttc" id="aa00898_html_a610634e940d15cf5ed8ae6ade405710f"><div class="ttname"><a href="a00898.html#a610634e940d15cf5ed8ae6ade405710f">parafields::DFTMatrixBackend::backwardTransform</a></div><div class="ttdeci">void backwardTransform()</div><div class="ttdoc">Transform from Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:246</div></div>
-<div class="ttc" id="aa00898_html_a78206c5a35e316e0fa8ced37ea984b04"><div class="ttname"><a href="a00898.html#a78206c5a35e316e0fa8ced37ea984b04">parafields::DFTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Indices indices) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:303</div></div>
-<div class="ttc" id="aa00898_html_a8afb6a012854ec9c28af39c9026aac08"><div class="ttname"><a href="a00898.html#a8afb6a012854ec9c28af39c9026aac08">parafields::DFTMatrixBackend::get</a></div><div class="ttdeci">RF get(Index index) const</div><div class="ttdoc">Get matrix entry (using the actual index)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:322</div></div>
-<div class="ttc" id="aa00898_html_a8f867215ac7f71c926568e5ac6a64595"><div class="ttname"><a href="a00898.html#a8f867215ac7f71c926568e5ac6a64595">parafields::DFTMatrixBackend::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:98</div></div>
-<div class="ttc" id="aa00898_html_aa0320529369704c414123291cd643d66"><div class="ttname"><a href="a00898.html#aa0320529369704c414123291cd643d66">parafields::DFTMatrixBackend::localMatrixSize</a></div><div class="ttdeci">Index localMatrixSize() const</div><div class="ttdoc">Number of matrix entries stored on this processor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:133</div></div>
-<div class="ttc" id="aa00898_html_aa107d13262d2fee4989b211e62b0da9d"><div class="ttname"><a href="a00898.html#aa107d13262d2fee4989b211e62b0da9d">parafields::DFTMatrixBackend::localMatrixCells</a></div><div class="ttdeci">const Indices &amp; localMatrixCells() const</div><div class="ttdoc">Number of entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:145</div></div>
-<div class="ttc" id="aa00898_html_aa95bb896931308831dbe07332654ed9c"><div class="ttname"><a href="a00898.html#aa95bb896931308831dbe07332654ed9c">parafields::DFTMatrixBackend::localMatrixOffset</a></div><div class="ttdeci">const Indices &amp; localMatrixOffset() const</div><div class="ttdoc">Offset between local indices and global indices per dim.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:156</div></div>
-<div class="ttc" id="aa00898_html_acf9fbdba9b2dd2f206dd83c53834d968"><div class="ttname"><a href="a00898.html#acf9fbdba9b2dd2f206dd83c53834d968">parafields::DFTMatrixBackend::valid</a></div><div class="ttdeci">bool valid() const</div><div class="ttdoc">Check whether matrix has already been created.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:123</div></div>
-<div class="ttc" id="aa00898_html_ad7ceb9a9b8dc6f0e1633d43d68f61acd"><div class="ttname"><a href="a00898.html#ad7ceb9a9b8dc6f0e1633d43d68f61acd">parafields::DFTMatrixBackend::finalize</a></div><div class="ttdeci">void finalize()</div><div class="ttdoc">Dummy function, nothing to do after Fourier transform.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:350</div></div>
-<div class="ttc" id="aa00898_html_ad875611beaa8c3103ee742338fd157ef"><div class="ttname"><a href="a00898.html#ad875611beaa8c3103ee742338fd157ef">parafields::DFTMatrixBackend::localEvalMatrixCells</a></div><div class="ttdeci">const Indices &amp; localEvalMatrixCells() const</div><div class="ttdoc">Number of logical entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:168</div></div>
-<div class="ttc" id="aa00898_html_ad892633886001178037f49fcc2e0c42c"><div class="ttname"><a href="a00898.html#ad892633886001178037f49fcc2e0c42c">parafields::DFTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Index index) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:284</div></div>
-<div class="ttc" id="aa00898_html_adda1ef1288986468d34aa1d377d5bdcc"><div class="ttname"><a href="a00898.html#adda1ef1288986468d34aa1d377d5bdcc">parafields::DFTMatrixBackend::forwardTransform</a></div><div class="ttdeci">void forwardTransform()</div><div class="ttdoc">Transform into Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:209</div></div>
-<div class="ttc" id="aa00898_html_ae2058da1584ccbf3eddefd878d77b62a"><div class="ttname"><a href="a00898.html#ae2058da1584ccbf3eddefd878d77b62a">parafields::DFTMatrixBackend::DFTMatrixBackend</a></div><div class="ttdeci">DFTMatrixBackend(const std::shared_ptr&lt; Traits &gt; &amp;traits_)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:55</div></div>
-<div class="ttc" id="aa00902_html"><div class="ttname"><a href="a00902.html">parafields::FFTW</a></div><div class="ttdoc">Fallback class for error message when requested FFTW3 library wasn't found.</div><div class="ttdef"><b>Definition:</b> fftwwrapper.hh:18</div></div>
+<div class="ttc" id="aa00069_html"><div class="ttname"><a href="a00069.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
+<div class="ttc" id="aa00901_html"><div class="ttname"><a href="a00901.html">parafields::DFTMatrixBackend</a></div><div class="ttdoc">Matrix backend that uses discrete Fourier transform (DFT)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:21</div></div>
+<div class="ttc" id="aa00901_html_a0f438264d43299fc3285e038e31f849a"><div class="ttname"><a href="a00901.html#a0f438264d43299fc3285e038e31f849a">parafields::DFTMatrixBackend::transposeIfNeeded</a></div><div class="ttdeci">void transposeIfNeeded()</div><div class="ttdoc">Switch last two dimensions (for transposed transforms)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:193</div></div>
+<div class="ttc" id="aa00901_html_a1cf45d5b19c4e098439d5896eb5e461f"><div class="ttname"><a href="a00901.html#a1cf45d5b19c4e098439d5896eb5e461f">parafields::DFTMatrixBackend::set</a></div><div class="ttdeci">void set(Index index, RF value)</div><div class="ttdoc">Set matrix entry (using the actual index)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:334</div></div>
+<div class="ttc" id="aa00901_html_a399f833cff18b0113d3797764c48075a"><div class="ttname"><a href="a00901.html#a399f833cff18b0113d3797764c48075a">parafields::DFTMatrixBackend::allocate</a></div><div class="ttdeci">void allocate()</div><div class="ttdoc">Reserve memory before storing any matrix entries.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:177</div></div>
+<div class="ttc" id="aa00901_html_a554d2e5fa1de5d77331cb39e0f00e783"><div class="ttname"><a href="a00901.html#a554d2e5fa1de5d77331cb39e0f00e783">parafields::DFTMatrixBackend::~DFTMatrixBackend</a></div><div class="ttdeci">~DFTMatrixBackend()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:76</div></div>
+<div class="ttc" id="aa00901_html_a610634e940d15cf5ed8ae6ade405710f"><div class="ttname"><a href="a00901.html#a610634e940d15cf5ed8ae6ade405710f">parafields::DFTMatrixBackend::backwardTransform</a></div><div class="ttdeci">void backwardTransform()</div><div class="ttdoc">Transform from Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:246</div></div>
+<div class="ttc" id="aa00901_html_a78206c5a35e316e0fa8ced37ea984b04"><div class="ttname"><a href="a00901.html#a78206c5a35e316e0fa8ced37ea984b04">parafields::DFTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Indices indices) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:303</div></div>
+<div class="ttc" id="aa00901_html_a8afb6a012854ec9c28af39c9026aac08"><div class="ttname"><a href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">parafields::DFTMatrixBackend::get</a></div><div class="ttdeci">RF get(Index index) const</div><div class="ttdoc">Get matrix entry (using the actual index)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:322</div></div>
+<div class="ttc" id="aa00901_html_a8f867215ac7f71c926568e5ac6a64595"><div class="ttname"><a href="a00901.html#a8f867215ac7f71c926568e5ac6a64595">parafields::DFTMatrixBackend::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:98</div></div>
+<div class="ttc" id="aa00901_html_aa0320529369704c414123291cd643d66"><div class="ttname"><a href="a00901.html#aa0320529369704c414123291cd643d66">parafields::DFTMatrixBackend::localMatrixSize</a></div><div class="ttdeci">Index localMatrixSize() const</div><div class="ttdoc">Number of matrix entries stored on this processor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:133</div></div>
+<div class="ttc" id="aa00901_html_aa107d13262d2fee4989b211e62b0da9d"><div class="ttname"><a href="a00901.html#aa107d13262d2fee4989b211e62b0da9d">parafields::DFTMatrixBackend::localMatrixCells</a></div><div class="ttdeci">const Indices &amp; localMatrixCells() const</div><div class="ttdoc">Number of entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:145</div></div>
+<div class="ttc" id="aa00901_html_aa95bb896931308831dbe07332654ed9c"><div class="ttname"><a href="a00901.html#aa95bb896931308831dbe07332654ed9c">parafields::DFTMatrixBackend::localMatrixOffset</a></div><div class="ttdeci">const Indices &amp; localMatrixOffset() const</div><div class="ttdoc">Offset between local indices and global indices per dim.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:156</div></div>
+<div class="ttc" id="aa00901_html_acf9fbdba9b2dd2f206dd83c53834d968"><div class="ttname"><a href="a00901.html#acf9fbdba9b2dd2f206dd83c53834d968">parafields::DFTMatrixBackend::valid</a></div><div class="ttdeci">bool valid() const</div><div class="ttdoc">Check whether matrix has already been created.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:123</div></div>
+<div class="ttc" id="aa00901_html_ad7ceb9a9b8dc6f0e1633d43d68f61acd"><div class="ttname"><a href="a00901.html#ad7ceb9a9b8dc6f0e1633d43d68f61acd">parafields::DFTMatrixBackend::finalize</a></div><div class="ttdeci">void finalize()</div><div class="ttdoc">Dummy function, nothing to do after Fourier transform.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:350</div></div>
+<div class="ttc" id="aa00901_html_ad875611beaa8c3103ee742338fd157ef"><div class="ttname"><a href="a00901.html#ad875611beaa8c3103ee742338fd157ef">parafields::DFTMatrixBackend::localEvalMatrixCells</a></div><div class="ttdeci">const Indices &amp; localEvalMatrixCells() const</div><div class="ttdoc">Number of logical entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:168</div></div>
+<div class="ttc" id="aa00901_html_ad892633886001178037f49fcc2e0c42c"><div class="ttname"><a href="a00901.html#ad892633886001178037f49fcc2e0c42c">parafields::DFTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Index index) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:284</div></div>
+<div class="ttc" id="aa00901_html_adda1ef1288986468d34aa1d377d5bdcc"><div class="ttname"><a href="a00901.html#adda1ef1288986468d34aa1d377d5bdcc">parafields::DFTMatrixBackend::forwardTransform</a></div><div class="ttdeci">void forwardTransform()</div><div class="ttdoc">Transform into Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:209</div></div>
+<div class="ttc" id="aa00901_html_ae2058da1584ccbf3eddefd878d77b62a"><div class="ttname"><a href="a00901.html#ae2058da1584ccbf3eddefd878d77b62a">parafields::DFTMatrixBackend::DFTMatrixBackend</a></div><div class="ttdeci">DFTMatrixBackend(const std::shared_ptr&lt; Traits &gt; &amp;traits_)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> dftmatrixbackend.hh:55</div></div>
+<div class="ttc" id="aa00905_html"><div class="ttname"><a href="a00905.html">parafields::FFTW</a></div><div class="ttdoc">Fallback class for error message when requested FFTW3 library wasn't found.</div><div class="ttdef"><b>Definition:</b> fftwwrapper.hh:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

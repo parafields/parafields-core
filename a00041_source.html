@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>parafields-core: legacyvtk.hh Source File</title>
+<title>parafields-core: io.hh Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -67,116 +67,362 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">legacyvtk.hh</div>  </div>
+<div class="title">io.hh</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="a00041.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Traits&gt;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="a00990.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00990.html">LegacyVTKWriter</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">mutable</span> std::ofstream file;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <span class="keyword">mutable</span> <span class="keywordtype">bool</span> preambleWritten;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  std::vector&lt;typename Traits::RF&gt; extensions;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;  std::vector&lt;unsigned int&gt; cells;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  std::vector&lt;typename Traits::RF&gt; spacing;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  std::vector&lt;typename Traits::RF&gt; origin;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dataPoints;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="a00990.html#abaa0c441bfe6a50e3ba4e9e07035ea84">   34</a></span>&#160;  <a class="code" href="a00990.html#abaa0c441bfe6a50e3ba4e9e07035ea84">LegacyVTKWriter</a>(<span class="keyword">const</span> Dune::ParameterTree&amp; config,</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                  <span class="keyword">const</span> std::string&amp; fileName,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                  <span class="keyword">const</span> MPI_Comm&amp; comm = MPI_COMM_WORLD)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    : file(fileName + <span class="stringliteral">&quot;.vtk&quot;</span>, std::ofstream::trunc)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    , preambleWritten(false)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    , extensions(config.template get&lt;std::vector&lt;typename Traits::RF&gt;&gt;(</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="stringliteral">&quot;grid.extensions&quot;</span>))</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    , cells(config.template get&lt;std::vector&lt;unsigned int&gt;&gt;(<span class="stringliteral">&quot;grid.cells&quot;</span>))</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;  {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">int</span> commSize;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    MPI_Comm_size(comm, &amp;commSize);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">if</span> (commSize &gt; 1)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="keywordflow">throw</span> std::runtime_error{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="stringliteral">&quot;Legacy VTK writer doesn&#39;t work for parallel runs&quot;</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      };</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// VTK is always 3D</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">if</span> (extensions.size() &lt; 2)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      extensions.push_back(0.);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> (extensions.size() &lt; 3)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      extensions.push_back(0.);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (cells.size() &lt; 2)</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      cells.push_back(1);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span> (cells.size() &lt; 3)</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      cells.push_back(1);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; cells.size(); i++) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      spacing.push_back(extensions[i] / cells[i]);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      origin.push_back(-0.5 * extensions[i] / cells[i]);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    dataPoints = 1;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; cells.size(); i++)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;      dataPoints *= cells[i];</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Field&gt;</div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="a00990.html#af2a0ea4df0157d7d4d3672be88b39492">   82</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00990.html#af2a0ea4df0157d7d4d3672be88b39492">writeScalarData</a>(<span class="keyword">const</span> std::string&amp; dataName, <span class="keyword">const</span> Field&amp; field)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> (!preambleWritten)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      writePreamble();</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    file &lt;&lt; <span class="stringliteral">&quot;SCALARS &quot;</span> &lt;&lt; dataName &lt;&lt; <span class="stringliteral">&quot; float 1\n&quot;</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;LOOKUP_TABLE default\n&quot;</span>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">typename</span> Traits::DomainType domain;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; Traits::dim; i++)</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      domain[i] = origin[i];</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">typename</span> Traits::RangeType value;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; cells[2]; i++) {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordflow">if</span> (Traits::dim == 3)</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        domain[2] += spacing[2];</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      <span class="keywordflow">if</span> (Traits::dim &gt;= 2)</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        domain[1] = origin[1];</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; cells[1]; j++) {</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">if</span> (Traits::dim &gt;= 2)</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;          domain[1] += spacing[1];</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        domain[0] = origin[0];</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> k = 0; k &lt; cells[0]; k++) {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;          domain[0] += spacing[0];</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;          field.evaluate(domain, value);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;          file &lt;&lt; value[0] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  }</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  <span class="keywordtype">void</span> writePreamble()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">  </span>{</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    file &lt;&lt; <span class="stringliteral">&quot;# vtk DataFile Version 2.0\n&quot;</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;dune-randomfield VTK output\n&quot;</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;ASCII\n&quot;</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;DATASET STRUCTURED_POINTS\n&quot;</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;DIMENSIONS &quot;</span> &lt;&lt; cells[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; cells[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; cells[2]</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;SPACING &quot;</span> &lt;&lt; spacing[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; spacing[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; spacing[2]</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;ORIGIN &quot;</span> &lt;&lt; origin[0] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; origin[1] &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; origin[2]</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;POINT_DATA &quot;</span> &lt;&lt; dataPoints &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;         &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    preambleWritten = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;  }</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;};</div>
-<div class="ttc" id="aa00990_html"><div class="ttname"><a href="a00990.html">LegacyVTKWriter</a></div><div class="ttdoc">Simple legacy format VTK writer class.</div><div class="ttdef"><b>Definition:</b> legacyvtk.hh:15</div></div>
-<div class="ttc" id="aa00990_html_abaa0c441bfe6a50e3ba4e9e07035ea84"><div class="ttname"><a href="a00990.html#abaa0c441bfe6a50e3ba4e9e07035ea84">LegacyVTKWriter::LegacyVTKWriter</a></div><div class="ttdeci">LegacyVTKWriter(const Dune::ParameterTree &amp;config, const std::string &amp;fileName, const MPI_Comm &amp;comm=MPI_COMM_WORLD)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> legacyvtk.hh:34</div></div>
-<div class="ttc" id="aa00990_html_af2a0ea4df0157d7d4d3672be88b39492"><div class="ttname"><a href="a00990.html#af2a0ea4df0157d7d4d3672be88b39492">LegacyVTKWriter::writeScalarData</a></div><div class="ttdeci">void writeScalarData(const std::string &amp;dataName, const Field &amp;field) const</div><div class="ttdoc">Add scalar data set to VTK file.</div><div class="ttdef"><b>Definition:</b> legacyvtk.hh:82</div></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#if HAVE_HDF5</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;hdf5.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define HDF5_DATA_TYPE H5T_IEEE_F64LE </span><span class="comment">// define for 64 bit machine</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// #define HDF5_DATA_TYPE H5T_IEEE_F32LE //define for 32 bit machine</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// HAVE_HDF5</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00069.html">parafields</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="a00069.html#ac6014b2e3b7d665546d60394b6ff27d9">   21</a></span>&#160;<a class="code" href="a00069.html#ac6014b2e3b7d665546d60394b6ff27d9">fileExists</a>(<span class="keyword">const</span> std::string&amp; filename)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  std::ifstream testfile(filename);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  <span class="keywordflow">return</span> testfile.good();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#if HAVE_HDF5 </span><span class="comment">// only define IO methods if HDF5 present</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// HDF5-internal data type specifiers</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;hid_t hdf5Type;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">const</span> hid_t hdf5Type&lt;float&gt; = H5T_NATIVE_FLOAT;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">const</span> hid_t hdf5Type&lt;double&gt; = H5T_NATIVE_DOUBLE;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">const</span> hid_t hdf5Type&lt;long double&gt; = H5T_NATIVE_LDOUBLE;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RF, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;readParallelFromHDF5(std::vector&lt;RF&gt;&amp; local_data,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                     <span class="keyword">const</span> std::array&lt;unsigned int, dim&gt;&amp; local_count,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                     <span class="keyword">const</span> std::array&lt;unsigned int, dim&gt;&amp; local_offset,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                     <span class="keyword">const</span> MPI_Comm&amp; communicator,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                     <span class="keyword">const</span> std::string&amp; data_name,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                     <span class="keyword">const</span> std::string&amp; data_filename)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="comment">// setup file access template with parallel IO access</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  hid_t access_pList = H5Pcreate(H5P_FILE_ACCESS);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  assert(access_pList &gt; -1);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;  herr_t status;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  MPI_Info mpiInfo = MPI_INFO_NULL;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  status = H5Pset_fapl_mpio(access_pList, communicator, mpiInfo);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  assert(status &gt; -1);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;  <span class="comment">// open the file for reading</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  hid_t file_id = H5Fopen(data_filename.c_str(), H5F_ACC_RDONLY, access_pList);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;  assert(file_id &gt; -1);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="comment">// Release file-access template</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  status = H5Pclose(access_pList);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  assert(status &gt; -1);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  <span class="comment">// open the dataset</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  hid_t dataset_id = H5Dopen(file_id, data_name.c_str(), H5P_DEFAULT);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;  assert(dataset_id &gt; -1);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;  <span class="comment">// get the dataspace</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;  hid_t dataspace_id = H5Dget_space(dataset_id);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  assert(dataspace_id &gt; -1);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;  <span class="comment">// some needed variables</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  hsize_t dimData;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;  hsize_t* dims;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;  <span class="comment">// get the dimension</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;  dimData = H5Sget_simple_extent_ndims(dataspace_id);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;  assert(dimData == dim);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="comment">// get the size of the data structure</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  dims = (hsize_t*)malloc(dim * <span class="keyword">sizeof</span>(hsize_t));</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;  status = H5Sget_simple_extent_dims(dataspace_id, dims, 0);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;  assert(status &gt; -1);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  <span class="comment">// set the local, offset, and count as hsize_t, which is needed by the HDF5</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;  <span class="comment">// routines</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;  hsize_t local_size = 1;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;  hsize_t offset[dim], count[dim];</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++) {</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    local_size *= local_count[i];</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    offset[dim - i - 1] = local_offset[i];</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    count[dim - i - 1] = local_count[i];</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;  }</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  <span class="comment">// create the memory space, if something needs to be read on this processor</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;  hid_t memspace_id = 0;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;  <span class="keywordflow">if</span> (local_size != 0)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    memspace_id = H5Screate_simple(1, &amp;local_size, NULL);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;  <span class="comment">// select the hyperslab</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;  status = H5Sselect_hyperslab(</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    dataspace_id, H5S_SELECT_SET, offset, NULL, count, NULL);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  assert(status &gt; -1);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;  <span class="comment">// resize the return data</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;  local_data.resize(local_size);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;  <span class="comment">// set up the collective transfer properties list</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;  hid_t xferPropList = H5Pcreate(H5P_DATASET_XFER);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;  assert(xferPropList &gt; -1);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;  <span class="comment">// finally the reading from the file, only if something needes to be read</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;  <span class="keywordflow">if</span> (local_size != 0) {</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    status = H5Dread(dataset_id,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                     hdf5Type&lt;RF&gt;,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                     memspace_id,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                     dataspace_id,</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                     xferPropList,</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                     &amp;(local_data[0]));</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    assert(status &gt; -1);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;  }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;  <span class="comment">// close the identifiers</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;  H5Dclose(dataset_id);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;  H5Sclose(dataspace_id);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;  <span class="keywordflow">if</span> (local_size !=</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;      0) <span class="comment">// this identifier only exists if somethings needs to be read</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    H5Sclose(memspace_id);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;  free(dims);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  status = H5Fclose(file_id);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;  assert(status &gt; -1);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RF, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keywordtype">void</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;writeParallelToHDF5(<span class="keyword">const</span> std::array&lt;unsigned int, dim&gt;&amp; global_dim,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                    <span class="keyword">const</span> std::vector&lt;RF&gt;&amp; local_data,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                    <span class="keyword">const</span> std::array&lt;unsigned int, dim&gt;&amp; local_count,</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                    <span class="keyword">const</span> std::array&lt;unsigned int, dim&gt;&amp; local_offset,</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                    <span class="keyword">const</span> MPI_Comm&amp; communicator,</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                    <span class="keyword">const</span> std::string&amp; data_name,</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    <span class="keyword">const</span> std::string&amp; data_filename)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;{</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;  <span class="comment">// Info variable needed for HDF5</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;  MPI_Info mpiInfo = MPI_INFO_NULL;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;  herr_t status;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;  <span class="comment">// Set up file access property list with parallel I/O access</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;  hid_t plist_id = H5Pcreate(H5P_FILE_ACCESS);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  H5Pset_fapl_mpio(plist_id, communicator, mpiInfo);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  assert(plist_id &gt; -1);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="comment">// Create a new file using default properties.</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;  hid_t file_id =</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    H5Fcreate(data_filename.c_str(), H5F_ACC_TRUNC, H5P_DEFAULT, plist_id);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;  assert(file_id &gt; -1);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  H5Pclose(plist_id);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;  <span class="comment">// set the global size of the grid into a vector of type hsize_t (needed for</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;  <span class="comment">// HDF5 routines)</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;  hsize_t global_dim_HDF5[dim];</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    global_dim_HDF5[dim - i - 1] = global_dim[i];</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;  <span class="comment">// set the count and offset in the different dimensions (determine the size of</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;  <span class="comment">// the hyperslab) (in hsize_t format, needed for HDF5 routines)</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;  hsize_t count[dim], offset[dim];</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++) {</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    count[dim - i - 1] = local_count[i];</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    offset[dim - i - 1] = local_offset[i];</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  }</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;  <span class="comment">// define the total size of the local data</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  hsize_t nAllLocalCells = 1;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    nAllLocalCells *= count[i];</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;  <span class="comment">// Create the dataspace for the dataset.</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;  hid_t filespace = H5Screate_simple(dim, global_dim_HDF5, NULL);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  assert(filespace &gt; -1);</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;  <span class="comment">// Create the dataset with default properties and close filespace.</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;  hid_t dset_id = H5Dcreate(file_id,</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                            data_name.c_str(),</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                            HDF5_DATA_TYPE,</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                            filespace,</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                            H5P_DEFAULT,</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                            H5P_DEFAULT,</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                            H5P_DEFAULT);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  H5Sclose(filespace);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;  assert(dset_id &gt; -1);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;  <span class="comment">// get the memoryspace (but only if something needs to be written on this</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;  <span class="comment">// processor!)</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;  hid_t memspace_id;</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;  <span class="keywordflow">if</span> (nAllLocalCells !=</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;      0) { <span class="comment">// -&gt; otherwise HDF5 warning, because of writing nothing!</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    memspace_id = H5Screate_simple(dim, count, NULL);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    assert(memspace_id &gt; -1);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;  }</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  <span class="comment">// Select hyperslab in the file</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;  filespace = H5Dget_space(dset_id);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;  H5Sselect_hyperslab(filespace, H5S_SELECT_SET, offset, NULL, count, NULL);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;  <span class="comment">// Create property list for collective dataset write.</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;  plist_id = H5Pcreate(H5P_DATASET_XFER);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;  H5Pset_dxpl_mpio(plist_id, H5FD_MPIO_COLLECTIVE);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;  <span class="comment">// finally write the data to the disk</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;  <span class="comment">// even if nothing should be written H5Dwrite needs to be called!</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;  <span class="keywordflow">if</span> (nAllLocalCells !=</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;      0) { <span class="comment">// -&gt; otherwise HDF5 warning, because of writing nothing!</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    status = H5Dwrite(dset_id,</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                      hdf5Type&lt;RF&gt;,</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                      memspace_id,</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                      filespace,</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                      plist_id,</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                      &amp;(local_data[0]));</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    assert(status &gt; -1);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;  } <span class="keywordflow">else</span> { <span class="comment">// IMPORTANT. otherwise the H5Dwrite() blocks!</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    status =</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;      H5Dwrite(dset_id, hdf5Type&lt;RF&gt;, 0, filespace, plist_id, &amp;(local_data[0]));</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    assert(status &gt; -1);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;  }</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;  <span class="comment">// Close the property list</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;  status = H5Pclose(plist_id);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;  assert(status &gt; -1);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160; </div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;  <span class="comment">// Close the filespace</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;  status = H5Sclose(filespace);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;  assert(status &gt; -1);</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;  <span class="comment">// if something written close the memspace</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;  <span class="keywordflow">if</span> (nAllLocalCells != 0) {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    status = H5Sclose(memspace_id);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    assert(status &gt; -1);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;  }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;  <span class="comment">// Close the dataset</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;  status = H5Dclose(dset_id);</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;  assert(status &gt; -1);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;  <span class="comment">// Close the file</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;  status = H5Fclose(file_id);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;  assert(status &gt; -1);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;  <span class="comment">// propably not needed. because the H5Dwrite blocks anyway</span></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;  MPI_Barrier(communicator);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;}</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// HAVE_HDF5</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> RF, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> dim&gt;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="keywordtype">bool</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno"><a class="line" href="a00069.html#ac8234f825d80a34f9f9fad90531d6bd9">  306</a></span>&#160;<a class="code" href="a00069.html#ac8234f825d80a34f9f9fad90531d6bd9">writeToXDMF</a>(<span class="keyword">const</span> std::array&lt;unsigned int, dim&gt;&amp; cells,</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            <span class="keyword">const</span> std::array&lt;RF, dim&gt;&amp; extensions,</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;            <span class="keyword">const</span> std::string&amp; fileName)</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;{</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;  <span class="keywordflow">if</span> (dim &gt; 4)</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;  std::ofstream file(fileName + <span class="stringliteral">&quot;.xdmf&quot;</span>, std::ofstream::trunc);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;  file &lt;&lt; <span class="stringliteral">&quot;&lt;?xml version=\&quot;1.0\&quot; ?&gt;\n&quot;</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;&lt;!DOCTYPE Xdmf SYSTEM \&quot;Xdmf.dtd\&quot; []&gt;\n&quot;</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;&lt;Xdmf Version=\&quot;2.0\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;       &lt;&lt; <span class="stringliteral">&quot; &lt;Domain&gt;\n&quot;</span>;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;  <span class="keywordflow">if</span> (dim &lt; 4) {</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    file &lt;&lt; <span class="stringliteral">&quot;  &lt;Grid Name=\&quot;StructuredGrid\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;   &lt;Topology TopologyType=\&quot;3DRectMesh\&quot; NumberOfElements=\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;      file &lt;&lt; cells[dim - (i + 1)] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    file &lt;&lt; <span class="stringliteral">&quot;\&quot;/&gt;\n&quot;</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;   &lt;Geometry GeometryType=\&quot;origin_dxdydz\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;    &lt;DataItem Dimensions=\&quot;3\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;     0. 0. 0.\n&quot;</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;    &lt;/DataItem&gt;\n&quot;</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;    &lt;DataItem Dimensions=\&quot;3\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;     &quot;</span>;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; 3 - dim; i++)</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;      file &lt;&lt; extensions[0] / cells[0]</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;           &lt;&lt; <span class="stringliteral">&quot; &quot;</span>; <span class="comment">// additional entries to visualize 1D and 2D files</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;      file &lt;&lt; extensions[i] / cells[i] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    file &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;    &lt;/DataItem&gt;\n&quot;</span></div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;   &lt;/Geometry&gt;\n&quot;</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;   &lt;Attribute Name=\&quot;&quot;</span> &lt;&lt; fileName &lt;&lt; <span class="stringliteral">&quot;\&quot; Center=\&quot;Cell\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;    &lt;DataItem Dimensions=\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;      file &lt;&lt; cells[dim - (i + 1)] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    file &lt;&lt; <span class="stringliteral">&quot;\&quot; Format=\&quot;HDF\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;     &quot;</span> &lt;&lt; fileName + <span class="stringliteral">&quot;.stoch.h5&quot;</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;:/stochastic\n&quot;</span></div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;    &lt;/DataItem&gt;\n&quot;</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;   &lt;/Attribute&gt;\n&quot;</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;         &lt;&lt; <span class="stringliteral">&quot;  &lt;/Grid&gt;\n&quot;</span>;</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;  } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dim == 4) {</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    file &lt;&lt; <span class="stringliteral">&quot;  &lt;Grid Name=\&quot;GridTime\&quot; GridType=\&quot;Collection\&quot;&quot;</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;         &lt;&lt; <span class="stringliteral">&quot; CollectionType=\&quot;Temporal\&quot;&gt;\n&quot;</span>;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; cells[dim - 1]; j++) {</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;      file &lt;&lt; <span class="stringliteral">&quot;   &lt;Grid Name=\&quot;StructuredGrid\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;    &lt;Time Value=\&quot;&quot;</span> &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot;\&quot;/&gt;\n&quot;</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;    &lt;Topology TopologyType=\&quot;3DRectMesh\&quot; NumberOfElements=\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim - 1; i++)</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        file &lt;&lt; cells[dim - (i + 2)] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;      file &lt;&lt; <span class="stringliteral">&quot;\&quot;/&gt;\n&quot;</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;    &lt;Geometry GeometryType=\&quot;origin_dxdydz\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;     &lt;DataItem Dimensions=\&quot;3\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;      0. 0. 0.\n&quot;</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;     &lt;/DataItem&gt;\n&quot;</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;     &lt;DataItem Dimensions=\&quot;3\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;      &quot;</span>;</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim - 1; i++)</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        file &lt;&lt; extensions[i] / cells[i] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;      file &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;     &lt;/DataItem&gt;\n&quot;</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;    &lt;/Geometry&gt;\n&quot;</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;    &lt;Attribute Name=\&quot;&quot;</span> &lt;&lt; fileName &lt;&lt; <span class="stringliteral">&quot;\&quot; Center=\&quot;Cell\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;     &lt;DataItem ItemType=\&quot;HyperSlab\&quot; Dimensions=\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim - 1; i++)</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        file &lt;&lt; cells[dim - (i + 2)] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      file &lt;&lt; <span class="stringliteral">&quot;1\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;      &lt;DataItem Dimensions=\&quot;3 4\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;       &quot;</span> &lt;&lt; j &lt;&lt; <span class="stringliteral">&quot; 0 0 0\n&quot;</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;       1 1 1 1\n&quot;</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;       1 &quot;</span>;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim - 1; i++)</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        file &lt;&lt; cells[dim - (i + 2)] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;      file &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;      &lt;/DataItem&gt;\n&quot;</span></div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;      &lt;DataItem Dimensions=\&quot;&quot;</span>;</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        file &lt;&lt; cells[dim - (i + 1)] &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;      file &lt;&lt; <span class="stringliteral">&quot;\&quot; Format=\&quot;HDF\&quot;&gt;\n&quot;</span></div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;       &quot;</span> &lt;&lt; fileName + <span class="stringliteral">&quot;.stoch.h5&quot;</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;:/stochastic\n&quot;</span></div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;      &lt;/DataItem&gt;\n&quot;</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;     &lt;/DataItem&gt;\n&quot;</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;    &lt;/Attribute&gt;\n&quot;</span></div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;           &lt;&lt; <span class="stringliteral">&quot;   &lt;/Grid&gt;\n&quot;</span>;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    }</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    file &lt;&lt; <span class="stringliteral">&quot;  &lt;/Grid&gt;\n&quot;</span>;</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;  }</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160; </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;  file &lt;&lt; <span class="stringliteral">&quot; &lt;/Domain&gt;\n&quot;</span></div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;       &lt;&lt; <span class="stringliteral">&quot;&lt;/Xdmf&gt;&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;}</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160; </div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;} <span class="comment">// namespace parafields</span></div>
+<div class="ttc" id="aa00069_html"><div class="ttname"><a href="a00069.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
+<div class="ttc" id="aa00069_html_ac6014b2e3b7d665546d60394b6ff27d9"><div class="ttname"><a href="a00069.html#ac6014b2e3b7d665546d60394b6ff27d9">parafields::fileExists</a></div><div class="ttdeci">bool fileExists(const std::string &amp;filename)</div><div class="ttdoc">Check if file exists.</div><div class="ttdef"><b>Definition:</b> io.hh:21</div></div>
+<div class="ttc" id="aa00069_html_ac8234f825d80a34f9f9fad90531d6bd9"><div class="ttname"><a href="a00069.html#ac8234f825d80a34f9f9fad90531d6bd9">parafields::writeToXDMF</a></div><div class="ttdeci">bool writeToXDMF(const std::array&lt; unsigned int, dim &gt; &amp;cells, const std::array&lt; RF, dim &gt; &amp;extensions, const std::string &amp;fileName)</div><div class="ttdoc">Write accompanying XDMF file for HDF5 file.</div><div class="ttdef"><b>Definition:</b> io.hh:306</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

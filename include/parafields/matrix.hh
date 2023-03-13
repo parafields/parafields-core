@@ -7,6 +7,8 @@
 #include <fftw3-mpi.h>
 #include <fftw3.h>
 
+#include "parafields/exceptions.hh"
+
 #include "parafields/covariance.hh"
 #include "parafields/gslfallback.hh"
 
@@ -307,7 +309,9 @@ public:
         std::cerr << "negative eigenvalues in covariance matrix, "
                   << "consider increasing embeddingFactor, or alternatively "
                   << "allow generation of approximate samples" << std::endl;
-      throw std::runtime_error{ "negative eigenvalues in covariance matrix" };
+      throw NegativeEigenvalueError{
+        "negative eigenvalues in covariance matrix"
+      };
     }
 
     matrixBackend.finalize();

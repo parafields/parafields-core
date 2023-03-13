@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exponentialcovariance_247',['ExponentialCovariance',['../a00946.html',1,'parafields']]]
+  ['exponentialcovariance_249',['ExponentialCovariance',['../a00949.html',1,'parafields']]]
 ];

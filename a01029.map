@@ -1,8 +1,0 @@
-<map id="parafields::MutatorBase&lt; RF &gt;" name="parafields::MutatorBase&lt; RF &gt;">
-<area shape="rect" id="node1" title="Abstract base class for value transformations." alt="" coords="5,136,183,177"/>
-<area shape="rect" id="node2" href="$a01050.html" title="Applies the Box&#45;Cox transformation to the data values." alt="" coords="241,5,436,47"/>
-<area shape="rect" id="node3" href="$a01042.html" title="Absolute value function mutator for folded normal fields." alt="" coords="246,71,431,112"/>
-<area shape="rect" id="node4" href="$a01034.html" title="Default Identity mutator that leaves its argument unchanged." alt="" coords="241,136,436,177"/>
-<area shape="rect" id="node5" href="$a01038.html" title="Exponential function mutator for log&#45;normal fields." alt="" coords="231,201,447,243"/>
-<area shape="rect" id="node6" href="$a01046.html" title="Replaces value with its sign (&#45;1 for negative, +1 for nonnegative)" alt="" coords="252,267,425,308"/>
-</map>

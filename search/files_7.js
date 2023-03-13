@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['optproblem_2ehh_293',['optproblem.hh',['../a00050.html',1,'']]]
+  ['matrix_2ehh_295',['matrix.hh',['../a00047.html',1,'']]],
+  ['mutators_2ehh_296',['mutators.hh',['../a00050.html',1,'']]]
 ];

@@ -72,10 +72,10 @@ $(function() {
 <div class="contents">
 <a href="a00005.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00066.html">parafields</a> {</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">namespace </span><a class="code" href="a00069.html">parafields</a> {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> Traits&gt;</div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="a00886.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00886.html">DCTDSTFieldBackend</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="a00889.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="a00889.html">DCTDSTFieldBackend</a></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  <span class="keyword">using</span> RF = <span class="keyword">typename</span> Traits::RF;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keyword">using</span> Index = <span class="keyword">typename</span> Traits::Index;</div>
@@ -114,7 +114,7 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  Index sliceSize;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;  <span class="keywordtype">bool</span> odd[dim];</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::r2r_kind</a> k[dim];</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keyword">typename</span> <a class="code" href="a00905.html">FFTW&lt;RF&gt;::r2r_kind</a> k[dim];</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">bool</span> transposed;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keyword">enum</span></div>
@@ -126,7 +126,7 @@ $(function() {
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;  };</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="a00886.html#ae93da714bcbcdafb179a334814ff1ef3">   68</a></span>&#160;  <a class="code" href="a00886.html#ae93da714bcbcdafb179a334814ff1ef3">DCTDSTFieldBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits_)</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="a00889.html#ae93da714bcbcdafb179a334814ff1ef3">   68</a></span>&#160;  <a class="code" href="a00889.html#ae93da714bcbcdafb179a334814ff1ef3">DCTDSTFieldBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; traits_)</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    : traits(traits_)</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    , fieldData(nullptr)</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  {</div>
@@ -135,23 +135,23 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="a00902.html">FFTW&lt;RF&gt;::import_wisdom_from_filename</a>(<span class="stringliteral">&quot;wisdom-DCTDSTField.ini&quot;</span>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="a00905.html">FFTW&lt;RF&gt;::import_wisdom_from_filename</a>(<span class="stringliteral">&quot;wisdom-DCTDSTField.ini&quot;</span>);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_broadcast_wisdom</a>((*traits).comm);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_broadcast_wisdom</a>((*traits).comm);</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  }</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a00886.html#ac1c6367a97f39efee4829840b699bafa">   89</a></span>&#160;  <a class="code" href="a00886.html#ac1c6367a97f39efee4829840b699bafa">~DCTDSTFieldBackend</a>()</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="a00889.html#ac1c6367a97f39efee4829840b699bafa">   89</a></span>&#160;  <a class="code" href="a00889.html#ac1c6367a97f39efee4829840b699bafa">~DCTDSTFieldBackend</a>()</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;  {</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_gather_wisdom</a>((*traits).comm);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_gather_wisdom</a>((*traits).comm);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <a class="code" href="a00902.html">FFTW&lt;RF&gt;::export_wisdom_to_filename</a>(<span class="stringliteral">&quot;wisdom-DCTDSTField.ini&quot;</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <a class="code" href="a00905.html">FFTW&lt;RF&gt;::export_wisdom_to_filename</a>(<span class="stringliteral">&quot;wisdom-DCTDSTField.ini&quot;</span>);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    }</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">if</span> (fieldData != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::free</a>(fieldData);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::free</a>(fieldData);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      fieldData = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;  }</div>
@@ -163,7 +163,7 @@ $(function() {
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">   * the random field object or its refinement. It updates</span></div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">   * parameters like the number of cells per dimension.</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment">   */</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a00886.html#ae7033d29a265e2016adfd92c60468087">  111</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#ae7033d29a265e2016adfd92c60468087">update</a>()</div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="a00889.html#ae7033d29a265e2016adfd92c60468087">  111</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#ae7033d29a265e2016adfd92c60468087">update</a>()</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;  {</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    rank = (*traits).rank;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    commSize = (*traits).commSize;</div>
@@ -181,15 +181,15 @@ $(function() {
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    getDCTCells(localN0, local0Start);</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <a class="code" href="a00886.html#a4bf0f50039e30c6eadb2cfcfeb55b60d">setType</a>(0);</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <a class="code" href="a00889.html#a4bf0f50039e30c6eadb2cfcfeb55b60d">setType</a>(0);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keywordflow">if</span> (fieldData != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::free</a>(fieldData);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::free</a>(fieldData);</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;      fieldData = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;  }</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="a00886.html#a4bf0f50039e30c6eadb2cfcfeb55b60d">  149</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#a4bf0f50039e30c6eadb2cfcfeb55b60d">setType</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type)</div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="a00889.html#a4bf0f50039e30c6eadb2cfcfeb55b60d">  149</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#a4bf0f50039e30c6eadb2cfcfeb55b60d">setType</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> type)</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;  {</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++) {</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;      <span class="keywordflow">if</span> (type % 2 == 0) {</div>
@@ -207,22 +207,22 @@ $(function() {
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  }</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="a00886.html#a674502a0bee0a81bb759aa07eda56a21">  179</a></span>&#160;  Index <a class="code" href="a00886.html#a674502a0bee0a81bb759aa07eda56a21">localFieldSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTDomainSize; }</div>
+<div class="line"><a name="l00179"></a><span class="lineno"><a class="line" href="a00889.html#a674502a0bee0a81bb759aa07eda56a21">  179</a></span>&#160;  Index <a class="code" href="a00889.html#a674502a0bee0a81bb759aa07eda56a21">localFieldSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTDomainSize; }</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno"><a class="line" href="a00886.html#a2978dfbdfcdcf3261b6ea38309ba8003">  196</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00886.html#a2978dfbdfcdcf3261b6ea38309ba8003">localFieldCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTCells; }</div>
+<div class="line"><a name="l00196"></a><span class="lineno"><a class="line" href="a00889.html#a2978dfbdfcdcf3261b6ea38309ba8003">  196</a></span>&#160;  <span class="keyword">const</span> Indices&amp; <a class="code" href="a00889.html#a2978dfbdfcdcf3261b6ea38309ba8003">localFieldCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localDCTCells; }</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="a00886.html#aea755449be5be97fd1e3d779081f3ff7">  205</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#aea755449be5be97fd1e3d779081f3ff7">allocate</a>()</div>
+<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="a00889.html#aea755449be5be97fd1e3d779081f3ff7">  205</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#aea755449be5be97fd1e3d779081f3ff7">allocate</a>()</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;  {</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">if</span> (fieldData == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;      fieldData = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::alloc_real</a>(allocLocal);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;      fieldData = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::alloc_real</a>(allocLocal);</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  }</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="a00886.html#a29b05469686ad4153cbb88ef504dd206">  224</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>()</div>
+<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="a00889.html#a29b05469686ad4153cbb88ef504dd206">  224</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>()</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;  {</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="a00886.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>(localN0Trans, local0StartTrans);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="a00889.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>(localN0Trans, local0StartTrans);</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;  }</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="a00886.html#a66b649febadfa420826138c38a98a2af">  236</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#a66b649febadfa420826138c38a98a2af">forwardTransform</a>()</div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="a00889.html#a66b649febadfa420826138c38a98a2af">  236</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#a66b649febadfa420826138c38a98a2af">forwardTransform</a>()</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;  {</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    toFFTWCompatible();</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
@@ -268,8 +268,8 @@ $(function() {
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;      blockSizeOut = (extendedCells[dim - 1] / 2 + 1) / commSize + 1;</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::plan</a> plan_forward =</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_plan_many_r2r</a>(dim,</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00905.html">FFTW&lt;RF&gt;::plan</a> plan_forward =</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_plan_many_r2r</a>(dim,</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                                  n,</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                                  1,</div>
 <div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                                  blockSizeIn,</div>
@@ -283,8 +283,8 @@ $(function() {
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordflow">if</span> (plan_forward == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create forward plan&quot;</span> };</div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::execute</a>(plan_forward);</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_forward);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::execute</a>(plan_forward);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_forward);</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="keywordflow">for</span> (Index i = 0; i &lt; allocLocal; i++)</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;      fieldData[i] /= extendedDomainSize;</div>
@@ -300,16 +300,16 @@ $(function() {
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        fieldData[index + diff] = fieldData[index];</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    }</div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <a class="code" href="a00886.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>(localN0Trans, local0StartTrans);</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <a class="code" href="a00889.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>(localN0Trans, local0StartTrans);</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    fromFFTWCompatible();</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;  }</div>
 <div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
-<div class="line"><a name="l00326"></a><span class="lineno"><a class="line" href="a00886.html#a199aa3d78b477e464005056348eb3413">  326</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#a199aa3d78b477e464005056348eb3413">backwardTransform</a>()</div>
+<div class="line"><a name="l00326"></a><span class="lineno"><a class="line" href="a00889.html#a199aa3d78b477e464005056348eb3413">  326</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#a199aa3d78b477e464005056348eb3413">backwardTransform</a>()</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;  {</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    toFFTWCompatible();</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160; </div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <a class="code" href="a00886.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>(localN0, local0Start);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    <a class="code" href="a00889.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>(localN0, local0Start);</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> flags;</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">if</span> ((*traits).config.template get&lt;bool&gt;(<span class="stringliteral">&quot;fftw.measure&quot;</span>, <span class="keyword">false</span>))</div>
@@ -353,8 +353,8 @@ $(function() {
 <div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;      blockSizeIn = (extendedCells[dim - 1] / 2 + 1) / commSize + 1;</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00902.html">FFTW&lt;RF&gt;::plan</a> plan_backward =</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      <a class="code" href="a00902.html">FFTW&lt;RF&gt;::mpi_plan_many_r2r</a>(dim,</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <span class="keyword">typename</span> <a class="code" href="a00905.html">FFTW&lt;RF&gt;::plan</a> plan_backward =</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      <a class="code" href="a00905.html">FFTW&lt;RF&gt;::mpi_plan_many_r2r</a>(dim,</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                                  n,</div>
 <div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                                  1,</div>
 <div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                                  blockSizeIn,</div>
@@ -368,8 +368,8 @@ $(function() {
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <span class="keywordflow">if</span> (plan_backward == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create backward plan&quot;</span> };</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160; </div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::execute</a>(plan_backward);</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <a class="code" href="a00902.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_backward);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::execute</a>(plan_backward);</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <a class="code" href="a00905.html">FFTW&lt;RF&gt;::destroy_plan</a>(plan_backward);</div>
 <div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keywordflow">if</span> (shiftIn &gt; shiftOut) {</div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;      <span class="keyword">const</span> Index diff = shiftIn - shiftOut;</div>
@@ -385,9 +385,9 @@ $(function() {
 <div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    fromFFTWCompatible();</div>
 <div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;  }</div>
 <div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
-<div class="line"><a name="l00413"></a><span class="lineno"><a class="line" href="a00886.html#a919534f06fed110666db4883b920d13f">  413</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00886.html#a919534f06fed110666db4883b920d13f">hasSpareField</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
+<div class="line"><a name="l00413"></a><span class="lineno"><a class="line" href="a00889.html#a919534f06fed110666db4883b920d13f">  413</a></span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="a00889.html#a919534f06fed110666db4883b920d13f">hasSpareField</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="keyword">false</span>; }</div>
 <div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160; </div>
-<div class="line"><a name="l00418"></a><span class="lineno"><a class="line" href="a00886.html#a5730497d2399655dcf0d82eba994e92c">  418</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#a5730497d2399655dcf0d82eba994e92c">set</a>(<span class="keyword">const</span> Index index, <span class="keyword">const</span> Indices&amp; indices, RF lambda, RF rand)</div>
+<div class="line"><a name="l00418"></a><span class="lineno"><a class="line" href="a00889.html#a5730497d2399655dcf0d82eba994e92c">  418</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#a5730497d2399655dcf0d82eba994e92c">set</a>(<span class="keyword">const</span> Index index, <span class="keyword">const</span> Indices&amp; indices, RF lambda, RF rand)</div>
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;  {</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> border = 0;</div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; dim; i++)</div>
@@ -409,7 +409,7 @@ $(function() {
 <div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;      fieldData[index] *= std::sqrt(1 &lt;&lt; border);</div>
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;  }</div>
 <div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
-<div class="line"><a name="l00444"></a><span class="lineno"><a class="line" href="a00886.html#a6dbebcfc35e1c9bb02df7ffd5a40ece6">  444</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#a6dbebcfc35e1c9bb02df7ffd5a40ece6">setComponent</a>(<span class="keyword">const</span> Index index, RF val)</div>
+<div class="line"><a name="l00444"></a><span class="lineno"><a class="line" href="a00889.html#a6dbebcfc35e1c9bb02df7ffd5a40ece6">  444</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#a6dbebcfc35e1c9bb02df7ffd5a40ece6">setComponent</a>(<span class="keyword">const</span> Index index, RF val)</div>
 <div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;  {</div>
 <div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    Traits::indexToIndices(index, indices, localDCTCells);</div>
 <div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160; </div>
@@ -428,14 +428,14 @@ $(function() {
 <div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    fieldData[index] = val / (1 &lt;&lt; (dim - border));</div>
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;  }</div>
 <div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
-<div class="line"><a name="l00466"></a><span class="lineno"><a class="line" href="a00886.html#a64d88fc7a5cbd4802ef5c699b5295aac">  466</a></span>&#160;  RF <a class="code" href="a00886.html#a64d88fc7a5cbd4802ef5c699b5295aac">get</a>(<span class="keyword">const</span> Index index)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> fieldData[index]; }</div>
+<div class="line"><a name="l00466"></a><span class="lineno"><a class="line" href="a00889.html#a64d88fc7a5cbd4802ef5c699b5295aac">  466</a></span>&#160;  RF <a class="code" href="a00889.html#a64d88fc7a5cbd4802ef5c699b5295aac">get</a>(<span class="keyword">const</span> Index index)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> fieldData[index]; }</div>
 <div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160; </div>
-<div class="line"><a name="l00478"></a><span class="lineno"><a class="line" href="a00886.html#ab8ee5dded4e3cbb728331c11837cb9db">  478</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#ab8ee5dded4e3cbb728331c11837cb9db">mult</a>(Index index, RF lambda) { fieldData[index] *= lambda; }</div>
+<div class="line"><a name="l00478"></a><span class="lineno"><a class="line" href="a00889.html#ab8ee5dded4e3cbb728331c11837cb9db">  478</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#ab8ee5dded4e3cbb728331c11837cb9db">mult</a>(Index index, RF lambda) { fieldData[index] *= lambda; }</div>
 <div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; </div>
-<div class="line"><a name="l00489"></a><span class="lineno"><a class="line" href="a00886.html#a7c76fdc1fb12566d8e9dbca2ec3b3b57">  489</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#a7c76fdc1fb12566d8e9dbca2ec3b3b57">fieldToExtendedField</a>(std::vector&lt;RF&gt;&amp; field)</div>
+<div class="line"><a name="l00489"></a><span class="lineno"><a class="line" href="a00889.html#a7c76fdc1fb12566d8e9dbca2ec3b3b57">  489</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#a7c76fdc1fb12566d8e9dbca2ec3b3b57">fieldToExtendedField</a>(std::vector&lt;RF&gt;&amp; field)</div>
 <div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;  {</div>
 <div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    <span class="keywordflow">if</span> (fieldData == <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;      fieldData = <a class="code" href="a00902.html">FFTW&lt;RF&gt;::alloc_real</a>(allocLocal);</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;      fieldData = <a class="code" href="a00905.html">FFTW&lt;RF&gt;::alloc_real</a>(allocLocal);</div>
 <div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160; </div>
 <div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    <span class="keywordflow">for</span> (Index index = 0; index &lt; localDCTDomainSize; index++)</div>
 <div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;      fieldData[index] = 0.;</div>
@@ -562,7 +562,7 @@ $(function() {
 <div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;    }</div>
 <div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;  }</div>
 <div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160; </div>
-<div class="line"><a name="l00631"></a><span class="lineno"><a class="line" href="a00886.html#a8452728f2ae9b214ea862ed66646ee80">  631</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#a8452728f2ae9b214ea862ed66646ee80">extendedFieldToField</a>(std::vector&lt;RF&gt;&amp; field,</div>
+<div class="line"><a name="l00631"></a><span class="lineno"><a class="line" href="a00889.html#a8452728f2ae9b214ea862ed66646ee80">  631</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#a8452728f2ae9b214ea862ed66646ee80">extendedFieldToField</a>(std::vector&lt;RF&gt;&amp; field,</div>
 <div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;                            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0,</div>
 <div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;                            <span class="keywordtype">bool</span> additive = <span class="keyword">false</span>)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;<span class="keyword">  </span>{</div>
@@ -772,7 +772,7 @@ $(function() {
 <div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160;    }</div>
 <div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;  }</div>
 <div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160; </div>
-<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00886.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>(ptrdiff_t&amp; localN0, ptrdiff_t&amp; local0Start)</div>
+<div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;  <span class="keywordtype">void</span> <a class="code" href="a00889.html#a29b05469686ad4153cbb88ef504dd206">transposeIfNeeded</a>(ptrdiff_t&amp; localN0, ptrdiff_t&amp; local0Start)</div>
 <div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;  {</div>
 <div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;    <span class="keywordflow">if</span> (transposed) {</div>
 <div class="line"><a name="l00858"></a><span class="lineno">  858</span>&#160;      std::swap(extendedCells[dim - 1], extendedCells[dim - 2]);</div>
@@ -1062,26 +1062,26 @@ $(function() {
 <div class="line"><a name="l01172"></a><span class="lineno"> 1172</span>&#160;};</div>
 <div class="line"><a name="l01173"></a><span class="lineno"> 1173</span>&#160; </div>
 <div class="line"><a name="l01174"></a><span class="lineno"> 1174</span>&#160;} <span class="comment">// namespace parafields</span></div>
-<div class="ttc" id="aa00066_html"><div class="ttname"><a href="a00066.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
-<div class="ttc" id="aa00886_html"><div class="ttname"><a href="a00886.html">parafields::DCTDSTFieldBackend</a></div><div class="ttdoc">Extended field backend that uses discrete cosine / sine transform (DCT/DST)</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:11</div></div>
-<div class="ttc" id="aa00886_html_a199aa3d78b477e464005056348eb3413"><div class="ttname"><a href="a00886.html#a199aa3d78b477e464005056348eb3413">parafields::DCTDSTFieldBackend::backwardTransform</a></div><div class="ttdeci">void backwardTransform()</div><div class="ttdoc">Transform from Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:326</div></div>
-<div class="ttc" id="aa00886_html_a2978dfbdfcdcf3261b6ea38309ba8003"><div class="ttname"><a href="a00886.html#a2978dfbdfcdcf3261b6ea38309ba8003">parafields::DCTDSTFieldBackend::localFieldCells</a></div><div class="ttdeci">const Indices &amp; localFieldCells() const</div><div class="ttdoc">Number of entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:196</div></div>
-<div class="ttc" id="aa00886_html_a29b05469686ad4153cbb88ef504dd206"><div class="ttname"><a href="a00886.html#a29b05469686ad4153cbb88ef504dd206">parafields::DCTDSTFieldBackend::transposeIfNeeded</a></div><div class="ttdeci">void transposeIfNeeded()</div><div class="ttdoc">Switch last two dimensions (for transposed transforms)</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:224</div></div>
-<div class="ttc" id="aa00886_html_a4bf0f50039e30c6eadb2cfcfeb55b60d"><div class="ttname"><a href="a00886.html#a4bf0f50039e30c6eadb2cfcfeb55b60d">parafields::DCTDSTFieldBackend::setType</a></div><div class="ttdeci">void setType(unsigned int type)</div><div class="ttdoc">Define even (DCT) and odd (DST) dimensions.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:149</div></div>
-<div class="ttc" id="aa00886_html_a5730497d2399655dcf0d82eba994e92c"><div class="ttname"><a href="a00886.html#a5730497d2399655dcf0d82eba994e92c">parafields::DCTDSTFieldBackend::set</a></div><div class="ttdeci">void set(const Index index, const Indices &amp;indices, RF lambda, RF rand)</div><div class="ttdoc">Set entry based on random number.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:418</div></div>
-<div class="ttc" id="aa00886_html_a64d88fc7a5cbd4802ef5c699b5295aac"><div class="ttname"><a href="a00886.html#a64d88fc7a5cbd4802ef5c699b5295aac">parafields::DCTDSTFieldBackend::get</a></div><div class="ttdeci">RF get(const Index index) const</div><div class="ttdoc">Return entry.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:466</div></div>
-<div class="ttc" id="aa00886_html_a66b649febadfa420826138c38a98a2af"><div class="ttname"><a href="a00886.html#a66b649febadfa420826138c38a98a2af">parafields::DCTDSTFieldBackend::forwardTransform</a></div><div class="ttdeci">void forwardTransform()</div><div class="ttdoc">Transform into Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:236</div></div>
-<div class="ttc" id="aa00886_html_a674502a0bee0a81bb759aa07eda56a21"><div class="ttname"><a href="a00886.html#a674502a0bee0a81bb759aa07eda56a21">parafields::DCTDSTFieldBackend::localFieldSize</a></div><div class="ttdeci">Index localFieldSize() const</div><div class="ttdoc">Number of extended field entries stored on this processor.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:179</div></div>
-<div class="ttc" id="aa00886_html_a6dbebcfc35e1c9bb02df7ffd5a40ece6"><div class="ttname"><a href="a00886.html#a6dbebcfc35e1c9bb02df7ffd5a40ece6">parafields::DCTDSTFieldBackend::setComponent</a></div><div class="ttdeci">void setComponent(const Index index, RF val)</div><div class="ttdoc">Set entry, but take even/odd component boundary conditions into account.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:444</div></div>
-<div class="ttc" id="aa00886_html_a7c76fdc1fb12566d8e9dbca2ec3b3b57"><div class="ttname"><a href="a00886.html#a7c76fdc1fb12566d8e9dbca2ec3b3b57">parafields::DCTDSTFieldBackend::fieldToExtendedField</a></div><div class="ttdeci">void fieldToExtendedField(std::vector&lt; RF &gt; &amp;field)</div><div class="ttdoc">Embed a random field in the extended domain.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:489</div></div>
-<div class="ttc" id="aa00886_html_a8452728f2ae9b214ea862ed66646ee80"><div class="ttname"><a href="a00886.html#a8452728f2ae9b214ea862ed66646ee80">parafields::DCTDSTFieldBackend::extendedFieldToField</a></div><div class="ttdeci">void extendedFieldToField(std::vector&lt; RF &gt; &amp;field, unsigned int component=0, bool additive=false) const</div><div class="ttdoc">Restrict an extended random field to the original domain.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:631</div></div>
-<div class="ttc" id="aa00886_html_a919534f06fed110666db4883b920d13f"><div class="ttname"><a href="a00886.html#a919534f06fed110666db4883b920d13f">parafields::DCTDSTFieldBackend::hasSpareField</a></div><div class="ttdeci">bool hasSpareField() const</div><div class="ttdoc">Whether this kind of backend produces two fields at once.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:413</div></div>
-<div class="ttc" id="aa00886_html_ab8ee5dded4e3cbb728331c11837cb9db"><div class="ttname"><a href="a00886.html#ab8ee5dded4e3cbb728331c11837cb9db">parafields::DCTDSTFieldBackend::mult</a></div><div class="ttdeci">void mult(Index index, RF lambda)</div><div class="ttdoc">Multiply entry with given number.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:478</div></div>
-<div class="ttc" id="aa00886_html_ac1c6367a97f39efee4829840b699bafa"><div class="ttname"><a href="a00886.html#ac1c6367a97f39efee4829840b699bafa">parafields::DCTDSTFieldBackend::~DCTDSTFieldBackend</a></div><div class="ttdeci">~DCTDSTFieldBackend()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:89</div></div>
-<div class="ttc" id="aa00886_html_ae7033d29a265e2016adfd92c60468087"><div class="ttname"><a href="a00886.html#ae7033d29a265e2016adfd92c60468087">parafields::DCTDSTFieldBackend::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:111</div></div>
-<div class="ttc" id="aa00886_html_ae93da714bcbcdafb179a334814ff1ef3"><div class="ttname"><a href="a00886.html#ae93da714bcbcdafb179a334814ff1ef3">parafields::DCTDSTFieldBackend::DCTDSTFieldBackend</a></div><div class="ttdeci">DCTDSTFieldBackend(const std::shared_ptr&lt; Traits &gt; &amp;traits_)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:68</div></div>
-<div class="ttc" id="aa00886_html_aea755449be5be97fd1e3d779081f3ff7"><div class="ttname"><a href="a00886.html#aea755449be5be97fd1e3d779081f3ff7">parafields::DCTDSTFieldBackend::allocate</a></div><div class="ttdeci">void allocate()</div><div class="ttdoc">Reserve memory before storing any field entries.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:205</div></div>
-<div class="ttc" id="aa00902_html"><div class="ttname"><a href="a00902.html">parafields::FFTW</a></div><div class="ttdoc">Fallback class for error message when requested FFTW3 library wasn't found.</div><div class="ttdef"><b>Definition:</b> fftwwrapper.hh:18</div></div>
+<div class="ttc" id="aa00069_html"><div class="ttname"><a href="a00069.html">parafields</a></div><div class="ttdef"><b>Definition:</b> cpprngbackend.hh:5</div></div>
+<div class="ttc" id="aa00889_html"><div class="ttname"><a href="a00889.html">parafields::DCTDSTFieldBackend</a></div><div class="ttdoc">Extended field backend that uses discrete cosine / sine transform (DCT/DST)</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:11</div></div>
+<div class="ttc" id="aa00889_html_a199aa3d78b477e464005056348eb3413"><div class="ttname"><a href="a00889.html#a199aa3d78b477e464005056348eb3413">parafields::DCTDSTFieldBackend::backwardTransform</a></div><div class="ttdeci">void backwardTransform()</div><div class="ttdoc">Transform from Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:326</div></div>
+<div class="ttc" id="aa00889_html_a2978dfbdfcdcf3261b6ea38309ba8003"><div class="ttname"><a href="a00889.html#a2978dfbdfcdcf3261b6ea38309ba8003">parafields::DCTDSTFieldBackend::localFieldCells</a></div><div class="ttdeci">const Indices &amp; localFieldCells() const</div><div class="ttdoc">Number of entries per dim on this processor.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:196</div></div>
+<div class="ttc" id="aa00889_html_a29b05469686ad4153cbb88ef504dd206"><div class="ttname"><a href="a00889.html#a29b05469686ad4153cbb88ef504dd206">parafields::DCTDSTFieldBackend::transposeIfNeeded</a></div><div class="ttdeci">void transposeIfNeeded()</div><div class="ttdoc">Switch last two dimensions (for transposed transforms)</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:224</div></div>
+<div class="ttc" id="aa00889_html_a4bf0f50039e30c6eadb2cfcfeb55b60d"><div class="ttname"><a href="a00889.html#a4bf0f50039e30c6eadb2cfcfeb55b60d">parafields::DCTDSTFieldBackend::setType</a></div><div class="ttdeci">void setType(unsigned int type)</div><div class="ttdoc">Define even (DCT) and odd (DST) dimensions.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:149</div></div>
+<div class="ttc" id="aa00889_html_a5730497d2399655dcf0d82eba994e92c"><div class="ttname"><a href="a00889.html#a5730497d2399655dcf0d82eba994e92c">parafields::DCTDSTFieldBackend::set</a></div><div class="ttdeci">void set(const Index index, const Indices &amp;indices, RF lambda, RF rand)</div><div class="ttdoc">Set entry based on random number.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:418</div></div>
+<div class="ttc" id="aa00889_html_a64d88fc7a5cbd4802ef5c699b5295aac"><div class="ttname"><a href="a00889.html#a64d88fc7a5cbd4802ef5c699b5295aac">parafields::DCTDSTFieldBackend::get</a></div><div class="ttdeci">RF get(const Index index) const</div><div class="ttdoc">Return entry.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:466</div></div>
+<div class="ttc" id="aa00889_html_a66b649febadfa420826138c38a98a2af"><div class="ttname"><a href="a00889.html#a66b649febadfa420826138c38a98a2af">parafields::DCTDSTFieldBackend::forwardTransform</a></div><div class="ttdeci">void forwardTransform()</div><div class="ttdoc">Transform into Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:236</div></div>
+<div class="ttc" id="aa00889_html_a674502a0bee0a81bb759aa07eda56a21"><div class="ttname"><a href="a00889.html#a674502a0bee0a81bb759aa07eda56a21">parafields::DCTDSTFieldBackend::localFieldSize</a></div><div class="ttdeci">Index localFieldSize() const</div><div class="ttdoc">Number of extended field entries stored on this processor.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:179</div></div>
+<div class="ttc" id="aa00889_html_a6dbebcfc35e1c9bb02df7ffd5a40ece6"><div class="ttname"><a href="a00889.html#a6dbebcfc35e1c9bb02df7ffd5a40ece6">parafields::DCTDSTFieldBackend::setComponent</a></div><div class="ttdeci">void setComponent(const Index index, RF val)</div><div class="ttdoc">Set entry, but take even/odd component boundary conditions into account.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:444</div></div>
+<div class="ttc" id="aa00889_html_a7c76fdc1fb12566d8e9dbca2ec3b3b57"><div class="ttname"><a href="a00889.html#a7c76fdc1fb12566d8e9dbca2ec3b3b57">parafields::DCTDSTFieldBackend::fieldToExtendedField</a></div><div class="ttdeci">void fieldToExtendedField(std::vector&lt; RF &gt; &amp;field)</div><div class="ttdoc">Embed a random field in the extended domain.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:489</div></div>
+<div class="ttc" id="aa00889_html_a8452728f2ae9b214ea862ed66646ee80"><div class="ttname"><a href="a00889.html#a8452728f2ae9b214ea862ed66646ee80">parafields::DCTDSTFieldBackend::extendedFieldToField</a></div><div class="ttdeci">void extendedFieldToField(std::vector&lt; RF &gt; &amp;field, unsigned int component=0, bool additive=false) const</div><div class="ttdoc">Restrict an extended random field to the original domain.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:631</div></div>
+<div class="ttc" id="aa00889_html_a919534f06fed110666db4883b920d13f"><div class="ttname"><a href="a00889.html#a919534f06fed110666db4883b920d13f">parafields::DCTDSTFieldBackend::hasSpareField</a></div><div class="ttdeci">bool hasSpareField() const</div><div class="ttdoc">Whether this kind of backend produces two fields at once.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:413</div></div>
+<div class="ttc" id="aa00889_html_ab8ee5dded4e3cbb728331c11837cb9db"><div class="ttname"><a href="a00889.html#ab8ee5dded4e3cbb728331c11837cb9db">parafields::DCTDSTFieldBackend::mult</a></div><div class="ttdeci">void mult(Index index, RF lambda)</div><div class="ttdoc">Multiply entry with given number.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:478</div></div>
+<div class="ttc" id="aa00889_html_ac1c6367a97f39efee4829840b699bafa"><div class="ttname"><a href="a00889.html#ac1c6367a97f39efee4829840b699bafa">parafields::DCTDSTFieldBackend::~DCTDSTFieldBackend</a></div><div class="ttdeci">~DCTDSTFieldBackend()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:89</div></div>
+<div class="ttc" id="aa00889_html_ae7033d29a265e2016adfd92c60468087"><div class="ttname"><a href="a00889.html#ae7033d29a265e2016adfd92c60468087">parafields::DCTDSTFieldBackend::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:111</div></div>
+<div class="ttc" id="aa00889_html_ae93da714bcbcdafb179a334814ff1ef3"><div class="ttname"><a href="a00889.html#ae93da714bcbcdafb179a334814ff1ef3">parafields::DCTDSTFieldBackend::DCTDSTFieldBackend</a></div><div class="ttdeci">DCTDSTFieldBackend(const std::shared_ptr&lt; Traits &gt; &amp;traits_)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:68</div></div>
+<div class="ttc" id="aa00889_html_aea755449be5be97fd1e3d779081f3ff7"><div class="ttname"><a href="a00889.html#aea755449be5be97fd1e3d779081f3ff7">parafields::DCTDSTFieldBackend::allocate</a></div><div class="ttdeci">void allocate()</div><div class="ttdoc">Reserve memory before storing any field entries.</div><div class="ttdef"><b>Definition:</b> dctdstfieldbackend.hh:205</div></div>
+<div class="ttc" id="aa00905_html"><div class="ttname"><a href="a00905.html">parafields::FFTW</a></div><div class="ttdoc">Fallback class for error message when requested FFTW3 library wasn't found.</div><div class="ttdef"><b>Definition:</b> fftwwrapper.hh:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

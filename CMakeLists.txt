@@ -11,6 +11,11 @@ project(
 # We allow <Package>_ROOT (env) variables for locating dependencies
 cmake_policy(SET CMP0074 NEW)
 
+# User-facing options for building parafields-core
+option(INSTALL_PARAFIELDS_CORE
+       "Enable installation of parafields-core (Projects embedding
+   parafields-core might turn this off)" ON)
+
 # Initialize some default paths
 include(GNUInstallDirs)
 
@@ -108,36 +113,38 @@ add_library(parafields::parafields ALIAS parafields)
 file(COPY cmake/FindFFTW.cmake DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # Install targets and configuration
-install(
-  TARGETS parafields
-  EXPORT parafields-targets
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+if(INSTALL_PARAFIELDS_CORE)
+  install(
+    TARGETS parafields
+    EXPORT parafields-targets
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
-install(
-  EXPORT parafields-targets
-  FILE parafieldsTargets.cmake
-  NAMESPACE parafields::
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
+  install(
+    EXPORT parafields-targets
+    FILE parafieldsTargets.cmake
+    NAMESPACE parafields::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
 
-include(CMakePackageConfigHelpers)
-configure_package_config_file(
-  ${CMAKE_CURRENT_LIST_DIR}/cmake/parafieldsConfig.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/parafieldsConfig.cmake
-  INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
+  include(CMakePackageConfigHelpers)
+  configure_package_config_file(
+    ${CMAKE_CURRENT_LIST_DIR}/cmake/parafieldsConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/parafieldsConfig.cmake
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/parafieldsConfig.cmake
-              ${CMAKE_CURRENT_LIST_DIR}/cmake/FindFFTW.cmake
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
+  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/parafieldsConfig.cmake
+                ${CMAKE_CURRENT_LIST_DIR}/cmake/FindFFTW.cmake
+          DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/parafields)
 
-export(
-  EXPORT parafields-targets
-  FILE ${CMAKE_CURRENT_BINARY_DIR}/parafieldsTargets.cmake
-  NAMESPACE parafields::)
+  export(
+    EXPORT parafields-targets
+    FILE ${CMAKE_CURRENT_BINARY_DIR}/parafieldsTargets.cmake
+    NAMESPACE parafields::)
 
-install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/
+          DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+endif()
 
 # This prints a summary of found dependencies
 include(FeatureSummary)

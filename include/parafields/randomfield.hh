@@ -669,8 +669,8 @@ public:
     typename Traits::Indices strides;
     std::fill(strides.begin(), strides.end(), 1);
     for (std::size_t i = 0; i < Traits::dim; ++i) {
-      size *= traits->localCells[i];
-      sizes[i] = traits->localCells[i];
+      size *= stochasticPart.localEvalCells[i];
+      sizes[i] = stochasticPart.localEvalCells[i];
       for (std::size_t j = i + 1; j < Traits::dim; ++j)
         strides[j] *= sizes[i];
     }
@@ -683,9 +683,10 @@ public:
       std::size_t index = i;
       typename Traits::DomainType location;
       for (int j = Traits::dim - 1; j >= 0; --j) {
-        double meshsize = traits->extensions[j] / static_cast<double>(sizes[j]);
         location[j] =
-          (static_cast<double>(index / strides[j]) + 0.5) * meshsize;
+          (static_cast<double>(index / strides[j]) +
+           static_cast<double>(stochasticPart.localEvalOffset[j]) + 0.5) *
+          traits->meshsize[j];
         index = index % strides[j];
       }
 

@@ -47,8 +47,12 @@ class StochasticPart
   Indices localOffset;
   Index localDomainSize;
   Index sliceSize;
+
+public:
   Indices localEvalCells;
   Indices localEvalOffset;
+
+private:
   std::array<int, dim> procPerDim;
 
   mutable std::vector<RF> dataVector;

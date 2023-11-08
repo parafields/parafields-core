@@ -2,7 +2,6 @@
 
 #include <fstream>
 
-#include <dune/common/power.hh>
 #if HAVE_DUNE_PDELAB
 #include <dune/pdelab/gridfunctionspace/gridfunctionspaceutilities.hh>
 #endif // HAVE_DUNE_PDELAB

@@ -21,7 +21,7 @@ public:
   /**
    * @brief Virtual destructor
    */
-  virtual ~MutatorBase(){};
+  virtual ~MutatorBase() {};
 };
 
 /**

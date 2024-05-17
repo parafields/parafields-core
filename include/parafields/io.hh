@@ -342,7 +342,8 @@ writeToXDMF(const std::array<unsigned int, dim>& cells,
     for (unsigned int i = 0; i < dim; i++)
       file << cells[dim - (i + 1)] << " ";
     file << "\" Format=\"HDF\">\n"
-         << "     " << fileName + ".stoch.h5" << ":/stochastic\n"
+         << "     " << fileName + ".stoch.h5"
+         << ":/stochastic\n"
          << "    </DataItem>\n"
          << "   </Attribute>\n"
          << "  </Grid>\n";
@@ -384,7 +385,8 @@ writeToXDMF(const std::array<unsigned int, dim>& cells,
       for (unsigned int i = 0; i < dim; i++)
         file << cells[dim - (i + 1)] << " ";
       file << "\" Format=\"HDF\">\n"
-           << "       " << fileName + ".stoch.h5" << ":/stochastic\n"
+           << "       " << fileName + ".stoch.h5"
+           << ":/stochastic\n"
            << "      </DataItem>\n"
            << "     </DataItem>\n"
            << "    </Attribute>\n"

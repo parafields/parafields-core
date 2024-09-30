@@ -514,7 +514,7 @@ public:
     if ((*traits).verbose && (*traits).rank == 0)
       std::cout << "generate with seed: " << seed << std::endl;
 
-      // Instantiate the RNG
+    // Instantiate the RNG
 #if HAVE_GSL
     GSLRNGBackend<Traits> rngBackend(this->traits);
 #else
@@ -1412,8 +1412,10 @@ template<typename GridTraits,
            DefaultIsoMatrix<GridTraits::dim>::template Type,
          template<typename> class AnisoMatrix =
            DefaultAnisoMatrix<GridTraits::dim>::template Type,
-         template<typename, template<typename> class, template<typename> class>
-         class RandomField = parafields::RandomField>
+         template<typename,
+                  template<typename> class,
+                  template<typename> class> class RandomField =
+           parafields::RandomField>
 class RandomFieldList
 {
 public:

@@ -20,10 +20,8 @@ class ImageComponent;
 template<typename Traits>
 class StochasticPart;
 template<typename GridTraits,
-         template<typename>
-         class IsoMatrix,
-         template<typename>
-         class AnisoMatrix>
+         template<typename> class IsoMatrix,
+         template<typename> class AnisoMatrix>
 class RandomField;
 
 // forward declarations for transposed test
@@ -54,10 +52,8 @@ const MPI_Datatype mpiType<long double> = MPI_LONG_DOUBLE;
  * @tparam AnisoMatrix matrix class used for general covariance functions
  */
 template<typename GridTraits,
-         template<typename>
-         class IsoMatrix,
-         template<typename>
-         class AnisoMatrix>
+         template<typename> class IsoMatrix,
+         template<typename> class AnisoMatrix>
 class RandomFieldTraits
 {
   using ThisType = RandomFieldTraits<GridTraits, IsoMatrix, AnisoMatrix>;

@@ -1,4 +1,5 @@
 <map id="parafields::LogNormalMutator&lt; RF &gt;" name="parafields::LogNormalMutator&lt; RF &gt;">
-<area shape="rect" id="node1" title="Exponential function mutator for log&#45;normal fields." alt="" coords="5,95,221,136"/>
-<area shape="rect" id="node2" href="$a01037.html" title="Abstract base class for value transformations." alt="" coords="25,5,202,47"/>
+<area shape="rect" id="Node000001" title="Exponential function mutator for log&#45;normal fields." alt="" coords="5,93,221,133"/>
+<area shape="rect" id="Node000002" href="$a01037.html" title="Abstract base class for value transformations." alt="" coords="25,5,202,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,59,116,93,111,93,111,59"/>
 </map>

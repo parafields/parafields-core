@@ -1,8 +1,13 @@
 <map id="parafields::MutatorBase&lt; RF &gt;" name="parafields::MutatorBase&lt; RF &gt;">
-<area shape="rect" id="node1" title="Abstract base class for value transformations." alt="" coords="5,136,183,177"/>
-<area shape="rect" id="node2" href="$a01057.html" title="Applies the Box&#45;Cox transformation to the data values." alt="" coords="241,5,436,47"/>
-<area shape="rect" id="node3" href="$a01049.html" title="Absolute value function mutator for folded normal fields." alt="" coords="246,71,431,112"/>
-<area shape="rect" id="node4" href="$a01041.html" title="Default Identity mutator that leaves its argument unchanged." alt="" coords="241,136,436,177"/>
-<area shape="rect" id="node5" href="$a01045.html" title="Exponential function mutator for log&#45;normal fields." alt="" coords="231,201,447,243"/>
-<area shape="rect" id="node6" href="$a01053.html" title="Replaces value with its sign (&#45;1 for negative, +1 for nonnegative)" alt="" coords="252,267,425,308"/>
+<area shape="rect" id="Node000001" title="Abstract base class for value transformations." alt="" coords="5,133,183,173"/>
+<area shape="rect" id="Node000002" href="$a01057.html" title="Applies the Box&#45;Cox transformation to the data values." alt="" coords="241,5,436,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,122,174,88,229,55,258,43,260,48,232,60,177,92,131,127"/>
+<area shape="rect" id="Node000003" href="$a01049.html" title="Absolute value function mutator for folded normal fields." alt="" coords="246,69,431,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="184,127,261,107,262,112,185,132"/>
+<area shape="rect" id="Node000004" href="$a01041.html" title="Default Identity mutator that leaves its argument unchanged." alt="" coords="241,133,436,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="196,151,241,151,241,156,196,156"/>
+<area shape="rect" id="Node000005" href="$a01045.html" title="Exponential function mutator for log&#45;normal fields." alt="" coords="231,197,447,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="185,174,262,195,261,200,184,179"/>
+<area shape="rect" id="Node000006" href="$a01053.html" title="Replaces value with its sign (&#45;1 for negative, +1 for nonnegative)" alt="" coords="252,261,425,301"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="131,180,177,215,232,247,260,259,258,264,229,252,174,219,128,184"/>
 </map>

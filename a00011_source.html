@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>parafields-core: pngreader.hh Source File</title>
+<title>parafields-core: dftmatrixbackend.hh Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,119 +74,281 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_f1cf9fff43a340b5fb1246d6efff32e0.html">parafields</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_f1cf9fff43a340b5fb1246d6efff32e0.html">parafields</a></li><li class="navelem"><a class="el" href="dir_ea9e5c827facd80d4f763862135907ad.html">backends</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="headertitle"><div class="title">pngreader.hh</div></div>
+  <div class="headertitle"><div class="title">dftmatrixbackend.hh</div></div>
 </div><!--header-->
 <div class="contents">
 <a href="a00011.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#if HAVE_PNG</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;png.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#endif </span><span class="comment">// HAVE_PNG</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00069.html">parafields</a> {</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="a01065.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="a01065.html">PNGReader</a></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> offset;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#if HAVE_PNG</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> width, height;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="comment">// png_byte color, depth;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  png_byte channels;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  png_structp pngStruct;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  png_infop pngInfo;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> numPass;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  png_bytep* data;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif </span><span class="comment">// HAVE_PNG</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="a01065.html#a3b9baf739e0a50a55090a00d6f74bd59">   34</a></span>  <a class="code hl_function" href="a01065.html#a3b9baf739e0a50a55090a00d6f74bd59">PNGReader</a>(<span class="keyword">const</span> std::string&amp; filename, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> channelOffset = 0)</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    : offset(channelOffset)</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#if HAVE_PNG</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// open file</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    FILE* file = fopen(filename.c_str(), <span class="stringliteral">&quot;rb&quot;</span>);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordflow">if</span> (!file)</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;opening PNG file failed&quot;</span> };</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00069.html">parafields</a> {</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Traits&gt;</div>
+<div class="foldopen" id="foldopen00020" data-start="{" data-end="};">
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="a00901.html">   20</a></span><span class="keyword">class </span><a class="code hl_class" href="a00901.html">DFTMatrixBackend</a></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keyword">using </span>RF = <span class="keyword">typename</span> Traits::RF;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keyword">using </span>Index = <span class="keyword">typename</span> Traits::Index;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keyword">using </span>Indices = <span class="keyword">typename</span> Traits::Indices;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keyword">enum</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  {</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    dim = Traits::dim</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  };</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keyword">const</span> std::shared_ptr&lt;Traits&gt; traits;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordtype">int</span> rank, commSize;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">ptrdiff_t</a> allocLocal, localN0, local0Start;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  Indices extendedCells;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  Index extendedDomainSize;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  Indices localExtendedCells;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  Indices localExtendedOffset;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  Index localExtendedDomainSize;</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="comment">// check header</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    png_byte header[8];</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">size_t</span> status = fread(header, 1, 8, file);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">if</span> (status != 8 || png_sig_cmp(header, 0, 8))</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;file not recognized as PNG&quot;</span> };</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="comment">// create struct and info objects</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    pngStruct = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">if</span> (!pngStruct)</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;couldn&#39;t create PNG struct object&quot;</span> };</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    pngInfo = png_create_info_struct(pngStruct);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">if</span> (!pngInfo)</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;couldn&#39;t create PNG info object&quot;</span> };</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="comment">// prepare for reading</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    png_init_io(pngStruct, file);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    png_set_sig_bytes(pngStruct, 8);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    png_read_info(pngStruct, pngInfo);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="comment">// extract information</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    width = png_get_image_width(pngStruct, pngInfo);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    height = png_get_image_height(pngStruct, pngInfo);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="comment">// color    = png_get_color_type  (pngStruct,pngInfo);</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="comment">// depth    = png_get_bit_depth   (pngStruct,pngInfo);</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    channels = png_get_channels(pngStruct, pngInfo);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keyword">mutable</span> <span class="keyword">typename</span> <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::complex</a>* matrixData;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordtype">bool</span> transposed;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="a00901.html#ae2058da1584ccbf3eddefd878d77b62a">   55</a></span>  <a class="code hl_function" href="a00901.html#ae2058da1584ccbf3eddefd878d77b62a">DFTMatrixBackend</a>(<span class="keyword">const</span> std::shared_ptr&lt;Traits&gt;&amp; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">traits_</a>)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    : traits(<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">traits_</a>)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    , matrixData(<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">nullptr</a>)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">if</span> ((*traits).verbose &amp;&amp; (*traits).rank == 0)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>      std::cout &lt;&lt; <span class="stringliteral">&quot;using DFTMatrixBackend&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">if</span> ((*traits).config.template <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">get&lt;bool&gt;</a>(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::import_wisdom_from_filename</a>(<span class="stringliteral">&quot;wisdom-DFTMatrix.ini&quot;</span>);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::mpi_broadcast_wisdom</a>((*traits).comm);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  }</div>
+</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">if</span> (offset &gt;= channels)</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      <span class="keywordflow">throw</span> std::runtime_error{</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="stringliteral">&quot;chosen channel offset exceeds number of channels in PNG&quot;</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>      };</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    numPass = png_set_interlace_handling(pngStruct);</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    png_read_update_info(pngStruct, pngInfo);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="comment">// read file</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    data = (png_bytep*)malloc(<span class="keyword">sizeof</span>(png_bytep) * height);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">int</span> rowSize = png_get_rowbytes(pngStruct, pngInfo);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> <span class="keywordtype">unsigned</span> row = 0; row &lt; height; row++)</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      data[row] = (png_byte*)malloc(rowSize);</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    png_read_image(pngStruct, data);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#else  </span><span class="comment">// HAVE_PNG</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;missing support for reading PNG files&quot;</span> };</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#endif </span><span class="comment">// HAVE_PNG</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  }</div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="}">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="a00901.html#a554d2e5fa1de5d77331cb39e0f00e783">   76</a></span>  <a class="code hl_function" href="a00901.html#a554d2e5fa1de5d77331cb39e0f00e783">~DFTMatrixBackend</a>()</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> ((*traits).config.template <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">get&lt;bool&gt;</a>(<span class="stringliteral">&quot;fftw.useWisdom&quot;</span>, <span class="keyword">false</span>)) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::mpi_gather_wisdom</a>((*traits).comm);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      <span class="keywordflow">if</span> ((*traits).rank == 0)</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::export_wisdom_to_filename</a>(<span class="stringliteral">&quot;wisdom-DFTMatrix.ini&quot;</span>);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">if</span> (matrixData != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>      matrixData = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    }</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  }</div>
 </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Coord1, <span class="keyword">typename</span> Coord2&gt;</div>
-<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="a01065.html#a67510e82bde22c4b45e4acb3c04e2e3c">   99</a></span>  <span class="keywordtype">double</span> <a class="code hl_function" href="a01065.html#a67510e82bde22c4b45e4acb3c04e2e3c">evaluate</a>(<span class="keyword">const</span> Coord1&amp; coord, <span class="keyword">const</span> Coord2&amp; extent)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#if HAVE_PNG</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> row =</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      height - 1 - int(coord[1] / <span class="keywordtype">double</span>(extent[1]) * height);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> col = int(coord[0] / <span class="keywordtype">double</span>(extent[0]) * width);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordflow">return</span> 1. - data[row][col * channels + offset] / 255.;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#else  </span><span class="comment">// HAVE_PNG</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;missing support for reading PNG files&quot;</span> };</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="preprocessor">#endif </span><span class="comment">// HAVE_PNG</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="comment">/*</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">   * @brief Update internal data after creation or refinement</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">   *</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">   * This function is has to be called after the creation of</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">   * the random field object or its refinement. It updates</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">   * parameters like the number of cells per dimension.</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">   */</span></div>
+<div class="foldopen" id="foldopen00098" data-start="{" data-end="}">
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="a00901.html#a8f867215ac7f71c926568e5ac6a64595">   98</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="a00901.html#a8f867215ac7f71c926568e5ac6a64595">update</a>()</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    rank = (*traits).rank;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    commSize = (*traits).commSize;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    extendedCells = (*traits).extendedCells;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    extendedDomainSize = (*traits).extendedDomainSize;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    localExtendedCells = (*traits).localExtendedCells;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    localExtendedOffset = (*traits).localExtendedOffset;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    localExtendedDomainSize = (*traits).localExtendedDomainSize;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    transposed = (*traits).transposed;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    getDFTData();</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">if</span> (matrixData != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::free</a>(matrixData);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      matrixData = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  }</div>
 </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>};</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="a00901.html#acf9fbdba9b2dd2f206dd83c53834d968">  123</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="a00901.html#acf9fbdba9b2dd2f206dd83c53834d968">valid</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (matrixData != <span class="keyword">nullptr</span>); }</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="a00901.html#aa0320529369704c414123291cd643d66">  133</a></span>  Index <a class="code hl_function" href="a00901.html#aa0320529369704c414123291cd643d66">localMatrixSize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedDomainSize; }</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="a00901.html#ad5ef98bc5917ffb73dd8d33c0c957870">  145</a></span>  <span class="keyword">const</span> Indices&amp; <a class="code hl_function" href="a00901.html#ad5ef98bc5917ffb73dd8d33c0c957870">localMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedCells; }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="a00901.html#a21b126ff27bd49e2b95f6d0a96a83ea6">  156</a></span>  <span class="keyword">const</span> Indices&amp; <a class="code hl_function" href="a00901.html#a21b126ff27bd49e2b95f6d0a96a83ea6">localMatrixOffset</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedOffset; }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="a00901.html#ab4681976817dff35475ac9cd1902fb0f">  168</a></span>  <span class="keyword">const</span> Indices&amp; <a class="code hl_function" href="a00901.html#ab4681976817dff35475ac9cd1902fb0f">localEvalMatrixCells</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> localExtendedCells; }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="foldopen" id="foldopen00177" data-start="{" data-end="}">
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="a00901.html#a399f833cff18b0113d3797764c48075a">  177</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="a00901.html#a399f833cff18b0113d3797764c48075a">allocate</a>()</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  {</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    <span class="keywordflow">if</span> (matrixData == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>      matrixData = <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::alloc_complex</a>(allocLocal);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  }</div>
 </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>} <span class="comment">// namespace parafields</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="a00901.html#a0f438264d43299fc3285e038e31f849a">  193</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="a00901.html#a0f438264d43299fc3285e038e31f849a">transposeIfNeeded</a>()</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keywordflow">if</span> (transposed) {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>      std::swap(extendedCells[dim - 1], extendedCells[dim - 2]);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>      localExtendedCells[dim - 1] = extendedCells[dim - 1] / commSize;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>      localExtendedCells[dim - 2] = extendedCells[dim - 2];</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>      localExtendedOffset[dim - 1] = localExtendedCells[dim - 1] * rank;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  }</div>
+</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="foldopen" id="foldopen00209" data-start="{" data-end="}">
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="a00901.html#adda1ef1288986468d34aa1d377d5bdcc">  209</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="a00901.html#adda1ef1288986468d34aa1d377d5bdcc">forwardTransform</a>()</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  {</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a>;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">if</span> ((*traits).config.template <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">get&lt;bool&gt;</a>(<span class="stringliteral">&quot;fftw.measure&quot;</span>, <span class="keyword">false</span>))</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a> = <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_MEASURE</a>;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a> = <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_ESTIMATE</a>;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keywordflow">if</span> (transposed)</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a> |= <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_MPI_TRANSPOSED_OUT</a>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">ptrdiff_t</a> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>[dim];</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a> = 0; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a> &lt; dim; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>++)</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>[<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>] = extendedCells[dim - 1 - <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>];</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keyword">typename</span> <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::plan</a> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">plan_forward</a> = <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::mpi_plan_dft</a>(</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>      dim, <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>, matrixData, matrixData, (*traits).comm, <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_FORWARD</a>, <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a>);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">plan_forward</a> == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create forward plan&quot;</span> };</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::execute</a>(<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">plan_forward</a>);</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::destroy_plan</a>(<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">plan_forward</a>);</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <span class="keywordflow">for</span> (Index <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a> = 0; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a> &lt; allocLocal; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>++) {</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>      matrixData[<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>][0] /= extendedDomainSize;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>      matrixData[<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>][1] /= extendedDomainSize;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    }</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>    <a class="code hl_function" href="a00901.html#a0f438264d43299fc3285e038e31f849a">transposeIfNeeded</a>();</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  }</div>
+</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="foldopen" id="foldopen00246" data-start="{" data-end="}">
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno"><a class="line" href="a00901.html#a610634e940d15cf5ed8ae6ade405710f">  246</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="a00901.html#a610634e940d15cf5ed8ae6ade405710f">backwardTransform</a>()</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  {</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    <a class="code hl_function" href="a00901.html#a0f438264d43299fc3285e038e31f849a">transposeIfNeeded</a>();</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a>;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>    <span class="keywordflow">if</span> ((*traits).config.template <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">get&lt;bool&gt;</a>(<span class="stringliteral">&quot;fftw.measure&quot;</span>, <span class="keyword">false</span>))</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a> = <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_MEASURE</a>;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a> = <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_ESTIMATE</a>;</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keywordflow">if</span> (transposed)</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a> |= <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_MPI_TRANSPOSED_IN</a>;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">ptrdiff_t</a> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>[dim];</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a> = 0; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a> &lt; dim; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>++)</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>[<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>] = extendedCells[dim - 1 - <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>];</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keyword">typename</span> <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::plan</a> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">plan_backward</a> = <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::mpi_plan_dft</a>(</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>      dim, <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>, matrixData, matrixData, (*traits).comm, <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_BACKWARD</a>, <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">flags</a>);</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">plan_backward</a> == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>      <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;parafields failed to create backward plan&quot;</span> };</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::execute</a>(<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">plan_backward</a>);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::destroy_plan</a>(<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">plan_backward</a>);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>  }</div>
+</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
+<div class="foldopen" id="foldopen00284" data-start="{" data-end="}">
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="a00901.html#ad892633886001178037f49fcc2e0c42c">  284</a></span>  RF <a class="code hl_function" href="a00901.html#ad892633886001178037f49fcc2e0c42c">eval</a>(Index <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">index</a>)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="comment">// no translation necessary</span></div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">get</a>(<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">index</a>);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  }</div>
+</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="foldopen" id="foldopen00303" data-start="{" data-end="}">
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno"><a class="line" href="a00901.html#a78206c5a35e316e0fa8ced37ea984b04">  303</a></span>  RF <a class="code hl_function" href="a00901.html#a78206c5a35e316e0fa8ced37ea984b04">eval</a>(Indices indices)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="keyword">const</span> Index&amp; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">index</a> = Traits::indicesToIndex(indices, localExtendedCells);</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="a00901.html#ad892633886001178037f49fcc2e0c42c">eval</a>(<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">index</a>);</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  }</div>
+</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno"><a class="line" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">  322</a></span>  RF <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">get</a>(Index <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">index</a>)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> matrixData[<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">index</a>][0]; }</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="foldopen" id="foldopen00334" data-start="{" data-end="}">
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno"><a class="line" href="a00901.html#a1cf45d5b19c4e098439d5896eb5e461f">  334</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="a00901.html#a1cf45d5b19c4e098439d5896eb5e461f">set</a>(Index <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">index</a>, RF value)</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>  {</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>    matrixData[<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">index</a>][0] = value;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    matrixData[<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">index</a>][1] = 0.;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  }</div>
+</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
+<div class="foldopen" id="foldopen00350" data-start="{" data-end="}">
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno"><a class="line" href="a00901.html#ad7ceb9a9b8dc6f0e1633d43d68f61acd">  350</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="a00901.html#ad7ceb9a9b8dc6f0e1633d43d68f61acd">finalize</a>()</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>  {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    <span class="comment">// nothing to do</span></div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>  }</div>
+</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span> </div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  <span class="keywordtype">void</span> getDFTData()</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>  {</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>    <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">ptrdiff_t</a> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>[dim];</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a> = 0; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a> &lt; dim; <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>++)</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>[<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>] = extendedCells[dim - 1 - <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">i</a>];</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span> </div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>    <span class="keywordflow">if</span> (dim == 1) {</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>      <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">ptrdiff_t</a> <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">localN02</a>, <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">local0Start2</a>;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>      allocLocal = <a class="code hl_class" href="a00905.html">FFTW&lt;RF&gt;::mpi_local_size_1d</a>(<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>[0],</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>                                               (*traits).comm,</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>                                               <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_FORWARD</a>,</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>                                               <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">FFTW_ESTIMATE</a>,</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>                                               &amp;localN0,</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>                                               &amp;local0Start,</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>                                               &amp;<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">localN02</a>,</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>                                               &amp;<a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">local0Start2</a>);</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>      <span class="keywordflow">if</span> (localN0 != <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">localN02</a> || local0Start != <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">local0Start2</a>)</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        <span class="keywordflow">throw</span> std::runtime_error{ <span class="stringliteral">&quot;1d size / offset results don&#39;t match&quot;</span> };</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    } <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>      allocLocal = FFTW&lt;RF&gt;::mpi_local_size(</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        dim, <a class="code hl_function" href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">n</a>, (*traits).comm, &amp;localN0, &amp;local0Start);</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>  }</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>};</div>
+</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>} <span class="comment">// namespace parafields</span></div>
 <div class="ttc" id="aa00069_html"><div class="ttname"><a href="a00069.html">parafields</a></div><div class="ttdef"><b>Definition</b> cpprngbackend.hh:5</div></div>
-<div class="ttc" id="aa01065_html"><div class="ttname"><a href="a01065.html">parafields::PNGReader</a></div><div class="ttdoc">A class to read in PNG files as trend components.</div><div class="ttdef"><b>Definition</b> pngreader.hh:13</div></div>
-<div class="ttc" id="aa01065_html_a3b9baf739e0a50a55090a00d6f74bd59"><div class="ttname"><a href="a01065.html#a3b9baf739e0a50a55090a00d6f74bd59">parafields::PNGReader::PNGReader</a></div><div class="ttdeci">PNGReader(const std::string &amp;filename, unsigned int channelOffset=0)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> pngreader.hh:34</div></div>
-<div class="ttc" id="aa01065_html_a67510e82bde22c4b45e4acb3c04e2e3c"><div class="ttname"><a href="a01065.html#a67510e82bde22c4b45e4acb3c04e2e3c">parafields::PNGReader::evaluate</a></div><div class="ttdeci">double evaluate(const Coord1 &amp;coord, const Coord2 &amp;extent) const</div><div class="ttdoc">Extract first pixel byte (gray or red) as value at coordinate.</div><div class="ttdef"><b>Definition</b> pngreader.hh:99</div></div>
+<div class="ttc" id="aa00901_html"><div class="ttname"><a href="a00901.html">parafields::DFTMatrixBackend</a></div><div class="ttdoc">Matrix backend that uses discrete Fourier transform (DFT)</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:21</div></div>
+<div class="ttc" id="aa00901_html_a0f438264d43299fc3285e038e31f849a"><div class="ttname"><a href="a00901.html#a0f438264d43299fc3285e038e31f849a">parafields::DFTMatrixBackend::transposeIfNeeded</a></div><div class="ttdeci">void transposeIfNeeded()</div><div class="ttdoc">Switch last two dimensions (for transposed transforms)</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:193</div></div>
+<div class="ttc" id="aa00901_html_a1cf45d5b19c4e098439d5896eb5e461f"><div class="ttname"><a href="a00901.html#a1cf45d5b19c4e098439d5896eb5e461f">parafields::DFTMatrixBackend::set</a></div><div class="ttdeci">void set(Index index, RF value)</div><div class="ttdoc">Set matrix entry (using the actual index)</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:334</div></div>
+<div class="ttc" id="aa00901_html_a21b126ff27bd49e2b95f6d0a96a83ea6"><div class="ttname"><a href="a00901.html#a21b126ff27bd49e2b95f6d0a96a83ea6">parafields::DFTMatrixBackend::localMatrixOffset</a></div><div class="ttdeci">const Indices &amp; localMatrixOffset() const</div><div class="ttdoc">Offset between local indices and global indices per dim.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:156</div></div>
+<div class="ttc" id="aa00901_html_a399f833cff18b0113d3797764c48075a"><div class="ttname"><a href="a00901.html#a399f833cff18b0113d3797764c48075a">parafields::DFTMatrixBackend::allocate</a></div><div class="ttdeci">void allocate()</div><div class="ttdoc">Reserve memory before storing any matrix entries.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:177</div></div>
+<div class="ttc" id="aa00901_html_a554d2e5fa1de5d77331cb39e0f00e783"><div class="ttname"><a href="a00901.html#a554d2e5fa1de5d77331cb39e0f00e783">parafields::DFTMatrixBackend::~DFTMatrixBackend</a></div><div class="ttdeci">~DFTMatrixBackend()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:76</div></div>
+<div class="ttc" id="aa00901_html_a610634e940d15cf5ed8ae6ade405710f"><div class="ttname"><a href="a00901.html#a610634e940d15cf5ed8ae6ade405710f">parafields::DFTMatrixBackend::backwardTransform</a></div><div class="ttdeci">void backwardTransform()</div><div class="ttdoc">Transform from Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:246</div></div>
+<div class="ttc" id="aa00901_html_a78206c5a35e316e0fa8ced37ea984b04"><div class="ttname"><a href="a00901.html#a78206c5a35e316e0fa8ced37ea984b04">parafields::DFTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Indices indices) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:303</div></div>
+<div class="ttc" id="aa00901_html_a8afb6a012854ec9c28af39c9026aac08"><div class="ttname"><a href="a00901.html#a8afb6a012854ec9c28af39c9026aac08">parafields::DFTMatrixBackend::get</a></div><div class="ttdeci">RF get(Index index) const</div><div class="ttdoc">Get matrix entry (using the actual index)</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:322</div></div>
+<div class="ttc" id="aa00901_html_a8f867215ac7f71c926568e5ac6a64595"><div class="ttname"><a href="a00901.html#a8f867215ac7f71c926568e5ac6a64595">parafields::DFTMatrixBackend::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:98</div></div>
+<div class="ttc" id="aa00901_html_aa0320529369704c414123291cd643d66"><div class="ttname"><a href="a00901.html#aa0320529369704c414123291cd643d66">parafields::DFTMatrixBackend::localMatrixSize</a></div><div class="ttdeci">Index localMatrixSize() const</div><div class="ttdoc">Number of matrix entries stored on this processor.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:133</div></div>
+<div class="ttc" id="aa00901_html_ab4681976817dff35475ac9cd1902fb0f"><div class="ttname"><a href="a00901.html#ab4681976817dff35475ac9cd1902fb0f">parafields::DFTMatrixBackend::localEvalMatrixCells</a></div><div class="ttdeci">const Indices &amp; localEvalMatrixCells() const</div><div class="ttdoc">Number of logical entries per dim on this processor.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:168</div></div>
+<div class="ttc" id="aa00901_html_acf9fbdba9b2dd2f206dd83c53834d968"><div class="ttname"><a href="a00901.html#acf9fbdba9b2dd2f206dd83c53834d968">parafields::DFTMatrixBackend::valid</a></div><div class="ttdeci">bool valid() const</div><div class="ttdoc">Check whether matrix has already been created.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:123</div></div>
+<div class="ttc" id="aa00901_html_ad5ef98bc5917ffb73dd8d33c0c957870"><div class="ttname"><a href="a00901.html#ad5ef98bc5917ffb73dd8d33c0c957870">parafields::DFTMatrixBackend::localMatrixCells</a></div><div class="ttdeci">const Indices &amp; localMatrixCells() const</div><div class="ttdoc">Number of entries per dim on this processor.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:145</div></div>
+<div class="ttc" id="aa00901_html_ad7ceb9a9b8dc6f0e1633d43d68f61acd"><div class="ttname"><a href="a00901.html#ad7ceb9a9b8dc6f0e1633d43d68f61acd">parafields::DFTMatrixBackend::finalize</a></div><div class="ttdeci">void finalize()</div><div class="ttdoc">Dummy function, nothing to do after Fourier transform.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:350</div></div>
+<div class="ttc" id="aa00901_html_ad892633886001178037f49fcc2e0c42c"><div class="ttname"><a href="a00901.html#ad892633886001178037f49fcc2e0c42c">parafields::DFTMatrixBackend::eval</a></div><div class="ttdeci">RF eval(Index index) const</div><div class="ttdoc">Evaluate matrix entry (in virtual, i.e., logical indices)</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:284</div></div>
+<div class="ttc" id="aa00901_html_adda1ef1288986468d34aa1d377d5bdcc"><div class="ttname"><a href="a00901.html#adda1ef1288986468d34aa1d377d5bdcc">parafields::DFTMatrixBackend::forwardTransform</a></div><div class="ttdeci">void forwardTransform()</div><div class="ttdoc">Transform into Fourier (i.e., frequency) space.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:209</div></div>
+<div class="ttc" id="aa00901_html_ae2058da1584ccbf3eddefd878d77b62a"><div class="ttname"><a href="a00901.html#ae2058da1584ccbf3eddefd878d77b62a">parafields::DFTMatrixBackend::DFTMatrixBackend</a></div><div class="ttdeci">DFTMatrixBackend(const std::shared_ptr&lt; Traits &gt; &amp;traits_)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> dftmatrixbackend.hh:55</div></div>
+<div class="ttc" id="aa00905_html"><div class="ttname"><a href="a00905.html">parafields::FFTW</a></div><div class="ttdoc">Fallback class for error message when requested FFTW3 library wasn't found.</div><div class="ttdef"><b>Definition</b> fftwwrapper.hh:18</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

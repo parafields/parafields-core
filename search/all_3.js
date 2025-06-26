@@ -1,9 +1,9 @@
 var searchData=
 [
   ['dctdstfieldbackend_0',['dctdstfieldbackend',['../a00889.html#ae93da714bcbcdafb179a334814ff1ef3',1,'parafields::DCTDSTFieldBackend::DCTDSTFieldBackend()'],['../a00889.html',1,'parafields::DCTDSTFieldBackend&lt; Traits &gt;']]],
-  ['dctdstfieldbackend_2ehh_1',['dctdstfieldbackend.hh',['../a00014.html',1,'']]],
+  ['dctdstfieldbackend_2ehh_1',['dctdstfieldbackend.hh',['../a00020.html',1,'']]],
   ['dctmatrixbackend_2',['dctmatrixbackend',['../a00893.html',1,'parafields::DCTMatrixBackend&lt; Traits &gt;'],['../a00893.html#ad6759944da6fc8a4366e0a4e126c1994',1,'parafields::DCTMatrixBackend::DCTMatrixBackend()']]],
-  ['dctmatrixbackend_2ehh_3',['dctmatrixbackend.hh',['../a00020.html',1,'']]],
+  ['dctmatrixbackend_2ehh_3',['dctmatrixbackend.hh',['../a00029.html',1,'']]],
   ['defaultanisomatrix_4',['DefaultAnisoMatrix',['../a01029.html',1,'parafields']]],
   ['defaultanisomatrix_3c_201_20_3e_5',['DefaultAnisoMatrix&lt; 1 &gt;',['../a01033.html',1,'parafields']]],
   ['defaultanisomatrix_3c_20gridtraits_3a_3adim_20_3e_6',['DefaultAnisoMatrix&lt; GridTraits::dim &gt;',['../a01029.html',1,'parafields']]],
@@ -18,7 +18,7 @@ var searchData=
   ['defaultmatrixbackend_3c_201_20_3e_15',['DefaultMatrixBackend&lt; 1 &gt;',['../a01013.html',1,'parafields']]],
   ['defaultmatrixbackend_3c_20traits_3a_3adim_20_3e_16',['DefaultMatrixBackend&lt; Traits::dim &gt;',['../a01001.html',1,'parafields']]],
   ['dftfieldbackend_17',['dftfieldbackend',['../a00897.html',1,'parafields::DFTFieldBackend&lt; Traits &gt;'],['../a00897.html#a4791745702aaf5e90dc6e191c62c6487',1,'parafields::DFTFieldBackend::DFTFieldBackend()']]],
-  ['dftfieldbackend_2ehh_18',['dftfieldbackend.hh',['../a00017.html',1,'']]],
+  ['dftfieldbackend_2ehh_18',['dftfieldbackend.hh',['../a00005.html',1,'']]],
   ['dftmatrixbackend_19',['dftmatrixbackend',['../a00901.html#ae2058da1584ccbf3eddefd878d77b62a',1,'parafields::DFTMatrixBackend::DFTMatrixBackend()'],['../a00901.html',1,'parafields::DFTMatrixBackend&lt; Traits &gt;']]],
   ['dftmatrixbackend_2ehh_20',['dftmatrixbackend.hh',['../a00011.html',1,'']]],
   ['diagonalmatrix_21',['diagonalmatrix',['../a00925.html',1,'parafields::DiagonalMatrix&lt; RF, dim &gt;'],['../a00925.html#a0e868e04255fe1950787f3cbb9d4f6ac',1,'parafields::DiagonalMatrix::DiagonalMatrix()']]],

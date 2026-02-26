@@ -1,7 +1,7 @@
 var searchData=
 [
   ['matrix_0',['matrix',['../a01009.html#a1cd8a4165f37248fe58dae97a751c97f',1,'parafields::Matrix::Matrix()'],['../a01009.html',1,'parafields::Matrix&lt; Traits, MatrixBackend, FieldBackend &gt;']]],
-  ['matrix_2ehh_1',['matrix.hh',['../a00002.html',1,'']]],
+  ['matrix_2ehh_1',['matrix.hh',['../a00065.html',1,'']]],
   ['matrixbackendtype_2',['MatrixBackendType',['../a01009.html#a6dba5e6195e2226f581e00f0f7874bd1',1,'parafields::Matrix']]],
   ['mean_3',['Mean',['../a01081.html#af920d0b0a036b7fb50af46d938bc03fcaca9d0a41040794aa495b374a9f4f4ed5',1,'parafields::TrendComponentType']]],
   ['meanvector_4',['meanVector',['../a00973.html#aeb7925c908562246755aae8b806318b2',1,'parafields::TrendComponent']]],
@@ -13,5 +13,5 @@ var searchData=
   ['multiplyinverse_10',['multiplyInverse',['../a01009.html#af8dfc44c93a3c65e1262d713deea4e62',1,'parafields::Matrix']]],
   ['multiplyroot_11',['multiplyRoot',['../a01009.html#a91010d23766a06f2d7a82c229648c032',1,'parafields::Matrix']]],
   ['mutatorbase_12',['MutatorBase',['../a01037.html',1,'parafields']]],
-  ['mutators_2ehh_13',['mutators.hh',['../a00053.html',1,'']]]
+  ['mutators_2ehh_13',['mutators.hh',['../a00062.html',1,'']]]
 ];

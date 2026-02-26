@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>parafields-core: pngreader.hh File Reference</title>
+<title>parafields-core: matrix.hh File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -76,16 +76,55 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">pngreader.hh File Reference</div></div>
+  <div class="headertitle"><div class="title">matrix.hh File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;fftw3-mpi.h&gt;</code><br />
+<code>#include &lt;fftw3.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00014_source.html">parafields/exceptions.hh</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00005_source.html">parafields/covariance.hh</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00026_source.html">parafields/gslfallback.hh</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00041_source.html">parafields/backends/fftwwrapper.hh</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00047_source.html">parafields/backends/dctmatrixbackend.hh</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00038_source.html">parafields/backends/dftmatrixbackend.hh</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00050_source.html">parafields/backends/r2cmatrixbackend.hh</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00044_source.html">parafields/backends/dctdstfieldbackend.hh</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00059_source.html">parafields/backends/dftfieldbackend.hh</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00035_source.html">parafields/backends/r2cfieldbackend.hh</a>&quot;</code><br />
+</div>
 <p><a href="a00065_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01065.html">parafields::PNGReader</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class to read in PNG files as trend components.  <a href="a01065.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html">parafields::Matrix&lt; Traits, MatrixBackend, FieldBackend &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Covariance matrix for stationary Gaussian random fields.  <a href="a01009.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01001.html">parafields::DefaultMatrixBackend&lt; dim &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default matrix backend for dim &gt; 1.  <a href="a01001.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01013.html">parafields::DefaultMatrixBackend&lt; 1 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default matrix backend for dim == 1.  <a href="a01013.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01005.html">parafields::DefaultFieldBackend&lt; dim &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default field backend for dim &gt; 1.  <a href="a01005.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html">parafields::DefaultFieldBackend&lt; 1 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default field backend for dim == 1.  <a href="a01017.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01021.html">parafields::DefaultIsoMatrix&lt; dim &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default isotropic matrix selector for nD, n &gt; 1: DCTMatrix.  <a href="a01021.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01025.html">parafields::DefaultIsoMatrix&lt; 1 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default isotropic matrix selector for 1D: DFTMatrix.  <a href="a01025.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01029.html">parafields::DefaultAnisoMatrix&lt; dim &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default anisotropic matrix selector for nD, n &gt; 1: R2CMatrix.  <a href="a01029.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01033.html">parafields::DefaultAnisoMatrix&lt; 1 &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default anisotropic matrix selector for 1D: DFTMatrix.  <a href="a01033.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

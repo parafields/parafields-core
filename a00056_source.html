@@ -90,27 +90,27 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;fftw3-mpi.h&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;fftw3.h&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="a00005.html">parafields/exceptions.hh</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="a00062.html">parafields/exceptions.hh</a>&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="a00008.html">parafields/covariance.hh</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="a00044.html">parafields/gslfallback.hh</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="a00023.html">parafields/covariance.hh</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="a00053.html">parafields/gslfallback.hh</a>&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="a00032.html">parafields/backends/fftwwrapper.hh</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="a00041.html">parafields/backends/fftwwrapper.hh</a>&quot;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="a00026.html">parafields/backends/dctmatrixbackend.hh</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="a00038.html">parafields/backends/dctmatrixbackend.hh</a>&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="a00029.html">parafields/backends/dftmatrixbackend.hh</a>&quot;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="a00023.html">parafields/backends/r2cmatrixbackend.hh</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="a00050.html">parafields/backends/r2cmatrixbackend.hh</a>&quot;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="a00020.html">parafields/backends/dctdstfieldbackend.hh</a>&quot;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="a00014.html">parafields/backends/dftfieldbackend.hh</a>&quot;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="a00011.html">parafields/backends/r2cfieldbackend.hh</a>&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="a00035.html">parafields/backends/dctdstfieldbackend.hh</a>&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="a00032.html">parafields/backends/dftfieldbackend.hh</a>&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="a00026.html">parafields/backends/r2cfieldbackend.hh</a>&quot;</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#if HAVE_GSL</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;gsl/gsl_integration.h&gt;</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif </span><span class="comment">// HAVE_GSL</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#if HAVE_DUNE_NONLINOPT</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="a00038.html">parafields/optproblem.hh</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="a00014.html">parafields/optproblem.hh</a>&quot;</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#endif </span><span class="comment">// HAVE_DUNE_NONLINOPT</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">namespace </span><a class="code hl_namespace" href="a00069.html">parafields</a> {</div>
@@ -1577,17 +1577,17 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l01736" name="l01736"></a><span class="lineno"> 1736</span> </div>
 <div class="line"><a id="l01737" name="l01737"></a><span class="lineno"> 1737</span>} <span class="comment">// namespace parafields</span></div>
-<div class="ttc" id="aa00005_html"><div class="ttname"><a href="a00005.html">exceptions.hh</a></div></div>
-<div class="ttc" id="aa00008_html"><div class="ttname"><a href="a00008.html">covariance.hh</a></div></div>
-<div class="ttc" id="aa00011_html"><div class="ttname"><a href="a00011.html">r2cfieldbackend.hh</a></div></div>
-<div class="ttc" id="aa00014_html"><div class="ttname"><a href="a00014.html">dftfieldbackend.hh</a></div></div>
-<div class="ttc" id="aa00020_html"><div class="ttname"><a href="a00020.html">dctdstfieldbackend.hh</a></div></div>
-<div class="ttc" id="aa00023_html"><div class="ttname"><a href="a00023.html">r2cmatrixbackend.hh</a></div></div>
-<div class="ttc" id="aa00026_html"><div class="ttname"><a href="a00026.html">dctmatrixbackend.hh</a></div></div>
+<div class="ttc" id="aa00014_html"><div class="ttname"><a href="a00014.html">optproblem.hh</a></div></div>
+<div class="ttc" id="aa00023_html"><div class="ttname"><a href="a00023.html">covariance.hh</a></div></div>
+<div class="ttc" id="aa00026_html"><div class="ttname"><a href="a00026.html">r2cfieldbackend.hh</a></div></div>
 <div class="ttc" id="aa00029_html"><div class="ttname"><a href="a00029.html">dftmatrixbackend.hh</a></div></div>
-<div class="ttc" id="aa00032_html"><div class="ttname"><a href="a00032.html">fftwwrapper.hh</a></div></div>
-<div class="ttc" id="aa00038_html"><div class="ttname"><a href="a00038.html">optproblem.hh</a></div></div>
-<div class="ttc" id="aa00044_html"><div class="ttname"><a href="a00044.html">gslfallback.hh</a></div></div>
+<div class="ttc" id="aa00032_html"><div class="ttname"><a href="a00032.html">dftfieldbackend.hh</a></div></div>
+<div class="ttc" id="aa00035_html"><div class="ttname"><a href="a00035.html">dctdstfieldbackend.hh</a></div></div>
+<div class="ttc" id="aa00038_html"><div class="ttname"><a href="a00038.html">dctmatrixbackend.hh</a></div></div>
+<div class="ttc" id="aa00041_html"><div class="ttname"><a href="a00041.html">fftwwrapper.hh</a></div></div>
+<div class="ttc" id="aa00050_html"><div class="ttname"><a href="a00050.html">r2cmatrixbackend.hh</a></div></div>
+<div class="ttc" id="aa00053_html"><div class="ttname"><a href="a00053.html">gslfallback.hh</a></div></div>
+<div class="ttc" id="aa00062_html"><div class="ttname"><a href="a00062.html">exceptions.hh</a></div></div>
 <div class="ttc" id="aa00069_html"><div class="ttname"><a href="a00069.html">parafields</a></div><div class="ttdef"><b>Definition</b> cpprngbackend.hh:5</div></div>
 <div class="ttc" id="aa00889_html"><div class="ttname"><a href="a00889.html">parafields::DCTDSTFieldBackend</a></div><div class="ttdoc">Extended field backend that uses discrete cosine / sine transform (DCT/DST)</div><div class="ttdef"><b>Definition</b> dctdstfieldbackend.hh:11</div></div>
 <div class="ttc" id="aa00893_html"><div class="ttname"><a href="a00893.html">parafields::DCTMatrixBackend</a></div><div class="ttdoc">Matrix backend that uses discrete cosine transform (DCT)</div><div class="ttdef"><b>Definition</b> dctmatrixbackend.hh:24</div></div>

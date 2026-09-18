@@ -92,8 +92,8 @@ protected:
   };
 
   const ParamTreeHelper treeHelper;
-  const Dune::ParameterTree config;
-  const ValueTransform<RF> valueTransform;
+  Dune::ParameterTree config;
+  ValueTransform<RF> valueTransform;
   std::shared_ptr<Traits> traits;
 
   using IsoMatrixPtr = std::shared_ptr<IsoMatrix<Traits>>;

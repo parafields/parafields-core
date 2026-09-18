@@ -55,3 +55,20 @@ TEMPLATE_TEST_CASE("Default 3D field generation", "[seq]", float, double)
   Field field(config);
   field.generate();
 }
+
+TEMPLATE_TEST_CASE("Random field copy assignment", "[seq]", float, double)
+{
+  Dune::ParameterTree config;
+  config["grid.cells"] = "32";
+  config["grid.extensions"] = "1";
+  config["stochastic.variance"] = "1";
+  config["stochastic.corrLength"] = "0.05";
+  config["stochastic.covariance"] = "exponential";
+
+  using Field = parafields::RandomField<GridTraits<TestType, TestType, 1>>;
+  Field source(config);
+  Field target(config);
+
+  target = source;
+  target.generate();
+}
